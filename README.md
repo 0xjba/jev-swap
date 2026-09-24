@@ -86,17 +86,19 @@ npx jev-swap oss build                   # price candidates -> oss-out/dashboard
 
 The pages are generated: edit `site/gen/` (`build.py` for copy, `layout.py` for styles and navigation, `scenes.py` for the illustrations) and run `npm run site` after `oss prices` / `oss build`. Figures come from `data/prices.json` and the dashboard data, not hard-coded values. Preview on your network with `python3 -m http.server 8000 --bind 0.0.0.0 --directory site`, then open `http://<your machine's IP>:8000`.
 
-## Explainer video
+## Launch video
 
-`video/` is a Remotion project for the "What is jev-swap?" video (1920x1080, 30 fps, about 1 min 48 s, with a voiceover). Its cost and speed figures are the site's sourced Claude Sonnet 5 example.
+`video/` is a Remotion project for the jev-swap launch video (1920x1080, 30 fps, about 45 s, voiceover and music). Its cost and speed figures are the site's sourced Claude Sonnet 5 example.
 
-The script is `video/narration.json` (`say` is spoken, `show` is the caption). `npm run voice` records each line with OpenRouter's `openai/gpt-audio` (voice `cedar`), checks the transcript matches word for word, trims and levels it (ffmpeg), and writes `public/vo/*.wav` plus timings; only changed lines are re-recorded. Scene lengths follow the narration: animations hold on a settled frame until each line starts.
+- Script: `video/narration.json` (`say` is spoken, `show` is the caption). `npm run voice` records each line with OpenRouter's `openai/gpt-audio` (voice `cedar`), checks the transcript matches word for word, trims and levels it (ffmpeg), and writes `public/vo/*.wav` plus timings; only changed lines are re-recorded.
+- Music: `public/music.mp3`, generated with Google Lyria 3 Pro via OpenRouter (`npm run music`, $0.08 a track). It is ducked under the voice; its first drop is timed to the Jev reveal and a bar-aligned jump lands the second drop on the outro (`src/Video.tsx`). A new track needs its drop times checked.
+- Pacing: scene lengths follow the narration; each scene's animation speeds up (within limits) to fit its line, and the cost race always plays in real time.
 
 ```sh
 cd video && npm install
 OPENROUTER_API_KEY=... npm run voice   # only after editing narration.json
 npm run studio     # preview and edit
-npm run render     # -> video/out/what-is-jev-swap.mp4
+npm run render     # -> video/out/jev-swap-launch.mp4
 ```
 
 ## Samples format (JSONL)

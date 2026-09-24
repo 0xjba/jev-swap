@@ -1,92 +1,47 @@
 {
   "intro-0": {
-    "say": "What is jev-swap?",
+    "say": "Meet jev-swap.",
     "file": "vo/intro-0.wav",
-    "seconds": 1.474
+    "seconds": 1.475
   },
   "problem-0": {
-    "say": "A lot of the LLM calls in your app aren't really asking for writing. They're decisions.",
+    "say": "A lot of your LLM calls are really decisions.",
     "file": "vo/problem-0.wav",
-    "seconds": 5.764
+    "seconds": 3.524
   },
   "problem-1": {
-    "say": "Route this ticket. Is this spam? How urgent is it, from one to five?",
+    "say": "Yet you pay a text model to write out every answer.",
     "file": "vo/problem-1.wav",
-    "seconds": 4.787
-  },
-  "problem-2": {
-    "say": "But a text model still writes out every answer, token by token, just to pick from options you already wrote.",
-    "file": "vo/problem-2.wav",
-    "seconds": 6.929
+    "seconds": 2.982
   },
   "jev-0": {
-    "say": "TypeSafe Jev is built for exactly that job.",
+    "say": "TypeSafe Jev answers them directly. Typed answers, and no output tokens.",
     "file": "vo/jev-0.wav",
-    "seconds": 3.101
-  },
-  "jev-1": {
-    "say": "You send the input and your typed questions, and Jev returns typed answers, each with a confidence score.",
-    "file": "vo/jev-1.wav",
-    "seconds": 6.765
-  },
-  "jev-2": {
-    "say": "No text is generated, and no output tokens are billed.",
-    "file": "vo/jev-2.wav",
-    "seconds": 4.067
+    "seconds": 5.338
   },
   "scan-0": {
-    "say": "Jev-swap finds those calls for you.",
+    "say": "Jev-swap finds those calls in your code,",
     "file": "vo/scan-0.wav",
-    "seconds": 2.406
-  },
-  "scan-1": {
-    "say": "It reads your code's syntax tree, in TypeScript, JavaScript and Python, and flags the LLM calls that return an enum, a boolean, or a small score.",
-    "file": "vo/scan-1.wav",
-    "seconds": 9.567
+    "seconds": 2.631
   },
   "cost-0": {
-    "say": "Then it estimates what each call costs today, and what it would cost on Jev.",
+    "say": "shows what you'd save. On this Claude Sonnet 5 call, 97.6 percent less, and nearly ten times faster.",
     "file": "vo/cost-0.wav",
-    "seconds": 4.981
-  },
-  "cost-1": {
-    "say": "Take one decision call on Claude Sonnet 5. On Jev, it costs 97.6 percent less, and answers about 9.6 times faster.",
-    "file": "vo/cost-1.wav",
-    "seconds": 9.668
+    "seconds": 8.642
   },
   "convert-0": {
-    "say": "Next, it writes a Jev module for each call.",
+    "say": "writes the Jev code, with a safe fallback to your LLM,",
     "file": "vo/convert-0.wav",
-    "seconds": 3.262
-  },
-  "convert-1": {
-    "say": "A confidence gate keeps Jev's answer when it's sure, and falls back to your current LLM when it isn't.",
-    "file": "vo/convert-1.wav",
-    "seconds": 6.347
+    "seconds": 3.632
   },
   "shadow-0": {
-    "say": "And before you switch anything, it proves the swap.",
+    "say": "and proves the swap on your real traffic.",
     "file": "vo/shadow-0.wav",
-    "seconds": 3.358
-  },
-  "shadow-1": {
-    "say": "It replays your recorded calls through Jev, and picks the lowest threshold where Jev agrees with your LLM.",
-    "file": "vo/shadow-1.wav",
-    "seconds": 6.094
-  },
-  "shadow-2": {
-    "say": "Or run the shadow proxy, and watch it happen on live traffic.",
-    "file": "vo/shadow-2.wav",
-    "seconds": 3.924
+    "seconds": 2.546
   },
   "outro-0": {
-    "say": "Find the decisions. Swap them to Jev. Prove it.",
+    "say": "Jev-swap. Try it now, with N P X jev-swap.",
     "file": "vo/outro-0.wav",
-    "seconds": 3.635
-  },
-  "outro-1": {
-    "say": "Get started with N P X jev-swap.",
-    "file": "vo/outro-1.wav",
-    "seconds": 3.197
+    "seconds": 3.915
   }
 }

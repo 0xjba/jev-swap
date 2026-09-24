@@ -25,8 +25,9 @@ export const About: React.FC<{ x: number; y: number; s: number; o?: number; chil
 
 /** Scene wrapper: the camera eases in on entry and pulls back on exit, like the reference's zoom cuts. */
 export const Cam: React.FC<{ f: number; dur: number; children: React.ReactNode }> = ({ f, dur, children }) => {
-  const s = t(f, 0, 22, 1.07, 1) * t(f, dur - 18, dur, 1, 0.95);
-  const o = Math.min(t(f, 0, 14), 1 - t(f, dur - 14, dur));
+  // Quick zoom in, a slow push while the scene plays, quick pull back out.
+  const s = t(f, 0, 12, 1.06, 1) * (1 + 0.03 * (f / dur)) * t(f, dur - 10, dur, 1, 0.96);
+  const o = Math.min(t(f, 0, 8), 1 - t(f, dur - 8, dur));
   return (
     <AbsoluteFill style={{ transform: `scale(${s})`, opacity: o }}>
       <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`}>

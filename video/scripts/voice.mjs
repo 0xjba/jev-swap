@@ -11,7 +11,7 @@ const KEY = process.env.OPENROUTER_API_KEY;
 if (!KEY) throw new Error("OPENROUTER_API_KEY is not set");
 const RATE = 24000; // gpt-audio pcm16: 24 kHz, mono, 16-bit
 
-const norm = (s) => s.toLowerCase().replace(/[’']/g, "").replace(/-/g, " ").replace(/[^a-z0-9. ]/g, " ").replace(/\.(?!\d)/g, " ").replace(/\s+/g, " ").trim();
+const norm = (s) => s.toLowerCase().replace(/[’']/g, "").replace(/-/g, " ").replace(/[^a-z0-9. ]/g, " ").replace(/\.(?!\d)/g, " ").replace(/\s+/g, "");
 
 async function speak(text) {
   const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {

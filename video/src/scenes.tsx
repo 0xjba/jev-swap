@@ -20,7 +20,7 @@ export const Intro: React.FC<P> = ({ dur, cap }) => {
           <tspan fill={C.muted} fontWeight={500}>{word.slice(3, n)}</tspan>
         </text>
         <text x={960} y={700} textAnchor="middle" fontFamily={SANS} fontSize={36} fill={C.body} opacity={t(f, 70, 86)}>
-          What is jev-swap?
+          Stop paying LLM prices for decisions.
         </text>
       </Cam>
     </>
