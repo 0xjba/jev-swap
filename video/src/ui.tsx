@@ -1,6 +1,7 @@
 import React from "react";
 import { AbsoluteFill, Easing, interpolate, interpolateColors, spring } from "remotion";
 import { C, FPS, H, MONO, SANS, W } from "./theme";
+import { HalftoneMark } from "./HalftoneMark";
 
 /** Maps real scene frames to visual frames, so animations pause while the narration catches up. */
 export const WarpCtx = React.createContext<(f: number) => number>((f) => f);
@@ -231,7 +232,7 @@ export const JevNode: React.FC<{ f: number; x: number; y: number; size?: number;
     <About x={x} y={y} s={s}>
       <rect x={x - size / 2 - 14} y={y - size / 2 - 14} width={size + 28} height={size + 28} rx={28} fill={C.pink} opacity={0.08 + 0.2 * g} />
       <rect x={x - size / 2} y={y - size / 2} width={size} height={size} rx={20} fill={C.panel} stroke={C.pink} strokeWidth={2.5} />
-      <Mark x={x} y={y - size * 0.08} size={size * 0.5} knob={t(f, start + 8, start + 22)} />
+      <HalftoneMark x={x} y={y - size * 0.08} size={size * 0.5} knob={t(f, start + 8, start + 22)} />
       <text x={x} y={y + size * 0.34} textAnchor="middle" fontFamily={MONO} fontWeight={600} fontSize={size * 0.12} fill={C.pink}>jev</text>
     </About>
   );

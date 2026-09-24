@@ -1,7 +1,8 @@
 import React from "react";
 import { AbsoluteFill, interpolate, useCurrentFrame } from "remotion";
 import { C, FPS, MONO, SANS } from "./theme";
-import { About, Cam, Caption, useWarp, Check, Cmd, JevNode, Label, Lines, LlmNode, Mark, Stream, Win, pop, t, typed } from "./ui";
+import { HalftoneMark } from "./HalftoneMark";
+import { About, Cam, Caption, useWarp, Check, Cmd, JevNode, Label, Lines, LlmNode, Stream, Win, pop, t, typed } from "./ui";
 
 type P = { dur: number; cap: [number, string][] };
 
@@ -14,7 +15,7 @@ export const Intro: React.FC<P> = ({ dur, cap }) => {
   return (
     <>
       <Cam f={raw} dur={dur}>
-        <Mark x={960} y={430} size={200} draw={t(f, 4, 38)} knob={t(f, 36, 56)} />
+        <HalftoneMark x={960} y={430} size={200} reveal={t(f, 4, 38)} knob={t(f, 36, 56)} />
         <text x={960} y={620} textAnchor="middle" fontFamily={MONO} fontWeight={600} fontSize={80} letterSpacing={-2} fill={C.text}>
           {word.slice(0, Math.min(3, n))}
           <tspan fill={C.muted} fontWeight={500}>{word.slice(3, n)}</tspan>
@@ -391,7 +392,7 @@ export const Outro: React.FC<P> = ({ dur, cap }) => {
   const cmd = "npx jev-swap scan ./your-app";
   return (
     <Cam f={raw} dur={dur + 20}>
-      <Mark x={780} y={330} size={120} draw={t(f, 0, 26)} knob={t(f, 24, 42)} />
+      <HalftoneMark x={780} y={330} size={120} reveal={t(f, 0, 26)} knob={t(f, 24, 42)} />
       <text x={870} y={358} fontFamily={MONO} fontWeight={600} fontSize={76} letterSpacing={-2} fill={C.text} opacity={t(f, 18, 32)}>
         jev<tspan fill={C.muted} fontWeight={500}>-swap</tspan>
       </text>

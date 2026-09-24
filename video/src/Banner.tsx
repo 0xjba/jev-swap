@@ -1,7 +1,7 @@
 import React from "react";
 import { AbsoluteFill } from "remotion";
 import { C, MONO, SANS } from "./theme";
-import { Mark } from "./ui";
+import { HalftoneMark } from "./HalftoneMark";
 
 // jev-swap's own site theme (dark, TypeSafe pinks, DM Sans + JetBrains Mono, framed grid), borrowing only generic
 // devices: an ordered halftone dither, crop marks and a dotted leader.
@@ -30,7 +30,12 @@ const SWITCH = (() => {
         continue;
       }
       const dx = Math.max(Math.abs(x - cx) - (w / 2 - r), 0);
-      const inPill = Math.hypot(dx, y - cy) < r - 8;
+      const ring = Math.hypot(dx, y - cy) - r;
+      if (Math.abs(ring) < 3.2) {
+        dots.push({ x, y, c: C.text });
+        continue;
+      }
+      const inPill = ring < -8;
       if (!inPill) continue;
       // Glow around the knob, kept inside the track.
       if (kd < 1.6 && (1.6 - kd) * 0.4 > th) {
@@ -66,7 +71,7 @@ export const Banner: React.FC = () => (
         <tspan fill={C.mid}> ...................... </tspan>
         <tspan fill={C.muted}>for TypeSafe Jev</tspan>
       </text>
-      <Mark x={140} y={262} size={92} />
+      <HalftoneMark x={146} y={262} size={124} pitch={3.4} />
       <text x={200} y={290} fontFamily={MONO} fontWeight={600} fontSize={76} letterSpacing={-2.5} fill={C.text}>
         jev<tspan fill={C.muted} fontWeight={500}>-swap</tspan>
       </text>
@@ -80,8 +85,6 @@ export const Banner: React.FC = () => (
       <g>
         {SWITCH.dots.map((d, i) => <rect key={i} x={d.x} y={d.y} width={2.4} height={2.4} fill={d.c} />)}
       </g>
-      <rect x={SWITCH.cx - SWITCH.w / 2} y={SWITCH.cy - SWITCH.h / 2} width={SWITCH.w} height={SWITCH.h} rx={SWITCH.r}
-        fill="none" stroke={C.text} strokeWidth={3} />
       <text x={SWITCH.cx - SWITCH.w / 2} y={SWITCH.cy + SWITCH.h / 2 + 64} fontFamily={MONO} fontSize={15} letterSpacing={0.6} fill={C.muted}>
         <tspan fill={C.dim}>llm</tspan>
         <tspan fill={C.mid}> ................................ </tspan>
