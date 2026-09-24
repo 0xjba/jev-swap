@@ -59,7 +59,7 @@ function wav(pcm) {
 }
 
 // Trim leading/trailing silence and level the voice (needs ffmpeg). Returns the new length in seconds.
-export const FILTER = "silenceremove=start_periods=1:start_threshold=-45dB:start_silence=0.05,areverse,silenceremove=start_periods=1:start_threshold=-45dB:start_silence=0.12,areverse,loudnorm=I=-16:TP=-1.5:LRA=11,aresample=48000";
+export const FILTER = "silenceremove=start_periods=1:start_threshold=-45dB:start_silence=0.05,areverse,silenceremove=start_periods=1:start_threshold=-45dB:start_silence=0.12,areverse,silenceremove=stop_periods=-1:stop_duration=0.34:stop_threshold=-42dB:stop_silence=0.28,loudnorm=I=-16:TP=-1.5:LRA=11,aresample=48000";
 function polish(file) {
   const tmp = file.replace(/\.wav$/, ".tmp.wav");
   execFileSync("ffmpeg", ["-v", "error", "-y", "-i", file, "-af", FILTER, "-ac", "1", tmp]);
@@ -76,7 +76,7 @@ for (const sc of cfg.scenes) {
   for (const [i, line] of sc.lines.entries()) {
     const file = `vo/${sc.id}-${i}.wav`;
     const key = `${sc.id}-${i}`;
-    if (!force && prev[key]?.say === line.say && fs.existsSync(`${root}/public/${file}`)) { out[key] = prev[key]; continue; }
+    if (!force && prev[key]?.say === line.say && prev[key]?.voice === cfg.voice && fs.existsSync(`${root}/public/${file}`)) { out[key] = prev[key]; continue; }
     let got;
     for (let attempt = 1; attempt <= 4; attempt++) {
       got = await speak(line.say);
@@ -87,7 +87,7 @@ for (const sc of cfg.scenes) {
     }
     if (!got) throw new Error(`${key}: the model kept changing the line`);
     fs.writeFileSync(`${root}/public/${file}`, wav(got.pcm));
-    out[key] = { say: line.say, file, seconds: polish(`${root}/public/${file}`) };
+    out[key] = { say: line.say, voice: cfg.voice, file, seconds: polish(`${root}/public/${file}`) };
     console.log(`  ${key}: ${out[key].seconds}s  "${got.transcript}"`);
     fs.writeFileSync(outPath, JSON.stringify({ ...prev, ...out }, null, 2) + "\n");
   }

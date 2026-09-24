@@ -1,47 +1,56 @@
 {
   "intro-0": {
     "say": "Meet jev-swap.",
+    "voice": "onyx",
     "file": "vo/intro-0.wav",
-    "seconds": 1.475
+    "seconds": 1.733
   },
   "problem-0": {
     "say": "A lot of your LLM calls are really decisions.",
+    "voice": "onyx",
     "file": "vo/problem-0.wav",
-    "seconds": 3.524
+    "seconds": 3.558
   },
   "problem-1": {
     "say": "Yet you pay a text model to write out every answer.",
+    "voice": "onyx",
     "file": "vo/problem-1.wav",
-    "seconds": 2.982
+    "seconds": 3.779
   },
   "jev-0": {
     "say": "TypeSafe Jev answers them directly. Typed answers, and no output tokens.",
+    "voice": "onyx",
     "file": "vo/jev-0.wav",
-    "seconds": 5.338
+    "seconds": 6.823
   },
   "scan-0": {
     "say": "Jev-swap finds those calls in your code,",
+    "voice": "onyx",
     "file": "vo/scan-0.wav",
-    "seconds": 2.631
+    "seconds": 3.012
   },
   "cost-0": {
     "say": "shows what you'd save. On this Claude Sonnet 5 call, 97.6 percent less, and nearly ten times faster.",
+    "voice": "onyx",
     "file": "vo/cost-0.wav",
-    "seconds": 8.642
+    "seconds": 9.207
   },
   "convert-0": {
     "say": "writes the Jev code, with a safe fallback to your LLM,",
+    "voice": "onyx",
     "file": "vo/convert-0.wav",
-    "seconds": 3.632
+    "seconds": 4.062
   },
   "shadow-0": {
     "say": "and proves the swap on your real traffic.",
+    "voice": "onyx",
     "file": "vo/shadow-0.wav",
-    "seconds": 2.546
+    "seconds": 2.815
   },
   "outro-0": {
     "say": "Jev-swap. Try it now, with N P X jev-swap.",
+    "voice": "onyx",
     "file": "vo/outro-0.wav",
-    "seconds": 3.915
+    "seconds": 4.885
   }
 }

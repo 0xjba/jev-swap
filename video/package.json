@@ -7,7 +7,7 @@
     "music": "node scripts/music.mjs",
     "sfx": "python3 scripts/sfx.py",
     "studio": "remotion studio src/index.ts",
-    "render": "remotion render src/index.ts WhatIsJevSwap out/jev-swap-launch.mp4",
+    "render": "remotion render src/index.ts WhatIsJevSwap out/master.mp4 --crf=16 && ffmpeg -v error -y -i out/master.mp4 -c:v libx264 -preset slow -crf 20 -maxrate 12M -bufsize 24M -tune grain -pix_fmt yuv420p -movflags +faststart -c:a copy out/jev-swap-launch.mp4",
     "still": "remotion still src/index.ts WhatIsJevSwap out/still.png"
   },
   "dependencies": {

@@ -1,5 +1,5 @@
 import React from "react";
-import { AbsoluteFill, Easing, interpolate, spring } from "remotion";
+import { AbsoluteFill, Easing, interpolate, interpolateColors, spring } from "remotion";
 import { C, FPS, H, MONO, SANS, W } from "./theme";
 
 /** Maps real scene frames to visual frames, so animations pause while the narration catches up. */
@@ -56,20 +56,51 @@ export const Backdrop: React.FC<{ f: number }> = ({ f }) => (
   </AbsoluteFill>
 );
 
-/** The jev-swap mark: a j whose dot is a switch. `draw` strokes it in, `knob` slides the switch on (0 -> 1). */
+/** The jev-swap mark (same geometry as the site's logo): a j whose dot is a switch.
+ * `draw` strokes it in, `knob` slides the switch on (0 -> 1). Once drawn, strokes are solid (no dash seams). */
 export const Mark: React.FC<{ x: number; y: number; size: number; draw?: number; knob?: number }> = ({ x, y, size, draw = 1, knob = 1 }) => {
   const k = size / 32;
-  const knobColor = interpolate(knob, [0, 0.6, 1], [0, 0, 1]) > 0.5 ? C.pink : C.dim;
+  const stem = t(draw, 0.3, 1);
+  const dash = (p: number) => (p >= 0.999 ? {} : { pathLength: 1, strokeDasharray: `${p} 2`, strokeDashoffset: 0 });
+  const knobColor = interpolateColors(knob, [0, 0.6, 1], [C.dim, C.dim, C.pink]);
   return (
     <g transform={`translate(${x - size / 2} ${y - size / 2}) scale(${k})`}>
-      <rect x="7.5" y="3" width="18" height="9" rx="4.5" fill="none" stroke={C.text} strokeWidth="2.2"
-        pathLength={1} strokeDasharray="1" strokeDashoffset={1 - draw} />
-      <path d="M17 15.5V23.5Q17 29 11.5 29H9" fill="none" stroke={C.text} strokeWidth="2.8" strokeLinecap="round"
-        pathLength={1} strokeDasharray="1" strokeDashoffset={1 - t(draw, 0.3, 1)} />
+      {draw > 0 && (
+        <path d="M12 3H21A4.5 4.5 0 0 1 21 12H12A4.5 4.5 0 0 1 12 3Z" fill="none" stroke={C.text} strokeWidth="2.2" strokeLinejoin="round" {...dash(draw)} />
+      )}
+      {stem > 0 && <path d="M17 15.5V23.5Q17 29 11.5 29H9" fill="none" stroke={C.text} strokeWidth="2.8" strokeLinecap="round" {...dash(stem)} />}
       <circle cx={12 + 9 * knob} cy="7.5" r="2.9" fill={knobColor} opacity={t(draw, 0.6, 1)} />
     </g>
   );
 };
+
+/** Animated film grain and a slow, soft light drift, so frames read as footage rather than slides. */
+export const Grain: React.FC<{ f: number }> = ({ f }) => (
+  <AbsoluteFill style={{ pointerEvents: "none" }}>
+    <svg width={W} height={H} style={{ position: "absolute", mixBlendMode: "screen", opacity: 0.55 }}>
+      <defs>
+        <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+          <stop offset="0" stopColor={C.pink2} stopOpacity="0.09" />
+          <stop offset="1" stopColor={C.pink2} stopOpacity="0" />
+        </radialGradient>
+      </defs>
+      <ellipse cx={960 + 520 * Math.sin(f / 170)} cy={420 + 180 * Math.cos(f / 130)} rx={900} ry={620} fill="url(#glow)" />
+    </svg>
+    <svg width={W} height={H} style={{ position: "absolute" }}>
+      {/* Light and dark speckles from fresh noise every frame; the alpha matrix keeps only the noise peaks. */}
+      <filter id="grainL" x="0" y="0" width="100%" height="100%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed={f % 48} stitchTiles="stitch" />
+        <feColorMatrix type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  3.2 0 0 0 -1.5" />
+      </filter>
+      <filter id="grainD" x="0" y="0" width="100%" height="100%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed={(f % 48) + 100} stitchTiles="stitch" />
+        <feColorMatrix type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  3.2 0 0 0 -1.5" />
+      </filter>
+      <rect width={W} height={H} filter="url(#grainL)" opacity={0.12} />
+      <rect width={W} height={H} filter="url(#grainD)" opacity={0.26} />
+    </svg>
+  </AbsoluteFill>
+);
 
 /** A panel with a title bar, like a file or terminal window. */
 export const Win: React.FC<{

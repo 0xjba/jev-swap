@@ -1,31 +1,82 @@
 {
-  "voice": "cedar",
-  "style": "Upbeat, confident launch-video narrator: brisk, energetic pacing with a natural human warmth and a smile in the voice. Punchy but never shouty, salesy or robotic.",
+  "voice": "onyx",
+  "style": "A deep, low, bassy, resonant male voice. Confident and warm, with brisk launch-trailer energy and natural human phrasing. Never shouty, salesy or robotic.",
   "scenes": [
-    { "id": "intro", "lines": [
-      { "say": "Meet jev-swap.", "show": "" }
-    ]},
-    { "id": "problem", "lines": [
-      { "say": "A lot of your LLM calls are really decisions.", "show": "A lot of your LLM calls are really decisions." },
-      { "say": "Yet you pay a text model to write out every answer.", "show": "Yet you pay a text model to write out every answer." }
-    ]},
-    { "id": "jev", "lines": [
-      { "say": "TypeSafe Jev answers them directly. Typed answers, and no output tokens.", "show": "TypeSafe Jev answers them directly: typed answers, no output tokens." }
-    ]},
-    { "id": "scan", "lines": [
-      { "say": "Jev-swap finds those calls in your code,", "show": "jev-swap finds those calls in your code," }
-    ]},
-    { "id": "cost", "lines": [
-      { "say": "shows what you'd save. On this Claude Sonnet 5 call, 97.6 percent less, and nearly ten times faster.", "show": "shows what you'd save: 97.6% less and 9.6× faster on this Claude Sonnet 5 call," }
-    ]},
-    { "id": "convert", "lines": [
-      { "say": "writes the Jev code, with a safe fallback to your LLM,", "show": "writes the Jev code, with a safe fallback to your LLM," }
-    ]},
-    { "id": "shadow", "lines": [
-      { "say": "and proves the swap on your real traffic.", "show": "and proves the swap on your real traffic." }
-    ]},
-    { "id": "outro", "lines": [
-      { "say": "Jev-swap. Try it now, with N P X jev-swap.", "show": "" }
-    ]}
+    {
+      "id": "intro",
+      "lines": [
+        {
+          "say": "Meet jev-swap.",
+          "show": ""
+        }
+      ]
+    },
+    {
+      "id": "problem",
+      "lines": [
+        {
+          "say": "A lot of your LLM calls are really decisions.",
+          "show": "A lot of your LLM calls are really decisions."
+        },
+        {
+          "say": "Yet you pay a text model to write out every answer.",
+          "show": "Yet you pay a text model to write out every answer."
+        }
+      ]
+    },
+    {
+      "id": "jev",
+      "lines": [
+        {
+          "say": "TypeSafe Jev answers them directly. Typed answers, and no output tokens.",
+          "show": "TypeSafe Jev answers them directly: typed answers, no output tokens."
+        }
+      ]
+    },
+    {
+      "id": "scan",
+      "lines": [
+        {
+          "say": "Jev-swap finds those calls in your code,",
+          "show": "jev-swap finds those calls in your code,"
+        }
+      ]
+    },
+    {
+      "id": "cost",
+      "lines": [
+        {
+          "say": "shows what you'd save. On this Claude Sonnet 5 call, 97.6 percent less, and nearly ten times faster.",
+          "show": "shows what you'd save: 97.6% less and 9.6× faster on this Claude Sonnet 5 call,"
+        }
+      ]
+    },
+    {
+      "id": "convert",
+      "lines": [
+        {
+          "say": "writes the Jev code, with a safe fallback to your LLM,",
+          "show": "writes the Jev code, with a safe fallback to your LLM,"
+        }
+      ]
+    },
+    {
+      "id": "shadow",
+      "lines": [
+        {
+          "say": "and proves the swap on your real traffic.",
+          "show": "and proves the swap on your real traffic."
+        }
+      ]
+    },
+    {
+      "id": "outro",
+      "lines": [
+        {
+          "say": "Jev-swap. Try it now, with N P X jev-swap.",
+          "show": ""
+        }
+      ]
+    }
   ]
 }

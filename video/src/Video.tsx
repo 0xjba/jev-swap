@@ -3,7 +3,7 @@ import { AbsoluteFill, Html5Audio, interpolate, Sequence, staticFile, useCurrent
 import narration from "../narration.json";
 import vo from "./vo.json";
 import { FPS } from "./theme";
-import { Backdrop, WarpCtx } from "./ui";
+import { Backdrop, Grain, WarpCtx } from "./ui";
 import { Convert, Cost, Intro, Jev, Outro, Problem, Scan, Shadow, Wipe } from "./scenes";
 
 type SceneFC = React.FC<{ dur: number; cap: [number, string][] }>;
@@ -63,15 +63,15 @@ const warpFor = (sc: Scene) => (f: number) => {
 };
 
 // Music (public/music.mp3, Lyria 3 Pro): a restrained product-film bed. It is started so its soft closing chord
-// (~60.5 s into the track) rings out under the logo. The track is loud (about -12 LUFS), so it sits well below the voice.
-const MUSIC_END = 60.5;
+// rings out under the logo. scripts/music.mjs normalizes the track to -16 LUFS; these gains put it about 18 dB under
+// the voice while it speaks and about 13 dB under between lines.
+const MUSIC_END = 64.4;
 const MUSIC_FROM = Math.max(0, Math.round(MUSIC_END * FPS) - TOTAL);
 const VO_SPANS = SCENES.flatMap((sc) => sc.lines.map((l) => [sc.from + l.at, sc.from + l.at + l.frames] as const));
 const clamp = { extrapolateLeft: "clamp", extrapolateRight: "clamp" } as const;
 const musicLevel = (f: number) => {
-  // About -18 dB under the voice, -12 dB between lines, with 8-frame ramps; fade in at the start.
   const near = Math.min(...VO_SPANS.map(([a, b]) => (f < a ? a - f : f > b ? f - b : 0)));
-  return interpolate(near, [0, 8], [0.13, 0.26], clamp) * interpolate(f, [0, 20], [0, 1], clamp);
+  return interpolate(near, [0, 8], [0.126, 0.22], clamp) * interpolate(f, [0, 12], [0, 1], clamp);
 };
 
 // Sound effects (public/sfx, synthesized by scripts/sfx.py), cued on each scene's animation beats in visual frames.
@@ -121,6 +121,7 @@ export const WhatIsJevSwap: React.FC = () => {
           ))}
         </Sequence>
       ))}
+      <Grain f={f} />
       <Sequence from={start("scan") - 10} durationInFrames={20} layout="none">
         <Wipe dur={20} />
         <Html5Audio src={staticFile("sfx/whoosh.wav")} volume={0.3} />
