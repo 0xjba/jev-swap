@@ -22,6 +22,7 @@ input:focus-visible,button:focus-visible,a:focus-visible{outline:2px solid #F386
 .pink{color:#F386A1}
 .eyebrow.lead{display:flex;align-items:center;gap:14px}
 .eyebrow.lead::after{content:"";flex:1 1 auto;min-width:24px;border-bottom:2px dotted #3A3B40}
+@media (max-width:600px){.hero-head .eyebrow.lead::after{display:none}}
 .crop{position:relative}
 .crop::after{content:"";position:absolute;inset:-10px;pointer-events:none;z-index:1;background:linear-gradient(#F386A1,#F386A1) left top/14px 1.5px no-repeat,linear-gradient(#F386A1,#F386A1) left top/1.5px 14px no-repeat,linear-gradient(#6C6F77,#6C6F77) right top/14px 1.5px no-repeat,linear-gradient(#6C6F77,#6C6F77) right top/1.5px 14px no-repeat,linear-gradient(#6C6F77,#6C6F77) left bottom/14px 1.5px no-repeat,linear-gradient(#6C6F77,#6C6F77) left bottom/1.5px 14px no-repeat,linear-gradient(#6C6F77,#6C6F77) right bottom/14px 1.5px no-repeat,linear-gradient(#6C6F77,#6C6F77) right bottom/1.5px 14px no-repeat}
 .ht{display:flex;flex-direction:column;gap:14px;max-width:460px;width:100%}

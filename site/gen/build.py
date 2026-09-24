@@ -15,7 +15,7 @@ import sys
 
 sys.path.insert(0, os.path.dirname(__file__))
 import scenes  # noqa: E402  (generates the SVGs and registers their keyframes)
-from layout import CALC_JS, HALFTONE, LOGO, code, fact, footer, page, qa, step, wrap  # noqa: E402
+from layout import CALC_JS, LOGO, code, fact, footer, page, qa, step, wrap  # noqa: E402
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 SITE = os.path.dirname(HERE)
@@ -156,8 +156,7 @@ def home():
 </div>''', label="jev-swap by the numbers")
 
     problem = wrap(f'''<div class="sec"><div class="row" style="gap: 32px 56px;">
-<div style="flex: 1 1 380px; display: flex; flex-direction: column; gap: 48px;"><h2 class="h2">Your LLM is making decisions. You&#39;re paying it to <span class="pink">write essays.</span></h2>
-{HALFTONE}</div>
+<h2 class="h2" style="flex: 1 1 380px;">Your LLM is making decisions. You&#39;re paying it to <span class="pink">write essays.</span></h2>
 <div style="flex: 1 1 480px; display: flex; flex-direction: column; gap: 20px;">
 <p class="body">Ticket routing, spam checks, moderation verdicts, refund triage, priority scores: each one runs a text-generation model to return one word from a list you already wrote.</p>
 <p class="body">Jev is built for that job. Send the input and typed questions; get back a typed answer with probabilities and a confidence score, with no text generated and no output tokens billed.</p>

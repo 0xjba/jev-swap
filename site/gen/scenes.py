@@ -305,12 +305,11 @@ def hero_scan():
 
     # the codebase
     s.box(0, 0, 0, W, D, 14, "#26272B", "#232427", "#1C1D20", stroke="rgba(236,237,239,0.22)")
-    n_cols = 4
     for r, row in enumerate(FILES):
         for c, (name, found) in enumerate(row):
             x, y = PAD + c * (T + G), PAD + r * (T + G)
             if found:
-                cls = _found_class(c / (n_cols - 1))
+                cls = _found_class((x + T / 2 - 5) / (W - 10))  # when the beam centre crosses this tile
                 s.box(x, y, 14, T, T, 4, TILE, "#2A2B2F", "#222326", extra_top=f' class="{cls}"')
                 s.text_x(x + 7, y + T - 9, 18, name, size=8.5, fill=TXT)
             else:
@@ -318,7 +317,7 @@ def hero_scan():
                 s.text_x(x + 7, y + T - 9, 14, name, size=8.5, fill="#6C6F77")
     # scan beam sweeping along +x
     s.add('<g class="beam">')
-    s.rect_top(-4, -10, 26, 10, D + 20, "rgba(243,134,161,0.22)", stroke="#F386A1")
+    s.rect_top(0, 0, 15, 10, D, "rgba(243,134,161,0.22)", stroke="#F386A1")
     s.add("</g>")
     for y in rows_y:
         s.dot(W, y, z, r=2.6)
@@ -364,8 +363,8 @@ def hero_scan():
         spans = "".join(f'<tspan fill="{c}">{esc(t)}</tspan>' for t, c in line)
         s.add(f'<text x="{s.f(px + 14)}" y="{s.f(py + 24 + i * 17)}" font-family="{MONO}" font-size="10.5" style="white-space: pre;">{spans}</text>')
 
-    # beam path in screen space: +x by W+8 iso units
-    dx, dy = (W + 8) * C_, (W + 8) * S_
+    # beam path in screen space: across the slab, stopping at its far edge
+    dx, dy = (W - 10) * C_, (W - 10) * S_
     KEYFRAMES.append(f"@keyframes beam{{0%,{8 - 1}%{{transform:translate(0px,0px);opacity:0}}8%{{opacity:1}}46%{{transform:translate({dx:.1f}px,{dy:.1f}px);opacity:1}}48%,100%{{transform:translate({dx:.1f}px,{dy:.1f}px);opacity:0}}}}")
     KEYFRAMES.append(".beam{animation:beam 6s linear infinite}")
     return s.svg(pad=24, label="jev-swap scans your codebase, lights up the LLM calls that are really decisions, sorts them into choice, yes/no and score questions, and runs them on Jev with your LLM as the fallback.", cls="iso hero-iso")
@@ -381,12 +380,13 @@ def hero_scan_mobile():
 
     # codebase -> first slab, then down the stack to jev (vertical screen wires)
     s.wire([(W, 200, z), (280, 200, z), (280, 280, z)], pulse={"anim": "sm-a", "color": ACC_T}, color=ACC_T)
-    stack = [("choice", "category · 3 options", 0), ("yes / no", "urgent · confidence", -58), ("score", "priority · 1–5", -116)]
+    stack = [("choice", "category · 3 options", 0), ("yes / no", "urgent · confidence", -80), ("score", "priority · 1–5", -160)]
+    CUBE = stack[-1][2] - 84  # top of the jev cube
     anims = ["sm-b", "sm-c", "sm-d"]
     for i in range(len(stack) - 1):
         a, b = s.P(280, 320, stack[i][2]), s.P(280, 320, stack[i + 1][2] + 8)
         s.screen_wire([a, b], pulse={"anim": anims[i], "color": ACC_T}, color=ACC_T)
-    a, b = s.P(280, 320, stack[-1][2]), s.P(280, 320, -150)
+    a, b = s.P(280, 320, stack[-1][2]), s.P(280, 320, CUBE)
     s.screen_wire([a, b], pulse={"anim": anims[-1], "color": ACC_T}, color=ACC_T)
 
     s.box(0, 0, 0, W, D, 12, "#26272B", "#232427", "#1C1D20", stroke="rgba(236,237,239,0.22)")
@@ -394,7 +394,7 @@ def hero_scan_mobile():
         for c, (name, found) in enumerate(row):
             x, y = PAD + c * (T + G), PAD + r * (T + G)
             if found:
-                cls = _found_class((r * 3 + c) / 11)
+                cls = _found_class((x + T / 2 - 5) / (W - 10))  # when the beam centre crosses this tile
                 s.box(x, y, 12, T, T, 4, TILE, "#2A2B2F", "#222326", extra_top=f' class="{cls}"')
                 s.text_x(x + 5, y + T - 8, 16, name, size=8, fill=TXT)
             else:
@@ -406,12 +406,12 @@ def hero_scan_mobile():
         s.box(220, 280, zz, 120, 80, 8, SLAB, "#0D0D0F", "#0B0B0C", stroke="rgba(243,134,161,0.45)")
         s.text_x(230, 336, zz + 8, title, size=12, fill=ACC_T, weight=500)
         s.text_x(230, 350, zz + 8, sub, size=9.5, fill=LABEL)
-    s.box(252, 292, -206, 56, 56, 56, ACC, ACC_L, ACC_D, stroke="rgba(243,134,161,0.7)")
-    s.text_x(263, 328, -150, "jev", size=14, fill="#1E1E1E", weight=600)
+    s.box(252, 292, CUBE - 56, 56, 56, 56, ACC, ACC_L, ACC_D, stroke="rgba(243,134,161,0.7)")
+    s.text_x(263, 328, CUBE, "jev", size=14, fill="#1E1E1E", weight=600)
 
     s.text_negy(-16, D - 4, 0, "// your codebase", size=12, fill=TXT)
-    s.text_negy(352, 350, 0, "// decisions found", size=11)
-    s.text_x(252, 364, -206, "// typed answers on jev", size=11, fill=ACC_T)
+    s.text_negy(404, 360, -60, "// decisions found", size=11)
+    s.text_x(252, 364, CUBE - 56, "// typed answers on jev", size=11, fill=ACC_T)
 
     top = s.P(30, 150, 150)
     s.screen_wire([top, s.P(30, 150, 12)], pulse={"anim": "sm-panel", "color": ACC_T})
@@ -426,10 +426,10 @@ def hero_scan_mobile():
         spans = "".join(f'<tspan fill="{c}">{esc(t)}</tspan>' for t, c in line)
         s.add(f'<text x="{s.f(px + 14)}" y="{s.f(py + 24 + i * 19)}" font-family="{MONO}" font-size="12" style="white-space: pre;">{spans}</text>')
 
-    dx, dy = (W + 8) * C_, (W + 8) * S_
+    dx, dy = (W - 10) * C_, (W - 10) * S_
     KEYFRAMES.append(f"@keyframes beamm{{0%,7%{{transform:translate(0px,0px);opacity:0}}8%{{opacity:1}}46%{{transform:translate({dx:.1f}px,{dy:.1f}px);opacity:1}}48%,100%{{transform:translate({dx:.1f}px,{dy:.1f}px);opacity:0}}}}")
     KEYFRAMES.append(".beam-m{animation:beamm 6s linear infinite}")
     s.add('<g class="beam-m">')
-    s.rect_top(-4, -10, 24, 10, D + 20, "rgba(243,134,161,0.22)", stroke="#F386A1")
+    s.rect_top(0, 0, 13, 10, D, "rgba(243,134,161,0.22)", stroke="#F386A1")
     s.add("</g>")
     return s.svg(pad=16, label="jev-swap scans your codebase, lights up the LLM calls that are really decisions, and sorts them into choice, yes/no and score questions for Jev.", cls="iso hero-iso")
