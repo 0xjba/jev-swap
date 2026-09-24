@@ -76,12 +76,12 @@ export const Banner: React.FC = () => (
         jev<tspan fill={C.muted} fontWeight={500}>-swap</tspan>
       </text>
       {/* The workflow, in order: the last step is the payoff. */}
-      {["Find the decisions", "Run the shadow proxy", "Estimate the savings", "See the difference", "Swap to Jev"].map((step, i, all) => (
+      {["Find the decisions", "See the savings, live", "Swap to Jev"].map((step, i, all) => (
         <g key={step}>
-          <text x={96} y={392 + i * 42} fontFamily={MONO} fontSize={16} fill={i === all.length - 1 ? C.pink : C.dim}>
+          <text x={96} y={412 + i * 56} fontFamily={MONO} fontSize={17} fill={i === all.length - 1 ? C.pink : C.dim}>
             {String(i + 1).padStart(2, "0")}
           </text>
-          <text x={136} y={392 + i * 42} fontFamily={SANS} fontWeight={500} fontSize={30} letterSpacing={-0.8} fill={i === all.length - 1 ? C.pink : C.text}>
+          <text x={140} y={412 + i * 56} fontFamily={SANS} fontWeight={500} fontSize={40} letterSpacing={-1.1} fill={i === all.length - 1 ? C.pink : C.text}>
             {step}
           </text>
         </g>
