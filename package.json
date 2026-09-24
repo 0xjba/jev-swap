@@ -1,6 +1,6 @@
 {
   "name": "jev-swap",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Find the LLM calls in your TS/JS or Python code that are really decisions, estimate their cost and speed on TypeSafe Jev, convert them, and prove the swap on your own traffic.",
   "license": "MIT",
   "keywords": [
