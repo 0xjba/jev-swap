@@ -1,4 +1,5 @@
 <p align="center"><img src="https://cdn.jsdelivr.net/npm/jev-swap@0.1.2/assets/banner.png" alt="jev-swap: find the decisions, see the savings live, swap to Jev" width="100%"></p>
+<p align="center"><a href="https://www.npmjs.com/package/jev-swap"><img src="https://img.shields.io/npm/v/jev-swap?style=flat-square&labelColor=19191B&color=F386A1" alt="npm version"></a> <a href="LICENSE"><img src="https://img.shields.io/npm/l/jev-swap?style=flat-square&labelColor=19191B&color=F386A1" alt="MIT license"></a> <a href="https://www.npmjs.com/package/jev-swap"><img src="https://img.shields.io/node/v/jev-swap?style=flat-square&labelColor=19191B&color=F386A1" alt="Node version"></a></p>
 
 # jev-swap
 
