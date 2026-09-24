@@ -2,6 +2,10 @@ import React from "react";
 import { AbsoluteFill, Easing, interpolate, spring } from "remotion";
 import { C, FPS, H, MONO, SANS, W } from "./theme";
 
+/** Maps real scene frames to visual frames, so animations pause while the narration catches up. */
+export const WarpCtx = React.createContext<(f: number) => number>((f) => f);
+export const useWarp = (f: number) => React.useContext(WarpCtx)(f);
+
 export const ease = Easing.bezier(0.3, 0.7, 0.25, 1);
 
 /** Clamped, eased interpolation of frame f over [a, b]. */
@@ -215,6 +219,7 @@ export const Caption: React.FC<{ f: number; dur: number; eyebrow?: string; lines
   const idx = lines.reduce((acc, [from], i) => (f >= from ? i : acc), -1);
   if (idx < 0) return null;
   const [from, text] = lines[idx];
+  if (!text) return null;
   const to = idx + 1 < lines.length ? lines[idx + 1][0] : dur;
   const o = Math.min(t(f, from, from + 12), 1 - t(f, to - 10, to));
   const y = t(f, from, from + 14, 14, 0);

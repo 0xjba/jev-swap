@@ -88,10 +88,13 @@ The pages are generated: edit `site/gen/` (`build.py` for copy, `layout.py` for 
 
 ## Explainer video
 
-`video/` is a Remotion project for the 70 s "What is jev-swap?" video (1920x1080, 30 fps, no audio). Its cost and speed figures are the site's sourced Claude Sonnet 5 example.
+`video/` is a Remotion project for the "What is jev-swap?" video (1920x1080, 30 fps, about 1 min 48 s, with a voiceover). Its cost and speed figures are the site's sourced Claude Sonnet 5 example.
+
+The script is `video/narration.json` (`say` is spoken, `show` is the caption). `npm run voice` records each line with OpenRouter's `openai/gpt-audio` (voice `cedar`), checks the transcript matches word for word, trims and levels it (ffmpeg), and writes `public/vo/*.wav` plus timings; only changed lines are re-recorded. Scene lengths follow the narration: animations hold on a settled frame until each line starts.
 
 ```sh
 cd video && npm install
+OPENROUTER_API_KEY=... npm run voice   # only after editing narration.json
 npm run studio     # preview and edit
 npm run render     # -> video/out/what-is-jev-swap.mp4
 ```

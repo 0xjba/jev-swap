@@ -3,6 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "voice": "node scripts/voice.mjs",
     "studio": "remotion studio src/index.ts",
     "render": "remotion render src/index.ts WhatIsJevSwap out/what-is-jev-swap.mp4",
     "still": "remotion still src/index.ts WhatIsJevSwap out/still.png"

@@ -1,18 +1,19 @@
 import React from "react";
 import { AbsoluteFill, interpolate, useCurrentFrame } from "remotion";
 import { C, FPS, MONO, SANS } from "./theme";
-import { About, Cam, Caption, Check, Cmd, JevNode, Label, Lines, LlmNode, Mark, Stream, Win, pop, t, typed } from "./ui";
+import { About, Cam, Caption, useWarp, Check, Cmd, JevNode, Label, Lines, LlmNode, Mark, Stream, Win, pop, t, typed } from "./ui";
 
-type P = { dur: number };
+type P = { dur: number; cap: [number, string][] };
 
 /* 1 · Logo: the j draws in and its switch flips on. */
-export const Intro: React.FC<P> = ({ dur }) => {
-  const f = useCurrentFrame();
+export const Intro: React.FC<P> = ({ dur, cap }) => {
+  const raw = useCurrentFrame();
+  const f = useWarp(raw);
   const word = "jev-swap";
   const n = Math.max(0, Math.min(word.length, Math.floor((f - 44) / 2.2)));
   return (
     <>
-      <Cam f={f} dur={dur}>
+      <Cam f={raw} dur={dur}>
         <Mark x={960} y={430} size={200} draw={t(f, 4, 38)} knob={t(f, 36, 56)} />
         <text x={960} y={620} textAnchor="middle" fontFamily={MONO} fontWeight={600} fontSize={80} letterSpacing={-2} fill={C.text}>
           {word.slice(0, Math.min(3, n))}
@@ -27,8 +28,9 @@ export const Intro: React.FC<P> = ({ dur }) => {
 };
 
 /* 2 · The problem: a decision goes to a text model, which writes its answer out token by token. */
-export const Problem: React.FC<P> = ({ dur }) => {
-  const f = useCurrentFrame();
+export const Problem: React.FC<P> = ({ dur, cap }) => {
+  const raw = useCurrentFrame();
+  const f = useWarp(raw);
   const resp = ["{", '  "category": "billing",', '  "urgent": true,', '  "priority": 3', "}"];
   const all = resp.join("\n");
   const shown = typed(all, f, 112, 0.75);
@@ -38,7 +40,7 @@ export const Problem: React.FC<P> = ({ dur }) => {
   const tokens = Math.min(1, Math.max(0, (f - 112) / (all.length / 0.75)));
   return (
     <>
-      <Cam f={f} dur={dur}>
+      <Cam f={raw} dur={dur}>
         <Win x={140} y={250} w={520} h={400} title="support/triage.ts" o={t(f, 0, 12)} s={0.94 + 0.06 * pop(f, 0)}>
           <Lines f={f} x={180} y={330} start={6} dur={30} widths={[240, 330, 180, 280, 220, 300, 150, 260, 200]} indents={[0, 1, 1, 1, 2, 2, 1, 1, 0]} hl={3} hlAt={30} gap={34} />
           <text x={180 + 28 + 300} y={330 + 3 * 34 + 6} fontFamily={MONO} fontSize={17} fill={C.pink} opacity={t(f, 34, 44)}>classify()</text>
@@ -72,22 +74,20 @@ export const Problem: React.FC<P> = ({ dur }) => {
           <rect x={1520} y={592} width={234 * tokens} height={12} rx={6} fill={C.dim} />
         </Win>
       </Cam>
-      <Caption f={f} dur={dur} eyebrow="// the problem" lines={[
-        [8, "Many LLM calls in your app are really decisions."],
-        [150, "A text model writes out every answer, token by token, just to pick from options you already wrote."],
-      ]} />
+      <Caption f={raw} dur={dur} eyebrow="// the problem" lines={cap} />
     </>
   );
 };
 
 /* 3 · Jev: the same input and typed questions in, typed answers with confidence out. */
-export const Jev: React.FC<P> = ({ dur }) => {
-  const f = useCurrentFrame();
+export const Jev: React.FC<P> = ({ dur, cap }) => {
+  const raw = useCurrentFrame();
+  const f = useWarp(raw);
   const qs: [string, string][] = [["choice", "category"], ["noul", "urgent?"], ["score", "priority 1–5"]];
   const rows: [string, string, number][] = [["category", "billing", 0.9], ["urgent", "yes", 0.72], ["priority", "3", 0.62]];
   return (
     <>
-      <Cam f={f} dur={dur}>
+      <Cam f={raw} dur={dur}>
         <Win x={130} y={370} w={400} h={160} title="input" o={t(f, 0, 12)} s={0.94 + 0.06 * pop(f, 0)}>
           <text x={160} y={470} fontFamily={MONO} fontSize={22} fill={C.text}>{typed("Charged twice,", f, 8, 1.5)}</text>
           <text x={160} y={504} fontFamily={MONO} fontSize={22} fill={C.text}>{typed("refund please.", f, 18, 1.5)}</text>
@@ -125,22 +125,19 @@ export const Jev: React.FC<P> = ({ dur }) => {
             );
           })}
           <text x={1746} y={346} textAnchor="end" fontFamily={MONO} fontSize={15} fill={C.muted} opacity={t(f, 150, 162)}>confidence</text>
-          <line x1={1244} x2={1756} y1={556} y2={556} stroke={C.line} strokeWidth={1.5} opacity={t(f, 180, 190)} />
-          <text x={1256} y={592} fontFamily={MONO} fontSize={18} fill={C.soft} opacity={t(f, 186, 198)}>
+          <line x1={1244} x2={1756} y1={556} y2={556} stroke={C.line} strokeWidth={1.5} opacity={t(f, 190, 200)} />
+          <text x={1256} y={592} fontFamily={MONO} fontSize={18} fill={C.soft} opacity={t(f, 196, 208)}>
             no text generated · <tspan fill={C.pink}>no output tokens billed</tspan>
           </text>
         </Win>
       </Cam>
-      <Caption f={f} dur={dur} eyebrow="// typesafe jev" lines={[
-        [8, "TypeSafe Jev is built for decisions."],
-        [140, "Send the input and typed questions. Get typed answers with a confidence score, and no text generated."],
-      ]} />
+      <Caption f={raw} dur={dur} eyebrow="// typesafe jev" lines={cap} />
     </>
   );
 };
 
 /* Pink panel sweep between the idea and the tool (the reference's colour-wipe cut). */
-export const Wipe: React.FC<P> = ({ dur }) => {
+export const Wipe: React.FC<{ dur: number }> = ({ dur }) => {
   const f = useCurrentFrame();
   const x = interpolate(f, [0, dur], [-2100, 1920], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
   return (
@@ -159,22 +156,23 @@ export const Wipe: React.FC<P> = ({ dur }) => {
 };
 
 /* 4 · Scan: a sweep across the codebase flags the decision calls. */
-export const Scan: React.FC<P> = ({ dur }) => {
-  const f = useCurrentFrame();
+export const Scan: React.FC<P> = ({ dur, cap }) => {
+  const raw = useCurrentFrame();
+  const f = useWarp(raw);
   const cols = 4, w = 300, h = 190, gx = 44, gy = 64;
   const x0 = 960 - (cols * w + (cols - 1) * gx) / 2;
   const files = ["api/tickets.ts", "lib/format.ts", "mail/filter.py", "ui/table.tsx", "mod/review.ts", "db/client.py", "jobs/triage.py", "util/dates.ts"];
   const flags: Record<number, string> = { 0: "enum", 2: "yes / no", 4: "boolean", 6: "score 1–5" };
-  const sweep = interpolate(f, [60, 170], [x0 - 40, x0 + cols * (w + gx)], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+  const sweep = interpolate(f, [70, 180], [x0 - 40, x0 + cols * (w + gx)], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
   return (
     <>
-      <Cam f={f} dur={dur}>
+      <Cam f={raw} dur={dur}>
         <Cmd f={f} cmd="npx jev-swap scan ./app" />
         {files.map((name, i) => {
           const c = i % cols, r = Math.floor(i / cols);
           const x = x0 + c * (w + gx), y = 270 + r * (h + gy);
           const passed = sweep > x + w / 2;
-          const passAt = 60 + ((x + w / 2 - (x0 - 40)) / (cols * (w + gx) + 40)) * 110;
+          const passAt = 70 + ((x + w / 2 - (x0 - 40)) / (cols * (w + gx) + 40)) * 110;
           const flagged = flags[i] !== undefined;
           return (
             <g key={name}>
@@ -190,24 +188,22 @@ export const Scan: React.FC<P> = ({ dur }) => {
             </g>
           );
         })}
-        {f > 58 && f < 176 && (
+        {f > 68 && f < 186 && (
           <g>
             <rect x={sweep - 60} y={240} width={60} height={2 * h + gy + 70} fill={C.pink} opacity={0.07} />
             <line x1={sweep} x2={sweep} y1={240} y2={240 + 2 * h + gy + 70} stroke={C.pink} strokeWidth={2.5} />
           </g>
         )}
       </Cam>
-      <Caption f={f} dur={dur} eyebrow="// 01 scan" lines={[
-        [8, "jev-swap finds those calls for you."],
-        [130, "It reads your code's syntax tree and flags LLM calls that return an enum, a boolean or a small score."],
-      ]} />
+      <Caption f={raw} dur={dur} eyebrow="// 01 scan" lines={cap} />
     </>
   );
 };
 
 /* 5 · Cost and speed: a race at real speed, then per-call costs. Figures are the site's sourced example. */
-export const Cost: React.FC<P> = ({ dur }) => {
-  const f = useCurrentFrame();
+export const Cost: React.FC<P> = ({ dur, cap }) => {
+  const raw = useCurrentFrame();
+  const f = useWarp(raw);
   // Claude Sonnet 5 vs Jev, 400-in / 20-out-token call (site/gen/build.py): OpenRouter list prices and latency
   // fetched 2026-09-24; Jev at its p50 over 45 live calls (data/jev-measure.json).
   const LLM_MS = 3148, JEV_MS = 327;
@@ -223,7 +219,7 @@ export const Cost: React.FC<P> = ({ dur }) => {
   ];
   return (
     <>
-      <Cam f={f} dur={dur}>
+      <Cam f={raw} dur={dur}>
         <text x={x1} y={200} textAnchor="end" fontFamily={MONO} fontSize={24} fill={C.muted} opacity={t(f, 20, 32)}>
           {(clock / 1000).toFixed(2)} s
         </text>
@@ -243,7 +239,7 @@ export const Cost: React.FC<P> = ({ dur }) => {
           );
         })}
         {cards.map(([k, big, sub, pink], i) => {
-          const x = 250 + i * 480, s = pop(f, 150 + i * 10);
+          const x = 250 + i * 480, s = pop(f, 166 + i * 10);
           return (
             <About key={k} x={x + 210} y={620} s={0.92 + 0.08 * s} o={Math.min(1, s)}>
               <rect x={x} y={530} width={420} height={180} rx={8} fill={C.panel} stroke={pink ? C.pink : C.line2} strokeWidth={1.5} />
@@ -254,7 +250,7 @@ export const Cost: React.FC<P> = ({ dur }) => {
           );
         })}
         {(() => {
-          const s = pop(f, 176);
+          const s = pop(f, 192);
           return (
             <About x={1460} y={620} s={0.92 + 0.08 * s} o={Math.min(1, s)}>
               <rect x={1250} y={530} width={420} height={180} rx={8} fill={C.pink2} />
@@ -264,21 +260,19 @@ export const Cost: React.FC<P> = ({ dur }) => {
             </About>
           );
         })()}
-        <text x={960} y={764} textAnchor="middle" fontFamily={SANS} fontSize={17} fill={C.muted} opacity={t(f, 196, 210)}>
+        <text x={960} y={764} textAnchor="middle" fontFamily={SANS} fontSize={17} fill={C.muted} opacity={t(f, 212, 226)}>
           400 input / 20 output tokens at OpenRouter list prices and p50 latency, 2026-09-24. Jev: p50 over 45 live calls.
         </text>
       </Cam>
-      <Caption f={f} dur={dur} eyebrow="// 02 cost and speed" lines={[
-        [8, "It estimates what each call costs today, and on Jev."],
-        [150, "For this call on Claude Sonnet 5: 97.6% lower cost on Jev, and about 9.6× faster."],
-      ]} />
+      <Caption f={raw} dur={dur} eyebrow="// 02 cost and speed" lines={cap} />
     </>
   );
 };
 
 /* 6 · Convert: a generated module, and the confidence gate that falls back to the LLM. */
-export const Convert: React.FC<P> = ({ dur }) => {
-  const f = useCurrentFrame();
+export const Convert: React.FC<P> = ({ dur, cap }) => {
+  const raw = useCurrentFrame();
+  const f = useWarp(raw);
   const code: [string, string][] = [
     ["export const THRESHOLD = 0.7;", C.text],
     ["", C.text],
@@ -302,7 +296,7 @@ export const Convert: React.FC<P> = ({ dur }) => {
   const a = tok(96, true), b = tok(160, false);
   return (
     <>
-      <Cam f={f} dur={dur}>
+      <Cam f={raw} dur={dur}>
         <Cmd f={f} cmd="npx jev-swap convert" />
         <Win x={130} y={250} w={640} h={470} title="jev/classifyTicket.ts" o={t(f, 10, 22)} s={0.94 + 0.06 * pop(f, 10)}>
           {code.map(([line, col], i) => (
@@ -327,17 +321,15 @@ export const Convert: React.FC<P> = ({ dur }) => {
         <Check f={f} x={1600} y={gy - 180} start={146} />
         <Check f={f} x={1600} y={gy + 80} start={210} bad />
       </Cam>
-      <Caption f={f} dur={dur} eyebrow="// 03 convert" lines={[
-        [8, "It writes a Jev module for each call."],
-        [110, "A confidence gate keeps Jev's answer when it's sure, and falls back to your current LLM when it isn't."],
-      ]} />
+      <Caption f={raw} dur={dur} eyebrow="// 03 convert" lines={cap} />
     </>
   );
 };
 
 /* 7 · Shadow: recorded calls replayed through Jev, agreement vs threshold, recommended threshold. */
-export const Shadow: React.FC<P> = ({ dur }) => {
-  const f = useCurrentFrame();
+export const Shadow: React.FC<P> = ({ dur, cap }) => {
+  const raw = useCurrentFrame();
+  const f = useWarp(raw);
   const agree = [true, true, false, true, true, true];
   const cx = 1010, cy = 250, cw = 760, ch = 470;
   // Illustrative curve only: agreement on covered calls rising with the threshold (no values shown).
@@ -350,11 +342,11 @@ export const Shadow: React.FC<P> = ({ dur }) => {
   const hit = pts.find(([, y]) => y <= target) ?? pts[pts.length - 1];
   return (
     <>
-      <Cam f={f} dur={dur}>
+      <Cam f={raw} dur={dur}>
         <Cmd f={f} cmd="npx jev-swap shadow samples.jsonl" />
-        <Label x={140} y={236} anchor="start" text="recorded calls" o={t(f, 14, 26)} />
+        <Label x={140} y={236} anchor="start" text="recorded calls" o={t(f, 44, 56)} />
         {agree.map((ok, i) => {
-          const y = 262 + i * 78, s = pop(f, 20 + i * 12);
+          const y = 262 + i * 78, s = pop(f, 50 + i * 12);
           return (
             <About key={i} x={470} y={y + 28} s={0.9 + 0.1 * s} o={Math.min(1, s)}>
               <rect x={140} y={y} width={660} height={58} rx={6} fill={C.panel} stroke={C.line2} strokeWidth={1.5} />
@@ -363,21 +355,21 @@ export const Shadow: React.FC<P> = ({ dur }) => {
               <rect x={384} y={y + 23} width={110} height={10} rx={5} fill={C.dim} />
               <text x={530} y={y + 36} fontFamily={MONO} fontSize={19} fill={C.pink}>jev</text>
               <rect x={578} y={y + 23} width={110} height={10} rx={5} fill={ok ? C.pink : C.mid} />
-              <Check f={f} x={756} y={y + 29} start={34 + i * 12} r={15} bad={!ok} />
+              <Check f={f} x={756} y={y + 29} start={64 + i * 12} r={15} bad={!ok} />
             </About>
           );
         })}
-        <Win x={cx} y={cy} w={cw} h={ch} o={t(f, 80, 94)} s={0.94 + 0.06 * pop(f, 80)}>
+        <Win x={cx} y={cy} w={cw} h={ch} o={t(f, 110, 124)} s={0.94 + 0.06 * pop(f, 110)}>
           <line x1={cx + 70} x2={cx + cw - 40} y1={cy + ch - 80} y2={cy + ch - 80} stroke={C.mid} strokeWidth={1.5} />
           <line x1={cx + 70} x2={cx + 70} y1={cy + 60} y2={cy + ch - 80} stroke={C.mid} strokeWidth={1.5} />
           <text x={cx + cw - 40} y={cy + ch - 40} textAnchor="end" fontFamily={MONO} fontSize={17} fill={C.muted}>confidence threshold →</text>
           <text x={cx + 70} y={cy + 42} fontFamily={MONO} fontSize={17} fill={C.muted}>agreement with your LLM</text>
-          <line x1={cx + 70} x2={cx + cw - 40} y1={target} y2={target} stroke={C.soft} strokeWidth={1.5} strokeDasharray="6 8" opacity={t(f, 150, 160)} />
-          <text x={cx + 90} y={target - 12} fontFamily={MONO} fontSize={16} fill={C.soft} opacity={t(f, 150, 160)}>your target</text>
-          <path d={d} fill="none" stroke={C.pink} strokeWidth={3} pathLength={1} strokeDasharray="1" strokeDashoffset={1 - t(f, 100, 160)} />
+          <line x1={cx + 70} x2={cx + cw - 40} y1={target} y2={target} stroke={C.soft} strokeWidth={1.5} strokeDasharray="6 8" opacity={t(f, 180, 190)} />
+          <text x={cx + 90} y={target - 12} fontFamily={MONO} fontSize={16} fill={C.soft} opacity={t(f, 180, 190)}>your target</text>
+          <path d={d} fill="none" stroke={C.pink} strokeWidth={3} pathLength={1} strokeDasharray="1" strokeDashoffset={1 - t(f, 130, 190)} />
         </Win>
         {(() => {
-          const s = pop(f, 170);
+          const s = pop(f, 200);
           return (
             <About x={hit[0]} y={hit[1]} s={s}>
               <line x1={hit[0]} x2={hit[0]} y1={hit[1]} y2={cy + ch - 80} stroke={C.pink} strokeWidth={1.5} strokeDasharray="4 6" />
@@ -387,21 +379,18 @@ export const Shadow: React.FC<P> = ({ dur }) => {
           );
         })()}
       </Cam>
-      <Caption f={f} dur={dur} eyebrow="// 04 shadow" lines={[
-        [8, "Then it proves the swap on your own traffic."],
-        [120, "It replays recorded calls through Jev and picks the lowest threshold where Jev agrees with your LLM."],
-        [200, "Or mirror live traffic with the shadow proxy."],
-      ]} />
+      <Caption f={raw} dur={dur} eyebrow="// 04 shadow" lines={cap} />
     </>
   );
 };
 
 /* 8 · Outro: logo and the one command to start. */
-export const Outro: React.FC<P> = ({ dur }) => {
-  const f = useCurrentFrame();
+export const Outro: React.FC<P> = ({ dur, cap }) => {
+  const raw = useCurrentFrame();
+  const f = useWarp(raw);
   const cmd = "npx jev-swap scan ./your-app";
   return (
-    <Cam f={f} dur={dur + 20}>
+    <Cam f={raw} dur={dur + 20}>
       <Mark x={780} y={330} size={120} draw={t(f, 0, 26)} knob={t(f, 24, 42)} />
       <text x={870} y={358} fontFamily={MONO} fontWeight={600} fontSize={76} letterSpacing={-2} fill={C.text} opacity={t(f, 18, 32)}>
         jev<tspan fill={C.muted} fontWeight={500}>-swap</tspan>

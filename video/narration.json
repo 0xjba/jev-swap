@@ -1,0 +1,40 @@
+{
+  "voice": "cedar",
+  "style": "Warm, calm and confident, with natural human pacing and light emphasis, like the narrator of a polished tech explainer video. Not salesy, not robotic.",
+  "scenes": [
+    { "id": "intro", "lines": [
+      { "say": "What is jev-swap?", "show": "What is jev-swap?" }
+    ]},
+    { "id": "problem", "lines": [
+      { "say": "A lot of the LLM calls in your app aren't really asking for writing. They're decisions.", "show": "Many LLM calls in your app are really decisions." },
+      { "say": "Route this ticket. Is this spam? How urgent is it, from one to five?", "show": "Route this ticket. Is this spam? How urgent is it, 1 to 5?" },
+      { "say": "But a text model still writes out every answer, token by token, just to pick from options you already wrote.", "show": "A text model writes out every answer, token by token, just to pick from options you already wrote." }
+    ]},
+    { "id": "jev", "lines": [
+      { "say": "TypeSafe Jev is built for exactly that job.", "show": "TypeSafe Jev is built for decisions." },
+      { "say": "You send the input and your typed questions, and Jev returns typed answers, each with a confidence score.", "show": "Send the input and typed questions. Get typed answers with a confidence score." },
+      { "say": "No text is generated, and no output tokens are billed.", "show": "No text generated. No output tokens billed." }
+    ]},
+    { "id": "scan", "lines": [
+      { "say": "Jev-swap finds those calls for you.", "show": "jev-swap finds those calls for you." },
+      { "say": "It reads your code's syntax tree, in TypeScript, JavaScript and Python, and flags the LLM calls that return an enum, a boolean, or a small score.", "show": "It reads your code's syntax tree and flags LLM calls that return an enum, a boolean or a small score." }
+    ]},
+    { "id": "cost", "lines": [
+      { "say": "Then it estimates what each call costs today, and what it would cost on Jev.", "show": "It estimates what each call costs today, and on Jev." },
+      { "say": "Take one decision call on Claude Sonnet 5. On Jev, it costs 97.6 percent less, and answers about 9.6 times faster.", "show": "For this call on Claude Sonnet 5: 97.6% lower cost on Jev, and about 9.6× faster." }
+    ]},
+    { "id": "convert", "lines": [
+      { "say": "Next, it writes a Jev module for each call.", "show": "It writes a Jev module for each call." },
+      { "say": "A confidence gate keeps Jev's answer when it's sure, and falls back to your current LLM when it isn't.", "show": "A confidence gate keeps Jev's answer when it's sure, and falls back to your current LLM when it isn't." }
+    ]},
+    { "id": "shadow", "lines": [
+      { "say": "And before you switch anything, it proves the swap.", "show": "Then it proves the swap on your own traffic." },
+      { "say": "It replays your recorded calls through Jev, and picks the lowest threshold where Jev agrees with your LLM.", "show": "It replays recorded calls through Jev and picks the lowest threshold where Jev agrees with your LLM." },
+      { "say": "Or run the shadow proxy, and watch it happen on live traffic.", "show": "Or mirror live traffic with the shadow proxy." }
+    ]},
+    { "id": "outro", "lines": [
+      { "say": "Find the decisions. Swap them to Jev. Prove it.", "show": "" },
+      { "say": "Get started with N P X jev-swap.", "show": "" }
+    ]}
+  ]
+}
