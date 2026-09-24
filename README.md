@@ -111,6 +111,7 @@ The pages are generated: edit `site/gen/` (`build.py` for copy, `layout.py` for 
 - `--mock` simulates Jev by agreeing with the recorded LLM label at `--mock-agreement`. Mock numbers are not Jev accuracy; the report says so.
 - Default Jev price: $0.042 per 1M input tokens, output free (override with `--jev-price-in`).
 - Review generated instructions: Jev works best with one short question per field.
+- `convert` warns when a score field has no description: the generated question then guesses which end of the scale is highest. Say what the ends mean (e.g. "1 = low, 5 = critical") to match your LLM prompt.
 
 ## Development
 

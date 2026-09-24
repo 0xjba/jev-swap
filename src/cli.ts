@@ -2,7 +2,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { Command, InvalidArgumentError } from "commander";
-import { applyThreshold, convert } from "./convert.js";
+import { applyThreshold, convert, scaleWarnings } from "./convert.js";
 import { renderReport } from "./report.js";
 import { scan } from "./scan.js";
 import { shadow } from "./shadow.js";
@@ -54,9 +54,11 @@ program
   .description("Write a Jev module per candidate (with a fallback to your current call) and a samples template.")
   .option("-o, --out <dir>", "output directory", "jev-swap-out")
   .action((opts: { out: string }) => {
-    const files = convert(loadCandidates(opts.out), opts.out);
+    const candidates = loadCandidates(opts.out);
+    const files = convert(candidates, opts.out);
     files.forEach((f) => console.log(`  wrote ${f}`));
     console.log(`  wrote ${path.join(opts.out, "samples.template.jsonl")}`);
+    scaleWarnings(candidates).forEach((w) => console.warn(`  warning: ${w}`));
   });
 
 program
