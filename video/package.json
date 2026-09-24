@@ -5,6 +5,7 @@
   "scripts": {
     "voice": "node scripts/voice.mjs",
     "music": "node scripts/music.mjs",
+    "sfx": "python3 scripts/sfx.py",
     "studio": "remotion studio src/index.ts",
     "render": "remotion render src/index.ts WhatIsJevSwap out/jev-swap-launch.mp4",
     "still": "remotion still src/index.ts WhatIsJevSwap out/still.png"

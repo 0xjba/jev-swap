@@ -88,10 +88,11 @@ The pages are generated: edit `site/gen/` (`build.py` for copy, `layout.py` for 
 
 ## Launch video
 
-`video/` is a Remotion project for the jev-swap launch video (1920x1080, 30 fps, about 45 s, voiceover and music). Its cost and speed figures are the site's sourced Claude Sonnet 5 example.
+`video/` is a Remotion project for the jev-swap launch video (1920x1080, 30 fps, about 45 s, voiceover, music and sound effects). Its cost and speed figures are the site's sourced Claude Sonnet 5 example.
 
 - Script: `video/narration.json` (`say` is spoken, `show` is the caption). `npm run voice` records each line with OpenRouter's `openai/gpt-audio` (voice `cedar`), checks the transcript matches word for word, trims and levels it (ffmpeg), and writes `public/vo/*.wav` plus timings; only changed lines are re-recorded.
-- Music: `public/music.mp3`, generated with Google Lyria 3 Pro via OpenRouter (`npm run music`, $0.08 a track). It is ducked under the voice; its first drop is timed to the Jev reveal and a bar-aligned jump lands the second drop on the outro (`src/Video.tsx`). A new track needs its drop times checked.
+- Music: `public/music.mp3`, a restrained product-film bed generated with Google Lyria 3 Pro via OpenRouter (`npm run music`, $0.08 a track). It sits about 18 dB under the voice and is started so its closing chord lands on the logo (`MUSIC_END` in `src/Video.tsx`; check it after generating a new track).
+- Sound effects: `public/sfx/*.wav`, synthesized by `npm run sfx` (Python + numpy, no samples): clicks, pops, typing ticks, whooshes, chimes, a scan sweep and a logo sting, cued on animation beats in `src/Video.tsx`.
 - Pacing: scene lengths follow the narration; each scene's animation speeds up (within limits) to fit its line, and the cost race always plays in real time.
 
 ```sh

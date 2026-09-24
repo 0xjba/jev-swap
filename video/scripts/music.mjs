@@ -3,11 +3,12 @@
 import fs from "node:fs";
 
 const PROMPT =
-  "Instrumental only, no vocals. A 50-second background track for a modern developer-tool product launch video. " +
-  "Upbeat, confident, minimal electronic: crisp plucked synth arpeggio, soft sidechained pads, light punchy drums and claps, " +
-  "warm sub bass, around 120 BPM, in a major key. Starts with a short airy intro, builds energy by 10 seconds, stays steady " +
-  "and uplifting under a voiceover, ends on a clean resolving hit with a short tail. Polished, optimistic, tech-forward, " +
-  "like an Apple or Linear launch video.";
+  "Instrumental only, no vocals. A 55-second understated background score for a premium software product film, " +
+  "in the style of Apple product videos and minimal developer-tool launches (Linear, Vercel, Stripe). " +
+  "Minimal and elegant: a soft felt-piano motif, warm analog pads, a gentle pulsing synth bass, delicate glassy plucks, " +
+  "very light textural percussion (soft ticks and shakers, no claps, no big kick drums). Around 100 BPM, major key, calm " +
+  "and quietly optimistic. No EDM drops, no risers, no dubstep, no build-ups, no trailer hits: constant, restrained " +
+  "energy with subtle layers added over time, sitting well under a voiceover. Ends on a soft resolving chord that rings out.";
 
 const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
   method: "POST",

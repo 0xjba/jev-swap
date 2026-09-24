@@ -62,19 +62,37 @@ const warpFor = (sc: Scene) => (f: number) => {
   return f;
 };
 
-// Music (public/music.mp3, Lyria 3 Pro, 120 BPM so bars are 2 s): the main drop at 16 s lands on the Jev reveal,
-// then the track jumps ahead on a bar line so its second drop (48 s) lands on the outro.
-const BAR = 2 * FPS;
-const MUSIC_FROM = 16 * FPS - start("jev");
-const CUT = start("outro") - BAR; // video frame of the jump
-const JUMP_TO = 48 * FPS - BAR; // music frame played from the cut
+// Music (public/music.mp3, Lyria 3 Pro): a restrained product-film bed. It is started so its soft closing chord
+// (~60.5 s into the track) rings out under the logo. The track is loud (about -12 LUFS), so it sits well below the voice.
+const MUSIC_END = 60.5;
+const MUSIC_FROM = Math.max(0, Math.round(MUSIC_END * FPS) - TOTAL);
 const VO_SPANS = SCENES.flatMap((sc) => sc.lines.map((l) => [sc.from + l.at, sc.from + l.at + l.frames] as const));
 const clamp = { extrapolateLeft: "clamp", extrapolateRight: "clamp" } as const;
 const musicLevel = (f: number) => {
-  // Duck under the voice with 6-frame ramps; fade in at the start and out at the end.
+  // About -18 dB under the voice, -12 dB between lines, with 8-frame ramps; fade in at the start.
   const near = Math.min(...VO_SPANS.map(([a, b]) => (f < a ? a - f : f > b ? f - b : 0)));
-  const duck = interpolate(near, [0, 6], [0.2, 0.5], clamp);
-  return duck * Math.min(interpolate(f, [0, 8], [0, 1], clamp), interpolate(f, [TOTAL - 45, TOTAL], [1, 0], clamp));
+  return interpolate(near, [0, 8], [0.13, 0.26], clamp) * interpolate(f, [0, 20], [0, 1], clamp);
+};
+
+// Sound effects (public/sfx, synthesized by scripts/sfx.py), cued on each scene's animation beats in visual frames.
+type Cue = [number, string, number];
+const ticks = (from: number, to: number, every: number, vol: number): Cue[] =>
+  Array.from({ length: Math.floor((to - from) / every) + 1 }, (_, i) => [from + i * every, `tick${i % 3}`, vol]);
+const SFX: Record<string, Cue[]> = {
+  intro: [[4, "pop", 0.25], [44, "click", 0.55], ...ticks(46, 62, 2.2, 0.12)],
+  problem: [[2, "pop", 0.25], [30, "tick1", 0.3], [48, "whoosh", 0.18], [86, "pop", 0.22], ...ticks(112, 196, 3, 0.1), [224, "chime_low", 0.25]],
+  jev: [[2, "pop", 0.2], [14, "reveal", 0.35], [36, "pop", 0.2], [46, "pop", 0.2], [56, "pop", 0.2], [82, "whoosh", 0.18], [130, "chime", 0.3], [146, "tick0", 0.2], [156, "tick1", 0.2], [166, "tick2", 0.2]],
+  scan: [...ticks(12, 28, 2, 0.12), [18, "pop", 0.15], [26, "pop", 0.15], [34, "pop", 0.15], [42, "pop", 0.15], [70, "sweep", 0.22], [87, "chime", 0.28], [140, "chime", 0.28]],
+  cost: [[44, "zip", 0.3], [54, "chime", 0.3], [138, "chime_low", 0.25], [166, "pop", 0.22], [176, "pop", 0.22], [192, "reveal", 0.35]],
+  convert: [...ticks(12, 26, 2, 0.12), ...ticks(20, 70, 3, 0.08), [50, "pop", 0.22], [96, "whoosh", 0.15], [146, "chime", 0.28], [160, "whoosh", 0.15], [210, "chime_low", 0.22]],
+  shadow: [...ticks(12, 44, 2, 0.12), ...[0, 1, 2, 3, 4, 5].flatMap((i): Cue[] => [[50 + i * 12, "pop", 0.14], [64 + i * 12, i === 2 ? "chime_low" : "chime", 0.18]]), [200, "reveal", 0.3]],
+  outro: [[0, "hit", 0.5], [30, "click", 0.5], ...ticks(72, 92, 2, 0.12)],
+};
+// Visual frame -> first real scene frame that shows it.
+const unwarp = (sc: Scene, v: number) => {
+  const w = warpFor(sc);
+  for (let f = 0; f < sc.dur; f++) if (w(f) >= v) return f;
+  return undefined;
 };
 
 export const WhatIsJevSwap: React.FC = () => {
@@ -82,17 +100,20 @@ export const WhatIsJevSwap: React.FC = () => {
   return (
     <AbsoluteFill>
       <Backdrop f={f} />
-      <Sequence durationInFrames={CUT + 2} layout="none">
-        <Html5Audio src={staticFile("music.mp3")} trimBefore={MUSIC_FROM} volume={(f) => musicLevel(f) * interpolate(f, [CUT - 2, CUT + 2], [1, 0], clamp)} />
-      </Sequence>
-      <Sequence from={CUT - 2} layout="none">
-        <Html5Audio src={staticFile("music.mp3")} trimBefore={JUMP_TO - 2} volume={(f) => musicLevel(f + CUT - 2) * interpolate(f, [0, 4], [0, 1], clamp)} />
-      </Sequence>
+      <Html5Audio src={staticFile("music.mp3")} trimBefore={MUSIC_FROM} volume={musicLevel} />
       {SCENES.map((sc) => (
         <Sequence key={sc.id} from={sc.from} durationInFrames={sc.dur} layout="none">
           <WarpCtx.Provider value={warpFor(sc)}>
             <AbsoluteFill><sc.C dur={sc.dur} cap={sc.lines.map((l) => [l.at, l.show])} /></AbsoluteFill>
           </WarpCtx.Provider>
+          {SFX[sc.id].map(([v, name, vol], i) => {
+            const at = unwarp(sc, v);
+            return at === undefined ? null : (
+              <Sequence key={`sfx-${i}`} from={at} durationInFrames={60} layout="none">
+                <Html5Audio src={staticFile(`sfx/${name}.wav`)} volume={vol} />
+              </Sequence>
+            );
+          })}
           {sc.lines.map((l) => (
             <Sequence key={l.file} from={l.at} durationInFrames={l.frames + 2} layout="none">
               <Html5Audio src={staticFile(l.file)} />
@@ -102,10 +123,8 @@ export const WhatIsJevSwap: React.FC = () => {
       ))}
       <Sequence from={start("scan") - 10} durationInFrames={20} layout="none">
         <Wipe dur={20} />
+        <Html5Audio src={staticFile("sfx/whoosh.wav")} volume={0.3} />
       </Sequence>
     </AbsoluteFill>
   );
 };
-
-// The jump is seamless only when the music time at the cut is also on a bar line.
-export const MUSIC_PHASE_ERROR_S = (((CUT + MUSIC_FROM) % BAR) + BAR) % BAR / FPS;
