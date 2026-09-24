@@ -58,7 +58,7 @@ export const Backdrop: React.FC<{ f: number }> = ({ f }) => (
 
 /** The jev-swap mark (same geometry as the site's logo): a j whose dot is a switch.
  * `draw` strokes it in, `knob` slides the switch on (0 -> 1). Once drawn, strokes are solid (no dash seams). */
-export const Mark: React.FC<{ x: number; y: number; size: number; draw?: number; knob?: number }> = ({ x, y, size, draw = 1, knob = 1 }) => {
+export const Mark: React.FC<{ x: number; y: number; size: number; draw?: number; knob?: number; ink?: string }> = ({ x, y, size, draw = 1, knob = 1, ink = C.text }) => {
   const k = size / 32;
   const stem = t(draw, 0.3, 1);
   const dash = (p: number) => (p >= 0.999 ? {} : { pathLength: 1, strokeDasharray: `${p} 2`, strokeDashoffset: 0 });
@@ -66,9 +66,9 @@ export const Mark: React.FC<{ x: number; y: number; size: number; draw?: number;
   return (
     <g transform={`translate(${x - size / 2} ${y - size / 2}) scale(${k})`}>
       {draw > 0 && (
-        <path d="M12 3H21A4.5 4.5 0 0 1 21 12H12A4.5 4.5 0 0 1 12 3Z" fill="none" stroke={C.text} strokeWidth="2.2" strokeLinejoin="round" {...dash(draw)} />
+        <path d="M12 3H21A4.5 4.5 0 0 1 21 12H12A4.5 4.5 0 0 1 12 3Z" fill="none" stroke={ink} strokeWidth="2.2" strokeLinejoin="round" {...dash(draw)} />
       )}
-      {stem > 0 && <path d="M17 15.5V23.5Q17 29 11.5 29H9" fill="none" stroke={C.text} strokeWidth="2.8" strokeLinecap="round" {...dash(stem)} />}
+      {stem > 0 && <path d="M17 15.5V23.5Q17 29 11.5 29H9" fill="none" stroke={ink} strokeWidth="2.8" strokeLinecap="round" {...dash(stem)} />}
       <circle cx={12 + 9 * knob} cy="7.5" r="2.9" fill={knobColor} opacity={t(draw, 0.6, 1)} />
     </g>
   );
