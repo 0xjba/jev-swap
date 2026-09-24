@@ -27,6 +27,15 @@ input:focus-visible,button:focus-visible,a:focus-visible{outline:2px solid #F386
 .body{margin:0;font-size:18px;line-height:1.65;color:#A1A3A9}
 .small{margin:0;font-size:13px;line-height:1.6;color:#8E9199}
 .pink{color:#F386A1}
+.eyebrow.lead{display:flex;align-items:center;gap:14px}
+.eyebrow.lead::after{content:"";flex:1 1 auto;min-width:24px;border-bottom:2px dotted #3A3B40}
+.crop{position:relative}
+.crop::after{content:"";position:absolute;inset:-10px;pointer-events:none;z-index:1;background:linear-gradient(#F386A1,#F386A1) left top/14px 1.5px no-repeat,linear-gradient(#F386A1,#F386A1) left top/1.5px 14px no-repeat,linear-gradient(#6C6F77,#6C6F77) right top/14px 1.5px no-repeat,linear-gradient(#6C6F77,#6C6F77) right top/1.5px 14px no-repeat,linear-gradient(#6C6F77,#6C6F77) left bottom/14px 1.5px no-repeat,linear-gradient(#6C6F77,#6C6F77) left bottom/1.5px 14px no-repeat,linear-gradient(#6C6F77,#6C6F77) right bottom/14px 1.5px no-repeat,linear-gradient(#6C6F77,#6C6F77) right bottom/1.5px 14px no-repeat}
+.ht{display:flex;flex-direction:column;gap:14px;max-width:460px;width:100%}
+.ht canvas{display:block;width:100%;aspect-ratio:23/10}
+.ht-legend{display:flex;align-items:center;gap:12px;font-family:"JetBrains Mono",ui-monospace,Menlo,monospace;font-size:13px;color:#6C6F77}
+.ht-legend i{flex:1 1 auto;border-bottom:2px dotted #3A3B40}
+.ht-legend .on{color:#F386A1}
 .panel{background:#111113;border:1px solid #2B2C30;border-radius:4px}
 .code{font-family:"JetBrains Mono",ui-monospace,Menlo,monospace;font-size:.88em;color:#FCD9E3}
 pre{margin:0;font-family:"JetBrains Mono",ui-monospace,Menlo,monospace;font-size:14px;line-height:1.8;white-space:pre-wrap;overflow-wrap:anywhere;color:#ECEDEF}
@@ -295,11 +304,11 @@ ul.clean{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:10px;
 </nav></header>
 <section class="wrap" id="top"><div class="frame"><div class="sec" style="padding-bottom: 56px;">
 <div class="row" style="justify-content: space-between; align-items: flex-end; gap: 24px 64px;">
-<div style="flex: 1 1 560px; display: flex; flex-direction: column; gap: 18px;"><p class="eyebrow">// open-source explorer</p>
+<div style="flex: 1 1 560px; display: flex; flex-direction: column; gap: 18px;"><p class="eyebrow lead">// open-source explorer</p>
 <h1 class="h1" style="font-size: 56px;">Decisions open-source code could run on Jev.</h1></div>
 <p class="body" style="flex: 1 1 360px; max-width: 460px;">LLM calls in public repos that only return a label, a yes/no or a score, and what each could save in cost and time on TypeSafe Jev. Percentages only: traffic is unknown, and it cancels out of a percentage.</p>
 </div>
-<div class="stat-row">
+<div class="stat-row crop">
 <div class="stat"><span class="stat-big">1,035</span><span class="small">public repos scanned</span></div>
 <div class="stat"><span class="stat-big">150</span><span class="small">with decision calls in production code</span></div>
 <div class="stat"><span class="stat-big">344</span><span class="small">decision calls found</span></div>
@@ -308,7 +317,7 @@ ul.clean{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:10px;
 <p class="small">Data as of 2026-09-24; prices and latency from OpenRouter. Where the code names its model and every field maps to Jev, the median is 31%; where the model is chosen at runtime, it&#39;s 44% against the least favourable likely model. <a href="#method">How we calculate this</a> · <a href="data/explorer.json">Download the data</a></p>
 </div></div></section>
 <section class="wrap" id="featured"><div class="frame"><div class="sec">
-<div style="display: flex; flex-direction: column; gap: 14px;"><p class="eyebrow">// featured</p>
+<div style="display: flex; flex-direction: column; gap: 14px;"><p class="eyebrow lead">// featured</p>
 <h2 class="h2">Widely used projects with decision calls.</h2>
 <p class="body">A selection of widely used open-source projects. Every repo we found, big or small, is in the full list below. Bars show each call&#39;s saving; hover a file for its full path and other models.</p></div>
 <div class="g-repos"><article class="panel rc">
@@ -664,7 +673,7 @@ ul.clean{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:10px;
 </article></div>
 </div></div></section>
 <section class="wrap" id="all"><div class="frame"><div class="sec">
-<div style="display: flex; flex-direction: column; gap: 14px;"><p class="eyebrow">// every repo</p>
+<div style="display: flex; flex-direction: column; gap: 14px;"><p class="eyebrow lead">// every repo</p>
 <h2 class="h2">All repos with decision calls.</h2>
 <p class="body">Well-known and less-known repos alike. Typical saving is the median across a repo&#39;s calls.</p></div>
 <div class="tools">
@@ -676,7 +685,7 @@ ul.clean{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:10px;
 <p class="small" id="count"></p>
 </div></div></section>
 <section class="wrap" id="method"><div class="frame"><div class="sec"><div class="row" style="gap: 32px 56px; align-items: flex-start;">
-<div style="flex: 1 1 320px; display: flex; flex-direction: column; gap: 14px;"><p class="eyebrow">// methodology</p>
+<div style="flex: 1 1 320px; display: flex; flex-direction: column; gap: 14px;"><p class="eyebrow lead">// methodology</p>
 <h2 class="h2">How we calculate this.</h2>
 <p class="body">Static estimates from each call&#39;s source, list prices and public latency stats. A shadow run on real traffic measures the real numbers.</p></div>
 <div style="flex: 2 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 20px;">
@@ -687,7 +696,7 @@ reduction_all_jev = 1 - jev_cost / llm_cost</div>
 <p class="small">Jev at $0.042 per 1M input tokens, output free (<a href="https://openrouter.ai/typesafe/jev-1.13">OpenRouter</a>, checked 2026-09-24). Input-size range: 50–2000 tokens per call.</p>
 </div></div></div></div></section>
 <section class="wrap"><div class="frame"><div class="sec" style="gap: 20px;">
-<p class="eyebrow">// maintainers</p>
+<p class="eyebrow lead">// maintainers</p>
 <h2 class="h2">Your repo is listed and you&#39;d rather it wasn&#39;t, or a call is wrong?</h2>
 <p class="body" style="max-width: 720px;">Open an issue at <a href="https://github.com/0xjba/jev-swap">https://github.com/0xjba/jev-swap</a> and we&#39;ll remove it or correct it on the next build. We store only the repo name, commit, file and line, schema shape, model and token counts: never code or prompt text. To see real numbers for your project instead of estimates, run <code class="code">jev-swap shadow</code> on your own traffic.</p>
 </div></div></section>

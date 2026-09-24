@@ -15,7 +15,7 @@ import sys
 
 sys.path.insert(0, os.path.dirname(__file__))
 import scenes  # noqa: E402  (generates the SVGs and registers their keyframes)
-from layout import CALC_JS, LOGO, code, fact, footer, page, qa, step, wrap  # noqa: E402
+from layout import CALC_JS, HALFTONE, LOGO, code, fact, footer, page, qa, step, wrap  # noqa: E402
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 SITE = os.path.dirname(HERE)
@@ -155,8 +155,9 @@ def home():
 {fact_link("$" + format(JEV["in"], "g"), "per 1M input tokens on Jev. Output tokens are free.", JEV["source"])}
 </div>''', label="jev-swap by the numbers")
 
-    problem = wrap('''<div class="sec"><div class="row" style="gap: 32px 56px;">
-<h2 class="h2" style="flex: 1 1 380px;">Your LLM is making decisions. You&#39;re paying it to <span class="pink">write essays.</span></h2>
+    problem = wrap(f'''<div class="sec"><div class="row" style="gap: 32px 56px;">
+<div style="flex: 1 1 380px; display: flex; flex-direction: column; gap: 48px;"><h2 class="h2">Your LLM is making decisions. You&#39;re paying it to <span class="pink">write essays.</span></h2>
+{HALFTONE}</div>
 <div style="flex: 1 1 480px; display: flex; flex-direction: column; gap: 20px;">
 <p class="body">Ticket routing, spam checks, moderation verdicts, refund triage, priority scores: each one runs a text-generation model to return one word from a list you already wrote.</p>
 <p class="body">Jev is built for that job. Send the input and typed questions; get back a typed answer with probabilities and a confidence score, with no text generated and no output tokens billed.</p>
@@ -181,7 +182,7 @@ def home():
 <h2 class="h2">The same decision at a fraction of the cost, and faster.</h2></div>
 <p class="body" style="flex: 1 1 360px; max-width: 480px;">On {e(CMP_NAME)}, a typical {TIN}-token decision call costs ${LLM_CALL:.5f} and takes about {LLM_MS / 1000:.1f} s. On Jev it costs ${JEV_CALL:.6f} and answered in {JEV_MS} ms at the median of our live test calls.</p>
 </div>
-<div class="panel race" role="img" aria-label="The same decision call on {e(CMP_NAME)} and on Jev. Jev answers first.">
+<div class="panel race crop" role="img" aria-label="The same decision call on {e(CMP_NAME)} and on Jev. Jev answers first.">
 <div class="lane"><span class="lane-name">{e(CMP_NAME)}</span><div class="track"><span class="runner runner-llm"></span></div><span class="flag flag-llm">answered</span>
 <p class="lane-note">{e(llm_note)}</p></div>
 <div class="lane"><span class="lane-name pink">jev</span><div class="track"><span class="runner runner-jev"></span></div><span class="flag flag-jev">answered</span>
@@ -259,7 +260,7 @@ ticket.source <span class="c-com">// &quot;jev&quot; or &quot;llm&quot;</span></
 <div style="display: flex; flex-direction: column; gap: 14px; max-width: 760px;"><p class="eyebrow">// savings calculator</p>
 <h2 class="h2">What are your decisions costing you?</h2>
 <p class="body">Plug in one decision-type call from your app. The share Jev handles comes from your shadow report. Until you run one, it&#39;s your estimate.</p></div>
-<div class="calc">
+<div class="calc crop">
 <div class="panel calc-in">
 {inp("calls", "Decisions per month", "1000000", 'step="1000"')}
 <div class="g2" style="gap: 16px;">{inp("tin", "Input tokens / call", TIN)}{inp("tout", "Output tokens / call", TOUT)}</div>
@@ -376,7 +377,7 @@ def proxy_page():
 
     run = wrap('''<div class="sec" style="gap: 28px;">
 <div style="display: flex; flex-direction: column; gap: 14px;"><p class="eyebrow">// run it</p><h2 class="h2">Two environment variables.</h2></div>
-<pre class="panel" style="padding: 22px 24px;"><span class="c-com">$</span> npx jev-swap scan ./your-app      <span class="c-com"># find the decision calls to mirror</span>
+<pre class="panel crop" style="padding: 22px 24px;"><span class="c-com">$</span> npx jev-swap scan ./your-app      <span class="c-com"># find the decision calls to mirror</span>
 <span class="c-com">$</span> npx jev-swap convert
 <span class="c-com">$</span> npx jev-swap proxy --llm-price-in 2 --llm-price-out 10
 
@@ -529,7 +530,7 @@ def explorer_page():
 <h1 class="h1" style="font-size: 56px;">Decisions open-source code could run on Jev.</h1></div>
 <p class="body" style="flex: 1 1 360px; max-width: 460px;">LLM calls in public repos that only return a label, a yes/no or a score, and what each could save in cost and time on TypeSafe Jev. Percentages only: traffic is unknown, and it cancels out of a percentage.</p>
 </div>
-<div class="stat-row">
+<div class="stat-row crop">
 <div class="stat"><span class="stat-big">{t["reposScanned"]:,}</span><span class="small">public repos scanned</span></div>
 <div class="stat"><span class="stat-big">{t["reposWithCandidates"]}</span><span class="small">with decision calls in production code</span></div>
 <div class="stat"><span class="stat-big">{t["candidates"]}</span><span class="small">decision calls found</span></div>

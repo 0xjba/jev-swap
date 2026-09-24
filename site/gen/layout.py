@@ -20,6 +20,15 @@ input:focus-visible,button:focus-visible,a:focus-visible{outline:2px solid #F386
 .body{margin:0;font-size:18px;line-height:1.65;color:#A1A3A9}
 .small{margin:0;font-size:13px;line-height:1.6;color:#8E9199}
 .pink{color:#F386A1}
+.eyebrow.lead{display:flex;align-items:center;gap:14px}
+.eyebrow.lead::after{content:"";flex:1 1 auto;min-width:24px;border-bottom:2px dotted #3A3B40}
+.crop{position:relative}
+.crop::after{content:"";position:absolute;inset:-10px;pointer-events:none;z-index:1;background:linear-gradient(#F386A1,#F386A1) left top/14px 1.5px no-repeat,linear-gradient(#F386A1,#F386A1) left top/1.5px 14px no-repeat,linear-gradient(#6C6F77,#6C6F77) right top/14px 1.5px no-repeat,linear-gradient(#6C6F77,#6C6F77) right top/1.5px 14px no-repeat,linear-gradient(#6C6F77,#6C6F77) left bottom/14px 1.5px no-repeat,linear-gradient(#6C6F77,#6C6F77) left bottom/1.5px 14px no-repeat,linear-gradient(#6C6F77,#6C6F77) right bottom/14px 1.5px no-repeat,linear-gradient(#6C6F77,#6C6F77) right bottom/1.5px 14px no-repeat}
+.ht{display:flex;flex-direction:column;gap:14px;max-width:460px;width:100%}
+.ht canvas{display:block;width:100%;aspect-ratio:23/10}
+.ht-legend{display:flex;align-items:center;gap:12px;font-family:"JetBrains Mono",ui-monospace,Menlo,monospace;font-size:13px;color:#6C6F77}
+.ht-legend i{flex:1 1 auto;border-bottom:2px dotted #3A3B40}
+.ht-legend .on{color:#F386A1}
 .panel{background:#111113;border:1px solid #2B2C30;border-radius:4px}
 .code{font-family:"JetBrains Mono",ui-monospace,Menlo,monospace;font-size:.88em;color:#FCD9E3}
 pre{margin:0;font-family:"JetBrains Mono",ui-monospace,Menlo,monospace;font-size:14px;line-height:1.8;white-space:pre-wrap;overflow-wrap:anywhere;color:#ECEDEF}
@@ -284,6 +293,68 @@ FONTS = ('<link rel="preconnect" href="https://fonts.googleapis.com">'
          '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>'
          '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap">')
 
+HALFTONE_JS = """
+(function () {
+  var B = [0, 8, 2, 10, 12, 4, 14, 6, 3, 11, 1, 9, 15, 7, 13, 5];
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function mix(a, b, t) { return Math.round(a + (b - a) * t); }
+  function rgb(c1, c2, t) { return 'rgb(' + mix(c1[0], c2[0], t) + ',' + mix(c1[1], c2[1], t) + ',' + mix(c1[2], c2[2], t) + ')'; }
+  var GREY = [108, 111, 119], PINK = [243, 134, 161], PALE = [252, 217, 227], DEEP = [212, 91, 182], TRACK = 'rgb(74,75,81)';
+  function draw(cv, k) {
+    var r = cv.getBoundingClientRect(), dpr = window.devicePixelRatio || 1, W = r.width, H = r.height;
+    if (!W) return;
+    cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+    var g = cv.getContext('2d'); g.setTransform(dpr, 0, 0, dpr, 0, 0); g.clearRect(0, 0, W, H);
+    var pad = 3, h = H - 2 * pad, rad = h / 2, x0 = pad, x1 = W - pad, cy = H / 2;
+    var kr = rad * 0.66, kx = x0 + rad + (x1 - x0 - 2 * rad) * k, cell = 4;
+    for (var gy = 0, y = 2; y < H; y += cell, gy++) {
+      for (var gx = 0, x = 2; x < W; x += cell, gx++) {
+        var th = (B[(gy % 4) * 4 + (gx % 4)] + 0.5) / 16;
+        var kd = Math.hypot(x - kx, y - cy) / kr;
+        if (kd < 1) {
+          var z = Math.sqrt(1 - kd * kd);
+          var light = 0.45 + 0.55 * Math.max(0, -(x - kx) / kr * 0.45 - (y - cy) / kr * 0.45 + z * 0.75);
+          if (Math.min(1, light) > th) { g.fillStyle = light > 0.85 ? rgb(GREY, PALE, k) : rgb(GREY, PINK, k); g.fillRect(x, y, 2.4, 2.4); }
+          continue;
+        }
+        var dx = Math.max(Math.abs(x - W / 2) - (x1 - x0) / 2 + rad, 0);
+        if (Math.hypot(dx, y - cy) > rad - 8) continue;
+        if (kd < 1.6 && (1.6 - kd) * 0.4 * k > th) { g.fillStyle = rgb(GREY, DEEP, k); g.fillRect(x, y, 2.4, 2.4); continue; }
+        if (0.06 + 0.16 * (x / W) > th) { g.fillStyle = TRACK; g.fillRect(x, y, 2.4, 2.4); }
+      }
+    }
+    g.strokeStyle = '#ECEDEF'; g.lineWidth = 3; g.beginPath();
+    g.moveTo(x0 + rad, pad); g.lineTo(x1 - rad, pad); g.arc(x1 - rad, cy, rad, -Math.PI / 2, Math.PI / 2);
+    g.lineTo(x0 + rad, H - pad); g.arc(x0 + rad, cy, rad, Math.PI / 2, 3 * Math.PI / 2); g.stroke();
+  }
+  document.querySelectorAll('.ht').forEach(function (el) {
+    var cv = el.querySelector('canvas'), labels = el.querySelectorAll('.ht-legend span'), k = reduce ? 1 : 0;
+    function paint() { draw(cv, k); labels[0].className = k < 0.5 ? 'on' : ''; labels[1].className = k >= 0.5 ? 'on' : ''; }
+    paint();
+    window.addEventListener('resize', paint);
+    if (reduce || !('IntersectionObserver' in window)) { k = 1; paint(); return; }
+    var io = new IntersectionObserver(function (es) {
+      if (!es[0].isIntersecting) return;
+      io.disconnect();
+      var t0 = null;
+      setTimeout(function () {
+        requestAnimationFrame(function step(t) {
+          if (t0 === null) t0 = t;
+          var p = Math.min(1, (t - t0) / 900);
+          k = p < 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2;
+          paint();
+          if (p < 1) requestAnimationFrame(step);
+        });
+      }, 350);
+    }, { threshold: 0.6 });
+    io.observe(el);
+  });
+})();
+"""
+
+HALFTONE = ('<div class="ht" aria-hidden="true"><canvas></canvas>'
+            '<div class="ht-legend"><span>llm</span><i></i><span>jev</span></div></div>')
+
 CALC_JS = """
 (function () {
   var $ = function (id) { return document.getElementById(id); };
@@ -398,6 +469,9 @@ def footer(sources_html=""):
 
 
 def page(title, description, active, body, extra_css="", script=""):
+    body = body.replace('class="eyebrow">//', 'class="eyebrow lead">//')
+    if 'class="ht"' in body:
+        script += f"<script>{HALFTONE_JS}</script>"
     return f'''<!doctype html>
 <html lang="en">
 <head>

@@ -27,6 +27,15 @@ input:focus-visible,button:focus-visible,a:focus-visible{outline:2px solid #F386
 .body{margin:0;font-size:18px;line-height:1.65;color:#A1A3A9}
 .small{margin:0;font-size:13px;line-height:1.6;color:#8E9199}
 .pink{color:#F386A1}
+.eyebrow.lead{display:flex;align-items:center;gap:14px}
+.eyebrow.lead::after{content:"";flex:1 1 auto;min-width:24px;border-bottom:2px dotted #3A3B40}
+.crop{position:relative}
+.crop::after{content:"";position:absolute;inset:-10px;pointer-events:none;z-index:1;background:linear-gradient(#F386A1,#F386A1) left top/14px 1.5px no-repeat,linear-gradient(#F386A1,#F386A1) left top/1.5px 14px no-repeat,linear-gradient(#6C6F77,#6C6F77) right top/14px 1.5px no-repeat,linear-gradient(#6C6F77,#6C6F77) right top/1.5px 14px no-repeat,linear-gradient(#6C6F77,#6C6F77) left bottom/14px 1.5px no-repeat,linear-gradient(#6C6F77,#6C6F77) left bottom/1.5px 14px no-repeat,linear-gradient(#6C6F77,#6C6F77) right bottom/14px 1.5px no-repeat,linear-gradient(#6C6F77,#6C6F77) right bottom/1.5px 14px no-repeat}
+.ht{display:flex;flex-direction:column;gap:14px;max-width:460px;width:100%}
+.ht canvas{display:block;width:100%;aspect-ratio:23/10}
+.ht-legend{display:flex;align-items:center;gap:12px;font-family:"JetBrains Mono",ui-monospace,Menlo,monospace;font-size:13px;color:#6C6F77}
+.ht-legend i{flex:1 1 auto;border-bottom:2px dotted #3A3B40}
+.ht-legend .on{color:#F386A1}
 .panel{background:#111113;border:1px solid #2B2C30;border-radius:4px}
 .code{font-family:"JetBrains Mono",ui-monospace,Menlo,monospace;font-size:.88em;color:#FCD9E3}
 pre{margin:0;font-family:"JetBrains Mono",ui-monospace,Menlo,monospace;font-size:14px;line-height:1.8;white-space:pre-wrap;overflow-wrap:anywhere;color:#ECEDEF}
@@ -294,7 +303,7 @@ ul.clean{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:10px;
 <div class="actions"><a class="btn btn-line" href="https://github.com/0xjba/jev-swap">GitHub</a><a class="btn btn-fill" href="https://www.npmjs.com/package/jev-swap">npm</a></div>
 </nav></header>
 <section class="wrap" id="top"><div class="frame"><div class="row hero-head">
-<div class="hero-copy"><p class="eyebrow">// open source · for teams running llm calls in production</p>
+<div class="hero-copy"><p class="eyebrow lead">// open source · for teams running llm calls in production</p>
 <h1 class="h1">Stop paying LLM prices for <span class="pink">yes/no answers.</span></h1></div>
 <div class="hero-side"><p class="body">jev-swap finds the LLM calls in your code that only ever return a label, a yes/no or a 1–5 score, rewrites them for TypeSafe Jev with your current call as the fallback, and proves the swap on your own traffic.</p>
 <div class="row" style="gap: 12px;"><a class="btn btn-fill" href="#install"><span class="kbd" aria-hidden="true">&gt;</span>Scan my codebase</a><a class="btn btn-line" href="explorer.html">See what open source could save</a></div>
@@ -310,7 +319,8 @@ ul.clean{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:10px;
 <div class="fact"><div class="fact-big ">$0.042</div><div class="fact-txt">per 1M input tokens on Jev. Output tokens are free. <a href="https://openrouter.ai/typesafe/jev-1.13" class="src">source</a></div></div>
 </div></div></section>
 <section class="wrap"><div class="frame"><div class="sec"><div class="row" style="gap: 32px 56px;">
-<h2 class="h2" style="flex: 1 1 380px;">Your LLM is making decisions. You&#39;re paying it to <span class="pink">write essays.</span></h2>
+<div style="flex: 1 1 380px; display: flex; flex-direction: column; gap: 48px;"><h2 class="h2">Your LLM is making decisions. You&#39;re paying it to <span class="pink">write essays.</span></h2>
+<div class="ht" aria-hidden="true"><canvas></canvas><div class="ht-legend"><span>llm</span><i></i><span>jev</span></div></div></div>
 <div style="flex: 1 1 480px; display: flex; flex-direction: column; gap: 20px;">
 <p class="body">Ticket routing, spam checks, moderation verdicts, refund triage, priority scores: each one runs a text-generation model to return one word from a list you already wrote.</p>
 <p class="body">Jev is built for that job. Send the input and typed questions; get back a typed answer with probabilities and a confidence score, with no text generated and no output tokens billed.</p>
@@ -318,11 +328,11 @@ ul.clean{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:10px;
 </div></div></div></div></section>
 <section class="wrap" id="speed"><div class="frame"><div class="sec">
 <div class="row" style="justify-content: space-between; align-items: flex-end; gap: 24px 64px;">
-<div style="flex: 1 1 480px; display: flex; flex-direction: column; gap: 14px;"><p class="eyebrow">// cost and speed</p>
+<div style="flex: 1 1 480px; display: flex; flex-direction: column; gap: 14px;"><p class="eyebrow lead">// cost and speed</p>
 <h2 class="h2">The same decision at a fraction of the cost, and faster.</h2></div>
 <p class="body" style="flex: 1 1 360px; max-width: 480px;">On Claude Sonnet 5, a typical 400-token decision call costs $0.00100 and takes about 3.1 s. On Jev it costs $0.000024 and answered in 327 ms at the median of our live test calls.</p>
 </div>
-<div class="panel race" role="img" aria-label="The same decision call on Claude Sonnet 5 and on Jev. Jev answers first.">
+<div class="panel race crop" role="img" aria-label="The same decision call on Claude Sonnet 5 and on Jev. Jev answers first.">
 <div class="lane"><span class="lane-name">Claude Sonnet 5</span><div class="track"><span class="runner runner-llm"></span></div><span class="flag flag-llm">answered</span>
 <p class="lane-note">~3.1 s for this call: OpenRouter p50 latency + output time, busiest provider, fetched 2026-09-24</p></div>
 <div class="lane"><span class="lane-name pink">jev</span><div class="track"><span class="runner runner-jev"></span></div><span class="flag flag-jev">answered</span>
@@ -340,7 +350,7 @@ ul.clean{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:10px;
 </div>
 </div></div></section>
 <section class="wrap" id="how"><div class="frame"><div class="sec">
-<div style="display: flex; flex-direction: column; gap: 14px;"><p class="eyebrow">// how it works</p><h2 class="h2">Three commands from LLM call to Jev call.</h2></div>
+<div style="display: flex; flex-direction: column; gap: 14px;"><p class="eyebrow lead">// how it works</p><h2 class="h2">Three commands from LLM call to Jev call.</h2></div>
 <div class="g3">
 <article class="panel card"><div class="icon"><div><svg class="iso icon" viewBox="-86.2 -70 172.4 140" role="img" aria-label="" style="display: block; width: 100%; height: auto;" xmlns="http://www.w3.org/2000/svg"><polygon points="52,30 0,60 0,0 52,-30" fill="#1C1D20" stroke="rgba(236,237,239,0.22)" stroke-width="1" stroke-linejoin="round"></polygon><polygon points="-52,30 0,60 0,0 -52,-30" fill="#232427" stroke="rgba(236,237,239,0.22)" stroke-width="1" stroke-linejoin="round"></polygon><polygon points="0,-60 52,-30 0,0 -52,-30" fill="#2E2F33" stroke="rgba(236,237,239,0.22)" stroke-width="1" stroke-linejoin="round"></polygon><text transform="matrix(0.8660 0.5 -0.8660 0.5 -20.8 -36)" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="12" font-weight="400" fill="#ECEDEF" text-anchor="start">&lt;/&gt;</text><g class="scanline"><polygon points="0,-44 76.2,0 0,44 -76.2,0" fill="rgba(94,130,230,0.12)" stroke="#F386A1" stroke-width="1" stroke-linejoin="round" stroke-dasharray="4 4"></polygon></g></svg></div></div><div class="eyebrow">01 · scan</div><h3 class="h3">Find the decisions</h3><p class="body" style="font-size: 16px; line-height: 1.6;">Reads your code&#39;s syntax tree and flags LLM calls whose output is an enum, a boolean, or a small integer range, whether it&#39;s a zod schema, a Pydantic model, JSON schema, or a raw HTTP call to the API. Also catches plain &quot;answer yes or no&quot; prompts.</p><code class="cmd">npx jev-swap scan ./app</code></article>
 <article class="panel card"><div class="icon"><div><svg class="iso icon" viewBox="-110.5 -4 276.3 100" role="img" aria-label="" style="display: block; width: 100%; height: auto;" xmlns="http://www.w3.org/2000/svg"><polygon points="-3.5,58 -52,86 -52,64 -3.5,36" fill="#1C1D20" stroke="rgba(236,237,239,0.22)" stroke-width="1" stroke-linejoin="round"></polygon><polygon points="-100.5,58 -52,86 -52,64 -100.5,36" fill="#232427" stroke="rgba(236,237,239,0.22)" stroke-width="1" stroke-linejoin="round"></polygon><polygon points="-52,8 -3.5,36 -52,64 -100.5,36" fill="#2E2F33" stroke="rgba(236,237,239,0.22)" stroke-width="1" stroke-linejoin="round"></polygon><text transform="matrix(0.8660 0.5 -0.8660 0.5 -83.1 34)" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="10" font-weight="400" fill="#ECEDEF" text-anchor="start">llm()</text><path d="M-27.7 61 L10.4 83 L60.6 54" fill="none" stroke="#F386A1" stroke-opacity="0.8" stroke-width="1.2"></path><path class="pulse pk27" d="M-27.7 61 L10.4 83 L60.6 54" fill="none" stroke="#F386A1" stroke-width="6" stroke-linecap="round"></path><polygon points="155.9,50 100.5,82 100.5,70 155.9,38" fill="#A8428F" stroke="rgba(243,134,161,0.55)" stroke-width="1" stroke-linejoin="round"></polygon><polygon points="45,50 100.5,82 100.5,70 45,38" fill="#D45BB6" stroke="rgba(243,134,161,0.55)" stroke-width="1" stroke-linejoin="round"></polygon><polygon points="100.5,6 155.9,38 100.5,70 45,38" fill="#26272B" stroke="rgba(243,134,161,0.55)" stroke-width="1" stroke-linejoin="round"></polygon><text transform="matrix(0.8660 0.5 -0.8660 0.5 67.5 35)" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="10" font-weight="400" fill="#ECEDEF" text-anchor="start">jev</text></svg></div></div><div class="eyebrow">02 · convert</div><h3 class="h3">Generate the Jev version</h3><p class="body" style="font-size: 16px; line-height: 1.6;">Writes one module per call, in the same language, on TypeSafe&#39;s official SDK: one short question per field, all in a single request. Free-text fields Jev can&#39;t produce are flagged, never silently dropped.</p><code class="cmd">npx jev-swap convert</code></article>
@@ -348,7 +358,7 @@ ul.clean{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:10px;
 </div></div></div></section>
 <section class="wrap"><div class="frame"><div class="sec"><div class="row" style="align-items: center; gap: 40px 56px;">
 <div style="flex: 1 1 400px; display: flex; flex-direction: column; gap: 22px; min-width: 0;">
-<p class="eyebrow">// the safety net</p>
+<p class="eyebrow lead">// the safety net</p>
 <h2 class="h2">Jev when it&#39;s sure. Your LLM when it isn&#39;t.</h2>
 <p class="body">Every Jev answer carries a confidence score. The generated code acts on Jev above your threshold and calls the model you use today below it, so the cases Jev isn&#39;t sure about keep the accuracy you have now. Your existing call stays in the code.</p>
 <pre class="panel" style="padding: 20px 22px; font-size: 13px;"><span class="c-com">// generated: jev-swap-out/jev/triage-classifyTicket.ts</span>
@@ -364,7 +374,7 @@ ticket.source <span class="c-com">// &quot;jev&quot; or &quot;llm&quot;</span></
 </div></div></div></section>
 <section class="wrap"><div class="frame"><div class="sec">
 <div class="row" style="justify-content: space-between; align-items: flex-end; gap: 24px 64px;">
-<div style="flex: 1 1 480px; display: flex; flex-direction: column; gap: 14px;"><p class="eyebrow">// in the wild</p>
+<div style="flex: 1 1 480px; display: flex; flex-direction: column; gap: 14px;"><p class="eyebrow lead">// in the wild</p>
 <h2 class="h2">What we found in public code.</h2></div>
 <a class="btn btn-line" href="explorer.html">See what open source could save</a>
 </div>
@@ -378,7 +388,7 @@ ticket.source <span class="c-com">// &quot;jev&quot; or &quot;llm&quot;</span></
 </div></div></section>
 <section class="wrap"><div class="frame"><div class="sec"><div class="trailer">
 <div style="display: flex; flex-direction: column; gap: 20px;">
-<p class="eyebrow">// also from jev-swap: the shadow proxy</p>
+<p class="eyebrow lead">// also from jev-swap: the shadow proxy</p>
 <h2 class="h2">Or watch it happen on live traffic.</h2>
 <p class="body">Point your OpenAI or Anthropic client at the shadow proxy. Every request still reaches your model untouched, while decision calls are mirrored to Jev in parallel and a live dashboard compares answers, latency and cost.</p>
 <a class="btn btn-line" href="proxy.html" style="align-self: flex-start;">Meet the shadow proxy</a>
@@ -386,10 +396,10 @@ ticket.source <span class="c-com">// &quot;jev&quot; or &quot;llm&quot;</span></
 <div style="min-width: 0;"><svg class="iso hero-iso" viewBox="-240.3 -288 454.6 914" role="img" aria-label="Your app sends its LLM call through the jev-swap shadow proxy, which forwards it unchanged to your LLM and mirrors it to Jev in parallel, then compares answers, latency and cost." style="display: block; width: 100%; height: auto;" xmlns="http://www.w3.org/2000/svg"><path d="M0 19 L-105.7 80 L-26 126" fill="none" stroke="#8E9199" stroke-opacity="0.8" stroke-width="1.2"></path><path class="pulse pk18" d="M0 19 L-105.7 80 L-26 126" fill="none" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round"></path><path d="M-26 126 L-105.7 80 L0 19" fill="none" stroke="#8E9199" stroke-opacity="0" stroke-width="1.2"></path><path class="pulse pk19" d="M-26 126 L-105.7 80 L0 19" fill="none" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round"></path><path d="M17.3 301 L126.4 364" fill="none" stroke="#F386A1" stroke-opacity="0.8" stroke-width="1.2"></path><path class="pulse pk20" d="M17.3 301 L126.4 364" fill="none" stroke="#F386A1" stroke-width="6" stroke-linecap="round"></path><path d="M126.4 364 L17.3 301" fill="none" stroke="#8E9199" stroke-opacity="0" stroke-width="1.2"></path><path class="pulse pk21" d="M126.4 364 L17.3 301" fill="none" stroke="#F386A1" stroke-width="6" stroke-linecap="round"></path><path d="M-17.3 301 L-126.4 364" fill="none" stroke="#8E9199" stroke-opacity="0.8" stroke-width="1.2"></path><path class="pulse pk22" d="M-17.3 301 L-126.4 364" fill="none" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round"></path><path d="M-126.4 364 L-17.3 301" fill="none" stroke="#8E9199" stroke-opacity="0" stroke-width="1.2"></path><path class="pulse pk23" d="M-126.4 364 L-17.3 301" fill="none" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round"></path><g class="slab slab-llm"><polygon points="129.9,535 0,610 0,602 129.9,527" fill="#0B0B0C" stroke="rgba(236,237,239,0.14)" stroke-width="1" stroke-linejoin="round"></polygon><polygon points="-129.9,535 0,610 0,602 -129.9,527" fill="#0D0D0F" stroke="rgba(236,237,239,0.14)" stroke-width="1" stroke-linejoin="round"></polygon><polygon points="0,452 129.9,527 0,602 -129.9,527" fill="#141416" stroke="rgba(236,237,239,0.14)" stroke-width="1" stroke-linejoin="round"></polygon><text transform="matrix(0.8660 0.5 -0.8660 0.5 -77.9 509)" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="12" font-weight="400" fill="#ECEDEF" text-anchor="start">llm: billing</text><text transform="matrix(0.8660 0.5 -0.8660 0.5 -91.8 517)" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="12" font-weight="400" fill="#F386A1" text-anchor="start">jev: billing · 0.94</text><text transform="matrix(0.8660 0.5 -0.8660 0.5 -105.7 525)" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="10.5" font-weight="400" fill="#8E9199" text-anchor="start">agree · faster · cheaper</text></g><polygon points="173.2,220 0,320 0,304 173.2,204" fill="#A8428F" stroke="rgba(243,134,161,0.55)" stroke-width="1" stroke-linejoin="round"></polygon><polygon points="-173.2,220 0,320 0,304 -173.2,204" fill="#D45BB6" stroke="rgba(243,134,161,0.55)" stroke-width="1" stroke-linejoin="round"></polygon><polygon points="0,104 173.2,204 0,304 -173.2,204" fill="#26272B" stroke="rgba(243,134,161,0.55)" stroke-width="1" stroke-linejoin="round"></polygon><polygon points="45,142 0,168 0,164 45,138" fill="#222326" stroke="rgba(236,237,239,0.22)" stroke-width="1" stroke-linejoin="round"></polygon><polygon points="-45,142 0,168 0,164 -45,138" fill="#2A2B2F" stroke="rgba(236,237,239,0.22)" stroke-width="1" stroke-linejoin="round"></polygon><polygon points="0,112 45,138 0,164 -45,138" fill="#3C3D42" stroke="rgba(236,237,239,0.22)" stroke-width="1" stroke-linejoin="round" class="tile t-match"></polygon><text transform="matrix(0.8660 0.5 -0.8660 0.5 -32 136.5)" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="9.5" font-weight="400" fill="#ECEDEF" text-anchor="start">match</text><polygon points="53.7,147 98.7,173 53.7,199 8.7,173" fill="none" stroke="rgba(236,237,239,0.18)" stroke-width="1" stroke-linejoin="round" stroke-dasharray="3 4"></polygon><polygon points="152.4,204 107.4,230 107.4,226 152.4,200" fill="#222326" stroke="rgba(236,237,239,0.22)" stroke-width="1" stroke-linejoin="round"></polygon><polygon points="62.4,204 107.4,230 107.4,226 62.4,200" fill="#2A2B2F" stroke="rgba(236,237,239,0.22)" stroke-width="1" stroke-linejoin="round"></polygon><polygon points="107.4,174 152.4,200 107.4,226 62.4,200" fill="#3C3D42" stroke="rgba(236,237,239,0.22)" stroke-width="1" stroke-linejoin="round" class="tile t-mirror"></polygon><text transform="matrix(0.8660 0.5 -0.8660 0.5 75.3 198.5)" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="9.5" font-weight="400" fill="#ECEDEF" text-anchor="start">mirror</text><polygon points="-53.7,147 -8.7,173 -53.7,199 -98.7,173" fill="none" stroke="rgba(236,237,239,0.18)" stroke-width="1" stroke-linejoin="round" stroke-dasharray="3 4"></polygon><polygon points="45,204 0,230 0,226 45,200" fill="#222326" stroke="rgba(236,237,239,0.22)" stroke-width="1" stroke-linejoin="round"></polygon><polygon points="-45,204 0,230 0,226 -45,200" fill="#2A2B2F" stroke="rgba(236,237,239,0.22)" stroke-width="1" stroke-linejoin="round"></polygon><polygon points="0,174 45,200 0,226 -45,200" fill="#3C3D42" stroke="rgba(236,237,239,0.22)" stroke-width="1" stroke-linejoin="round" class="tile t-compare"></polygon><text transform="matrix(0.8660 0.5 -0.8660 0.5 -32 198.5)" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="9.5" font-weight="400" fill="#ECEDEF" text-anchor="start">compare</text><polygon points="53.7,209 98.7,235 53.7,261 8.7,235" fill="none" stroke="rgba(236,237,239,0.18)" stroke-width="1" stroke-linejoin="round" stroke-dasharray="3 4"></polygon><polygon points="-62.4,204 -107.4,230 -107.4,226 -62.4,200" fill="#222326" stroke="rgba(236,237,239,0.22)" stroke-width="1" stroke-linejoin="round"></polygon><polygon points="-152.4,204 -107.4,230 -107.4,226 -152.4,200" fill="#2A2B2F" stroke="rgba(236,237,239,0.22)" stroke-width="1" stroke-linejoin="round"></polygon><polygon points="-107.4,174 -62.4,200 -107.4,226 -152.4,200" fill="#3C3D42" stroke="rgba(236,237,239,0.22)" stroke-width="1" stroke-linejoin="round" class="tile t-latency"></polygon><text transform="matrix(0.8660 0.5 -0.8660 0.5 -139.4 198.5)" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="9.5" font-weight="400" fill="#ECEDEF" text-anchor="start">latency</text><polygon points="-53.7,209 -8.7,235 -53.7,261 -98.7,235" fill="none" stroke="rgba(236,237,239,0.18)" stroke-width="1" stroke-linejoin="round" stroke-dasharray="3 4"></polygon><polygon points="45,266 0,292 0,288 45,262" fill="#222326" stroke="rgba(236,237,239,0.22)" stroke-width="1" stroke-linejoin="round"></polygon><polygon points="-45,266 0,292 0,288 -45,262" fill="#2A2B2F" stroke="rgba(236,237,239,0.22)" stroke-width="1" stroke-linejoin="round"></polygon><polygon points="0,236 45,262 0,288 -45,262" fill="#3C3D42" stroke="rgba(236,237,239,0.22)" stroke-width="1" stroke-linejoin="round" class="tile t-cost"></polygon><text transform="matrix(0.8660 0.5 -0.8660 0.5 -32 260.5)" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="9.5" font-weight="400" fill="#ECEDEF" text-anchor="start">cost</text><circle cx="-17.3" cy="301" r="3" fill="#FFFFFF"></circle><circle cx="17.3" cy="301" r="3" fill="#FFFFFF"></circle><polygon points="48.5,28 0,56 0,0 48.5,-28" fill="#1C1D20" stroke="rgba(236,237,239,0.22)" stroke-width="1" stroke-linejoin="round"></polygon><polygon points="-48.5,28 0,56 0,0 -48.5,-28" fill="#232427" stroke="rgba(236,237,239,0.22)" stroke-width="1" stroke-linejoin="round"></polygon><polygon points="0,-56 48.5,-28 0,0 -48.5,-28" fill="#2E2F33" stroke="rgba(236,237,239,0.22)" stroke-width="1" stroke-linejoin="round"></polygon><text transform="matrix(0.8660 0.5 -0.8660 0.5 -22.5 -33)" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="14" font-weight="500" fill="#ECEDEF" text-anchor="start">&lt;/&gt;</text><polygon points="-101.3,387.5 -149.8,415.5 -149.8,359.5 -101.3,331.5" fill="#1C1D20" stroke="rgba(236,237,239,0.22)" stroke-width="1" stroke-linejoin="round"></polygon><polygon points="-198.3,387.5 -149.8,415.5 -149.8,359.5 -198.3,331.5" fill="#232427" stroke="rgba(236,237,239,0.22)" stroke-width="1" stroke-linejoin="round"></polygon><polygon points="-149.8,303.5 -101.3,331.5 -149.8,359.5 -198.3,331.5" fill="#2E2F33" stroke="rgba(236,237,239,0.22)" stroke-width="1" stroke-linejoin="round"></polygon><text transform="matrix(0.8660 0.5 -0.8660 0.5 -171.5 327)" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="15" font-weight="500" fill="#ECEDEF" text-anchor="start">llm</text><polygon points="198.3,387.5 149.8,415.5 149.8,359.5 198.3,331.5" fill="#A8428F" stroke="rgba(243,134,161,0.7)" stroke-width="1" stroke-linejoin="round"></polygon><polygon points="101.3,387.5 149.8,415.5 149.8,359.5 101.3,331.5" fill="#D45BB6" stroke="rgba(243,134,161,0.7)" stroke-width="1" stroke-linejoin="round"></polygon><polygon points="149.8,303.5 198.3,331.5 149.8,359.5 101.3,331.5" fill="#F386A1" stroke="rgba(243,134,161,0.7)" stroke-width="1" stroke-linejoin="round"></polygon><text transform="matrix(0.8660 0.5 -0.8660 0.5 128.2 327)" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="15" font-weight="600" fill="#1E1E1E" text-anchor="start">jev</text><text transform="matrix(0.8660 0.5 -0.8660 0.5 -67.5 37)" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="12" font-weight="400" fill="#8E9199" text-anchor="start">// your app</text><text transform="matrix(0.8660 -0.5 0.8660 0.5 -180.1 208)" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="12.5" font-weight="400" fill="#ECEDEF" text-anchor="start">// shadow proxy</text><text transform="matrix(0.8660 0.5 -0.8660 0.5 -212.2 395.5)" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="12" font-weight="400" fill="#8E9199" text-anchor="start">// your llm</text><text transform="matrix(0.8660 0.5 -0.8660 0.5 -224.3 402.5)" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="10.5" font-weight="400" fill="#8E9199" text-anchor="start">forwarded unchanged</text><text transform="matrix(0.8660 0.5 -0.8660 0.5 87.5 395.5)" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="12" font-weight="400" fill="#F386A1" text-anchor="start">// jev · mirrored</text><text transform="matrix(0.8660 0.5 -0.8660 0.5 75.3 402.5)" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="10.5" font-weight="400" fill="#8E9199" text-anchor="start">70–500 ms</text><text transform="matrix(0.8660 0.5 -0.8660 0.5 63.2 409.5)" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="10.5" font-weight="400" fill="#8E9199" text-anchor="start">$0.042 / 1M in</text><path d="M0 -122 L0 -28" fill="none" stroke="#8E9199" stroke-opacity="0.8" stroke-width="1.2"></path><circle cx="0" cy="-122" r="3" fill="#FFFFFF"></circle><rect x="-170" y="-272" width="340" height="150" rx="3" fill="#111113" stroke="rgba(236,237,239,0.14)"></rect><text x="-156" y="-250" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="11" font-weight="400" fill="#8E9199" text-anchor="start">your app · triage.ts</text><text x="-156" y="-222" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="12.5" style="white-space: pre;"><tspan fill="#7C7F87">// point your SDK at the proxy</tspan></text><text x="-156" y="-203" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="12.5" style="white-space: pre;"><tspan fill="#E3C07A">new </tspan><tspan fill="#ECEDEF">OpenAI({</tspan></text><text x="-156" y="-184" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="12.5" style="white-space: pre;"><tspan fill="#ECEDEF">  baseURL: </tspan><tspan fill="#F386A1">"http://localhost:8787</tspan></text><text x="-156" y="-165" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="12.5" style="white-space: pre;"><tspan fill="#F386A1">            /openai/v1"</tspan></text><text x="-156" y="-146" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="12.5" style="white-space: pre;"><tspan fill="#ECEDEF">});</tspan></text></svg></div>
 </div></div></div></section>
 <section class="wrap" id="calculator"><div class="frame"><div class="sec">
-<div style="display: flex; flex-direction: column; gap: 14px; max-width: 760px;"><p class="eyebrow">// savings calculator</p>
+<div style="display: flex; flex-direction: column; gap: 14px; max-width: 760px;"><p class="eyebrow lead">// savings calculator</p>
 <h2 class="h2">What are your decisions costing you?</h2>
 <p class="body">Plug in one decision-type call from your app. The share Jev handles comes from your shadow report. Until you run one, it&#39;s your estimate.</p></div>
-<div class="calc">
+<div class="calc crop">
 <div class="panel calc-in">
 <div class="field"><label class="lbl" for="calls">Decisions per month</label><input class="in" id="calls" type="number" min="0" step="1000" value="1000000"></div>
 <div class="g2" style="gap: 16px;"><div class="field"><label class="lbl" for="tin">Input tokens / call</label><input class="in" id="tin" type="number" min="0"  value="400"></div><div class="field"><label class="lbl" for="tout">Output tokens / call</label><input class="in" id="tout" type="number" min="0"  value="20"></div></div>
@@ -413,7 +423,7 @@ ticket.source <span class="c-com">// &quot;jev&quot; or &quot;llm&quot;</span></
 </div>
 </div></div></div></section>
 <section class="wrap" id="report"><div class="frame"><div class="sec"><div class="row" style="align-items: flex-start; gap: 40px 56px;">
-<div style="flex: 1 1 380px; display: flex; flex-direction: column; gap: 20px;"><p class="eyebrow">// the report</p>
+<div style="flex: 1 1 380px; display: flex; flex-direction: column; gap: 20px;"><p class="eyebrow lead">// the report</p>
 <h2 class="h2">A report your team can review in the pull request.</h2>
 <p class="body">Every shadow run writes a REPORT.md that drops straight into a pull request: agreement with your current model per field, a confidence-versus-coverage table, the recommended threshold, and cost per call on your real token counts.</p>
 <p class="body">Measured on inputs your model already answered, not on a benchmark.</p></div>
@@ -428,9 +438,9 @@ Cost per call                  <span class="c-com">your model vs Jev vs hybrid, 
 </div></div></div></section>
 <section class="wrap"><div class="frame"><div class="sec"><h2 class="h2">Reads the SDKs you already use.</h2>
 <div class="g2">
-<div class="panel card"><p class="eyebrow">// ts · js</p><h3 class="h3">TypeScript &amp; JavaScript</h3>
+<div class="panel card"><p class="eyebrow lead">// ts · js</p><h3 class="h3">TypeScript &amp; JavaScript</h3>
 <p class="body" style="font-size: 16px; line-height: 1.7;">OpenAI chat completions and Responses, Anthropic Messages including forced tool schemas, the Vercel AI SDK (<code class="code">generateText</code>, <code class="code">generateObject</code>, <code class="code">Output.choice</code>), and raw <code class="code">fetch</code>/axios calls to those APIs. Reads zod and JSON schema.</p></div>
-<div class="panel card"><p class="eyebrow">// python</p><h3 class="h3">Python</h3>
+<div class="panel card"><p class="eyebrow lead">// python</p><h3 class="h3">Python</h3>
 <p class="body" style="font-size: 16px; line-height: 1.7;">OpenAI, Anthropic, LangChain&#39;s <code class="code">with_structured_output</code>, and raw <code class="code">requests</code>/<code class="code">httpx</code> calls. Reads Pydantic models, Enum classes, <code class="code">Literal</code>, <code class="code">Field(ge, le)</code> and JSON schema dicts, even when they live in another file.</p></div>
 </div></div></div></section>
 <section class="wrap" id="faq"><div class="frame"><div class="sec"><div class="row" style="gap: 32px 48px;"><h2 class="h2" style="flex: 1 1 260px;">Questions</h2>
@@ -499,6 +509,63 @@ npm install -g jev-swap</pre>
     update();
   });
   update();
+})();
+</script><script>
+(function () {
+  var B = [0, 8, 2, 10, 12, 4, 14, 6, 3, 11, 1, 9, 15, 7, 13, 5];
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function mix(a, b, t) { return Math.round(a + (b - a) * t); }
+  function rgb(c1, c2, t) { return 'rgb(' + mix(c1[0], c2[0], t) + ',' + mix(c1[1], c2[1], t) + ',' + mix(c1[2], c2[2], t) + ')'; }
+  var GREY = [108, 111, 119], PINK = [243, 134, 161], PALE = [252, 217, 227], DEEP = [212, 91, 182], TRACK = 'rgb(74,75,81)';
+  function draw(cv, k) {
+    var r = cv.getBoundingClientRect(), dpr = window.devicePixelRatio || 1, W = r.width, H = r.height;
+    if (!W) return;
+    cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+    var g = cv.getContext('2d'); g.setTransform(dpr, 0, 0, dpr, 0, 0); g.clearRect(0, 0, W, H);
+    var pad = 3, h = H - 2 * pad, rad = h / 2, x0 = pad, x1 = W - pad, cy = H / 2;
+    var kr = rad * 0.66, kx = x0 + rad + (x1 - x0 - 2 * rad) * k, cell = 4;
+    for (var gy = 0, y = 2; y < H; y += cell, gy++) {
+      for (var gx = 0, x = 2; x < W; x += cell, gx++) {
+        var th = (B[(gy % 4) * 4 + (gx % 4)] + 0.5) / 16;
+        var kd = Math.hypot(x - kx, y - cy) / kr;
+        if (kd < 1) {
+          var z = Math.sqrt(1 - kd * kd);
+          var light = 0.45 + 0.55 * Math.max(0, -(x - kx) / kr * 0.45 - (y - cy) / kr * 0.45 + z * 0.75);
+          if (Math.min(1, light) > th) { g.fillStyle = light > 0.85 ? rgb(GREY, PALE, k) : rgb(GREY, PINK, k); g.fillRect(x, y, 2.4, 2.4); }
+          continue;
+        }
+        var dx = Math.max(Math.abs(x - W / 2) - (x1 - x0) / 2 + rad, 0);
+        if (Math.hypot(dx, y - cy) > rad - 8) continue;
+        if (kd < 1.6 && (1.6 - kd) * 0.4 * k > th) { g.fillStyle = rgb(GREY, DEEP, k); g.fillRect(x, y, 2.4, 2.4); continue; }
+        if (0.06 + 0.16 * (x / W) > th) { g.fillStyle = TRACK; g.fillRect(x, y, 2.4, 2.4); }
+      }
+    }
+    g.strokeStyle = '#ECEDEF'; g.lineWidth = 3; g.beginPath();
+    g.moveTo(x0 + rad, pad); g.lineTo(x1 - rad, pad); g.arc(x1 - rad, cy, rad, -Math.PI / 2, Math.PI / 2);
+    g.lineTo(x0 + rad, H - pad); g.arc(x0 + rad, cy, rad, Math.PI / 2, 3 * Math.PI / 2); g.stroke();
+  }
+  document.querySelectorAll('.ht').forEach(function (el) {
+    var cv = el.querySelector('canvas'), labels = el.querySelectorAll('.ht-legend span'), k = reduce ? 1 : 0;
+    function paint() { draw(cv, k); labels[0].className = k < 0.5 ? 'on' : ''; labels[1].className = k >= 0.5 ? 'on' : ''; }
+    paint();
+    window.addEventListener('resize', paint);
+    if (reduce || !('IntersectionObserver' in window)) { k = 1; paint(); return; }
+    var io = new IntersectionObserver(function (es) {
+      if (!es[0].isIntersecting) return;
+      io.disconnect();
+      var t0 = null;
+      setTimeout(function () {
+        requestAnimationFrame(function step(t) {
+          if (t0 === null) t0 = t;
+          var p = Math.min(1, (t - t0) / 900);
+          k = p < 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2;
+          paint();
+          if (p < 1) requestAnimationFrame(step);
+        });
+      }, 350);
+    }, { threshold: 0.6 });
+    io.observe(el);
+  });
 })();
 </script>
 </body>
