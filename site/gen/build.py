@@ -32,6 +32,9 @@ i_scan, i_conv, i_shadow = scenes.icon_scan(), scenes.icon_convert(), scenes.ico
 _local_prices = os.path.join(ROOT, "oss-out", "prices.json")
 prices = json.load(open(_local_prices if os.path.exists(_local_prices) else os.path.join(ROOT, "data", "prices.json")))
 JEV = prices["jev"]
+# Jev's measured request profile (`jev-swap oss measure-jev`): billed tokens and latency.
+_local_prof = os.path.join(ROOT, "oss-out", "jev-measure.json")
+PROF = json.load(open(_local_prof if os.path.exists(_local_prof) else os.path.join(ROOT, "data", "jev-measure.json")))["profile"]
 FETCHED = prices["fetchedAt"][:10]
 dash_path = os.path.join(ROOT, "oss-out", "dashboard.json")
 DASH = json.load(open(dash_path)) if os.path.exists(dash_path) else None
@@ -56,13 +59,15 @@ CMP = prices["models"][CMP_KEY]
 CMP_NAME = "Claude Sonnet 5"
 MOST_USED = USED[0] if USED else None
 
-# A 400-input / 20-output-token decision call, at OpenRouter list prices.
-TIN, TOUT = 400, 20
+# A 400-input / 20-output-token, one-question decision call, at OpenRouter list prices.
+TIN, TOUT, QS = 400, 20, 1
+JEV_TIN = round(PROF["baseTokens"] + PROF["perQuestion"] * QS + PROF["stateFactor"] * TIN)
 LLM_CALL = (TIN * CMP["in"] + TOUT * CMP["out"]) / 1e6
-JEV_CALL = TIN * JEV["in"] / 1e6
+JEV_CALL = JEV_TIN * JEV["in"] / 1e6
 REDUCTION = (1 - JEV_CALL / LLM_CALL) * 100
 MULTIPLE = LLM_CALL / JEV_CALL
-JEV_MS = 285  # midpoint of TypeSafe's reported 70-500 ms
+JEV_MS = PROF["p50Ms"]
+MEASURED = f'its p50 over {PROF["calls"]} live calls we timed on {PROF["measuredAt"][:10]}'
 SPEED = CMP.get("speed")
 LLM_MS = SPEED["p50LatencyMs"] + TOUT / SPEED["p50ThroughputTps"] * 1000 if SPEED else None
 
@@ -146,7 +151,7 @@ def home():
     facts = wrap(f'''<div class="facts">
 {fact_link(str(T["calls"]) if T else "–", "decision calls found in public repos so far", "explorer.html")}
 {fact_link(pct(T["save"]) if T else "–", "median cost cut per call, counting the ones with no saving", "explorer.html#method", "pink")}
-{fact_link(f"{T['speed']:.1f}×" if T else "–", "median speedup: each model&#39;s OpenRouter latency vs Jev at 285 ms, the midpoint of its reported range", "explorer.html#method", "pink")}
+{fact_link(f"{T['speed']:.1f}×" if T else "–", "median speedup: each model&#39;s OpenRouter latency vs Jev at {JEV_MS} ms, " + MEASURED, "explorer.html#method", "pink")}
 {fact_link("$" + format(JEV["in"], "g"), "per 1M input tokens on Jev. Output tokens are free.", JEV["source"])}
 </div>''', label="jev-swap by the numbers")
 
@@ -174,13 +179,13 @@ def home():
 <div class="row" style="justify-content: space-between; align-items: flex-end; gap: 24px 64px;">
 <div style="flex: 1 1 480px; display: flex; flex-direction: column; gap: 14px;"><p class="eyebrow">// cost and speed</p>
 <h2 class="h2">The same decision at a fraction of the cost, and faster.</h2></div>
-<p class="body" style="flex: 1 1 360px; max-width: 480px;">On {e(CMP_NAME)}, a typical {TIN}-token decision call costs ${LLM_CALL:.5f} and takes about {LLM_MS / 1000:.1f} s. On Jev it costs ${JEV_CALL:.6f} and typically answers in 70–500 ms.</p>
+<p class="body" style="flex: 1 1 360px; max-width: 480px;">On {e(CMP_NAME)}, a typical {TIN}-token decision call costs ${LLM_CALL:.5f} and takes about {LLM_MS / 1000:.1f} s. On Jev it costs ${JEV_CALL:.6f} and answered in {JEV_MS} ms at the median of our live test calls.</p>
 </div>
 <div class="panel race" role="img" aria-label="The same decision call on {e(CMP_NAME)} and on Jev. Jev answers first.">
 <div class="lane"><span class="lane-name">{e(CMP_NAME)}</span><div class="track"><span class="runner runner-llm"></span></div><span class="flag flag-llm">answered</span>
 <p class="lane-note">{e(llm_note)}</p></div>
 <div class="lane"><span class="lane-name pink">jev</span><div class="track"><span class="runner runner-jev"></span></div><span class="flag flag-jev">answered</span>
-<p class="lane-note">70–500 ms as reported by TypeSafe; drawn at 285 ms, the midpoint</p></div>
+<p class="lane-note">{JEV_MS} ms: {e(MEASURED)} (TypeSafe reports 70–500 ms)</p></div>
 <p class="small">Lane lengths are to scale for these two figures. Your model and inputs will differ: the shadow run measures them.</p>
 </div>
 <div style="display: flex; flex-direction: column; gap: 16px;">
@@ -189,7 +194,7 @@ def home():
 <div class="cost"><span class="small mono pink">jev · per call</span><span class="cost-big pink">${JEV_CALL:.7f}</span><span class="body" style="font-size: 15px;">${JEV_CALL * 1e6:,.2f} per million calls</span></div>
 <div class="cost cost-hi"><span class="small mono" style="color: #FCD9E3;">difference</span><span class="cost-big" style="color: #FFFFFF;">{REDUCTION:.1f}% lower</span><span class="body" style="font-size: 15px; color: #FCD9E3;">{MULTIPLE:.1f}× cheaper · {speedup}</span></div>
 </div>
-<p class="small">A {TIN}-input, {TOUT}-output-token call at OpenRouter list prices fetched {FETCHED}: {e(CMP_NAME)} at ${CMP["in"]:g} in / ${CMP["out"]:g} out per 1M tokens, Jev at ${JEV["in"]:g} in, output free. Same input tokens assumed on both.</p>
+<p class="small">A {TIN}-input, {TOUT}-output-token call at OpenRouter list prices fetched {FETCHED}: {e(CMP_NAME)} at ${CMP["in"]:g} in / ${CMP["out"]:g} out per 1M tokens, Jev at ${JEV["in"]:g} in, output free. Jev bills its own framing: {JEV_TIN} input tokens for this call, from {PROF["baseTokens"]} + {PROF["perQuestion"]} per question + {PROF["stateFactor"]:g} × input, measured on live calls.</p>
 <p class="small">Independent check: a test of 1,000 eight-way routing decisions found Jev about 40× cheaper than GPT-5.6 Terra ($0.0151 vs $0.6089). <a href="https://www.ayautomate.com/blog/jev-pricing-cost-per-decision">AY Automate</a></p>
 </div>
 </div>''', id_="speed")
@@ -258,6 +263,7 @@ ticket.source <span class="c-com">// &quot;jev&quot; or &quot;llm&quot;</span></
 <div class="panel calc-in">
 {inp("calls", "Decisions per month", "1000000", 'step="1000"')}
 <div class="g2" style="gap: 16px;">{inp("tin", "Input tokens / call", TIN)}{inp("tout", "Output tokens / call", TOUT)}</div>
+{inp("qs", "Questions per call (fields in the answer)", QS, 'step="1"')}
 <div class="field"><label class="lbl" for="model">Your current model</label><select class="in" id="model">{model_options()}</select>
 <span class="small">OpenRouter list prices per 1M tokens, fetched {FETCHED}. Edit the prices below for a different model or a negotiated rate.</span></div>
 <div class="g2" style="gap: 16px;">{inp("pin", "Input $ / 1M tokens", f'{CMP["in"]:g}', 'step="0.01"')}{inp("pout", "Output $ / 1M tokens", f'{CMP["out"]:g}', 'step="0.01"')}</div>
@@ -273,7 +279,7 @@ ticket.source <span class="c-com">// &quot;jev&quot; or &quot;llm&quot;</span></
 <div class="field"><div class="bar-row"><span>Hybrid: Jev + LLM fallback</span><span class="mono"><span id="o-hybridMonth"></span>/mo</span></div><div class="bar"><div id="o-hybridBar" style="width: 0%; background: #F9B3C5;"></div></div></div>
 <div class="field"><div class="bar-row"><span>All Jev</span><span class="mono"><span id="o-jevMonth"></span>/mo</span></div><div class="bar"><div id="o-jevBar" style="width: 0%; background: #D45BB6;"></div></div></div>
 </div>
-<p class="small">Hybrid = Jev on every call + your LLM on the share Jev isn&#39;t confident about. Jev priced at ${JEV["in"]:g} per 1M input tokens, output free. Assumes the same input tokens on both models; your question text adds some. Check your provider&#39;s current rates, then measure with a shadow run.</p>
+<p class="small">Hybrid = Jev on every call + your LLM on the share Jev isn&#39;t confident about. Jev priced at ${JEV["in"]:g} per 1M input tokens, output free. Jev input tokens = {PROF["baseTokens"]} + {PROF["perQuestion"]} per question + {PROF["stateFactor"]:g} × your input tokens, fitted from live calls. Check your provider&#39;s current rates, then measure with a shadow run.</p>
 </div>
 </div></div>''', id_="calculator")
 
@@ -332,7 +338,7 @@ npm install -g jev-swap</pre>
     body = "\n".join([hero, facts, problem, speed, how, safety, teaser, trailer, calc, report, coverage, faq, install, footer(SOURCES)])
     return page("jev-swap — stop paying LLM prices for decisions",
                 "Find the LLM calls in your codebase that are really decisions, see what they'd cost and how fast they'd run on TypeSafe Jev, and swap them with a safe fallback.",
-                "index.html", body, extra_css=race_css, script=f"<script>{CALC_JS.replace('__JEV_IN__', format(JEV['in'], 'g'))}</script>")
+                "index.html", body, extra_css=race_css, script=f"<script>{CALC_JS.replace('__JEV_IN__', format(JEV['in'], 'g')).replace('__JEV_BASE__', str(PROF['baseTokens'])).replace('__JEV_PERQ__', str(PROF['perQuestion'])).replace('__JEV_SF__', format(PROF['stateFactor'], 'g'))}</script>")
 
 
 # ======================================================================

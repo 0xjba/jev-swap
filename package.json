@@ -33,6 +33,7 @@
     "py/scan_py.py",
     "data/prices.json",
     "data/reference-models.json",
+    "data/jev-measure.json",
     "data/optout.txt",
     "README.md"
   ],

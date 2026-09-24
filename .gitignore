@@ -4,3 +4,4 @@ jev-swap-out
 oss-out
 __pycache__/
 .DS_Store
+.env

@@ -8,8 +8,8 @@ import type { Candidate, DecisionField, ModelRef } from "../types.js";
 import { llmSdkCheck } from "./deps.js";
 import { DEFAULT_CODE_QUERIES, popularQueries, repoMeta, repoQueries, searchCode, searchRepos, type Fetch, type RepoMeta } from "./github.js";
 import { loadPricesFor, lookupPrice, type PriceTable } from "./prices.js";
-import { estimateTokens, staticTokens, type StaticTokens } from "./tokens.js";
-import { buildQuestions } from "../questions.js";
+import { staticTokens, type StaticTokens } from "./tokens.js";
+import { jevRequestTokens, loadJevProfile, type JevProfile } from "./jev.js";
 
 const run = promisify(execFile);
 
@@ -351,19 +351,17 @@ export async function scanQueue(out: string, opts: ScanOptions & { concurrency: 
 /**
  * All-Jev reduction for one call, with `stateTokens` of user input on both sides:
  *   llm_cost = (prompt + state) * llm_in + output * llm_out
- *   jev_cost = (jev_static + state) * jev_in           (Jev output is free)
+ *   jev_cost = (jev_request + state_factor * state) * jev_in   (Jev output is free; jev_request from the measured profile)
  *   reduction = 1 - jev_cost / llm_cost
  */
-export function reductionAt(t: StaticTokens, llm: { in: number; out: number }, jev: { in: number; out: number }, stateTokens: number) {
+export function reductionAt(t: StaticTokens, llm: { in: number; out: number }, jev: { in: number; out: number }, stateTokens: number, stateFactor = 1) {
   const llmCost = ((t.llmPrompt.tokens + stateTokens) * llm.in + t.llmOutput.tokens * llm.out) / 1e6;
-  const jevCost = ((t.jevStatic.tokens + stateTokens) * jev.in) / 1e6;
+  const jevCost = ((t.jevStatic.tokens + stateFactor * stateTokens) * jev.in) / 1e6;
   return { llmCost, jevCost, reduction: llmCost > 0 ? 1 - jevCost / llmCost : null };
 }
 
 type CandidateStatus = "estimated" | "partial-swap" | "model-unknown" | "price-unknown";
 
-/** Jev end-to-end latency used for speed comparisons: the midpoint of TypeSafe's reported 70-500 ms. */
-const JEV_MS = 285;
 const REF_PATH = fileURLToPath(new URL("../../data/reference-models.json", import.meta.url));
 
 type Verdict = "cheaper" | "same-cost-faster" | "no-saving";
@@ -375,19 +373,19 @@ export interface ModelEval {
   reductionAllJev: { low: number; high: number };
   /** Estimated LLM time for this call: OpenRouter p50 latency + output tokens / p50 throughput. */
   llmMs: number | null;
-  /** llmMs / JEV_MS; null without speed data. */
+  /** llmMs / Jev's measured p50; null without speed data. */
   speedup: number | null;
   /** cheaper: >= 5% lower at the low end. same-cost-faster: within 15% of the LLM cost and >= 1.5x faster. */
   verdict: Verdict;
 }
 
-function evalModel(t: StaticTokens, key: string, e: PriceTable["models"][string], jev: PriceTable["jev"], stateMin: number, stateMax: number): ModelEval | null {
-  const a = reductionAt(t, e, jev, stateMin).reduction;
-  const b = reductionAt(t, e, jev, stateMax).reduction;
+function evalModel(t: StaticTokens, key: string, e: PriceTable["models"][string], jev: PriceTable["jev"], stateMin: number, stateMax: number, prof: JevProfile): ModelEval | null {
+  const a = reductionAt(t, e, jev, stateMin, prof.stateFactor).reduction;
+  const b = reductionAt(t, e, jev, stateMax, prof.stateFactor).reduction;
   if (a === null || b === null) return null;
   const low = Math.min(a, b), high = Math.max(a, b);
   const llmMs = e.speed ? e.speed.p50LatencyMs + (t.llmOutput.tokens / e.speed.p50ThroughputTps) * 1000 : null;
-  const speedup = llmMs !== null ? llmMs / JEV_MS : null;
+  const speedup = llmMs !== null ? llmMs / prof.p50Ms : null;
   const verdict: Verdict = low >= 0.05 ? "cheaper" : low > -0.15 && (speedup ?? 0) >= 1.5 ? "same-cost-faster" : "no-saving";
   return { key, in: e.in, out: e.out, reductionAllJev: { low, high }, llmMs, speedup, verdict };
 }
@@ -434,6 +432,9 @@ export interface Dashboard {
     assumptions: string[];
     stateTokenRange: [number, number];
     jevPrice: PriceTable["jev"];
+    /** Jev's measured request profile (billed tokens and latency) behind every Jev figure. */
+    jevProfile: JevProfile;
+    jevLatencyMs: number;
   };
   totals: {
     reposQueued: number;
@@ -473,6 +474,7 @@ const median = (xs: number[]) => {
 };
 
 export function buildDashboard(out: string, opts: { stateMin: number; stateMax: number; featuredMinStars: number; prices?: PriceTable }): Dashboard {
+  const prof = loadJevProfile(out);
   const prices = opts.prices ?? loadPricesFor(out);
   const optedOut = loadOptOut();
   const q = loadQueue(out);
@@ -503,11 +505,13 @@ export function buildDashboard(out: string, opts: { stateMin: number; stateMax: 
     const cands = production.map((c): DashboardCandidate => {
       // Re-price from the current table so price updates don't need a re-scan.
       const priced = c.model?.id ? lookupPrice(prices, c.model.id) : undefined;
-      // Recompute Jev's question tokens with the current question builder (no prompt text is stored;
-      // schema questions no longer use it). Prompt-heuristic questions keep their scan-time count.
-      const t: StaticTokens = c.signal === "schema"
-        ? { ...c.tokens, jevStatic: estimateTokens(JSON.stringify({ questions: buildQuestions({ ...c, stateExprs: [], snippet: "" } as unknown as Candidate) })) }
-        : c.tokens;
+      // Jev's billed request size from the measured profile: base + per question. A yes/no-prompt question
+      // also carries its prompt text (kept from scan time as a chars/4 estimate).
+      const extra = c.signal === "schema" ? 0 : prof.stateFactor * c.tokens.jevStatic.tokens;
+      const t: StaticTokens = {
+        ...c.tokens,
+        jevStatic: { tokens: Math.round(jevRequestTokens(prof, c.fields.length, 0) + extra), method: "estimate:chars/4" },
+      };
       let status: CandidateStatus;
       if (!c.model?.id) status = "model-unknown";
       else if (!priced) status = "price-unknown";
@@ -519,11 +523,11 @@ export function buildDashboard(out: string, opts: { stateMin: number; stateMax: 
       let speed: DashboardCandidate["speed"] = null;
       let verdict: Verdict | null = null;
       if (priced) {
-        const ev = evalModel(t, priced.key, priced.entry, prices.jev, opts.stateMin, opts.stateMax);
+        const ev = evalModel(t, priced.key, priced.entry, prices.jev, opts.stateMin, opts.stateMax, prof);
         if (ev) {
           reductionAllJev = { ...ev.reductionAllJev, label: "estimated" };
           verdict = ev.verdict;
-          if (ev.llmMs !== null) speed = { llmMs: Math.round(ev.llmMs), jevMs: JEV_MS, speedup: ev.speedup! };
+          if (ev.llmMs !== null) speed = { llmMs: Math.round(ev.llmMs), jevMs: prof.p50Ms, speedup: ev.speedup! };
         }
       }
       if (status === "estimated" && reductionAllJev) lows.push(reductionAllJev.low);
@@ -539,7 +543,7 @@ export function buildDashboard(out: string, opts: { stateMin: number; stateMax: 
           : fams.flatMap((f) => (ref.families[f] ?? []).map((k): [string, string] => [k, `common small ${f} model`]));
         const evals = tries.flatMap(([k, basis]) => {
           const e = prices.models[k];
-          const ev = e ? evalModel(t, k, e, prices.jev, opts.stateMin, opts.stateMax) : null;
+          const ev = e ? evalModel(t, k, e, prices.jev, opts.stateMin, opts.stateMax, prof) : null;
           return ev ? [{ ...ev, basis }] : [];
         });
         likelyModels = evals.filter((e) => e.verdict !== "no-saving")
@@ -582,24 +586,26 @@ export function buildDashboard(out: string, opts: { stateMin: number; stateMax: 
     methodology: {
       formulas: [
         "llm_cost = (prompt_tokens + state_tokens) * llm_price_in + output_tokens * llm_price_out",
-        "jev_cost = (jev_question_tokens + state_tokens) * jev_price_in   (Jev output tokens are free)",
+        "jev_cost = (jev_request_tokens + state_factor * state_tokens) * jev_price_in   (Jev output tokens are free)",
         "reduction_all_jev = 1 - jev_cost / llm_cost",
       ],
       assumptions: [
         `state_tokens (the user input each call sends) is unknown from source, so each figure is a range over ${opts.stateMin}-${opts.stateMax} tokens; the same count is used on both sides.`,
         "prompt_tokens counts only prompt text found in the call's source, without interpolated input. Prompts loaded from files or other modules are missed (promptInSource: false).",
         "output_tokens is the smallest JSON the schema allows. Reasoning tokens, schema/tool definitions, tool-use system prompts and chat framing are left out of llm_cost, so llm_cost is a lower bound and the reduction is conservative.",
-        "jev_question_tokens is the questions JSON jev-swap would send, estimated at 4 characters per token (no public Jev tokenizer).",
+        `jev_request_tokens = ${prof.baseTokens} + ${prof.perQuestion} per question, and state_factor = ${prof.stateFactor}: Jev's billed input tokens, fitted from ${prof.calls} live Jev calls on ${prof.measuredAt.slice(0, 10)} (jev-swap oss measure-jev).`,
         `Prices are list prices from OpenRouter (${prices.source}, fetched ${prices.fetchedAt.slice(0, 10)}); Jev's from its OpenRouter page. Calls whose model can't be read or isn't listed there are shown but left out of totals.`,
         "Only production code counts. Calls in tests, examples/demos/samples/docs/cookbooks/templates, evals/benchmarks/scripts/experiments, and in repositories that are sample collections are left out.",
         "Calls that also return free-text fields Jev can't produce are 'partial-swap' and left out of totals: the LLM call would still be needed.",
         "Absolute dollars are never shown: traffic volume is unknown, and it cancels out of a percentage.",
-        `Speed: the LLM's time for a call is estimated as OpenRouter's p50 latency plus output tokens / p50 throughput, from the model's busiest provider on its OpenRouter page (a 30-minute window at fetch time). Jev is taken at ${JEV_MS} ms, the midpoint of TypeSafe's reported 70-500 ms: no best case, no worst case.`,
+        `Speed: the LLM's time for a call is estimated as OpenRouter's p50 latency plus output tokens / p50 throughput, from the model's busiest provider on its OpenRouter page (a 30-minute window at fetch time). Jev is taken at ${prof.p50Ms} ms, its p50 over ${prof.calls} live calls measured end to end on ${prof.measuredAt.slice(0, 10)} (TypeSafe reports 70-500 ms).`,
         "Verdicts: 'cheaper' when Jev is at least 5% cheaper at the low end of the input range; 'about the same cost, faster' when within 15% of the LLM's cost and at least 1.5× faster; otherwise no saving.",
         "Calls whose model is chosen at runtime are compared with likely models: ones the same repo names in its other decision calls, else the provider's small default models (data/reference-models.json: hand-picked, not usage data), which are also the cheapest, so the savings shown are the conservative ones. Only models where Jev is cheaper, or about the same cost and faster, are shown; these conditional figures stay out of the headline totals.",
       ],
       stateTokenRange: [opts.stateMin, opts.stateMax],
       jevPrice: prices.jev,
+      jevProfile: prof,
+      jevLatencyMs: prof.p50Ms,
     },
     totals: {
       reposQueued: Object.keys(q.repos).filter((r) => !optedOut(r)).length,

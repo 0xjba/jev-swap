@@ -1,0 +1,329 @@
+{
+  "profile": {
+    "baseTokens": 259,
+    "perQuestion": 31,
+    "stateFactor": 0.71,
+    "p50Ms": 327,
+    "p90Ms": 366,
+    "calls": 45,
+    "measuredAt": "2026-09-24T08:59:14.130Z",
+    "method": "Live TypeSafe Jev calls (1-5 questions x short/medium/long input, after a warm-up call), timed end to end from one client; tokens are Jev's billed usage.input_tokens."
+  },
+  "rows": [
+    {
+      "size": "short",
+      "stateChars": 29,
+      "questions": 1,
+      "ms": 801,
+      "inTok": 302
+    },
+    {
+      "size": "short",
+      "stateChars": 29,
+      "questions": 1,
+      "ms": 313,
+      "inTok": 302
+    },
+    {
+      "size": "short",
+      "stateChars": 29,
+      "questions": 1,
+      "ms": 297,
+      "inTok": 302
+    },
+    {
+      "size": "short",
+      "stateChars": 29,
+      "questions": 2,
+      "ms": 355,
+      "inTok": 313
+    },
+    {
+      "size": "short",
+      "stateChars": 29,
+      "questions": 2,
+      "ms": 331,
+      "inTok": 313
+    },
+    {
+      "size": "short",
+      "stateChars": 29,
+      "questions": 2,
+      "ms": 333,
+      "inTok": 313
+    },
+    {
+      "size": "short",
+      "stateChars": 29,
+      "questions": 3,
+      "ms": 319,
+      "inTok": 371
+    },
+    {
+      "size": "short",
+      "stateChars": 29,
+      "questions": 3,
+      "ms": 324,
+      "inTok": 371
+    },
+    {
+      "size": "short",
+      "stateChars": 29,
+      "questions": 3,
+      "ms": 317,
+      "inTok": 371
+    },
+    {
+      "size": "short",
+      "stateChars": 29,
+      "questions": 4,
+      "ms": 366,
+      "inTok": 386
+    },
+    {
+      "size": "short",
+      "stateChars": 29,
+      "questions": 4,
+      "ms": 309,
+      "inTok": 386
+    },
+    {
+      "size": "short",
+      "stateChars": 29,
+      "questions": 4,
+      "ms": 363,
+      "inTok": 386
+    },
+    {
+      "size": "short",
+      "stateChars": 29,
+      "questions": 5,
+      "ms": 419,
+      "inTok": 422
+    },
+    {
+      "size": "short",
+      "stateChars": 29,
+      "questions": 5,
+      "ms": 357,
+      "inTok": 422
+    },
+    {
+      "size": "short",
+      "stateChars": 29,
+      "questions": 5,
+      "ms": 318,
+      "inTok": 422
+    },
+    {
+      "size": "medium",
+      "stateChars": 251,
+      "questions": 1,
+      "ms": 327,
+      "inTok": 340
+    },
+    {
+      "size": "medium",
+      "stateChars": 251,
+      "questions": 1,
+      "ms": 315,
+      "inTok": 340
+    },
+    {
+      "size": "medium",
+      "stateChars": 251,
+      "questions": 1,
+      "ms": 341,
+      "inTok": 340
+    },
+    {
+      "size": "medium",
+      "stateChars": 251,
+      "questions": 2,
+      "ms": 296,
+      "inTok": 351
+    },
+    {
+      "size": "medium",
+      "stateChars": 251,
+      "questions": 2,
+      "ms": 327,
+      "inTok": 351
+    },
+    {
+      "size": "medium",
+      "stateChars": 251,
+      "questions": 2,
+      "ms": 304,
+      "inTok": 351
+    },
+    {
+      "size": "medium",
+      "stateChars": 251,
+      "questions": 3,
+      "ms": 309,
+      "inTok": 409
+    },
+    {
+      "size": "medium",
+      "stateChars": 251,
+      "questions": 3,
+      "ms": 316,
+      "inTok": 409
+    },
+    {
+      "size": "medium",
+      "stateChars": 251,
+      "questions": 3,
+      "ms": 335,
+      "inTok": 409
+    },
+    {
+      "size": "medium",
+      "stateChars": 251,
+      "questions": 4,
+      "ms": 327,
+      "inTok": 424
+    },
+    {
+      "size": "medium",
+      "stateChars": 251,
+      "questions": 4,
+      "ms": 331,
+      "inTok": 424
+    },
+    {
+      "size": "medium",
+      "stateChars": 251,
+      "questions": 4,
+      "ms": 360,
+      "inTok": 424
+    },
+    {
+      "size": "medium",
+      "stateChars": 251,
+      "questions": 5,
+      "ms": 411,
+      "inTok": 460
+    },
+    {
+      "size": "medium",
+      "stateChars": 251,
+      "questions": 5,
+      "ms": 310,
+      "inTok": 460
+    },
+    {
+      "size": "medium",
+      "stateChars": 251,
+      "questions": 5,
+      "ms": 342,
+      "inTok": 460
+    },
+    {
+      "size": "long",
+      "stateChars": 1007,
+      "questions": 1,
+      "ms": 294,
+      "inTok": 475
+    },
+    {
+      "size": "long",
+      "stateChars": 1007,
+      "questions": 1,
+      "ms": 318,
+      "inTok": 475
+    },
+    {
+      "size": "long",
+      "stateChars": 1007,
+      "questions": 1,
+      "ms": 319,
+      "inTok": 475
+    },
+    {
+      "size": "long",
+      "stateChars": 1007,
+      "questions": 2,
+      "ms": 326,
+      "inTok": 486
+    },
+    {
+      "size": "long",
+      "stateChars": 1007,
+      "questions": 2,
+      "ms": 334,
+      "inTok": 486
+    },
+    {
+      "size": "long",
+      "stateChars": 1007,
+      "questions": 2,
+      "ms": 347,
+      "inTok": 486
+    },
+    {
+      "size": "long",
+      "stateChars": 1007,
+      "questions": 3,
+      "ms": 296,
+      "inTok": 544
+    },
+    {
+      "size": "long",
+      "stateChars": 1007,
+      "questions": 3,
+      "ms": 338,
+      "inTok": 544
+    },
+    {
+      "size": "long",
+      "stateChars": 1007,
+      "questions": 3,
+      "ms": 359,
+      "inTok": 544
+    },
+    {
+      "size": "long",
+      "stateChars": 1007,
+      "questions": 4,
+      "ms": 320,
+      "inTok": 559
+    },
+    {
+      "size": "long",
+      "stateChars": 1007,
+      "questions": 4,
+      "ms": 329,
+      "inTok": 559
+    },
+    {
+      "size": "long",
+      "stateChars": 1007,
+      "questions": 4,
+      "ms": 375,
+      "inTok": 559
+    },
+    {
+      "size": "long",
+      "stateChars": 1007,
+      "questions": 5,
+      "ms": 327,
+      "inTok": 595
+    },
+    {
+      "size": "long",
+      "stateChars": 1007,
+      "questions": 5,
+      "ms": 325,
+      "inTok": 595
+    },
+    {
+      "size": "long",
+      "stateChars": 1007,
+      "questions": 5,
+      "ms": 359,
+      "inTok": 595
+    }
+  ]
+}

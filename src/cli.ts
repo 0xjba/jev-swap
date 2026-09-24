@@ -9,6 +9,7 @@ import { shadow } from "./shadow.js";
 import { startProxy } from "./proxy/server.js";
 import { addRepos, buildDashboard, discover, scanQueue } from "./oss/pipeline.js";
 import { fetchPrices, fetchSpeed, loadPricesFor, lookupPrice, savePrices } from "./oss/prices.js";
+import { measureJev } from "./oss/jev.js";
 import type { Candidate, SampleRow } from "./types.js";
 
 const num = (v: string) => {
@@ -202,6 +203,24 @@ oss
   });
 
 oss
+  .command("measure-jev")
+  .description("Measure Jev's billed input tokens and latency with live calls (needs TYPESAFE_API_KEY); writes <out>/jev-measure.json.")
+  .option("-o, --out <dir>", "state directory", "oss-out")
+  .option("--reps <n>", "calls per combination of question count and input size", num, 3)
+  .action(async (opts: { out: string; reps: number }) => {
+    if (!process.env.TYPESAFE_API_KEY) {
+      console.error("TYPESAFE_API_KEY is not set: measuring Jev needs live calls.");
+      process.exit(1);
+    }
+    const { profile, rows } = await measureJev(opts.reps);
+    fs.mkdirSync(opts.out, { recursive: true });
+    const dest = path.join(opts.out, "jev-measure.json");
+    fs.writeFileSync(dest, JSON.stringify({ profile, rows }, null, 2) + "\n");
+    console.log(`${profile.calls} live Jev calls: input tokens ~= ${profile.baseTokens} + ${profile.perQuestion} per question + ${profile.stateFactor} x input; latency p50 ${profile.p50Ms} ms, p90 ${profile.p90Ms} ms.`);
+    console.log(`Wrote ${dest}`);
+  });
+
+oss
   .command("add")
   .description("Queue repos by name, e.g. a maintainer claiming their project.")
   .argument("<repos...>", "owner/repo or https://github.com/owner/repo")
@@ -248,7 +267,7 @@ oss
     const x = t.excludedNonProduction;
     console.log(`Excluded as non-production: ${x.example} in examples/demos/docs, ${x.eval} in evals/benchmarks/scripts, ${x.sampleRepo} in sample repos`);
     console.log(`Found as raw HTTP calls (no SDK): ${t.candidatesViaHttp}`);
-    console.log(`Speed (estimated calls): median ${t.medianSpeedup === null ? "n/a" : t.medianSpeedup.toFixed(1) + "x"} faster on Jev (Jev at 285 ms, the midpoint of its reported 70-500 ms)`);
+    console.log(`Speed (estimated calls): median ${t.medianSpeedup === null ? "n/a" : t.medianSpeedup.toFixed(1) + "x"} faster on Jev (Jev at its measured p50: ${d.methodology.jevLatencyMs} ms)`);
     console.log(`Runtime-model calls with a likely model where Jev saves cost or time: ${t.likely.calls} (median ${pct(t.likely.medianConservativeReductionLow)}, least favourable likely model per call)`);
     const f = t.featured;
     console.log(`Featured (>= ${f.minStars} stars): ${f.repos} repos, ${f.candidates} candidates, ${f.candidatesEstimated} estimated, median ${pct(f.medianReductionLow)}`);

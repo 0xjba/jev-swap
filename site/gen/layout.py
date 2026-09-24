@@ -297,7 +297,8 @@ CALC_JS = """
     var calls = n($('calls').value), tin = n($('tin').value), tout = n($('tout').value);
     var pin = n($('pin').value), pout = n($('pout').value), share = Math.min(100, n($('share').value));
     var llm = calls * (tin * pin + tout * pout) / 1e6;
-    var jev = calls * tin * __JEV_IN__ / 1e6;
+    var qs = Math.max(1, Math.round(n($('qs').value)));
+    var jev = calls * (__JEV_BASE__ + __JEV_PERQ__ * qs + __JEV_SF__ * tin) * __JEV_IN__ / 1e6;
     var hybrid = jev + llm * (1 - share / 100);
     var save = Math.max(0, llm - hybrid);
     var pct = function (v) { return llm > 0 ? Math.max(0.5, Math.min(100, v / llm * 100)) : 0; };
@@ -313,7 +314,7 @@ CALC_JS = """
     var sel = $('model'), opt = sel.options[sel.selectedIndex];
     if (opt && opt.value !== 'custom' && (n(opt.dataset.in) !== pin || n(opt.dataset.out) !== pout)) sel.value = 'custom';
   }
-  ['calls', 'tin', 'tout', 'pin', 'pout', 'share'].forEach(function (id) { $(id).addEventListener('input', update); });
+  ['calls', 'tin', 'tout', 'qs', 'pin', 'pout', 'share'].forEach(function (id) { $(id).addEventListener('input', update); });
   $('model').addEventListener('change', function () {
     var o = this.options[this.selectedIndex];
     if (o.value !== 'custom') { $('pin').value = o.dataset.in; $('pout').value = o.dataset.out; }
