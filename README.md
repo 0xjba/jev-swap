@@ -1,4 +1,4 @@
-<p align="center"><img src="https://raw.githubusercontent.com/0xjba/jev-swap/main/assets/banner.png" alt="jev-swap: find the decisions, swap them to Jev, prove it" width="100%"></p>
+<p align="center"><img src="https://cdn.jsdelivr.net/npm/jev-swap@0.1.2/assets/banner.png" alt="jev-swap: find the decisions, swap them to Jev, prove it" width="100%"></p>
 
 # jev-swap
 
