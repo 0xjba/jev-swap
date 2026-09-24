@@ -100,6 +100,7 @@ export const WhatIsJevSwap: React.FC = () => {
   return (
     <AbsoluteFill>
       <Backdrop f={f} />
+      <Grain f={f} />
       <Html5Audio src={staticFile("music.mp3")} trimBefore={MUSIC_FROM} volume={musicLevel} />
       {SCENES.map((sc) => (
         <Sequence key={sc.id} from={sc.from} durationInFrames={sc.dur} layout="none">
@@ -121,7 +122,6 @@ export const WhatIsJevSwap: React.FC = () => {
           ))}
         </Sequence>
       ))}
-      <Grain f={f} />
       <Sequence from={start("scan") - 10} durationInFrames={20} layout="none">
         <Wipe dur={20} />
         <Html5Audio src={staticFile("sfx/whoosh.wav")} volume={0.3} />

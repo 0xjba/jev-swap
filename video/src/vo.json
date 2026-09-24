@@ -2,55 +2,64 @@
   "intro-0": {
     "say": "Meet jev-swap.",
     "voice": "onyx",
+    "style": "An enthusiastic, warm product-launch host who is genuinely excited: animated, expressive pitch that rises and falls, punchy emphasis on key words, bright smiling tone, quick upbeat pace. Friendly and modern, like a keynote demo. Absolutely not dark, dramatic, whispery, slow or ominous.",
     "file": "vo/intro-0.wav",
-    "seconds": 1.733
+    "seconds": 1.778
   },
   "problem-0": {
     "say": "A lot of your LLM calls are really decisions.",
     "voice": "onyx",
+    "style": "An enthusiastic, warm product-launch host who is genuinely excited: animated, expressive pitch that rises and falls, punchy emphasis on key words, bright smiling tone, quick upbeat pace. Friendly and modern, like a keynote demo. Absolutely not dark, dramatic, whispery, slow or ominous.",
     "file": "vo/problem-0.wav",
-    "seconds": 3.558
+    "seconds": 3.176
   },
   "problem-1": {
     "say": "Yet you pay a text model to write out every answer.",
     "voice": "onyx",
+    "style": "An enthusiastic, warm product-launch host who is genuinely excited: animated, expressive pitch that rises and falls, punchy emphasis on key words, bright smiling tone, quick upbeat pace. Friendly and modern, like a keynote demo. Absolutely not dark, dramatic, whispery, slow or ominous.",
     "file": "vo/problem-1.wav",
-    "seconds": 3.779
+    "seconds": 3.612
   },
   "jev-0": {
     "say": "TypeSafe Jev answers them directly. Typed answers, and no output tokens.",
     "voice": "onyx",
+    "style": "An enthusiastic, warm product-launch host who is genuinely excited: animated, expressive pitch that rises and falls, punchy emphasis on key words, bright smiling tone, quick upbeat pace. Friendly and modern, like a keynote demo. Absolutely not dark, dramatic, whispery, slow or ominous.",
     "file": "vo/jev-0.wav",
-    "seconds": 6.823
+    "seconds": 5.737
   },
   "scan-0": {
     "say": "Jev-swap finds those calls in your code,",
     "voice": "onyx",
+    "style": "An enthusiastic, warm product-launch host who is genuinely excited: animated, expressive pitch that rises and falls, punchy emphasis on key words, bright smiling tone, quick upbeat pace. Friendly and modern, like a keynote demo. Absolutely not dark, dramatic, whispery, slow or ominous.",
     "file": "vo/scan-0.wav",
-    "seconds": 3.012
+    "seconds": 3.061
   },
   "cost-0": {
     "say": "shows what you'd save. On this Claude Sonnet 5 call, 97.6 percent less, and nearly ten times faster.",
     "voice": "onyx",
+    "style": "An enthusiastic, warm product-launch host who is genuinely excited: animated, expressive pitch that rises and falls, punchy emphasis on key words, bright smiling tone, quick upbeat pace. Friendly and modern, like a keynote demo. Absolutely not dark, dramatic, whispery, slow or ominous.",
     "file": "vo/cost-0.wav",
-    "seconds": 9.207
+    "seconds": 8.033
   },
   "convert-0": {
     "say": "writes the Jev code, with a safe fallback to your LLM,",
     "voice": "onyx",
+    "style": "An enthusiastic, warm product-launch host who is genuinely excited: animated, expressive pitch that rises and falls, punchy emphasis on key words, bright smiling tone, quick upbeat pace. Friendly and modern, like a keynote demo. Absolutely not dark, dramatic, whispery, slow or ominous.",
     "file": "vo/convert-0.wav",
-    "seconds": 4.062
+    "seconds": 4.426
   },
   "shadow-0": {
     "say": "and proves the swap on your real traffic.",
     "voice": "onyx",
+    "style": "An enthusiastic, warm product-launch host who is genuinely excited: animated, expressive pitch that rises and falls, punchy emphasis on key words, bright smiling tone, quick upbeat pace. Friendly and modern, like a keynote demo. Absolutely not dark, dramatic, whispery, slow or ominous.",
     "file": "vo/shadow-0.wav",
-    "seconds": 2.815
+    "seconds": 2.757
   },
   "outro-0": {
     "say": "Jev-swap. Try it now, with N P X jev-swap.",
     "voice": "onyx",
+    "style": "An enthusiastic, warm product-launch host who is genuinely excited: animated, expressive pitch that rises and falls, punchy emphasis on key words, bright smiling tone, quick upbeat pace. Friendly and modern, like a keynote demo. Absolutely not dark, dramatic, whispery, slow or ominous.",
     "file": "vo/outro-0.wav",
-    "seconds": 4.885
+    "seconds": 4.324
   }
 }

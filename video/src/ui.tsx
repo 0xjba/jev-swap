@@ -74,7 +74,7 @@ export const Mark: React.FC<{ x: number; y: number; size: number; draw?: number;
   );
 };
 
-/** Animated film grain and a slow, soft light drift, so frames read as footage rather than slides. */
+/** Background texture: fine animated grain and a slow, soft light drift. Rendered under the content so text and UI stay crisp. */
 export const Grain: React.FC<{ f: number }> = ({ f }) => (
   <AbsoluteFill style={{ pointerEvents: "none" }}>
     <svg width={W} height={H} style={{ position: "absolute", mixBlendMode: "screen", opacity: 0.55 }}>
@@ -96,8 +96,8 @@ export const Grain: React.FC<{ f: number }> = ({ f }) => (
         <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed={(f % 48) + 100} stitchTiles="stitch" />
         <feColorMatrix type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  3.2 0 0 0 -1.5" />
       </filter>
-      <rect width={W} height={H} filter="url(#grainL)" opacity={0.12} />
-      <rect width={W} height={H} filter="url(#grainD)" opacity={0.26} />
+      <rect width={W} height={H} filter="url(#grainL)" opacity={0.07} />
+      <rect width={W} height={H} filter="url(#grainD)" opacity={0.18} />
     </svg>
   </AbsoluteFill>
 );

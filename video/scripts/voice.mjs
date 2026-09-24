@@ -76,7 +76,7 @@ for (const sc of cfg.scenes) {
   for (const [i, line] of sc.lines.entries()) {
     const file = `vo/${sc.id}-${i}.wav`;
     const key = `${sc.id}-${i}`;
-    if (!force && prev[key]?.say === line.say && prev[key]?.voice === cfg.voice && fs.existsSync(`${root}/public/${file}`)) { out[key] = prev[key]; continue; }
+    if (!force && prev[key]?.say === line.say && prev[key]?.voice === cfg.voice && prev[key]?.style === cfg.style && fs.existsSync(`${root}/public/${file}`)) { out[key] = prev[key]; continue; }
     let got;
     for (let attempt = 1; attempt <= 4; attempt++) {
       got = await speak(line.say);
@@ -87,7 +87,7 @@ for (const sc of cfg.scenes) {
     }
     if (!got) throw new Error(`${key}: the model kept changing the line`);
     fs.writeFileSync(`${root}/public/${file}`, wav(got.pcm));
-    out[key] = { say: line.say, voice: cfg.voice, file, seconds: polish(`${root}/public/${file}`) };
+    out[key] = { say: line.say, voice: cfg.voice, style: cfg.style, file, seconds: polish(`${root}/public/${file}`) };
     console.log(`  ${key}: ${out[key].seconds}s  "${got.transcript}"`);
     fs.writeFileSync(outPath, JSON.stringify({ ...prev, ...out }, null, 2) + "\n");
   }
