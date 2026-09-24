@@ -86,6 +86,16 @@ npx jev-swap oss build                   # price candidates -> oss-out/dashboard
 
 The pages are generated: edit `site/gen/` (`build.py` for copy, `layout.py` for styles and navigation, `scenes.py` for the illustrations) and run `npm run site` after `oss prices` / `oss build`. Figures come from `data/prices.json` and the dashboard data, not hard-coded values. Preview on your network with `python3 -m http.server 8000 --bind 0.0.0.0 --directory site`, then open `http://<your machine's IP>:8000`.
 
+## Explainer video
+
+`video/` is a Remotion project for the 70 s "What is jev-swap?" video (1920x1080, 30 fps, no audio). Its cost and speed figures are the site's sourced Claude Sonnet 5 example.
+
+```sh
+cd video && npm install
+npm run studio     # preview and edit
+npm run render     # -> video/out/what-is-jev-swap.mp4
+```
+
 ## Samples format (JSONL)
 
 ```json
