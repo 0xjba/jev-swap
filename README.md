@@ -120,3 +120,7 @@ npm install && npm run build
 node dist/cli.js --help      # or: npm run dev -- --help
 npm run demo                 # scan + convert + a --mock shadow run on examples/demo-app
 ```
+
+## License
+
+MIT. See [LICENSE](LICENSE).
