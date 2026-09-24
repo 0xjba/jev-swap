@@ -1,4 +1,4 @@
-<p align="center"><img src="https://cdn.jsdelivr.net/npm/jev-swap@0.1.3/assets/banner.png" alt="jev-swap: find the decisions, see the savings live, swap to Jev" width="100%"></p>
+<p align="center"><img src="https://cdn.jsdelivr.net/npm/jev-swap@0.1.2/assets/banner.png" alt="jev-swap: find the decisions, see the savings live, swap to Jev" width="100%"></p>
 
 # jev-swap
 

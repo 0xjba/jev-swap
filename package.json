@@ -48,7 +48,7 @@
     "demo": "tsx src/cli.ts scan examples/demo-app && tsx src/cli.ts convert && tsx src/cli.ts shadow examples/samples.jsonl --mock",
     "demo:proxy": "node examples/proxy-demo/demo.mjs",
     "site": "python3 site/gen/build.py",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build && node scripts/pin-banner.mjs"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.128.0",
