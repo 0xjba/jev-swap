@@ -1,0 +1,7 @@
+# Git deployments serve only the static site in site/ (see vercel.json).
+/*
+!/site
+!/vercel.json
+/site/gen
+/site/.env*
+/site/.vercel
