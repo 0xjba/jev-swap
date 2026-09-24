@@ -7,7 +7,7 @@ import { promisify } from "node:util";
 import type { Candidate, DecisionField, ModelRef } from "../types.js";
 import { llmSdkCheck } from "./deps.js";
 import { DEFAULT_CODE_QUERIES, popularQueries, repoMeta, repoQueries, searchCode, searchRepos, type Fetch, type RepoMeta } from "./github.js";
-import { loadPrices, lookupPrice, type PriceTable } from "./prices.js";
+import { loadPricesFor, lookupPrice, type PriceTable } from "./prices.js";
 import { estimateTokens, staticTokens, type StaticTokens } from "./tokens.js";
 import { buildQuestions } from "../questions.js";
 
@@ -304,7 +304,7 @@ export async function scanRepo(repo: string, opts: ScanOptions, prices: PriceTab
 export async function scanQueue(out: string, opts: ScanOptions & { concurrency: number }) {
   const q = loadQueue(out);
   const optedOut = loadOptOut();
-  const prices = loadPrices();
+  const prices = loadPricesFor(out);
   const needsScan = (r: string) => {
     if (opts.rescan || !fs.existsSync(scanPath(out, r))) return true;
     const rec = JSON.parse(fs.readFileSync(scanPath(out, r), "utf8")) as ScanRecord;
@@ -473,7 +473,7 @@ const median = (xs: number[]) => {
 };
 
 export function buildDashboard(out: string, opts: { stateMin: number; stateMax: number; featuredMinStars: number; prices?: PriceTable }): Dashboard {
-  const prices = opts.prices ?? loadPrices();
+  const prices = opts.prices ?? loadPricesFor(out);
   const optedOut = loadOptOut();
   const q = loadQueue(out);
   const dir = path.join(out, "scans");

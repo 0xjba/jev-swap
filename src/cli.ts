@@ -8,7 +8,7 @@ import { scan } from "./scan.js";
 import { shadow } from "./shadow.js";
 import { startProxy } from "./proxy/server.js";
 import { addRepos, buildDashboard, discover, scanQueue } from "./oss/pipeline.js";
-import { fetchPrices, fetchSpeed, loadPrices, lookupPrice, savePrices } from "./oss/prices.js";
+import { fetchPrices, fetchSpeed, loadPricesFor, lookupPrice, savePrices } from "./oss/prices.js";
 import type { Candidate, SampleRow } from "./types.js";
 
 const num = (v: string) => {
@@ -32,6 +32,7 @@ const program = new Command()
 
 program
   .command("scan")
+  .description("Find LLM calls that only return a label, a yes/no or a small score; writes candidates.json.")
   .argument("[dir]", "project to scan (TS/JS and Python)", ".")
   .option("-o, --out <dir>", "output directory", "jev-swap-out")
   .action((dir: string, opts: { out: string }) => {
@@ -49,6 +50,7 @@ program
 
 program
   .command("convert")
+  .description("Write a Jev module per candidate (with a fallback to your current call) and a samples template.")
   .option("-o, --out <dir>", "output directory", "jev-swap-out")
   .action((opts: { out: string }) => {
     const files = convert(loadCandidates(opts.out), opts.out);
@@ -58,6 +60,7 @@ program
 
 program
   .command("shadow")
+  .description("Replay recorded calls through Jev: agreement, recommended threshold, latency and cost (REPORT.md).")
   .argument("<samples>", "JSONL of recorded calls: {candidate, state, llm, llm_usage?}")
   .option("-o, --out <dir>", "output directory", "jev-swap-out")
   .option("--mock", "use a simulated Jev (no API key needed)", false)
@@ -166,12 +169,13 @@ oss
 
 oss
   .command("prices")
-  .description("Refresh data/prices.json from OpenRouter: list prices for every model, and p50 latency/throughput for the models the dashboard uses.")
-  .option("-o, --out <dir>", "state directory (to find the models scanned repos use)", "oss-out")
+  .description("Refresh <out>/prices.json from OpenRouter: list prices for every model, and p50 latency/throughput for the models in use.")
+  .option("-o, --out <dir>", "state directory (prices are saved here; scanned repos tell which models need speed stats)", "oss-out")
   .action(async (opts: { out: string }) => {
-    let previous;
-    try { previous = loadPrices(); } catch { /* first run */ }
+    const previous = loadPricesFor(opts.out);
     const t = await fetchPrices(previous);
+    // Keep earlier speed stats for models not refreshed this time.
+    for (const [k, m] of Object.entries(previous.models)) if (m.speed && t.models[k]) t.models[k].speed = m.speed;
     // Speed stats live on each model's page, so fetch only the models the dashboard can use.
     const ref = JSON.parse(fs.readFileSync(new URL("../data/reference-models.json", import.meta.url), "utf8"));
     const wanted = new Set<string>(Object.values<string[]>(ref.families).flat());
@@ -191,8 +195,10 @@ oss
       if (sp) { t.models[k].speed = sp; got++; }
       await new Promise((r) => setTimeout(r, 400)); // be polite to openrouter.ai
     }
-    savePrices(t);
-    console.log(`Saved ${Object.keys(t.models).length} model prices from OpenRouter; speed stats for ${got} of ${wanted.size} models in use; Jev $${t.jev.in} in / $${t.jev.out} out per 1M (checked ${t.jev.checked}).`);
+    fs.mkdirSync(opts.out, { recursive: true });
+    const dest = path.join(opts.out, "prices.json");
+    savePrices(t, dest);
+    console.log(`Saved ${Object.keys(t.models).length} model prices from OpenRouter to ${dest}; speed stats refreshed for ${got} of ${wanted.size} models in use; Jev $${t.jev.in} in / $${t.jev.out} out per 1M (checked ${t.jev.checked}).`);
   });
 
 oss

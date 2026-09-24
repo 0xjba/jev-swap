@@ -28,7 +28,9 @@ proxy_m_svg, _ = scenes.hero_mobile()
 gate_svg, _ = scenes.gate()
 i_scan, i_conv, i_shadow = scenes.icon_scan(), scenes.icon_convert(), scenes.icon_shadow()
 
-prices = json.load(open(os.path.join(ROOT, "data", "prices.json")))
+# Prices refreshed by `oss prices` (oss-out/prices.json), else the snapshot bundled with the package.
+_local_prices = os.path.join(ROOT, "oss-out", "prices.json")
+prices = json.load(open(_local_prices if os.path.exists(_local_prices) else os.path.join(ROOT, "data", "prices.json")))
 JEV = prices["jev"]
 FETCHED = prices["fetchedAt"][:10]
 dash_path = os.path.join(ROOT, "oss-out", "dashboard.json")

@@ -1,4 +1,5 @@
 import fs from "node:fs";
+import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 /**
@@ -40,6 +41,12 @@ const JEV_PAGE = "https://openrouter.ai/typesafe/jev-1.13";
 
 export function loadPrices(p = PRICES_PATH): PriceTable {
   return JSON.parse(fs.readFileSync(p, "utf8"));
+}
+
+/** Prices refreshed by `oss prices` into the state directory, else the snapshot bundled with the package. */
+export function loadPricesFor(out: string): PriceTable {
+  const local = path.join(out, "prices.json");
+  return loadPrices(fs.existsSync(local) ? local : PRICES_PATH);
 }
 
 const vendorOf = (id: string) => id.split("/")[0];

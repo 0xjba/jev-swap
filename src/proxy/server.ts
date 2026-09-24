@@ -62,6 +62,8 @@ function readBody(req: http.IncomingMessage): Promise<Buffer> {
 }
 
 export function startProxy(candidates: Candidate[], o: ProxyOptions) {
+  // What users type: "localhost" for the loopback interface.
+  const shownHost = o.host === "127.0.0.1" || o.host === "::1" ? "localhost" : o.host;
   const byId = new Map(candidates.map((c) => [c.id, c]));
   const questions = new Map(candidates.map((c) => [c.id, buildQuestions(c)]));
   const expected = new Map<string, Record<string, unknown>>();
@@ -231,8 +233,8 @@ export function startProxy(candidates: Candidate[], o: ProxyOptions) {
       startedAt: started,
       pricesKnown: o.llmPriceIn !== undefined && o.llmPriceOut !== undefined,
       baseUrls: {
-        openai: `http://${o.host}:${o.port}/openai/v1`,
-        anthropic: `http://${o.host}:${o.port}/anthropic`,
+        openai: `http://${shownHost}:${o.port}/openai/v1`,
+        anthropic: `http://${shownHost}:${o.port}/anthropic`,
       },
       counters,
       totals: {
@@ -295,8 +297,8 @@ export function startProxy(candidates: Candidate[], o: ProxyOptions) {
 
   server.listen(o.port, o.host, () => {
     const s = snapshot();
-    console.log(`jev-swap proxy ${o.mock ? "(SIMULATED Jev) " : ""}listening on http://${o.host}:${o.port}`);
-    console.log(`\n  Dashboard:        http://${o.host}:${o.port}/`);
+    console.log(`jev-swap proxy ${o.mock ? "(SIMULATED Jev) " : ""}listening on http://${shownHost}:${o.port}`);
+    console.log(`\n  Dashboard:        http://${shownHost}:${o.port}/`);
     console.log(`  OPENAI_BASE_URL=${s.baseUrls.openai}`);
     console.log(`  ANTHROPIC_BASE_URL=${s.baseUrls.anthropic}`);
     console.log(`\n  Mirroring ${candidates.length} candidate(s). Recording samples to ${samplesPath}`);
