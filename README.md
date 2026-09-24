@@ -1,3 +1,5 @@
+<p align="center"><img src="https://raw.githubusercontent.com/0xjba/jev-swap/main/assets/banner.png" alt="jev-swap: find the decisions, swap them to Jev, prove it" width="100%"></p>
+
 # jev-swap
 
 Find LLM calls in a TypeScript/JavaScript or Python codebase that are really decisions, convert them to [TypeSafe Jev](https://docs.typesafe.ai), and shadow-test them on recorded traffic.
@@ -99,6 +101,7 @@ The pages are generated: edit `site/gen/` (`build.py` for copy, `layout.py` for 
 cd video && npm install
 OPENROUTER_API_KEY=... npm run voice   # only after editing narration.json
 npm run studio     # preview and edit
+npx remotion still src/index.ts Banner ../assets/banner.png --scale=2   # README banner
 npm run render     # -> video/out/jev-swap-launch.mp4 (web encode, ~12 Mbps; the grain makes a raw master very large)
 ```
 
