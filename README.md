@@ -4,6 +4,8 @@
 
 Find LLM calls in a TypeScript/JavaScript or Python codebase that are really decisions, convert them to [TypeSafe Jev](https://docs.typesafe.ai), and shadow-test them on recorded traffic.
 
+**Website:** [jev-swap.vercel.app](https://jev-swap.vercel.app) · **[Explorer](https://jev-swap.vercel.app/explorer)**: what open-source repos could save on Jev
+
 ```sh
 npx jev-swap scan ./your-app        # no install needed
 npm install -g jev-swap             # or install the `jev-swap` command
@@ -80,11 +82,11 @@ npx jev-swap oss build                   # price candidates -> oss-out/dashboard
 
 ## Website
 
-`site/` is a static site with no build step to serve it; deploy the folder to any static host (GitHub Pages, Netlify, Cloudflare Pages, Vercel):
+`site/` is a static site, live at [jev-swap.vercel.app](https://jev-swap.vercel.app). It has no server code: run `npm run site` to regenerate the pages, then `cd site && npx vercel deploy --prod` (the project is linked; `site/gen/` and env files are excluded by `site/.vercelignore`).
 
-- `index.html`: jev-swap itself: finding decision calls, their cost and speed on Jev, converting, and proving it.
-- `explorer.html`: the Explorer (what public repos could save), generated from `oss-out/dashboard.json` (raw data copied to `site/data/explorer.json`).
-- `proxy.html`: the shadow proxy.
+- `index.html` (`/`): jev-swap itself: finding decision calls, their cost and speed on Jev, converting, and proving it.
+- `explorer.html` (`/explorer`): the Explorer (what public repos could save), generated from `oss-out/dashboard.json` (raw data copied to `site/data/explorer.json`).
+- `proxy.html` (`/proxy`): the shadow proxy.
 
 The pages are generated: edit `site/gen/` (`build.py` for copy, `layout.py` for styles and navigation, `scenes.py` for the illustrations) and run `npm run site` after `oss prices` / `oss build`. Figures come from `data/prices.json` and the dashboard data, not hard-coded values. Preview on your network with `python3 -m http.server 8000 --bind 0.0.0.0 --directory site`, then open `http://<your machine's IP>:8000`.
 
