@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Shadow proxy — jev-swap</title>
+<meta name="description" content="Mirror live OpenAI and Anthropic traffic to TypeSafe Jev without changing your app, and compare answers, latency and cost on your real requests.">
+<meta name="theme-color" content="#19191B">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32' aria-hidden='true'%3E%3Crect x='7.5' y='3' width='18' height='9' rx='4.5' fill='none' stroke='%23ECEDEF' stroke-width='3.0'/%3E%3Ccircle class='sw-knob' cx='21' cy='7.5' r='2.9' fill='%23F386A1'/%3E%3Cpath d='M17 15.5V23.5Q17 29 11.5 29H9' fill='none' stroke='%23ECEDEF' stroke-width='3.6' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#19191B;color:#ECEDEF;font-family:"DM Sans","Helvetica Neue",Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:#F386A1}a:hover{color:#F9B3C5}
+input[type=range]{accent-color:#F386A1}
+input:focus-visible,button:focus-visible,a:focus-visible{outline:2px solid #F386A1;outline-offset:2px}
+::selection{background:#D45BB6;color:#FFFFFF}
+.mono{font-family:"JetBrains Mono",ui-monospace,Menlo,monospace}
+.wrap{padding:0 16px;background:#19191B}
+.frame{max-width:1280px;margin:0 auto;border-left:1px solid #2B2C30;border-right:1px solid #2B2C30;border-bottom:1px solid #2B2C30}
+.sec{padding:112px 48px;display:flex;flex-direction:column;gap:48px}
+.row{display:flex;flex-wrap:wrap;gap:40px 64px}
+.eyebrow{margin:0;font-family:"JetBrains Mono",ui-monospace,Menlo,monospace;font-size:13px;letter-spacing:.04em;color:#F386A1}
+.h1{margin:0;font-size:68px;font-weight:500;line-height:1.02;letter-spacing:-.035em;color:#ECEDEF;text-wrap:balance}
+.h2{margin:0;font-size:48px;font-weight:500;line-height:1.06;letter-spacing:-.03em;color:#ECEDEF;text-wrap:balance}
+.h3{margin:0;font-size:22px;font-weight:500;letter-spacing:-.01em;color:#ECEDEF}
+.body{margin:0;font-size:18px;line-height:1.65;color:#A1A3A9}
+.small{margin:0;font-size:13px;line-height:1.6;color:#8E9199}
+.pink{color:#F386A1}
+.panel{background:#111113;border:1px solid #2B2C30;border-radius:4px}
+.code{font-family:"JetBrains Mono",ui-monospace,Menlo,monospace;font-size:.88em;color:#FCD9E3}
+pre{margin:0;font-family:"JetBrains Mono",ui-monospace,Menlo,monospace;font-size:14px;line-height:1.8;white-space:pre-wrap;overflow-wrap:anywhere;color:#ECEDEF}
+.c-com{color:#7C7F87}.c-kw{color:#E3C07A}.c-str{color:#F386A1}
+.btn{display:inline-flex;align-items:center;gap:10px;min-height:44px;padding:0 20px;border-radius:3px;font-weight:500;font-size:15px;text-decoration:none;white-space:nowrap}
+.btn-fill{background:#DADCE1;color:#111113}.btn-fill:hover{background:#FFFFFF;color:#111113}
+.btn-line{border:1px solid #ECEDEF;color:#ECEDEF}.btn-line:hover{color:#FFFFFF;border-color:#FFFFFF}
+.btn-pink{background:#F386A1;color:#1E1E1E}.btn-pink:hover{background:#F9B3C5;color:#1E1E1E}
+.btn-dark{background:#111113;color:#ECEDEF}.btn-dark:hover{background:#000000;color:#FFFFFF}
+.kbd{display:inline-flex;width:22px;height:22px;background:#111113;color:#DADCE1;border-radius:2px;align-items:center;justify-content:center;font-family:"JetBrains Mono",ui-monospace,Menlo,monospace;font-size:12px}
+
+/* nav */
+.top{padding:16px 16px 0;background:#19191B}
+.nav{max-width:1280px;margin:0 auto;border:1px solid #2B2C30;display:flex;align-items:stretch}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:#ECEDEF;padding:14px 24px;border-right:1px solid #2B2C30}
+.wordmark{font-family:"JetBrains Mono",ui-monospace,Menlo,monospace;font-weight:600;font-size:17px;letter-spacing:-.02em;color:#ECEDEF}
+.wm-dim{color:#8E9199;font-weight:500}
+/* the logo's switch flips on once when the page loads */
+.brand .sw-knob{animation:swon .7s cubic-bezier(.3,.7,.25,1) .3s both}
+@keyframes swon{from{transform:translateX(-9px);fill:#6C6F77}60%{fill:#6C6F77}to{transform:translateX(0);fill:#F386A1}}
+@media (prefers-reduced-motion:reduce){.brand .sw-knob{animation:none}}
+.links{display:flex;align-items:center;gap:32px;padding:0 28px;flex:1 1 auto;font-size:15px;overflow-x:auto;white-space:nowrap;scrollbar-width:none}
+.links::-webkit-scrollbar{display:none}
+.links a{color:#C9CBD0;text-decoration:none;padding:14px 0}.links a:hover{color:#FFFFFF}
+.actions{display:flex;align-items:center;gap:10px;padding:8px 12px;border-left:1px solid #2B2C30}
+
+/* hero */
+.hero-head{padding:88px 48px 24px;align-items:flex-end;justify-content:space-between}
+.hero-copy{flex:1 1 560px;display:flex;flex-direction:column;gap:22px}
+.hero-side{flex:1 1 380px;max-width:460px;display:flex;flex-direction:column;gap:24px}
+.hero-art{padding:8px 32px 32px}
+.hero-art .m{display:none}
+.hero-foot{padding:0 48px 32px}
+
+/* facts */
+.facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}
+.fact{display:flex;flex-direction:column;gap:10px;padding:32px 28px;border-left:1px solid #2B2C30}
+.fact:first-child{border-left:0}
+.fact-big{font-family:"JetBrains Mono",ui-monospace,Menlo,monospace;font-size:34px;line-height:1;letter-spacing:-.02em;color:#ECEDEF}
+.fact-txt{font-size:15px;line-height:1.55;color:#A1A3A9}
+.fact-big.pink{color:#F386A1}
+.src{font-size:12px;color:#8E9199}
+.proof{display:flex;flex-wrap:wrap;align-items:center;gap:10px 12px}
+.pchip{font-size:15px;color:#C9CBD0;border:1px solid #3A3B40;border-radius:3px;padding:6px 12px}
+.pchip strong{font-family:"JetBrains Mono",ui-monospace,Menlo,monospace;color:#F386A1;font-weight:500;margin-right:4px}
+
+/* race */
+.race{padding:32px;display:flex;flex-direction:column;gap:30px}
+.lane{display:grid;grid-template-columns:110px minmax(0,1fr) 110px;gap:8px 20px;align-items:center}
+.lane-name{font-family:"JetBrains Mono",ui-monospace,Menlo,monospace;font-size:14px}
+.track{position:relative;height:12px;background:repeating-linear-gradient(90deg,#3A3B40 0 1px,transparent 1px 10%);border-top:1px dashed #3A3B40;margin-top:6px}
+.runner{position:absolute;top:-7px;left:0;width:12px;height:12px;border-radius:50%}
+.runner-llm{background:#FFFFFF;animation:rl 6s linear infinite}
+.runner-jev{background:#F386A1;box-shadow:0 0 12px rgba(243,134,161,.7);animation:rj 6s linear infinite}
+@keyframes rl{0%,5%{left:0}70%,100%{left:calc(100% - 12px)}}
+@keyframes rj{0%,5%{left:0}18%,100%{left:calc(100% - 12px)}}
+.flag{font-family:"JetBrains Mono",ui-monospace,Menlo,monospace;font-size:12px;text-align:center;padding:5px 0;border-radius:3px;opacity:.25}
+.flag-llm{border:1px solid #6B6E75;color:#ECEDEF;animation:fl 6s linear infinite}
+.flag-jev{border:1px solid #F386A1;color:#F386A1;background:#3A1E2C;animation:fj 6s linear infinite}
+@keyframes fl{0%,69%{opacity:.25}71%,94%{opacity:1}98%,100%{opacity:.25}}
+@keyframes fj{0%,17%{opacity:.25}19%,94%{opacity:1}98%,100%{opacity:.25}}
+.lane-note{grid-column:2 / 4;font-size:13px;color:#8E9199;margin:-2px 0 0}
+.costs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border:1px solid #2B2C30;border-radius:4px}
+.cost{padding:28px;display:flex;flex-direction:column;gap:10px;border-left:1px solid #2B2C30}
+.cost:first-child{border-left:0}
+.cost-big{font-family:"JetBrains Mono",ui-monospace,Menlo,monospace;font-size:34px;letter-spacing:-.02em;overflow-wrap:anywhere}
+.cost-hi{background:#3A1E2C}
+
+/* grids */
+.g3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.g2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.card{padding:28px;display:flex;flex-direction:column;gap:16px}
+.icon{height:150px;display:flex;align-items:center;justify-content:center}.icon>div{width:190px}
+.cmd{margin-top:auto;font-family:"JetBrains Mono",ui-monospace,Menlo,monospace;font-size:13px;color:#FCD9E3;background:#19191B;border:1px solid #2B2C30;padding:12px 14px;border-radius:3px;overflow-wrap:anywhere}
+
+/* calculator */
+.calc{display:flex;flex-wrap:wrap;gap:24px;align-items:stretch}
+.calc-in{flex:1 1 440px;padding:32px;display:flex;flex-direction:column;gap:22px}
+.calc-out{flex:1 1 440px;background:#111113;border:1px solid #D45BB6;border-radius:4px;padding:36px;display:flex;flex-direction:column;gap:28px}
+.field{display:flex;flex-direction:column;gap:8px;min-width:0}
+.lbl{font-size:15px;font-weight:500;color:#ECEDEF}
+.in{font-family:"JetBrains Mono",ui-monospace,Menlo,monospace;font-size:16px;padding:12px 14px;border:1px solid #3A3B40;border-radius:3px;background:#111113;color:#ECEDEF;width:100%;min-height:44px}
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chip{min-height:44px;padding:10px 14px;border-radius:3px;font-family:inherit;font-size:14px;cursor:pointer;border:1px solid #3A3B40;background:#111113;color:#ECEDEF}
+.chip[aria-pressed=true]{border-color:#F386A1;background:#3A1E2C;color:#FCD9E3}
+.save{font-family:"JetBrains Mono",ui-monospace,Menlo,monospace;font-size:60px;line-height:1;color:#F386A1;letter-spacing:-.03em;overflow-wrap:anywhere}
+.bar{height:12px;background:#26272B;border-radius:2px;overflow:hidden}
+.bar>div{height:100%}
+.bar-row{display:flex;justify-content:space-between;gap:12px;font-size:15px;color:#ECEDEF}
+
+/* report */
+.tbl-wrap{overflow-x:auto;min-width:0;max-width:100%}
+.sec>*{min-width:0}
+ul.clean li,.body,.small{overflow-wrap:anywhere}
+table{width:100%;border-collapse:collapse;font-family:"JetBrains Mono",ui-monospace,Menlo,monospace;font-size:14px;min-width:380px;font-variant-numeric:tabular-nums}
+th{padding:10px;font-weight:500;color:#A1A3A9;text-align:left}
+td{padding:11px 10px;color:#ECEDEF}
+tr{border-bottom:1px solid #2B2C30}
+tr.hi{background:#3A1E2C}tr.hi td:first-child{color:#FCD9E3}
+.tag{font-family:"JetBrains Mono",ui-monospace,Menlo,monospace;font-size:12px;color:#E3C07A;border:1px solid #5A4A26;padding:4px 10px;border-radius:3px}
+
+/* faq */
+.qa{border-top:1px solid #2B2C30;padding:26px 0;display:flex;flex-direction:column;gap:10px}
+.qa:last-child{border-bottom:1px solid #2B2C30}
+.q{margin:0;font-size:19px;font-weight:500;color:#ECEDEF}
+
+/* cta */
+.cta{background:#F386A1;padding:104px 48px;display:flex;flex-wrap:wrap;gap:48px;align-items:center}
+.cta .h2{color:#1E1E1E;font-size:54px}
+.cta pre{flex:1 1 440px;background:#111113;border-radius:4px;padding:28px;line-height:1.85}
+
+/* iso animations */
+.tile{fill:#3C3D42}
+.t-match{animation:tm 7s linear infinite}.t-mirror{animation:tmi 7s linear infinite}.t-compare{animation:tc 7s linear infinite}
+.t-latency{animation:tl 7s linear infinite}.t-cost{animation:tco 7s linear infinite}
+@keyframes tm{0%,10%{fill:#3C3D42}13%,17%{fill:#F386A1}21%,100%{fill:#3C3D42}}
+@keyframes tmi{0%,13%{fill:#3C3D42}15%,19%{fill:#F386A1}24%,100%{fill:#3C3D42}}
+@keyframes tc{0%,33%{fill:#3C3D42}35%,39%{fill:#F386A1}43%,59%{fill:#3C3D42}61%,66%{fill:#F386A1}70%,100%{fill:#3C3D42}}
+@keyframes tl{0%,61%{fill:#3C3D42}63%,69%{fill:#F386A1}73%,100%{fill:#3C3D42}}
+@keyframes tco{0%,63%{fill:#3C3D42}65%,71%{fill:#F386A1}75%,100%{fill:#3C3D42}}
+.slab{opacity:.38}
+.slab-jev{animation:sj 7s ease-out infinite}.slab-llm{animation:sl 7s ease-out infinite}
+.slab-agree{animation:sa 7s ease-out infinite}.slab-more{animation:sm 7s ease-out infinite}
+@keyframes sj{0%,33%{opacity:.38;transform:translateY(-14px)}37%,93%{opacity:1;transform:translateY(0)}98%,100%{opacity:.38;transform:translateY(-14px)}}
+@keyframes sl{0%,59%{opacity:.38;transform:translateY(-14px)}63%,93%{opacity:1;transform:translateY(0)}98%,100%{opacity:.38;transform:translateY(-14px)}}
+@keyframes sa{0%,63%{opacity:.38;transform:translateY(-14px)}67%,93%{opacity:1;transform:translateY(0)}98%,100%{opacity:.38;transform:translateY(-14px)}}
+@keyframes sm{0%,66%{opacity:.38;transform:translateY(-14px)}70%,93%{opacity:1;transform:translateY(0)}98%,100%{opacity:.38;transform:translateY(-14px)}}
+.scanline{animation:scan 3s ease-in-out infinite}
+@keyframes scan{0%,100%{transform:translateY(22px)}50%{transform:translateY(-22px)}}
+
+/* tablet */
+@media (max-width:900px){
+.sec{padding:80px 28px;gap:40px}
+.hero-head{padding:64px 28px 16px}
+.hero-art{padding:8px 16px 24px}
+.hero-foot{padding:0 28px 28px}
+.h1{font-size:52px}
+.h2{font-size:38px}
+.facts{grid-template-columns:repeat(2,minmax(0,1fr))}
+.fact:nth-child(3){border-left:0}
+.fact:nth-child(n+3){border-top:1px solid #2B2C30}
+.g3,.g2{grid-template-columns:minmax(0,1fr)}
+.costs{grid-template-columns:minmax(0,1fr)}
+.cost{border-left:0;border-top:1px solid #2B2C30}.cost:first-child{border-top:0}
+.cta{padding:80px 28px}.cta .h2{font-size:42px}
+.links{gap:24px;padding:0 20px}
+.actions .btn-line{display:none}
+}
+/* phone */
+@media (max-width:560px){
+.top{padding:10px 10px 0}
+.wrap{padding:0 10px}
+.nav{flex-wrap:wrap}
+.brand{padding:12px 16px;flex:1 1 auto;border-right:0}
+.actions{border-left:0;padding:6px 8px}
+.links{order:3;flex:1 1 100%;border-top:1px solid #2B2C30;padding:0 16px;gap:22px}
+.sec{padding:64px 20px;gap:32px}
+.hero-head{padding:48px 20px 8px;gap:24px}
+.hero-copy,.hero-side{flex-basis:100%}
+.hero-art{padding:8px 4px 16px}
+.hero-art .d{display:none}.hero-art .m{display:block}
+.hero-foot{padding:0 20px 24px}
+.h1{font-size:40px}
+.h2{font-size:31px}
+.body{font-size:17px}
+.facts{grid-template-columns:minmax(0,1fr)}
+.fact{border-left:0;border-top:1px solid #2B2C30;padding:24px 20px}.fact:first-child{border-top:0}
+.fact-big{font-size:30px}
+.race{padding:22px 18px}
+.lane{grid-template-columns:minmax(0,1fr) 92px;gap:10px 14px}
+.lane-name{grid-column:1 / 3}
+.lane .track{grid-column:1 / 2}
+.lane-note{grid-column:1 / 3}
+.cost{padding:22px 20px}.cost-big{font-size:28px}
+.calc-in,.calc-out{padding:22px 18px}
+.save{font-size:40px}
+pre{font-size:12.5px}
+.cta{padding:64px 20px}.cta .h2{font-size:32px}
+.cta pre{padding:20px}
+.btn{padding:0 16px}
+}
+@media (prefers-reduced-motion:reduce){
+.pulse{animation:none!important;opacity:0}
+.tile,.slab,.scanline,.runner,.flag{animation:none!important}
+.slab,.flag{opacity:1}
+.runner{left:calc(100% - 12px)!important}
+}
+
+/* page nav */
+.links a[aria-current=page]{color:#FFFFFF;box-shadow:inset 0 -2px 0 #F386A1}
+.foot-links{display:flex;flex-wrap:wrap;gap:12px 28px;font-size:15px}
+.foot-links a{color:#ECEDEF;text-decoration:none}.foot-links a:hover{color:#F386A1}
+.credit{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 24px;padding-top:18px;border-top:1px solid #2B2C30;color:#ECEDEF;font-size:15px}
+.heart{vertical-align:-2px;margin:0 2px}
+/* teasers */
+.stat-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border:1px solid #2B2C30;border-radius:4px}
+.stat{padding:24px;display:flex;flex-direction:column;gap:8px;border-left:1px solid #2B2C30}.stat:first-child{border-left:0}
+.stat-big{font-family:"JetBrains Mono",ui-monospace,Menlo,monospace;font-size:32px;letter-spacing:-.02em;color:#ECEDEF}
+.trailer{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,420px);gap:40px;align-items:center}
+/* explorer */
+.g-repos{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.rc{padding:22px;display:flex;flex-direction:column;gap:18px}
+.rc-head{display:flex;align-items:center;gap:12px;min-width:0}
+.av{width:40px;height:40px;border-radius:6px;background:#26272B;flex:none}
+.av-s{width:22px;height:22px;border-radius:4px;vertical-align:middle;margin-right:10px}
+.rc-id{display:flex;flex-direction:column;gap:2px;min-width:0}
+.rc-name{font-family:"JetBrains Mono",ui-monospace,Menlo,monospace;font-size:16px;font-weight:600;color:#ECEDEF;text-decoration:none;overflow-wrap:anywhere}
+.rc-name:hover{color:#F386A1}.rc-owner{color:#8E9199;font-weight:400}
+.meta{font-family:"JetBrains Mono",ui-monospace,Menlo,monospace;font-size:12px;color:#8E9199}
+.rc-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border:1px solid #2B2C30;border-radius:4px}
+.rc-stats>div{padding:12px 14px;display:flex;flex-direction:column;gap:2px;border-left:1px solid #2B2C30}.rc-stats>div:first-child{border-left:0}
+.rc-big{font-family:"JetBrains Mono",ui-monospace,Menlo,monospace;font-size:24px;letter-spacing:-.02em;color:#ECEDEF}
+.rc-lbl{font-size:12px;color:#8E9199}
+.cls{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:14px}
+.cl{display:flex;flex-direction:column;gap:6px}
+.cl-top{display:flex;justify-content:space-between;align-items:center;gap:10px;min-width:0}
+.cl-file{font-family:"JetBrains Mono",ui-monospace,Menlo,monospace;font-size:13px;color:#ECEDEF;text-decoration:none;overflow-wrap:anywhere;min-width:0}
+.cl-file:hover{color:#F386A1}.cl-line{color:#8E9199}
+.cl-badges{display:flex;gap:4px;flex:none}
+.dt{font-family:"JetBrains Mono",ui-monospace,Menlo,monospace;font-size:10.5px;line-height:1;padding:4px 6px;border-radius:3px;border:1px solid #3A3B40;color:#C9CBD0;cursor:help}
+.dt-choice{border-color:#5A3E6B;color:#E0B8F0}.dt-noul{border-color:#2F5A4A;color:#9FE0C2}.dt-score{border-color:#5A4A26;color:#E3C07A}
+.cl-bar{height:6px;background:#26272B;border-radius:3px;overflow:hidden}
+.cl-bar>span{display:block;height:100%;border-radius:3px}
+.cl-bar>.cheaper{background:#F386A1}.cl-bar>.same{background:#E3C07A}
+.cl-meta{display:flex;justify-content:space-between;align-items:baseline;gap:10px;font-size:12.5px;color:#8E9199}
+.cl-vs{display:flex;flex-wrap:wrap;align-items:center;gap:6px;min-width:0;overflow-wrap:anywhere}
+.rt{font-family:"JetBrains Mono",ui-monospace,Menlo,monospace;font-size:10.5px;padding:2px 5px;border-radius:3px;background:#26272B;color:#A1A3A9;cursor:help}
+.cl-figs{display:flex;gap:10px;flex:none;font-family:"JetBrains Mono",ui-monospace,Menlo,monospace}
+.cl-pct{font-family:"JetBrains Mono",ui-monospace,Menlo,monospace;font-size:13px}
+.cl-pct.cheaper{color:#F386A1}.cl-pct.same{color:#E3C07A}.cl-pct.none{color:#8E9199}
+.cl-x{font-size:13px;color:#ECEDEF}
+.more summary{cursor:pointer;font-size:13px;color:#A1A3A9;list-style:none;padding:4px 0}
+.more summary::-webkit-details-marker{display:none}
+.more summary::before{content:"+ ";color:#F386A1}.more[open] summary::before{content:"− "}
+.more .cls{margin-top:12px}
+.tools{display:flex;flex-wrap:wrap;gap:16px 32px;align-items:flex-end}
+.filter{flex:1 1 260px;max-width:360px}
+.seg{display:flex;gap:6px;flex-wrap:wrap}
+.trepo{display:inline-flex;align-items:center;color:#ECEDEF;text-decoration:none}.trepo:hover{color:#F386A1}
+.all-table td,.all-table th{white-space:nowrap;vertical-align:middle}
+.all-table .num{text-align:right;font-variant-numeric:tabular-nums}
+th.num,td.num{text-align:right;font-variant-numeric:tabular-nums}
+td.pink{color:#F386A1}
+.tsave{display:flex;align-items:center;gap:10px;min-width:160px}.tsave .cl-bar{flex:1 1 auto;min-width:80px}
+.formula{font-family:"JetBrains Mono",ui-monospace,Menlo,monospace;font-size:13.5px;color:#FCD9E3;background:#111113;border:1px solid #2B2C30;border-radius:3px;padding:12px 14px;overflow-x:auto;white-space:pre}
+ul.clean{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:10px;color:#A1A3A9;font-size:16px;line-height:1.6}
+@media (max-width:900px){
+.stat-row{grid-template-columns:repeat(2,minmax(0,1fr))}
+.stat:nth-child(3){border-left:0}.stat:nth-child(n+3){border-top:1px solid #2B2C30}
+.trailer{grid-template-columns:minmax(0,1fr)}
+.g-repos{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:560px){
+.stat-row{grid-template-columns:minmax(0,1fr)}
+.stat{border-left:0;border-top:1px solid #2B2C30}.stat:first-child{border-top:0}
+.stat-big{font-size:28px}
+.rc{padding:16px}.rc-big{font-size:20px}.rc-stats>div{padding:10px}
+}
+@keyframes pk1{0%{stroke-dashoffset:0px;opacity:0}50%{stroke-dashoffset:0px;opacity:0}50.01%{stroke-dashoffset:0px;opacity:1}60%{stroke-dashoffset:-94.0px;opacity:1}60.01%{stroke-dashoffset:-94.0px;opacity:0}100%{stroke-dashoffset:-94.0px;opacity:0}}.pk1{stroke-dasharray:0.01px 134.0px;animation:pk1 6s linear infinite}@keyframes pk2{0%{stroke-dashoffset:0px;opacity:0}50%{stroke-dashoffset:0px;opacity:0}50.01%{stroke-dashoffset:0px;opacity:1}60%{stroke-dashoffset:-94.0px;opacity:1}60.01%{stroke-dashoffset:-94.0px;opacity:0}100%{stroke-dashoffset:-94.0px;opacity:0}}.pk2{stroke-dasharray:0.01px 134.0px;animation:pk2 6s linear infinite}@keyframes pk3{0%{stroke-dashoffset:0px;opacity:0}50%{stroke-dashoffset:0px;opacity:0}50.01%{stroke-dashoffset:0px;opacity:1}60%{stroke-dashoffset:-94.0px;opacity:1}60.01%{stroke-dashoffset:-94.0px;opacity:0}100%{stroke-dashoffset:-94.0px;opacity:0}}.pk3{stroke-dasharray:0.01px 134.0px;animation:pk3 6s linear infinite}@keyframes pk4{0%{stroke-dashoffset:0px;opacity:0}62%{stroke-dashoffset:0px;opacity:0}62.01%{stroke-dashoffset:0px;opacity:1}74%{stroke-dashoffset:-163.0px;opacity:1}74.01%{stroke-dashoffset:-163.0px;opacity:0}100%{stroke-dashoffset:-163.0px;opacity:0}}.pk4{stroke-dasharray:0.01px 203.0px;animation:pk4 6s linear infinite}@keyframes pk5{0%{stroke-dashoffset:0px;opacity:0}62%{stroke-dashoffset:0px;opacity:0}62.01%{stroke-dashoffset:0px;opacity:1}74%{stroke-dashoffset:-90.0px;opacity:1}74.01%{stroke-dashoffset:-90.0px;opacity:0}100%{stroke-dashoffset:-90.0px;opacity:0}}.pk5{stroke-dasharray:0.01px 130.0px;animation:pk5 6s linear infinite}@keyframes pk6{0%{stroke-dashoffset:0px;opacity:0}62%{stroke-dashoffset:0px;opacity:0}62.01%{stroke-dashoffset:0px;opacity:1}74%{stroke-dashoffset:-161.0px;opacity:1}74.01%{stroke-dashoffset:-161.0px;opacity:0}100%{stroke-dashoffset:-161.0px;opacity:0}}.pk6{stroke-dasharray:0.01px 201.0px;animation:pk6 6s linear infinite}@keyframes fd1{0%,8.0%{fill:#3C3D42}9.5%,90%{fill:#F386A1}96%,100%{fill:#3C3D42}}.fd1{animation:fd1 6s linear infinite}@keyframes fd2{0%,33.3%{fill:#3C3D42}34.8%,90%{fill:#F386A1}96%,100%{fill:#3C3D42}}.fd2{animation:fd2 6s linear infinite}@keyframes fd3{0%,20.7%{fill:#3C3D42}22.2%,90%{fill:#F386A1}96%,100%{fill:#3C3D42}}.fd3{animation:fd3 6s linear infinite}@keyframes fd4{0%,20.7%{fill:#3C3D42}22.2%,90%{fill:#F386A1}96%,100%{fill:#3C3D42}}.fd4{animation:fd4 6s linear infinite}@keyframes fd5{0%,46.0%{fill:#3C3D42}47.5%,90%{fill:#F386A1}96%,100%{fill:#3C3D42}}.fd5{animation:fd5 6s linear infinite}@keyframes pk7{0%{stroke-dashoffset:0px;opacity:1}10%{stroke-dashoffset:-156.0px;opacity:1}10.01%{stroke-dashoffset:-156.0px;opacity:0}100%{stroke-dashoffset:-156.0px;opacity:0}}.pk7{stroke-dasharray:0.01px 196.0px;animation:pk7 6s linear infinite}@keyframes beam{0%,7%{transform:translate(0px,0px);opacity:0}8%{opacity:1}46%{transform:translate(271.9px,157.0px);opacity:1}48%,100%{transform:translate(271.9px,157.0px);opacity:0}}.beam{animation:beam 6s linear infinite}@keyframes pk8{0%{stroke-dashoffset:0px;opacity:0}48%{stroke-dashoffset:0px;opacity:0}48.01%{stroke-dashoffset:0px;opacity:1}56%{stroke-dashoffset:-160.0px;opacity:1}56.01%{stroke-dashoffset:-160.0px;opacity:0}100%{stroke-dashoffset:-160.0px;opacity:0}}.pk8{stroke-dasharray:0.01px 200.0px;animation:pk8 6s linear infinite}@keyframes pk9{0%{stroke-dashoffset:0px;opacity:0}56%{stroke-dashoffset:0px;opacity:0}56.01%{stroke-dashoffset:0px;opacity:1}64%{stroke-dashoffset:-50.0px;opacity:1}64.01%{stroke-dashoffset:-50.0px;opacity:0}100%{stroke-dashoffset:-50.0px;opacity:0}}.pk9{stroke-dasharray:0.01px 90.0px;animation:pk9 6s linear infinite}@keyframes pk10{0%{stroke-dashoffset:0px;opacity:0}64%{stroke-dashoffset:0px;opacity:0}64.01%{stroke-dashoffset:0px;opacity:1}72%{stroke-dashoffset:-50.0px;opacity:1}72.01%{stroke-dashoffset:-50.0px;opacity:0}100%{stroke-dashoffset:-50.0px;opacity:0}}.pk10{stroke-dasharray:0.01px 90.0px;animation:pk10 6s linear infinite}@keyframes pk11{0%{stroke-dashoffset:0px;opacity:0}72%{stroke-dashoffset:0px;opacity:0}72.01%{stroke-dashoffset:0px;opacity:1}80%{stroke-dashoffset:-34.0px;opacity:1}80.01%{stroke-dashoffset:-34.0px;opacity:0}100%{stroke-dashoffset:-34.0px;opacity:0}}.pk11{stroke-dasharray:0.01px 74.0px;animation:pk11 6s linear infinite}@keyframes fd6{0%,8.0%{fill:#3C3D42}9.5%,90%{fill:#F386A1}96%,100%{fill:#3C3D42}}.fd6{animation:fd6 6s linear infinite}@keyframes fd7{0%,14.9%{fill:#3C3D42}16.4%,90%{fill:#F386A1}96%,100%{fill:#3C3D42}}.fd7{animation:fd7 6s linear infinite}@keyframes fd8{0%,25.3%{fill:#3C3D42}26.8%,90%{fill:#F386A1}96%,100%{fill:#3C3D42}}.fd8{animation:fd8 6s linear infinite}@keyframes fd9{0%,39.1%{fill:#3C3D42}40.6%,90%{fill:#F386A1}96%,100%{fill:#3C3D42}}.fd9{animation:fd9 6s linear infinite}@keyframes fd10{0%,46.0%{fill:#3C3D42}47.5%,90%{fill:#F386A1}96%,100%{fill:#3C3D42}}.fd10{animation:fd10 6s linear infinite}@keyframes pk12{0%{stroke-dashoffset:0px;opacity:1}10%{stroke-dashoffset:-138.0px;opacity:1}10.01%{stroke-dashoffset:-138.0px;opacity:0}100%{stroke-dashoffset:-138.0px;opacity:0}}.pk12{stroke-dasharray:0.01px 178.0px;animation:pk12 6s linear infinite}@keyframes beamm{0%,7%{transform:translate(0px,0px);opacity:0}8%{opacity:1}46%{transform:translate(180.1px,104.0px);opacity:1}48%,100%{transform:translate(180.1px,104.0px);opacity:0}}.beam-m{animation:beamm 6s linear infinite}@keyframes pk13{0%{stroke-dashoffset:0px;opacity:1}14%{stroke-dashoffset:-162.0px;opacity:1}14.01%{stroke-dashoffset:-162.0px;opacity:0}100%{stroke-dashoffset:-162.0px;opacity:0}}.pk13{stroke-dasharray:0.01px 202.0px;animation:pk13 7s linear infinite}@keyframes pk14{0%{stroke-dashoffset:0px;opacity:0}14%{stroke-dashoffset:0px;opacity:0}14.01%{stroke-dashoffset:0px;opacity:1}22%{stroke-dashoffset:-376.0px;opacity:1}22.01%{stroke-dashoffset:-376.0px;opacity:0}100%{stroke-dashoffset:-376.0px;opacity:0}}.pk14{stroke-dasharray:0.01px 416.0px;animation:pk14 7s linear infinite}@keyframes pk15{0%{stroke-dashoffset:0px;opacity:0}22%{stroke-dashoffset:0px;opacity:0}22.01%{stroke-dashoffset:0px;opacity:1}34%{stroke-dashoffset:-610.0px;opacity:1}34.01%{stroke-dashoffset:-610.0px;opacity:0}100%{stroke-dashoffset:-610.0px;opacity:0}}.pk15{stroke-dasharray:0.01px 650.0px;animation:pk15 7s linear infinite}@keyframes pk16{0%{stroke-dashoffset:0px;opacity:0}14%{stroke-dashoffset:0px;opacity:0}14.01%{stroke-dashoffset:0px;opacity:1}60%{stroke-dashoffset:-466.0px;opacity:1}60.01%{stroke-dashoffset:-466.0px;opacity:0}100%{stroke-dashoffset:-466.0px;opacity:0}}.pk16{stroke-dasharray:0.01px 506.0px;animation:pk16 7s linear infinite}@keyframes pk17{0%{stroke-dashoffset:0px;opacity:0}60%{stroke-dashoffset:0px;opacity:0}60.01%{stroke-dashoffset:0px;opacity:1}86%{stroke-dashoffset:-1312.0px;opacity:1}86.01%{stroke-dashoffset:-1312.0px;opacity:0}100%{stroke-dashoffset:-1312.0px;opacity:0}}.pk17{stroke-dasharray:0.01px 1352.0px;animation:pk17 7s linear infinite}@keyframes pk18{0%{stroke-dashoffset:0px;opacity:1}12%{stroke-dashoffset:-214.0px;opacity:1}12.01%{stroke-dashoffset:-214.0px;opacity:0}100%{stroke-dashoffset:-214.0px;opacity:0}}.pk18{stroke-dasharray:0.01px 254.0px;animation:pk18 7s linear infinite}@keyframes pk19{0%{stroke-dashoffset:0px;opacity:0}64%{stroke-dashoffset:0px;opacity:0}64.01%{stroke-dashoffset:0px;opacity:1}76%{stroke-dashoffset:-214.0px;opacity:1}76.01%{stroke-dashoffset:-214.0px;opacity:0}100%{stroke-dashoffset:-214.0px;opacity:0}}.pk19{stroke-dasharray:0.01px 254.0px;animation:pk19 7s linear infinite}@keyframes pk20{0%{stroke-dashoffset:0px;opacity:0}12%{stroke-dashoffset:0px;opacity:0}12.01%{stroke-dashoffset:0px;opacity:1}20%{stroke-dashoffset:-126.0px;opacity:1}20.01%{stroke-dashoffset:-126.0px;opacity:0}100%{stroke-dashoffset:-126.0px;opacity:0}}.pk20{stroke-dasharray:0.01px 166.0px;animation:pk20 7s linear infinite}@keyframes pk21{0%{stroke-dashoffset:0px;opacity:0}20%{stroke-dashoffset:0px;opacity:0}20.01%{stroke-dashoffset:0px;opacity:1}28%{stroke-dashoffset:-126.0px;opacity:1}28.01%{stroke-dashoffset:-126.0px;opacity:0}100%{stroke-dashoffset:-126.0px;opacity:0}}.pk21{stroke-dasharray:0.01px 166.0px;animation:pk21 7s linear infinite}@keyframes pk22{0%{stroke-dashoffset:0px;opacity:0}12%{stroke-dashoffset:0px;opacity:0}12.01%{stroke-dashoffset:0px;opacity:1}52%{stroke-dashoffset:-126.0px;opacity:1}52.01%{stroke-dashoffset:-126.0px;opacity:0}100%{stroke-dashoffset:-126.0px;opacity:0}}.pk22{stroke-dasharray:0.01px 166.0px;animation:pk22 7s linear infinite}@keyframes pk23{0%{stroke-dashoffset:0px;opacity:0}52%{stroke-dashoffset:0px;opacity:0}52.01%{stroke-dashoffset:0px;opacity:1}64%{stroke-dashoffset:-126.0px;opacity:1}64.01%{stroke-dashoffset:-126.0px;opacity:0}100%{stroke-dashoffset:-126.0px;opacity:0}}.pk23{stroke-dasharray:0.01px 166.0px;animation:pk23 7s linear infinite}@keyframes pk24{0%{stroke-dashoffset:0px;opacity:1}18%{stroke-dashoffset:-114.0px;opacity:1}18.01%{stroke-dashoffset:-114.0px;opacity:0}50%{stroke-dashoffset:0px;opacity:0}50.01%{stroke-dashoffset:0px;opacity:1}68%{stroke-dashoffset:-114.0px;opacity:1}68.01%{stroke-dashoffset:-114.0px;opacity:0}100%{stroke-dashoffset:-114.0px;opacity:0}}.pk24{stroke-dasharray:0.01px 154.0px;animation:pk24 8s linear infinite}@keyframes pk25{0%{stroke-dashoffset:0px;opacity:0}18%{stroke-dashoffset:0px;opacity:0}18.01%{stroke-dashoffset:0px;opacity:1}36%{stroke-dashoffset:-114.0px;opacity:1}36.01%{stroke-dashoffset:-114.0px;opacity:0}100%{stroke-dashoffset:-114.0px;opacity:0}}.pk25{stroke-dasharray:0.01px 154.0px;animation:pk25 8s linear infinite}@keyframes pk26{0%{stroke-dashoffset:0px;opacity:0}68%{stroke-dashoffset:0px;opacity:0}68.01%{stroke-dashoffset:0px;opacity:1}90%{stroke-dashoffset:-114.0px;opacity:1}90.01%{stroke-dashoffset:-114.0px;opacity:0}100%{stroke-dashoffset:-114.0px;opacity:0}}.pk26{stroke-dasharray:0.01px 154.0px;animation:pk26 8s linear infinite}@keyframes pk27{0%{stroke-dashoffset:0px;opacity:0}10%{stroke-dashoffset:0px;opacity:0}10.01%{stroke-dashoffset:0px;opacity:1}60%{stroke-dashoffset:-102.0px;opacity:1}60.01%{stroke-dashoffset:-102.0px;opacity:0}100%{stroke-dashoffset:-102.0px;opacity:0}}.pk27{stroke-dasharray:0.01px 142.0px;animation:pk27 3s linear infinite}@keyframes pk28{0%{stroke-dashoffset:0px;opacity:0}10%{stroke-dashoffset:0px;opacity:0}10.01%{stroke-dashoffset:0px;opacity:1}60%{stroke-dashoffset:-34.0px;opacity:1}60.01%{stroke-dashoffset:-34.0px;opacity:0}100%{stroke-dashoffset:-34.0px;opacity:0}}.pk28{stroke-dasharray:0.01px 74.0px;animation:pk28 3s linear infinite}</style>
+</head>
+<body>
+<header class="top"><nav class="nav" aria-label="Main">
+<a class="brand" href="index.html"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 32 32" aria-hidden="true"><rect x="7.5" y="3" width="18" height="9" rx="4.5" fill="none" stroke="#ECEDEF" stroke-width="2.2"/><circle class="sw-knob" cx="21" cy="7.5" r="2.9" fill="#F386A1"/><path d="M17 15.5V23.5Q17 29 11.5 29H9" fill="none" stroke="#ECEDEF" stroke-width="2.8" stroke-linecap="round"/></svg><span class="wordmark">jev<span class="wm-dim">-swap</span></span></a>
+<div class="links"><a href="explorer.html">Explorer</a><a href="proxy.html" aria-current="page">Shadow proxy</a></div>
+<div class="actions"><a class="btn btn-line" href="https://github.com/0xjba/jev-swap">GitHub</a><a class="btn btn-fill" href="https://www.npmjs.com/package/jev-swap">npm</a></div>
+</nav></header>
+<section class="wrap" id="top"><div class="frame"><div class="row hero-head">
+<div class="hero-copy"><p class="eyebrow">// jev-swap shadow proxy</p>
+<h1 class="h1">Mirror live traffic to Jev. <span class="pink">Change nothing.</span></h1></div>
+<div class="hero-side"><p class="body">A local proxy between your app and OpenAI or Anthropic. Every request is forwarded unchanged; decision calls are also sent to Jev in parallel, and a live dashboard shows how the two compare on your real traffic.</p>
+<div class="row" style="gap: 12px;"><a class="btn btn-fill" href="#run"><span class="kbd" aria-hidden="true">&gt;</span>Run the proxy</a><a class="btn btn-line" href="#measures">What it measures</a></div>
+<p class="small">Runs on your machine. Your traffic never goes anywhere it doesn&#39;t already go, plus Jev.</p></div>
+</div>
+<div class="hero-art"><div class="d"><svg class="iso hero-iso" viewBox="-489.8 -152 1117.1 811" role="img" aria-label="Your app sends its LLM call through the jev-swap shadow proxy. The proxy forwards it unchanged to your LLM and mirrors it to Jev in parallel, then compares the two answers, their latency and their cost." style="display: block; width: 100%; height: auto;" xmlns="http://www.w3.org/2000/svg"><path d="M-311.8 239 L-171.5 158" fill="none" stroke="#8E9199" stroke-opacity="0.8" stroke-width="1.2"></path><path class="pulse pk13" d="M-311.8 239 L-171.5 158" fill="none" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round"></path><path d="M178.4 154 L284.1 215 L504 88" fill="none" stroke="#F386A1" stroke-opacity="0.8" stroke-width="1.2"></path><path class="pulse pk14" d="M178.4 154 L284.1 215 L504 88" fill="none" stroke="#F386A1" stroke-width="6" stroke-linecap="round"></path><path d="M552.5 88 L599.3 115 L294.4 291 L117.8 189" fill="none" stroke="#F386A1" stroke-opacity="0.8" stroke-width="1.2" stroke-dasharray="4 5"></path><path class="pulse pk15" d="M552.5 88 L599.3 115 L294.4 291 L117.8 189" fill="none" stroke="#F386A1" stroke-width="6" stroke-linecap="round"></path><path d="M57.2 224 L370.7 405 L460.7 353" fill="none" stroke="#8E9199" stroke-opacity="0.8" stroke-width="1.2"></path><path class="pulse pk16" d="M57.2 224 L370.7 405 L460.7 353" fill="none" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round"></path><path d="M509.2 353 L564.6 385 L138.6 631 L-426.1 305 L-336 253" fill="none" stroke="#8E9199" stroke-opacity="0.8" stroke-width="1.2" stroke-dasharray="4 5"></path><path class="pulse pk17" d="M509.2 353 L564.6 385 L138.6 631 L-426.1 305 L-336 253" fill="none" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round"></path><g class="slab slab-agree"><polygon points="24.2,182 -77.9,241 -77.9,233 24.2,174" fill="#0B0B0C" stroke="rgba(236,237,239,0.14)" stroke-width="1" stroke-linejoin="round"></polygon><polygon points="-180.1,182 -77.9,241 -77.9,233 -180.1,174" fill="#0D0D0F" stroke="rgba(236,237,239,0.14)" stroke-width="1" stroke-linejoin="round"></polygon><polygon points="-77.9,115 24.2,174 -77.9,233 -180.1,174" fill="#141416" stroke="rgba(236,237,239,0.14)" stroke-width="1" stroke-linejoin="round"></polygon><text transform="matrix(0.8660 0.5 -0.8660 0.5 -152.4 170)" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="10" font-weight="400" fill="#ECEDEF" text-anchor="start">agree</text><text transform="matrix(0.8660 0.5 -0.8660 0.5 -162.8 176)" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="8.5" font-weight="400" fill="#8E9199" text-anchor="start">same label: billing</text></g><g class="slab slab-more"><polygon points="34.6,180 136.8,239 34.6,298 -67.5,239" fill="none" stroke="#6C6F77" stroke-width="1" stroke-linejoin="round" stroke-dasharray="4 4"></polygon><text transform="matrix(0.8660 0.5 -0.8660 0.5 -39.8 235)" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="10" font-weight="400" fill="#8E9199" text-anchor="start">+ latency, cost</text><text transform="matrix(0.8660 0.5 -0.8660 0.5 -50.2 241)" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="8.5" font-weight="400" fill="#8E9199" text-anchor="start">per call, per field</text></g><g class="slab slab-llm"><polygon points="-88.3,247 -190.5,306 -190.5,298 -88.3,239" fill="#0B0B0C" stroke="rgba(236,237,239,0.14)" stroke-width="1" stroke-linejoin="round"></polygon><polygon points="-292.7,247 -190.5,306 -190.5,298 -292.7,239" fill="#0D0D0F" stroke="rgba(236,237,239,0.14)" stroke-width="1" stroke-linejoin="round"></polygon><polygon points="-190.5,180 -88.3,239 -190.5,298 -292.7,239" fill="#141416" stroke="rgba(236,237,239,0.14)" stroke-width="1" stroke-linejoin="round"></polygon><text transform="matrix(0.8660 0.5 -0.8660 0.5 -265 235)" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="10" font-weight="400" fill="#ECEDEF" text-anchor="start">llm answer</text><text transform="matrix(0.8660 0.5 -0.8660 0.5 -275.4 241)" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="8.5" font-weight="400" fill="#8E9199" text-anchor="start">billing</text></g><g class="slab slab-jev"><polygon points="24.2,312 -77.9,371 -77.9,363 24.2,304" fill="#0B0B0C" stroke="rgba(236,237,239,0.14)" stroke-width="1" stroke-linejoin="round"></polygon><polygon points="-180.1,312 -77.9,371 -77.9,363 -180.1,304" fill="#0D0D0F" stroke="rgba(236,237,239,0.14)" stroke-width="1" stroke-linejoin="round"></polygon><polygon points="-77.9,245 24.2,304 -77.9,363 -180.1,304" fill="#141416" stroke="rgba(236,237,239,0.14)" stroke-width="1" stroke-linejoin="round"></polygon><text transform="matrix(0.8660 0.5 -0.8660 0.5 -152.4 300)" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="10" font-weight="400" fill="#F386A1" text-anchor="start">jev answer</text><text transform="matrix(0.8660 0.5 -0.8660 0.5 -162.8 306)" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="8.5" font-weight="400" fill="#8E9199" text-anchor="start">billing · conf 0.94</text></g><polygon points="230.4,133 0,266 0,248 230.4,115" fill="#A8428F" stroke="rgba(243,134,161,0.55)" stroke-width="1" stroke-linejoin="round"></polygon><polygon points="-230.4,133 0,266 0,248 -230.4,115" fill="#D45BB6" stroke="rgba(243,134,161,0.55)" stroke-width="1" stroke-linejoin="round"></polygon><polygon points="0,-18 230.4,115 0,248 -230.4,115" fill="#26272B" stroke="rgba(243,134,161,0.55)" stroke-width="1" stroke-linejoin="round"></polygon><polygon points="60.6,33 0,68 0,63 60.6,28" fill="#222326" stroke="rgba(236,237,239,0.22)" stroke-width="1" stroke-linejoin="round"></polygon><polygon points="-60.6,33 0,68 0,63 -60.6,28" fill="#2A2B2F" stroke="rgba(236,237,239,0.22)" stroke-width="1" stroke-linejoin="round"></polygon><polygon points="0,-7 60.6,28 0,63 -60.6,28" fill="#3C3D42" stroke="rgba(236,237,239,0.22)" stroke-width="1" stroke-linejoin="round" class="tile t-match"></polygon><text transform="matrix(0.8660 0.5 -0.8660 0.5 -41.6 27)" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="9" font-weight="400" fill="#ECEDEF" text-anchor="start">match</text><polygon points="71,39 131.6,74 71,109 10.4,74" fill="none" stroke="rgba(236,237,239,0.18)" stroke-width="1" stroke-linejoin="round" stroke-dasharray="3 4"></polygon><polygon points="202.6,115 142,150 142,145 202.6,110" fill="#222326" stroke="rgba(236,237,239,0.22)" stroke-width="1" stroke-linejoin="round"></polygon><polygon points="81.4,115 142,150 142,145 81.4,110" fill="#2A2B2F" stroke="rgba(236,237,239,0.22)" stroke-width="1" stroke-linejoin="round"></polygon><polygon points="142,75 202.6,110 142,145 81.4,110" fill="#3C3D42" stroke="rgba(236,237,239,0.22)" stroke-width="1" stroke-linejoin="round" class="tile t-mirror"></polygon><text transform="matrix(0.8660 0.5 -0.8660 0.5 100.5 109)" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="9" font-weight="400" fill="#ECEDEF" text-anchor="start">mirror</text><polygon points="-71,39 -10.4,74 -71,109 -131.6,74" fill="none" stroke="rgba(236,237,239,0.18)" stroke-width="1" stroke-linejoin="round" stroke-dasharray="3 4"></polygon><polygon points="60.6,115 0,150 0,145 60.6,110" fill="#222326" stroke="rgba(236,237,239,0.22)" stroke-width="1" stroke-linejoin="round"></polygon><polygon points="-60.6,115 0,150 0,145 -60.6,110" fill="#2A2B2F" stroke="rgba(236,237,239,0.22)" stroke-width="1" stroke-linejoin="round"></polygon><polygon points="0,75 60.6,110 0,145 -60.6,110" fill="#3C3D42" stroke="rgba(236,237,239,0.22)" stroke-width="1" stroke-linejoin="round" class="tile t-compare"></polygon><text transform="matrix(0.8660 0.5 -0.8660 0.5 -41.6 109)" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="9" font-weight="400" fill="#ECEDEF" text-anchor="start">compare</text><polygon points="71,121 131.6,156 71,191 10.4,156" fill="none" stroke="rgba(236,237,239,0.18)" stroke-width="1" stroke-linejoin="round" stroke-dasharray="3 4"></polygon><polygon points="-81.4,115 -142,150 -142,145 -81.4,110" fill="#222326" stroke="rgba(236,237,239,0.22)" stroke-width="1" stroke-linejoin="round"></polygon><polygon points="-202.6,115 -142,150 -142,145 -202.6,110" fill="#2A2B2F" stroke="rgba(236,237,239,0.22)" stroke-width="1" stroke-linejoin="round"></polygon><polygon points="-142,75 -81.4,110 -142,145 -202.6,110" fill="#3C3D42" stroke="rgba(236,237,239,0.22)" stroke-width="1" stroke-linejoin="round" class="tile t-latency"></polygon><text transform="matrix(0.8660 0.5 -0.8660 0.5 -183.6 109)" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="9" font-weight="400" fill="#ECEDEF" text-anchor="start">latency</text><polygon points="-71,121 -10.4,156 -71,191 -131.6,156" fill="none" stroke="rgba(236,237,239,0.18)" stroke-width="1" stroke-linejoin="round" stroke-dasharray="3 4"></polygon><polygon points="60.6,197 0,232 0,227 60.6,192" fill="#222326" stroke="rgba(236,237,239,0.22)" stroke-width="1" stroke-linejoin="round"></polygon><polygon points="-60.6,197 0,232 0,227 -60.6,192" fill="#2A2B2F" stroke="rgba(236,237,239,0.22)" stroke-width="1" stroke-linejoin="round"></polygon><polygon points="0,157 60.6,192 0,227 -60.6,192" fill="#3C3D42" stroke="rgba(236,237,239,0.22)" stroke-width="1" stroke-linejoin="round" class="tile t-cost"></polygon><text transform="matrix(0.8660 0.5 -0.8660 0.5 -41.6 191)" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="9" font-weight="400" fill="#ECEDEF" text-anchor="start">cost</text><circle cx="-171.5" cy="158" r="2.6" fill="#FFFFFF"></circle><circle cx="178.4" cy="154" r="2.6" fill="#FFFFFF"></circle><circle cx="117.8" cy="189" r="2.6" fill="#FFFFFF"></circle><circle cx="57.2" cy="224" r="2.6" fill="#FFFFFF"></circle><polygon points="576.8,83 528.3,111 528.3,55 576.8,27" fill="#A8428F" stroke="rgba(243,134,161,0.7)" stroke-width="1" stroke-linejoin="round"></polygon><polygon points="479.8,83 528.3,111 528.3,55 479.8,27" fill="#D45BB6" stroke="rgba(243,134,161,0.7)" stroke-width="1" stroke-linejoin="round"></polygon><polygon points="528.3,-1 576.8,27 528.3,55 479.8,27" fill="#F386A1" stroke="rgba(243,134,161,0.7)" stroke-width="1" stroke-linejoin="round"></polygon><text transform="matrix(0.8660 0.5 -0.8660 0.5 507.5 23)" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="12" font-weight="600" fill="#1E1E1E" text-anchor="start">jev</text><polygon points="533.5,348 485,376 485,320 533.5,292" fill="#1C1D20" stroke="rgba(236,237,239,0.22)" stroke-width="1" stroke-linejoin="round"></polygon><polygon points="436.5,348 485,376 485,320 436.5,292" fill="#232427" stroke="rgba(236,237,239,0.22)" stroke-width="1" stroke-linejoin="round"></polygon><polygon points="485,264 533.5,292 485,320 436.5,292" fill="#2E2F33" stroke="rgba(236,237,239,0.22)" stroke-width="1" stroke-linejoin="round"></polygon><text transform="matrix(0.8660 0.5 -0.8660 0.5 465.1 288.5)" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="12" font-weight="500" fill="#ECEDEF" text-anchor="start">llm</text><polygon points="-263.3,248 -311.8,276 -311.8,220 -263.3,192" fill="#1C1D20" stroke="rgba(236,237,239,0.22)" stroke-width="1" stroke-linejoin="round"></polygon><polygon points="-360.3,248 -311.8,276 -311.8,220 -360.3,192" fill="#232427" stroke="rgba(236,237,239,0.22)" stroke-width="1" stroke-linejoin="round"></polygon><polygon points="-311.8,164 -263.3,192 -311.8,220 -360.3,192" fill="#2E2F33" stroke="rgba(236,237,239,0.22)" stroke-width="1" stroke-linejoin="round"></polygon><text transform="matrix(0.8660 0.5 -0.8660 0.5 -331.7 188.5)" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="12" font-weight="500" fill="#ECEDEF" text-anchor="start">&lt;/&gt;</text><circle cx="504" cy="88" r="2.6" fill="#FFFFFF"></circle><circle cx="552.5" cy="88" r="2.6" fill="#FFFFFF"></circle><circle cx="460.7" cy="353" r="2.6" fill="#FFFFFF"></circle><circle cx="509.2" cy="353" r="2.6" fill="#FFFFFF"></circle><circle cx="-336" cy="253" r="2.6" fill="#FFFFFF"></circle><text transform="matrix(0.8660 -0.5 0.8660 0.5 -240.8 119)" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="10" font-weight="400" fill="#ECEDEF" text-anchor="start">// jev-swap shadow proxy</text><text transform="matrix(0.8660 0.5 -0.8660 0.5 -379.3 259)" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="9.5" font-weight="400" fill="#8E9199" text-anchor="start">// your app</text><text transform="matrix(0.8660 0.5 -0.8660 0.5 464.2 92)" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="9.5" font-weight="400" fill="#F386A1" text-anchor="start">// jev · system one</text><text transform="matrix(0.8660 0.5 -0.8660 0.5 453.8 98)" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="8.5" font-weight="400" fill="#8E9199" text-anchor="start">70–500 ms · $0.042 / 1M in</text><text transform="matrix(0.8660 0.5 -0.8660 0.5 417.4 359)" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="9.5" font-weight="400" fill="#8E9199" text-anchor="start">// your llm</text><text transform="matrix(0.8660 0.5 -0.8660 0.5 407 365)" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="8.5" font-weight="400" fill="#8E9199" text-anchor="start">e.g. haiku 4.5 · $1 in / $5 out</text><text transform="matrix(0.8660 0.5 -0.8660 0.5 69.3 243)" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="8.5" font-weight="400" fill="#8E9199" text-anchor="start">// forwarded unchanged</text><text transform="matrix(0.8660 -0.5 0.8660 0.5 306.6 212)" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="8.5" font-weight="400" fill="#F386A1" text-anchor="start">// mirrored in parallel</text><text transform="matrix(0.8660 -0.5 0.8660 0.5 313.5 290)" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="8.5" font-weight="400" fill="#F386A1" text-anchor="start">// typed answer + confidence</text><text transform="matrix(0.8660 0.5 -0.8660 0.5 -291 395)" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="8.5" font-weight="400" fill="#8E9199" text-anchor="start">// your response, untouched</text><path d="M-311.8 52 L-311.8 192" fill="none" stroke="#8E9199" stroke-opacity="0.8" stroke-width="1.2"></path><circle cx="-311.8" cy="52" r="2.6" fill="#FFFFFF"></circle><rect x="-461.8" y="-124" width="372" height="176" rx="3" fill="#111113" stroke="rgba(236,237,239,0.14)"></rect><text x="-447.8" y="-104" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="9" font-weight="400" fill="#8E9199" text-anchor="start">your app · triage.ts</text><text x="-103.8" y="-104" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="9" font-weight="400" fill="#B6D98A" text-anchor="end">live</text><text x="-447.8" y="-78" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="10.5" style="white-space: pre;"><tspan fill="#7C7F87">// point your SDK at the shadow proxy</tspan></text><text x="-447.8" y="-62" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="10.5" style="white-space: pre;"><tspan fill="#E3C07A">const </tspan><tspan fill="#ECEDEF">openai = </tspan><tspan fill="#E3C07A">new </tspan><tspan fill="#ECEDEF">OpenAI({</tspan></text><text x="-447.8" y="-46" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="10.5" style="white-space: pre;"><tspan fill="#ECEDEF">  baseURL: </tspan><tspan fill="#F386A1">"http://localhost:8787/openai/v1"</tspan></text><text x="-447.8" y="-30" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="10.5" style="white-space: pre;"><tspan fill="#ECEDEF">});</tspan></text><text x="-447.8" y="-14" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="10.5" style="white-space: pre;"><tspan fill="#E3C07A">const </tspan><tspan fill="#ECEDEF">t = </tspan><tspan fill="#E3C07A">await </tspan><tspan fill="#ECEDEF">openai.chat.completions.parse({</tspan></text><text x="-447.8" y="2" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="10.5" style="white-space: pre;"><tspan fill="#ECEDEF">  model: </tspan><tspan fill="#F386A1">"gpt-5.6-terra"</tspan><tspan fill="#ECEDEF">,</tspan></text><text x="-447.8" y="18" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="10.5" style="white-space: pre;"><tspan fill="#ECEDEF">  response_format: </tspan><tspan fill="#9CC9A8">zodResponseFormat</tspan><tspan fill="#ECEDEF">(Ticket, </tspan><tspan fill="#F386A1">"t"</tspan><tspan fill="#ECEDEF">),</tspan></text><text x="-447.8" y="34" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="10.5" style="white-space: pre;"><tspan fill="#ECEDEF">});</tspan></text></svg></div><div class="m"><svg class="iso hero-iso" viewBox="-240.3 -288 454.6 914" role="img" aria-label="Your app sends its LLM call through the jev-swap shadow proxy, which forwards it unchanged to your LLM and mirrors it to Jev in parallel, then compares answers, latency and cost." style="display: block; width: 100%; height: auto;" xmlns="http://www.w3.org/2000/svg"><path d="M0 19 L-105.7 80 L-26 126" fill="none" stroke="#8E9199" stroke-opacity="0.8" stroke-width="1.2"></path><path class="pulse pk18" d="M0 19 L-105.7 80 L-26 126" fill="none" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round"></path><path d="M-26 126 L-105.7 80 L0 19" fill="none" stroke="#8E9199" stroke-opacity="0" stroke-width="1.2"></path><path class="pulse pk19" d="M-26 126 L-105.7 80 L0 19" fill="none" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round"></path><path d="M17.3 301 L126.4 364" fill="none" stroke="#F386A1" stroke-opacity="0.8" stroke-width="1.2"></path><path class="pulse pk20" d="M17.3 301 L126.4 364" fill="none" stroke="#F386A1" stroke-width="6" stroke-linecap="round"></path><path d="M126.4 364 L17.3 301" fill="none" stroke="#8E9199" stroke-opacity="0" stroke-width="1.2"></path><path class="pulse pk21" d="M126.4 364 L17.3 301" fill="none" stroke="#F386A1" stroke-width="6" stroke-linecap="round"></path><path d="M-17.3 301 L-126.4 364" fill="none" stroke="#8E9199" stroke-opacity="0.8" stroke-width="1.2"></path><path class="pulse pk22" d="M-17.3 301 L-126.4 364" fill="none" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round"></path><path d="M-126.4 364 L-17.3 301" fill="none" stroke="#8E9199" stroke-opacity="0" stroke-width="1.2"></path><path class="pulse pk23" d="M-126.4 364 L-17.3 301" fill="none" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round"></path><g class="slab slab-llm"><polygon points="129.9,535 0,610 0,602 129.9,527" fill="#0B0B0C" stroke="rgba(236,237,239,0.14)" stroke-width="1" stroke-linejoin="round"></polygon><polygon points="-129.9,535 0,610 0,602 -129.9,527" fill="#0D0D0F" stroke="rgba(236,237,239,0.14)" stroke-width="1" stroke-linejoin="round"></polygon><polygon points="0,452 129.9,527 0,602 -129.9,527" fill="#141416" stroke="rgba(236,237,239,0.14)" stroke-width="1" stroke-linejoin="round"></polygon><text transform="matrix(0.8660 0.5 -0.8660 0.5 -77.9 509)" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="12" font-weight="400" fill="#ECEDEF" text-anchor="start">llm: billing</text><text transform="matrix(0.8660 0.5 -0.8660 0.5 -91.8 517)" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="12" font-weight="400" fill="#F386A1" text-anchor="start">jev: billing · 0.94</text><text transform="matrix(0.8660 0.5 -0.8660 0.5 -105.7 525)" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="10.5" font-weight="400" fill="#8E9199" text-anchor="start">agree · faster · cheaper</text></g><polygon points="173.2,220 0,320 0,304 173.2,204" fill="#A8428F" stroke="rgba(243,134,161,0.55)" stroke-width="1" stroke-linejoin="round"></polygon><polygon points="-173.2,220 0,320 0,304 -173.2,204" fill="#D45BB6" stroke="rgba(243,134,161,0.55)" stroke-width="1" stroke-linejoin="round"></polygon><polygon points="0,104 173.2,204 0,304 -173.2,204" fill="#26272B" stroke="rgba(243,134,161,0.55)" stroke-width="1" stroke-linejoin="round"></polygon><polygon points="45,142 0,168 0,164 45,138" fill="#222326" stroke="rgba(236,237,239,0.22)" stroke-width="1" stroke-linejoin="round"></polygon><polygon points="-45,142 0,168 0,164 -45,138" fill="#2A2B2F" stroke="rgba(236,237,239,0.22)" stroke-width="1" stroke-linejoin="round"></polygon><polygon points="0,112 45,138 0,164 -45,138" fill="#3C3D42" stroke="rgba(236,237,239,0.22)" stroke-width="1" stroke-linejoin="round" class="tile t-match"></polygon><text transform="matrix(0.8660 0.5 -0.8660 0.5 -32 136.5)" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="9.5" font-weight="400" fill="#ECEDEF" text-anchor="start">match</text><polygon points="53.7,147 98.7,173 53.7,199 8.7,173" fill="none" stroke="rgba(236,237,239,0.18)" stroke-width="1" stroke-linejoin="round" stroke-dasharray="3 4"></polygon><polygon points="152.4,204 107.4,230 107.4,226 152.4,200" fill="#222326" stroke="rgba(236,237,239,0.22)" stroke-width="1" stroke-linejoin="round"></polygon><polygon points="62.4,204 107.4,230 107.4,226 62.4,200" fill="#2A2B2F" stroke="rgba(236,237,239,0.22)" stroke-width="1" stroke-linejoin="round"></polygon><polygon points="107.4,174 152.4,200 107.4,226 62.4,200" fill="#3C3D42" stroke="rgba(236,237,239,0.22)" stroke-width="1" stroke-linejoin="round" class="tile t-mirror"></polygon><text transform="matrix(0.8660 0.5 -0.8660 0.5 75.3 198.5)" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="9.5" font-weight="400" fill="#ECEDEF" text-anchor="start">mirror</text><polygon points="-53.7,147 -8.7,173 -53.7,199 -98.7,173" fill="none" stroke="rgba(236,237,239,0.18)" stroke-width="1" stroke-linejoin="round" stroke-dasharray="3 4"></polygon><polygon points="45,204 0,230 0,226 45,200" fill="#222326" stroke="rgba(236,237,239,0.22)" stroke-width="1" stroke-linejoin="round"></polygon><polygon points="-45,204 0,230 0,226 -45,200" fill="#2A2B2F" stroke="rgba(236,237,239,0.22)" stroke-width="1" stroke-linejoin="round"></polygon><polygon points="0,174 45,200 0,226 -45,200" fill="#3C3D42" stroke="rgba(236,237,239,0.22)" stroke-width="1" stroke-linejoin="round" class="tile t-compare"></polygon><text transform="matrix(0.8660 0.5 -0.8660 0.5 -32 198.5)" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="9.5" font-weight="400" fill="#ECEDEF" text-anchor="start">compare</text><polygon points="53.7,209 98.7,235 53.7,261 8.7,235" fill="none" stroke="rgba(236,237,239,0.18)" stroke-width="1" stroke-linejoin="round" stroke-dasharray="3 4"></polygon><polygon points="-62.4,204 -107.4,230 -107.4,226 -62.4,200" fill="#222326" stroke="rgba(236,237,239,0.22)" stroke-width="1" stroke-linejoin="round"></polygon><polygon points="-152.4,204 -107.4,230 -107.4,226 -152.4,200" fill="#2A2B2F" stroke="rgba(236,237,239,0.22)" stroke-width="1" stroke-linejoin="round"></polygon><polygon points="-107.4,174 -62.4,200 -107.4,226 -152.4,200" fill="#3C3D42" stroke="rgba(236,237,239,0.22)" stroke-width="1" stroke-linejoin="round" class="tile t-latency"></polygon><text transform="matrix(0.8660 0.5 -0.8660 0.5 -139.4 198.5)" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="9.5" font-weight="400" fill="#ECEDEF" text-anchor="start">latency</text><polygon points="-53.7,209 -8.7,235 -53.7,261 -98.7,235" fill="none" stroke="rgba(236,237,239,0.18)" stroke-width="1" stroke-linejoin="round" stroke-dasharray="3 4"></polygon><polygon points="45,266 0,292 0,288 45,262" fill="#222326" stroke="rgba(236,237,239,0.22)" stroke-width="1" stroke-linejoin="round"></polygon><polygon points="-45,266 0,292 0,288 -45,262" fill="#2A2B2F" stroke="rgba(236,237,239,0.22)" stroke-width="1" stroke-linejoin="round"></polygon><polygon points="0,236 45,262 0,288 -45,262" fill="#3C3D42" stroke="rgba(236,237,239,0.22)" stroke-width="1" stroke-linejoin="round" class="tile t-cost"></polygon><text transform="matrix(0.8660 0.5 -0.8660 0.5 -32 260.5)" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="9.5" font-weight="400" fill="#ECEDEF" text-anchor="start">cost</text><circle cx="-17.3" cy="301" r="3" fill="#FFFFFF"></circle><circle cx="17.3" cy="301" r="3" fill="#FFFFFF"></circle><polygon points="48.5,28 0,56 0,0 48.5,-28" fill="#1C1D20" stroke="rgba(236,237,239,0.22)" stroke-width="1" stroke-linejoin="round"></polygon><polygon points="-48.5,28 0,56 0,0 -48.5,-28" fill="#232427" stroke="rgba(236,237,239,0.22)" stroke-width="1" stroke-linejoin="round"></polygon><polygon points="0,-56 48.5,-28 0,0 -48.5,-28" fill="#2E2F33" stroke="rgba(236,237,239,0.22)" stroke-width="1" stroke-linejoin="round"></polygon><text transform="matrix(0.8660 0.5 -0.8660 0.5 -22.5 -33)" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="14" font-weight="500" fill="#ECEDEF" text-anchor="start">&lt;/&gt;</text><polygon points="-101.3,387.5 -149.8,415.5 -149.8,359.5 -101.3,331.5" fill="#1C1D20" stroke="rgba(236,237,239,0.22)" stroke-width="1" stroke-linejoin="round"></polygon><polygon points="-198.3,387.5 -149.8,415.5 -149.8,359.5 -198.3,331.5" fill="#232427" stroke="rgba(236,237,239,0.22)" stroke-width="1" stroke-linejoin="round"></polygon><polygon points="-149.8,303.5 -101.3,331.5 -149.8,359.5 -198.3,331.5" fill="#2E2F33" stroke="rgba(236,237,239,0.22)" stroke-width="1" stroke-linejoin="round"></polygon><text transform="matrix(0.8660 0.5 -0.8660 0.5 -171.5 327)" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="15" font-weight="500" fill="#ECEDEF" text-anchor="start">llm</text><polygon points="198.3,387.5 149.8,415.5 149.8,359.5 198.3,331.5" fill="#A8428F" stroke="rgba(243,134,161,0.7)" stroke-width="1" stroke-linejoin="round"></polygon><polygon points="101.3,387.5 149.8,415.5 149.8,359.5 101.3,331.5" fill="#D45BB6" stroke="rgba(243,134,161,0.7)" stroke-width="1" stroke-linejoin="round"></polygon><polygon points="149.8,303.5 198.3,331.5 149.8,359.5 101.3,331.5" fill="#F386A1" stroke="rgba(243,134,161,0.7)" stroke-width="1" stroke-linejoin="round"></polygon><text transform="matrix(0.8660 0.5 -0.8660 0.5 128.2 327)" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="15" font-weight="600" fill="#1E1E1E" text-anchor="start">jev</text><text transform="matrix(0.8660 0.5 -0.8660 0.5 -67.5 37)" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="12" font-weight="400" fill="#8E9199" text-anchor="start">// your app</text><text transform="matrix(0.8660 -0.5 0.8660 0.5 -180.1 208)" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="12.5" font-weight="400" fill="#ECEDEF" text-anchor="start">// shadow proxy</text><text transform="matrix(0.8660 0.5 -0.8660 0.5 -212.2 395.5)" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="12" font-weight="400" fill="#8E9199" text-anchor="start">// your llm</text><text transform="matrix(0.8660 0.5 -0.8660 0.5 -224.3 402.5)" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="10.5" font-weight="400" fill="#8E9199" text-anchor="start">forwarded unchanged</text><text transform="matrix(0.8660 0.5 -0.8660 0.5 87.5 395.5)" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="12" font-weight="400" fill="#F386A1" text-anchor="start">// jev · mirrored</text><text transform="matrix(0.8660 0.5 -0.8660 0.5 75.3 402.5)" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="10.5" font-weight="400" fill="#8E9199" text-anchor="start">70–500 ms</text><text transform="matrix(0.8660 0.5 -0.8660 0.5 63.2 409.5)" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="10.5" font-weight="400" fill="#8E9199" text-anchor="start">$0.042 / 1M in</text><path d="M0 -122 L0 -28" fill="none" stroke="#8E9199" stroke-opacity="0.8" stroke-width="1.2"></path><circle cx="0" cy="-122" r="3" fill="#FFFFFF"></circle><rect x="-170" y="-272" width="340" height="150" rx="3" fill="#111113" stroke="rgba(236,237,239,0.14)"></rect><text x="-156" y="-250" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="11" font-weight="400" fill="#8E9199" text-anchor="start">your app · triage.ts</text><text x="-156" y="-222" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="12.5" style="white-space: pre;"><tspan fill="#7C7F87">// point your SDK at the proxy</tspan></text><text x="-156" y="-203" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="12.5" style="white-space: pre;"><tspan fill="#E3C07A">new </tspan><tspan fill="#ECEDEF">OpenAI({</tspan></text><text x="-156" y="-184" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="12.5" style="white-space: pre;"><tspan fill="#ECEDEF">  baseURL: </tspan><tspan fill="#F386A1">"http://localhost:8787</tspan></text><text x="-156" y="-165" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="12.5" style="white-space: pre;"><tspan fill="#F386A1">            /openai/v1"</tspan></text><text x="-156" y="-146" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="12.5" style="white-space: pre;"><tspan fill="#ECEDEF">});</tspan></text></svg></div></div></div></section>
+<section class="wrap"><div class="frame"><div class="sec">
+<div style="display: flex; flex-direction: column; gap: 14px;"><p class="eyebrow">// how it works</p><h2 class="h2">Your app keeps its model. Jev shadows it.</h2></div>
+<div class="g3">
+<article class="panel card"><div class="eyebrow">01 · point</div><h3 class="h3">Point your client at the proxy</h3><p class="body" style="font-size: 16px; line-height: 1.6;">Set the base URL of your OpenAI or Anthropic SDK to the proxy. Your API keys pass straight through.</p></article>
+<article class="panel card"><div class="eyebrow">02 · mirror</div><h3 class="h3">Forward, and mirror decisions</h3><p class="body" style="font-size: 16px; line-height: 1.6;">Every request goes to your provider unchanged and your app gets its response. Requests that match a scanned decision call are also sent to Jev, in parallel.</p></article>
+<article class="panel card"><div class="eyebrow">03 · decide</div><h3 class="h3">Compare, then apply</h3><p class="body" style="font-size: 16px; line-height: 1.6;">Once a call has enough mirrored samples and a confidence threshold meets your accuracy target, apply that threshold to the generated Jev module in one click.</p></article>
+</div></div></div></section>
+<section class="wrap"><div class="frame"><div class="sec" id="measures"><div class="row" style="gap: 32px 56px;">
+<div style="flex: 1 1 380px; display: flex; flex-direction: column; gap: 14px;"><p class="eyebrow">// the live dashboard</p>
+<h2 class="h2">Measured on your traffic, not a benchmark.</h2></div>
+<ul class="clean" style="flex: 1 1 480px;">
+<li><strong style="color: #ECEDEF;">Agreement</strong> between Jev and your model, per decision call and per field.</li>
+<li><strong style="color: #ECEDEF;">Latency</strong> of both, side by side, on the same requests.</li>
+<li><strong style="color: #ECEDEF;">Savings so far</strong> at the prices you pass in.</li>
+<li><strong style="color: #ECEDEF;">The confidence curve</strong>: how much traffic Jev covers at each threshold, and how accurate it is there.</li>
+<li><strong style="color: #ECEDEF;">A disagreement inbox</strong> of the requests where the two answered differently.</li>
+<li><strong style="color: #ECEDEF;">Replayable samples</strong>: mirrored calls are appended to <code class="code">proxy-samples.jsonl</code> in the format <code class="code">jev-swap shadow</code> reads.</li>
+</ul></div></div></div></section>
+<section class="wrap" id="run"><div class="frame"><div class="sec" style="gap: 28px;">
+<div style="display: flex; flex-direction: column; gap: 14px;"><p class="eyebrow">// run it</p><h2 class="h2">Two environment variables.</h2></div>
+<pre class="panel" style="padding: 22px 24px;"><span class="c-com">$</span> npx jev-swap scan ./your-app      <span class="c-com"># find the decision calls to mirror</span>
+<span class="c-com">$</span> npx jev-swap convert
+<span class="c-com">$</span> npx jev-swap proxy --llm-price-in 2 --llm-price-out 10
+
+<span class="c-com"># point your app at it; API keys pass through untouched</span>
+OPENAI_BASE_URL=<span class="c-str">http://localhost:8787/openai/v1</span>
+ANTHROPIC_BASE_URL=<span class="c-str">http://localhost:8787/anthropic</span></pre>
+<p class="small" style="font-size: 14px;">The proxy runs locally on port 8787 (change it with <code class="code">--port</code>) and serves its dashboard at <code class="code">http://localhost:8787/</code>. Mirroring to Jev needs a TypeSafe API key in <code class="code">TYPESAFE_API_KEY</code>.</p>
+</div></div></section>
+<section class="wrap"><div class="frame"><div class="sec"><div class="row" style="gap: 32px 48px;"><h2 class="h2" style="flex: 1 1 260px;">Questions</h2>
+<div style="flex: 2 1 520px; display: flex; flex-direction: column; min-width: 0;"><div class="qa"><h3 class="q">Does the proxy change my responses?</h3><p class="body" style="font-size: 17px;">No. Every request is forwarded to your provider unchanged and your app gets the provider&#39;s response. Jev only sees a copy of the decision calls, in parallel.</p></div><div class="qa"><h3 class="q">Which requests are mirrored?</h3><p class="body" style="font-size: 17px;">Ones that match a call from <code class="code">jev-swap scan</code>, by output schema, enum values or yes/no prompt text. Two calls with identical schemas or prompts both match the first one scanned.</p></div><div class="qa"><h3 class="q">What about streaming?</h3><p class="body" style="font-size: 17px;">Streaming requests are forwarded but not mirrored.</p></div><div class="qa"><h3 class="q">What does Jev see?</h3><p class="body" style="font-size: 17px;">The last user message as its state, plus the typed questions for that call.</p></div><div class="qa"><h3 class="q">Is the samples file safe to commit?</h3><p class="body" style="font-size: 17px;">No. <code class="code">proxy-samples.jsonl</code> contains your users&#39; inputs: keep it out of version control.</p></div></div></div></div></div></section>
+<footer class="wrap" id="sources" style="padding-bottom: 16px;"><div class="frame sec" style="padding-top: 56px; padding-bottom: 64px; gap: 20px; font-size: 14px; line-height: 1.7; color: #A1A3A9;">
+<span style="display: flex; align-items: center; gap: 10px;"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 32 32" aria-hidden="true"><rect x="7.5" y="3" width="18" height="9" rx="4.5" fill="none" stroke="#ECEDEF" stroke-width="2.2"/><circle class="sw-knob" cx="21" cy="7.5" r="2.9" fill="#F386A1"/><path d="M17 15.5V23.5Q17 29 11.5 29H9" fill="none" stroke="#ECEDEF" stroke-width="2.8" stroke-linecap="round"/></svg><span class="wordmark">jev<span class="wm-dim">-swap</span></span></span>
+<nav class="foot-links" aria-label="Footer"><a href="index.html">jev-swap</a><a href="explorer.html">Explorer</a><a href="proxy.html">Shadow proxy</a><a href="https://github.com/0xjba/jev-swap">GitHub</a><a href="https://www.npmjs.com/package/jev-swap">npm</a></nav>
+
+<div class="credit">
+<p style="margin: 0;">Made with <svg class="heart" width="14" height="14" viewBox="0 0 24 24" aria-label="love" role="img"><path d="M12 21s-7.5-4.6-9.6-9.3C.9 8.3 3 4.5 6.7 4.5c2.1 0 3.6 1.2 5.3 3.1 1.7-1.9 3.2-3.1 5.3-3.1 3.7 0 5.8 3.8 4.3 7.2C19.5 16.4 12 21 12 21z" fill="#F386A1"/></svg> by Jobin</p>
+<nav class="foot-links" aria-label="Contact"><a href="https://github.com/0xjba">GitHub</a><a href="mailto:jobinb6444@gmail.com">jobinb6444@gmail.com</a></nav>
+</div>
+<p style="margin: 0;">Not affiliated with TypeSafe. Jev is a product of TypeSafe AI.</p>
+</div></footer>
+
+</body>
+</html>

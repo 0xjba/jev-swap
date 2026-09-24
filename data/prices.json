@@ -1,0 +1,3441 @@
+{
+  "source": "https://openrouter.ai/api/v1/models",
+  "fetchedAt": "2026-09-24T08:12:23.292Z",
+  "jev": {
+    "in": 0.042,
+    "out": 0,
+    "source": "https://openrouter.ai/typesafe/jev-1.13",
+    "checked": "2026-09-24",
+    "note": "list price"
+  },
+  "models": {
+    "fireworks/ember-1": {
+      "provider": "other",
+      "in": 3,
+      "out": 15,
+      "source": "https://openrouter.ai/fireworks/ember-1",
+      "checked": "2026-09-24",
+      "aliases": [
+        "fireworks/ember-1-20260923"
+      ]
+    },
+    "z-ai/glm-5.3-prime": {
+      "provider": "other",
+      "in": 2.8,
+      "out": 8.8,
+      "source": "https://openrouter.ai/z-ai/glm-5.3-prime",
+      "checked": "2026-09-24",
+      "aliases": [
+        "z-ai/glm-5.3-prime-20260921"
+      ]
+    },
+    "qwen/qwen3.8-max-prime": {
+      "provider": "other",
+      "in": 4,
+      "out": 12,
+      "source": "https://openrouter.ai/qwen/qwen3.8-max-prime",
+      "checked": "2026-09-24",
+      "aliases": [
+        "qwen/qwen3.8-max-prime-20260923"
+      ]
+    },
+    "stealth/space-bunny-alpha": {
+      "provider": "other",
+      "in": 0,
+      "out": 0,
+      "source": "https://openrouter.ai/stealth/space-bunny-alpha",
+      "checked": "2026-09-24"
+    },
+    "aion-labs/aion-3.5-mini": {
+      "provider": "other",
+      "in": 0.7,
+      "out": 1.4,
+      "source": "https://openrouter.ai/aion-labs/aion-3.5-mini",
+      "checked": "2026-09-24",
+      "aliases": [
+        "aion-labs/aion-3.5-mini-20260923"
+      ]
+    },
+    "aion-labs/aion-3.5": {
+      "provider": "other",
+      "in": 3,
+      "out": 6,
+      "source": "https://openrouter.ai/aion-labs/aion-3.5",
+      "checked": "2026-09-24",
+      "aliases": [
+        "aion-labs/aion-3.5-20260923"
+      ]
+    },
+    "upstage/solar-mini4": {
+      "provider": "other",
+      "in": 0.05,
+      "out": 0.2,
+      "source": "https://openrouter.ai/upstage/solar-mini4",
+      "checked": "2026-09-24",
+      "aliases": [
+        "upstage/solar-mini4-20260922"
+      ]
+    },
+    "cohere/command-a-plus": {
+      "provider": "other",
+      "in": 0.3,
+      "out": 1.5,
+      "source": "https://openrouter.ai/cohere/command-a-plus",
+      "checked": "2026-09-24",
+      "aliases": [
+        "cohere/command-a-plus-05-2026"
+      ]
+    },
+    "openai/gpt-6-luna-pro": {
+      "provider": "openai",
+      "in": 0.1,
+      "out": 0.5,
+      "source": "https://openrouter.ai/openai/gpt-6-luna-pro",
+      "checked": "2026-09-24",
+      "aliases": [
+        "openai/gpt-6-luna-pro-20260922"
+      ]
+    },
+    "openai/gpt-6-luna": {
+      "provider": "openai",
+      "in": 0.1,
+      "out": 0.5,
+      "source": "https://openrouter.ai/openai/gpt-6-luna",
+      "checked": "2026-09-24",
+      "aliases": [
+        "openai/gpt-6-luna-20260922"
+      ]
+    },
+    "openai/gpt-6-sol-pro": {
+      "provider": "openai",
+      "in": 2,
+      "out": 10,
+      "source": "https://openrouter.ai/openai/gpt-6-sol-pro",
+      "checked": "2026-09-24",
+      "aliases": [
+        "openai/gpt-6-sol-pro-20260922"
+      ]
+    },
+    "openai/gpt-6-sol": {
+      "provider": "openai",
+      "in": 2,
+      "out": 10,
+      "source": "https://openrouter.ai/openai/gpt-6-sol",
+      "checked": "2026-09-24",
+      "aliases": [
+        "openai/gpt-6-sol-20260922"
+      ]
+    },
+    "anthropic/claude-opus-5.5": {
+      "provider": "anthropic",
+      "in": 4,
+      "out": 20,
+      "source": "https://openrouter.ai/anthropic/claude-opus-5.5",
+      "checked": "2026-09-24",
+      "aliases": [
+        "anthropic/claude-opus-5.5-20260921"
+      ]
+    },
+    "xiaomi/mimo-v2.6-pro-ultraspeed": {
+      "provider": "other",
+      "in": 4.35,
+      "out": 8.7,
+      "source": "https://openrouter.ai/xiaomi/mimo-v2.6-pro-ultraspeed",
+      "checked": "2026-09-24",
+      "aliases": [
+        "xiaomi/mimo-v2.6-pro-ultraspeed-20260921"
+      ]
+    },
+    "xiaomi/mimo-v2.6-flash": {
+      "provider": "other",
+      "in": 0.14,
+      "out": 0.28,
+      "source": "https://openrouter.ai/xiaomi/mimo-v2.6-flash",
+      "checked": "2026-09-24",
+      "aliases": [
+        "xiaomi/mimo-v2.6-flash-20260921"
+      ]
+    },
+    "xiaomi/mimo-v2.6-pro": {
+      "provider": "other",
+      "in": 0.435,
+      "out": 0.87,
+      "source": "https://openrouter.ai/xiaomi/mimo-v2.6-pro",
+      "checked": "2026-09-24",
+      "aliases": [
+        "xiaomi/mimo-v2.6-pro-20260921"
+      ]
+    },
+    "x-ai/grok-4.7": {
+      "provider": "other",
+      "in": 1.6,
+      "out": 4.8,
+      "source": "https://openrouter.ai/x-ai/grok-4.7",
+      "checked": "2026-09-24",
+      "aliases": [
+        "x-ai/grok-4.7-20260916"
+      ]
+    },
+    "qwen/qwen3.8-omni-flash": {
+      "provider": "other",
+      "in": 0.15,
+      "out": 0.47,
+      "source": "https://openrouter.ai/qwen/qwen3.8-omni-flash",
+      "checked": "2026-09-24",
+      "aliases": [
+        "qwen/qwen3.8-omni-flash-20260918"
+      ]
+    },
+    "prism-ml/ternary-bonsai-2-27b": {
+      "provider": "other",
+      "in": 0.075,
+      "out": 0.5,
+      "source": "https://openrouter.ai/prism-ml/ternary-bonsai-2-27b",
+      "checked": "2026-09-24",
+      "aliases": [
+        "prism-ml/ternary-bonsai-2-27b-20260918"
+      ]
+    },
+    "z-ai/glm-5.3-flashx": {
+      "provider": "other",
+      "in": 0.37,
+      "out": 1.25,
+      "source": "https://openrouter.ai/z-ai/glm-5.3-flashx",
+      "checked": "2026-09-24",
+      "aliases": [
+        "z-ai/glm-5.3-flashx-20260918"
+      ]
+    },
+    "unbiased/pareto": {
+      "provider": "other",
+      "in": 2.5,
+      "out": 7.5,
+      "source": "https://openrouter.ai/unbiased/pareto",
+      "checked": "2026-09-24",
+      "aliases": [
+        "unbiased/pareto-20260917"
+      ]
+    },
+    "~deepseek/deepseek-pro-latest": {
+      "provider": "other",
+      "in": 0.39,
+      "out": 2.9,
+      "source": "https://openrouter.ai/~deepseek/deepseek-pro-latest",
+      "checked": "2026-09-24"
+    },
+    "~deepseek/deepseek-flash-latest": {
+      "provider": "other",
+      "in": 0.04,
+      "out": 1,
+      "source": "https://openrouter.ai/~deepseek/deepseek-flash-latest",
+      "checked": "2026-09-24"
+    },
+    "inference-net/schematron-v2-turbo": {
+      "provider": "other",
+      "in": 0.03,
+      "out": 0.15,
+      "source": "https://openrouter.ai/inference-net/schematron-v2-turbo",
+      "checked": "2026-09-24",
+      "aliases": [
+        "inference-net/schematron-v2-turbo-20260902"
+      ]
+    },
+    "inference-net/schematron-v2-small": {
+      "provider": "other",
+      "in": 0.05,
+      "out": 0.23,
+      "source": "https://openrouter.ai/inference-net/schematron-v2-small",
+      "checked": "2026-09-24",
+      "aliases": [
+        "inference-net/schematron-v2-small-20260902"
+      ]
+    },
+    "~openai/gpt-astra-latest": {
+      "provider": "other",
+      "in": 10,
+      "out": 50,
+      "source": "https://openrouter.ai/~openai/gpt-astra-latest",
+      "checked": "2026-09-24"
+    },
+    "~openai/gpt-sol-latest": {
+      "provider": "other",
+      "in": 2,
+      "out": 10,
+      "source": "https://openrouter.ai/~openai/gpt-sol-latest",
+      "checked": "2026-09-24"
+    },
+    "~openai/gpt-terra-latest": {
+      "provider": "other",
+      "in": 2,
+      "out": 12,
+      "source": "https://openrouter.ai/~openai/gpt-terra-latest",
+      "checked": "2026-09-24"
+    },
+    "~openai/gpt-luna-latest": {
+      "provider": "other",
+      "in": 0.1,
+      "out": 0.5,
+      "source": "https://openrouter.ai/~openai/gpt-luna-latest",
+      "checked": "2026-09-24"
+    },
+    "sakana/fugu-ultra-v2": {
+      "provider": "other",
+      "in": 5,
+      "out": 30,
+      "source": "https://openrouter.ai/sakana/fugu-ultra-v2",
+      "checked": "2026-09-24",
+      "aliases": [
+        "sakana/fugu-ultra-v2-20260911"
+      ]
+    },
+    "sakana/fugu-max": {
+      "provider": "other",
+      "in": 2,
+      "out": 6,
+      "source": "https://openrouter.ai/sakana/fugu-max",
+      "checked": "2026-09-24",
+      "aliases": [
+        "sakana/fugu-max-20260911"
+      ]
+    },
+    "inclusionai/ling-3.0-flash-vl": {
+      "provider": "other",
+      "in": 0.06,
+      "out": 0.18,
+      "source": "https://openrouter.ai/inclusionai/ling-3.0-flash-vl",
+      "checked": "2026-09-24",
+      "aliases": [
+        "inclusionai/ling-3.0-flash-vl-20260910"
+      ]
+    },
+    "deepseek/deepseek-v4.1-flash": {
+      "provider": "other",
+      "in": 0.14,
+      "out": 0.42,
+      "source": "https://openrouter.ai/deepseek/deepseek-v4.1-flash",
+      "checked": "2026-09-24",
+      "aliases": [
+        "deepseek/deepseek-v4.1-flash-20260910"
+      ]
+    },
+    "inception/mercury-2.5": {
+      "provider": "other",
+      "in": 0.04,
+      "out": 0.15,
+      "source": "https://openrouter.ai/inception/mercury-2.5",
+      "checked": "2026-09-24",
+      "aliases": [
+        "inception/mercury-2.5-20260908"
+      ]
+    },
+    "openai/gpt-6-astra": {
+      "provider": "openai",
+      "in": 10,
+      "out": 50,
+      "source": "https://openrouter.ai/openai/gpt-6-astra",
+      "checked": "2026-09-24",
+      "aliases": [
+        "openai/gpt-6-astra-20260903"
+      ]
+    },
+    "openai/gpt-6-astra-pro": {
+      "provider": "openai",
+      "in": 10,
+      "out": 50,
+      "source": "https://openrouter.ai/openai/gpt-6-astra-pro",
+      "checked": "2026-09-24",
+      "aliases": [
+        "openai/gpt-6-astra-pro-20260903"
+      ]
+    },
+    "qwen/qwen3.8-max-0902": {
+      "provider": "other",
+      "in": 2,
+      "out": 6,
+      "source": "https://openrouter.ai/qwen/qwen3.8-max-0902",
+      "checked": "2026-09-24",
+      "aliases": [
+        "qwen/qwen3.8-max-20260902"
+      ]
+    },
+    "meta/muse-spark-1.3-contributor": {
+      "provider": "other",
+      "in": 0.1,
+      "out": 0.2,
+      "source": "https://openrouter.ai/meta/muse-spark-1.3-contributor",
+      "checked": "2026-09-24",
+      "aliases": [
+        "meta/muse-spark-1.3-contributor-20260902"
+      ]
+    },
+    "meta/muse-spark-1.3": {
+      "provider": "other",
+      "in": 1.25,
+      "out": 4.25,
+      "source": "https://openrouter.ai/meta/muse-spark-1.3",
+      "checked": "2026-09-24",
+      "aliases": [
+        "meta/muse-spark-1.3-20260902"
+      ]
+    },
+    "google/gemini-3.8-flash": {
+      "provider": "other",
+      "in": 0.75,
+      "out": 3.75,
+      "source": "https://openrouter.ai/google/gemini-3.8-flash",
+      "checked": "2026-09-24",
+      "aliases": [
+        "google/gemini-3.8-flash-20260902"
+      ]
+    },
+    "anthropic/claude-fable-5.1": {
+      "provider": "anthropic",
+      "in": 10,
+      "out": 50,
+      "source": "https://openrouter.ai/anthropic/claude-fable-5.1",
+      "checked": "2026-09-24",
+      "aliases": [
+        "anthropic/claude-fable-5.1-20260831"
+      ]
+    },
+    "ibm-granite/granite-4.2-8b": {
+      "provider": "other",
+      "in": 0.06,
+      "out": 0.25,
+      "source": "https://openrouter.ai/ibm-granite/granite-4.2-8b",
+      "checked": "2026-09-24",
+      "aliases": [
+        "ibm-granite/granite-4.2-8b-20260831"
+      ]
+    },
+    "tencent/hy4-preview": {
+      "provider": "other",
+      "in": 0.834,
+      "out": 2.501,
+      "source": "https://openrouter.ai/tencent/hy4-preview",
+      "checked": "2026-09-24",
+      "aliases": [
+        "tencent/hy4-preview-20260827"
+      ]
+    },
+    "inclusionai/ling-3.0-flash-fin": {
+      "provider": "other",
+      "in": 0.06,
+      "out": 0.18,
+      "source": "https://openrouter.ai/inclusionai/ling-3.0-flash-fin",
+      "checked": "2026-09-24",
+      "aliases": [
+        "inclusionai/ling-3.0-flash-fin-20260827"
+      ]
+    },
+    "~z-ai/glm-flash-latest": {
+      "provider": "other",
+      "in": 0.045,
+      "out": 0.14,
+      "source": "https://openrouter.ai/~z-ai/glm-flash-latest",
+      "checked": "2026-09-24"
+    },
+    "qwen/qwen3.8-flash": {
+      "provider": "other",
+      "in": 0.15,
+      "out": 0.47,
+      "source": "https://openrouter.ai/qwen/qwen3.8-flash",
+      "checked": "2026-09-24",
+      "aliases": [
+        "qwen/qwen3.8-flash-20260826"
+      ]
+    },
+    "z-ai/glm-5.3-flash": {
+      "provider": "other",
+      "in": 0.15,
+      "out": 0.5,
+      "source": "https://openrouter.ai/z-ai/glm-5.3-flash",
+      "checked": "2026-09-24",
+      "aliases": [
+        "z-ai/glm-5.3-flash-20260826"
+      ]
+    },
+    "meta/muse-spark-1.2-contributor": {
+      "provider": "other",
+      "in": 0.1,
+      "out": 0.2,
+      "source": "https://openrouter.ai/meta/muse-spark-1.2-contributor",
+      "checked": "2026-09-24",
+      "aliases": [
+        "meta/muse-spark-1.2-contributor-20260805"
+      ]
+    },
+    "deepseek/deepseek-v4-flash-vision-exp": {
+      "provider": "other",
+      "in": 0.22,
+      "out": 0.66,
+      "source": "https://openrouter.ai/deepseek/deepseek-v4-flash-vision-exp",
+      "checked": "2026-09-24",
+      "aliases": [
+        "deepseek/deepseek-v4-flash-vision-exp-20260821"
+      ]
+    },
+    "tencent/hy-mt2-1.8b": {
+      "provider": "other",
+      "in": 0.044,
+      "out": 0.177,
+      "source": "https://openrouter.ai/tencent/hy-mt2-1.8b",
+      "checked": "2026-09-24",
+      "aliases": [
+        "tencent/hy-mt2-1.8b-20260521"
+      ]
+    },
+    "tencent/hy-mt2-30b-a3b": {
+      "provider": "other",
+      "in": 0.074,
+      "out": 0.295,
+      "source": "https://openrouter.ai/tencent/hy-mt2-30b-a3b",
+      "checked": "2026-09-24",
+      "aliases": [
+        "tencent/hy-mt2-30b-a3b-20260521"
+      ]
+    },
+    "~z-ai/glm-latest": {
+      "provider": "other",
+      "in": 0.5625,
+      "out": 2.5,
+      "source": "https://openrouter.ai/~z-ai/glm-latest",
+      "checked": "2026-09-24"
+    },
+    "tencent/hy-mt2-7b": {
+      "provider": "other",
+      "in": 0.074,
+      "out": 0.295,
+      "source": "https://openrouter.ai/tencent/hy-mt2-7b",
+      "checked": "2026-09-24",
+      "aliases": [
+        "tencent/hy-mt2-7b-20260521"
+      ]
+    },
+    "z-ai/glm-5.3": {
+      "provider": "other",
+      "in": 0.84,
+      "out": 2.64,
+      "source": "https://openrouter.ai/z-ai/glm-5.3",
+      "checked": "2026-09-24",
+      "aliases": [
+        "z-ai/glm-5.3-20260816"
+      ]
+    },
+    "qwen/qwen3.8-27b": {
+      "provider": "other",
+      "in": 0.42,
+      "out": 3,
+      "source": "https://openrouter.ai/qwen/qwen3.8-27b",
+      "checked": "2026-09-24",
+      "aliases": [
+        "qwen/qwen3.8-27b-20260814"
+      ]
+    },
+    "google/gemini-3.7-flash": {
+      "provider": "other",
+      "in": 0.75,
+      "out": 3.75,
+      "source": "https://openrouter.ai/google/gemini-3.7-flash",
+      "checked": "2026-09-24",
+      "aliases": [
+        "google/gemini-3.7-flash-20260813"
+      ]
+    },
+    "bytedance-seed/seed-2-1-turbo": {
+      "provider": "other",
+      "in": 0.5,
+      "out": 2.5,
+      "source": "https://openrouter.ai/bytedance-seed/seed-2-1-turbo",
+      "checked": "2026-09-24",
+      "aliases": [
+        "bytedance-seed/seed-2-1-turbo-20260810"
+      ]
+    },
+    "qwen/qwen3.8-2.4t-a95b": {
+      "provider": "other",
+      "in": 2,
+      "out": 6,
+      "source": "https://openrouter.ai/qwen/qwen3.8-2.4t-a95b",
+      "checked": "2026-09-24",
+      "aliases": [
+        "qwen/qwen3.8-2.4t-a95b-20260812"
+      ]
+    },
+    "bytedance-seed/seed-2.0-code": {
+      "provider": "other",
+      "in": 0.5,
+      "out": 3,
+      "source": "https://openrouter.ai/bytedance-seed/seed-2.0-code",
+      "checked": "2026-09-24",
+      "aliases": [
+        "bytedance-seed/seed-2.0-code-20260730"
+      ]
+    },
+    "deepseek/deepseek-v4-pro-0813": {
+      "provider": "other",
+      "in": 0.462,
+      "out": 1.386,
+      "source": "https://openrouter.ai/deepseek/deepseek-v4-pro-0813",
+      "checked": "2026-09-24",
+      "aliases": [
+        "deepseek/deepseek-v4-pro-20260813"
+      ]
+    },
+    "x-ai/grok-4.6": {
+      "provider": "other",
+      "in": 2,
+      "out": 6,
+      "source": "https://openrouter.ai/x-ai/grok-4.6",
+      "checked": "2026-09-24",
+      "aliases": [
+        "x-ai/grok-4.6-20260810"
+      ]
+    },
+    "nvidia/nemotron-3.5-lightning": {
+      "provider": "other",
+      "in": 0.08,
+      "out": 0.2,
+      "source": "https://openrouter.ai/nvidia/nemotron-3.5-lightning",
+      "checked": "2026-09-24",
+      "aliases": [
+        "nvidia/nemotron-3.5-lightning-20260807"
+      ]
+    },
+    "sakana/sakana-namazu": {
+      "provider": "other",
+      "in": 0.95,
+      "out": 4,
+      "source": "https://openrouter.ai/sakana/sakana-namazu",
+      "checked": "2026-09-24",
+      "aliases": [
+        "sakana/namazu-20260811"
+      ]
+    },
+    "upstage/solar-pro4": {
+      "provider": "other",
+      "in": 0.09,
+      "out": 0.36,
+      "source": "https://openrouter.ai/upstage/solar-pro4",
+      "checked": "2026-09-24",
+      "aliases": [
+        "upstage/solar-pro4-20260810"
+      ]
+    },
+    "meta/muse-glimmer-30b": {
+      "provider": "other",
+      "in": 0.3,
+      "out": 1.2,
+      "source": "https://openrouter.ai/meta/muse-glimmer-30b",
+      "checked": "2026-09-24",
+      "aliases": [
+        "meta/muse-glimmer-30b-20260810"
+      ]
+    },
+    "meta/muse-spark-1.2": {
+      "provider": "other",
+      "in": 1.25,
+      "out": 4.25,
+      "source": "https://openrouter.ai/meta/muse-spark-1.2",
+      "checked": "2026-09-24",
+      "aliases": [
+        "meta/muse-spark-1.2-20260805"
+      ]
+    },
+    "~deepseek/deepseek-v4-flash-latest": {
+      "provider": "other",
+      "in": 0.03,
+      "out": 0.32,
+      "source": "https://openrouter.ai/~deepseek/deepseek-v4-flash-latest",
+      "checked": "2026-09-24"
+    },
+    "deepseek/deepseek-v4-flash-0731": {
+      "provider": "other",
+      "in": 0.03,
+      "out": 0.32,
+      "source": "https://openrouter.ai/deepseek/deepseek-v4-flash-0731",
+      "checked": "2026-09-24",
+      "aliases": [
+        "deepseek/deepseek-v4-flash-20260731"
+      ]
+    },
+    "thinkingmachines/inkling-small": {
+      "provider": "other",
+      "in": 0.45,
+      "out": 1.2,
+      "source": "https://openrouter.ai/thinkingmachines/inkling-small",
+      "checked": "2026-09-24",
+      "aliases": [
+        "thinkingmachines/inkling-small-20260730"
+      ]
+    },
+    "qwen/qwen3.7-flash": {
+      "provider": "other",
+      "in": 0.03,
+      "out": 0.13,
+      "source": "https://openrouter.ai/qwen/qwen3.7-flash",
+      "checked": "2026-09-24",
+      "aliases": [
+        "qwen/qwen3.7-flash-20260727"
+      ]
+    },
+    "anthropic/claude-opus-5": {
+      "provider": "anthropic",
+      "in": 5,
+      "out": 25,
+      "source": "https://openrouter.ai/anthropic/claude-opus-5",
+      "checked": "2026-09-24",
+      "aliases": [
+        "anthropic/claude-opus-5-20260723"
+      ]
+    },
+    "inclusionai/ling-3.0-flash": {
+      "provider": "other",
+      "in": 0.021,
+      "out": 0.063,
+      "source": "https://openrouter.ai/inclusionai/ling-3.0-flash",
+      "checked": "2026-09-24",
+      "aliases": [
+        "inclusionai/ling-3.0-flash-20260723"
+      ]
+    },
+    "poolside/laguna-s-2.1": {
+      "provider": "other",
+      "in": 0.09,
+      "out": 0.18,
+      "source": "https://openrouter.ai/poolside/laguna-s-2.1",
+      "checked": "2026-09-24",
+      "aliases": [
+        "poolside/laguna-s-2.1-20260720"
+      ]
+    },
+    "google/gemini-3.6-flash": {
+      "provider": "other",
+      "in": 0.75,
+      "out": 3.75,
+      "source": "https://openrouter.ai/google/gemini-3.6-flash",
+      "checked": "2026-09-24",
+      "aliases": [
+        "google/gemini-3.6-flash-20260721"
+      ],
+      "speed": {
+        "p50LatencyMs": 1752,
+        "p50ThroughputTps": 147,
+        "requests": 19350,
+        "windowMinutes": 30,
+        "source": "https://openrouter.ai/google/gemini-3.6-flash",
+        "fetchedAt": "2026-09-24T08:12:28.138Z"
+      }
+    },
+    "google/gemini-3.5-flash-lite": {
+      "provider": "other",
+      "in": 0.3,
+      "out": 2.5,
+      "source": "https://openrouter.ai/google/gemini-3.5-flash-lite",
+      "checked": "2026-09-24",
+      "aliases": [
+        "google/gemini-3.5-flash-lite-20260721"
+      ]
+    },
+    "meituan/longcat-2.0": {
+      "provider": "other",
+      "in": 0.3,
+      "out": 1.2,
+      "source": "https://openrouter.ai/meituan/longcat-2.0",
+      "checked": "2026-09-24",
+      "aliases": [
+        "meituan/longcat-2.0-20260720"
+      ]
+    },
+    "thinkingmachines/inkling": {
+      "provider": "other",
+      "in": 1,
+      "out": 4.05,
+      "source": "https://openrouter.ai/thinkingmachines/inkling",
+      "checked": "2026-09-24",
+      "aliases": [
+        "thinkingmachines/inkling-20260715"
+      ]
+    },
+    "moonshotai/kimi-k3": {
+      "provider": "other",
+      "in": 3,
+      "out": 15,
+      "source": "https://openrouter.ai/moonshotai/kimi-k3",
+      "checked": "2026-09-24",
+      "aliases": [
+        "moonshotai/kimi-k3-20260715"
+      ]
+    },
+    "meta/muse-spark-1.1": {
+      "provider": "other",
+      "in": 1.25,
+      "out": 4.25,
+      "source": "https://openrouter.ai/meta/muse-spark-1.1",
+      "checked": "2026-09-24",
+      "aliases": [
+        "meta/muse-spark-1.1-20260709"
+      ]
+    },
+    "kwaipilot/kat-coder-pro-v2.5": {
+      "provider": "other",
+      "in": 0.74,
+      "out": 2.96,
+      "source": "https://openrouter.ai/kwaipilot/kat-coder-pro-v2.5",
+      "checked": "2026-09-24",
+      "aliases": [
+        "kwaipilot/kat-coder-pro-v2.5-20260710"
+      ]
+    },
+    "openai/gpt-5.6-luna-pro": {
+      "provider": "openai",
+      "in": 0.2,
+      "out": 1.2,
+      "source": "https://openrouter.ai/openai/gpt-5.6-luna-pro",
+      "checked": "2026-09-24",
+      "aliases": [
+        "openai/gpt-5.6-luna-pro-20260709"
+      ]
+    },
+    "openai/gpt-5.6-luna": {
+      "provider": "openai",
+      "in": 0.2,
+      "out": 1.2,
+      "source": "https://openrouter.ai/openai/gpt-5.6-luna",
+      "checked": "2026-09-24",
+      "aliases": [
+        "openai/gpt-5.6-luna-20260709"
+      ],
+      "speed": {
+        "p50LatencyMs": 2043.5,
+        "p50ThroughputTps": 56,
+        "requests": 445030,
+        "windowMinutes": 30,
+        "source": "https://openrouter.ai/openai/gpt-5.6-luna",
+        "fetchedAt": "2026-09-24T08:12:39.068Z"
+      }
+    },
+    "openai/gpt-5.6-terra-pro": {
+      "provider": "openai",
+      "in": 2,
+      "out": 12,
+      "source": "https://openrouter.ai/openai/gpt-5.6-terra-pro",
+      "checked": "2026-09-24",
+      "aliases": [
+        "openai/gpt-5.6-terra-pro-20260709"
+      ]
+    },
+    "openai/gpt-5.6-terra": {
+      "provider": "openai",
+      "in": 2,
+      "out": 12,
+      "source": "https://openrouter.ai/openai/gpt-5.6-terra",
+      "checked": "2026-09-24",
+      "aliases": [
+        "openai/gpt-5.6-terra-20260709"
+      ]
+    },
+    "openai/gpt-5.6-sol-pro": {
+      "provider": "openai",
+      "in": 2,
+      "out": 10,
+      "source": "https://openrouter.ai/openai/gpt-5.6-sol-pro",
+      "checked": "2026-09-24",
+      "aliases": [
+        "openai/gpt-5.6-sol-pro-20260709"
+      ]
+    },
+    "openai/gpt-5.6-sol": {
+      "provider": "openai",
+      "in": 2,
+      "out": 10,
+      "source": "https://openrouter.ai/openai/gpt-5.6-sol",
+      "checked": "2026-09-24",
+      "aliases": [
+        "openai/gpt-5.6-sol-20260709"
+      ]
+    },
+    "x-ai/grok-4.5": {
+      "provider": "other",
+      "in": 2,
+      "out": 6,
+      "source": "https://openrouter.ai/x-ai/grok-4.5",
+      "checked": "2026-09-24",
+      "aliases": [
+        "x-ai/grok-4.5-20260708"
+      ]
+    },
+    "~x-ai/grok-latest": {
+      "provider": "other",
+      "in": 1.6,
+      "out": 4.8,
+      "source": "https://openrouter.ai/~x-ai/grok-latest",
+      "checked": "2026-09-24"
+    },
+    "aion-labs/aion-3.0-mini": {
+      "provider": "other",
+      "in": 0.7,
+      "out": 1.4,
+      "source": "https://openrouter.ai/aion-labs/aion-3.0-mini",
+      "checked": "2026-09-24",
+      "aliases": [
+        "aion-labs/aion-3.0-mini-20260707"
+      ]
+    },
+    "aion-labs/aion-3.0": {
+      "provider": "other",
+      "in": 3,
+      "out": 6,
+      "source": "https://openrouter.ai/aion-labs/aion-3.0",
+      "checked": "2026-09-24",
+      "aliases": [
+        "aion-labs/aion-3.0-20260707"
+      ]
+    },
+    "tencent/hy3": {
+      "provider": "other",
+      "in": 0.132,
+      "out": 0.528,
+      "source": "https://openrouter.ai/tencent/hy3",
+      "checked": "2026-09-24",
+      "aliases": [
+        "tencent/hy3-20260706"
+      ]
+    },
+    "poolside/laguna-xs-2.1": {
+      "provider": "other",
+      "in": 0.06,
+      "out": 0.12,
+      "source": "https://openrouter.ai/poolside/laguna-xs-2.1",
+      "checked": "2026-09-24",
+      "aliases": [
+        "poolside/laguna-xs-2.1-20260625"
+      ]
+    },
+    "anthropic/claude-sonnet-5": {
+      "provider": "anthropic",
+      "in": 2,
+      "out": 10,
+      "source": "https://openrouter.ai/anthropic/claude-sonnet-5",
+      "checked": "2026-09-24",
+      "aliases": [
+        "anthropic/claude-sonnet-5-20260630"
+      ],
+      "speed": {
+        "p50LatencyMs": 2739.5,
+        "p50ThroughputTps": 49,
+        "requests": 72978,
+        "windowMinutes": 30,
+        "source": "https://openrouter.ai/anthropic/claude-sonnet-5",
+        "fetchedAt": "2026-09-24T08:12:35.653Z"
+      }
+    },
+    "google/gemini-3.1-flash-lite-image": {
+      "provider": "other",
+      "in": 0.25,
+      "out": 1.5,
+      "source": "https://openrouter.ai/google/gemini-3.1-flash-lite-image",
+      "checked": "2026-09-24",
+      "aliases": [
+        "google/gemini-3.1-flash-lite-image-20260630"
+      ]
+    },
+    "sakana/fugu-ultra": {
+      "provider": "other",
+      "in": 5,
+      "out": 30,
+      "source": "https://openrouter.ai/sakana/fugu-ultra",
+      "checked": "2026-09-24",
+      "aliases": [
+        "sakana/fugu-ultra-20260615"
+      ]
+    },
+    "google/gemini-3.1-flash-image": {
+      "provider": "other",
+      "in": 0.5,
+      "out": 3,
+      "source": "https://openrouter.ai/google/gemini-3.1-flash-image",
+      "checked": "2026-09-24",
+      "aliases": [
+        "google/gemini-3.1-flash-image-20260528"
+      ]
+    },
+    "google/gemini-3-pro-image": {
+      "provider": "other",
+      "in": 2,
+      "out": 12,
+      "source": "https://openrouter.ai/google/gemini-3-pro-image",
+      "checked": "2026-09-24",
+      "aliases": [
+        "google/gemini-3-pro-image-20260528"
+      ]
+    },
+    "z-ai/glm-5.2": {
+      "provider": "other",
+      "in": 0.6496,
+      "out": 2.0416,
+      "source": "https://openrouter.ai/z-ai/glm-5.2",
+      "checked": "2026-09-24",
+      "aliases": [
+        "z-ai/glm-5.2-20260616"
+      ]
+    },
+    "moonshotai/kimi-k2.7-code": {
+      "provider": "other",
+      "in": 0.7062,
+      "out": 3.3,
+      "source": "https://openrouter.ai/moonshotai/kimi-k2.7-code",
+      "checked": "2026-09-24",
+      "aliases": [
+        "moonshotai/kimi-k2.7-code-20260612"
+      ]
+    },
+    "~anthropic/claude-fable-latest": {
+      "provider": "other",
+      "in": 10,
+      "out": 50,
+      "source": "https://openrouter.ai/~anthropic/claude-fable-latest",
+      "checked": "2026-09-24"
+    },
+    "anthropic/claude-fable-5": {
+      "provider": "anthropic",
+      "in": 10,
+      "out": 50,
+      "source": "https://openrouter.ai/anthropic/claude-fable-5",
+      "checked": "2026-09-24",
+      "aliases": [
+        "anthropic/claude-5-fable-20260609"
+      ]
+    },
+    "nvidia/nemotron-3.5-content-safety": {
+      "provider": "other",
+      "in": 0.2,
+      "out": 0.2,
+      "source": "https://openrouter.ai/nvidia/nemotron-3.5-content-safety",
+      "checked": "2026-09-24",
+      "aliases": [
+        "nvidia/nemotron-3.5-content-safety-20260604"
+      ]
+    },
+    "nvidia/nemotron-3-ultra-550b-a55b": {
+      "provider": "other",
+      "in": 0.6,
+      "out": 2.4,
+      "source": "https://openrouter.ai/nvidia/nemotron-3-ultra-550b-a55b",
+      "checked": "2026-09-24",
+      "aliases": [
+        "nvidia/nemotron-3-ultra-550b-a55b-20260604"
+      ]
+    },
+    "qwen/qwen3.7-plus": {
+      "provider": "other",
+      "in": 0.32,
+      "out": 1.28,
+      "source": "https://openrouter.ai/qwen/qwen3.7-plus",
+      "checked": "2026-09-24",
+      "aliases": [
+        "qwen/qwen3.7-plus-20260602"
+      ]
+    },
+    "minimax/minimax-m3": {
+      "provider": "other",
+      "in": 0.3,
+      "out": 1.2,
+      "source": "https://openrouter.ai/minimax/minimax-m3",
+      "checked": "2026-09-24",
+      "aliases": [
+        "minimax/minimax-m3-20260531"
+      ]
+    },
+    "stepfun/step-3.7-flash": {
+      "provider": "other",
+      "in": 0.2,
+      "out": 1.15,
+      "source": "https://openrouter.ai/stepfun/step-3.7-flash",
+      "checked": "2026-09-24",
+      "aliases": [
+        "stepfun/step-3.7-flash-20260528"
+      ]
+    },
+    "anthropic/claude-opus-4.8": {
+      "provider": "anthropic",
+      "in": 5,
+      "out": 25,
+      "source": "https://openrouter.ai/anthropic/claude-opus-4.8",
+      "checked": "2026-09-24",
+      "aliases": [
+        "anthropic/claude-4.8-opus-20260528"
+      ]
+    },
+    "qwen/qwen3.7-max": {
+      "provider": "other",
+      "in": 1.475,
+      "out": 4.425,
+      "source": "https://openrouter.ai/qwen/qwen3.7-max",
+      "checked": "2026-09-24",
+      "aliases": [
+        "qwen/qwen3.7-max-20260520"
+      ]
+    },
+    "x-ai/grok-build-0.1": {
+      "provider": "other",
+      "in": 1,
+      "out": 2,
+      "source": "https://openrouter.ai/x-ai/grok-build-0.1",
+      "checked": "2026-09-24",
+      "aliases": [
+        "x-ai/grok-build-0.1-20260520"
+      ]
+    },
+    "google/gemini-3.5-flash": {
+      "provider": "other",
+      "in": 1.5,
+      "out": 9,
+      "source": "https://openrouter.ai/google/gemini-3.5-flash",
+      "checked": "2026-09-24",
+      "aliases": [
+        "google/gemini-3.5-flash-20260519"
+      ]
+    },
+    "perceptron/perceptron-mk1": {
+      "provider": "other",
+      "in": 0.15,
+      "out": 1.5,
+      "source": "https://openrouter.ai/perceptron/perceptron-mk1",
+      "checked": "2026-09-24",
+      "aliases": [
+        "perceptron/perceptron-mk1-20260512"
+      ]
+    },
+    "google/gemini-3.1-flash-lite": {
+      "provider": "other",
+      "in": 0.25,
+      "out": 1.5,
+      "source": "https://openrouter.ai/google/gemini-3.1-flash-lite",
+      "checked": "2026-09-24",
+      "aliases": [
+        "google/gemini-3.1-flash-lite-20260507"
+      ],
+      "speed": {
+        "p50LatencyMs": 840,
+        "p50ThroughputTps": 80,
+        "requests": 245264,
+        "windowMinutes": 30,
+        "source": "https://openrouter.ai/google/gemini-3.1-flash-lite",
+        "fetchedAt": "2026-09-24T08:12:48.506Z"
+      }
+    },
+    "openai/gpt-chat-latest": {
+      "provider": "openai",
+      "in": 5,
+      "out": 30,
+      "source": "https://openrouter.ai/openai/gpt-chat-latest",
+      "checked": "2026-09-24",
+      "aliases": [
+        "openai/gpt-chat-latest-20260505"
+      ]
+    },
+    "x-ai/grok-4.3": {
+      "provider": "other",
+      "in": 1.25,
+      "out": 2.5,
+      "source": "https://openrouter.ai/x-ai/grok-4.3",
+      "checked": "2026-09-24",
+      "aliases": [
+        "x-ai/grok-4.3-20260430"
+      ]
+    },
+    "mistralai/mistral-medium-3-5": {
+      "provider": "other",
+      "in": 1.5,
+      "out": 7.5,
+      "source": "https://openrouter.ai/mistralai/mistral-medium-3-5",
+      "checked": "2026-09-24",
+      "aliases": [
+        "mistralai/mistral-medium-3.5-20260430"
+      ]
+    },
+    "~anthropic/claude-haiku-latest": {
+      "provider": "other",
+      "in": 1,
+      "out": 5,
+      "source": "https://openrouter.ai/~anthropic/claude-haiku-latest",
+      "checked": "2026-09-24"
+    },
+    "~openai/gpt-mini-latest": {
+      "provider": "other",
+      "in": 0.75,
+      "out": 4.5,
+      "source": "https://openrouter.ai/~openai/gpt-mini-latest",
+      "checked": "2026-09-24"
+    },
+    "~google/gemini-pro-latest": {
+      "provider": "other",
+      "in": 2,
+      "out": 12,
+      "source": "https://openrouter.ai/~google/gemini-pro-latest",
+      "checked": "2026-09-24"
+    },
+    "~moonshotai/kimi-latest": {
+      "provider": "other",
+      "in": 1.4,
+      "out": 10.75,
+      "source": "https://openrouter.ai/~moonshotai/kimi-latest",
+      "checked": "2026-09-24"
+    },
+    "~google/gemini-flash-latest": {
+      "provider": "other",
+      "in": 0.75,
+      "out": 3.75,
+      "source": "https://openrouter.ai/~google/gemini-flash-latest",
+      "checked": "2026-09-24"
+    },
+    "~anthropic/claude-sonnet-latest": {
+      "provider": "other",
+      "in": 2,
+      "out": 10,
+      "source": "https://openrouter.ai/~anthropic/claude-sonnet-latest",
+      "checked": "2026-09-24"
+    },
+    "qwen/qwen3.5-plus-20260420": {
+      "provider": "other",
+      "in": 0.3,
+      "out": 1.8,
+      "source": "https://openrouter.ai/qwen/qwen3.5-plus-20260420",
+      "checked": "2026-09-24"
+    },
+    "qwen/qwen3.6-flash": {
+      "provider": "other",
+      "in": 0.1875,
+      "out": 1.125,
+      "source": "https://openrouter.ai/qwen/qwen3.6-flash",
+      "checked": "2026-09-24"
+    },
+    "qwen/qwen3.6-35b-a3b": {
+      "provider": "other",
+      "in": 0.15,
+      "out": 1,
+      "source": "https://openrouter.ai/qwen/qwen3.6-35b-a3b",
+      "checked": "2026-09-24",
+      "aliases": [
+        "qwen/qwen3.6-35b-a3b-20260415"
+      ]
+    },
+    "qwen/qwen3.6-max-preview": {
+      "provider": "other",
+      "in": 1.027,
+      "out": 6.162,
+      "source": "https://openrouter.ai/qwen/qwen3.6-max-preview",
+      "checked": "2026-09-24",
+      "aliases": [
+        "qwen/qwen3.6-max-preview-20260420"
+      ]
+    },
+    "qwen/qwen3.6-27b": {
+      "provider": "other",
+      "in": 0.32,
+      "out": 2.7,
+      "source": "https://openrouter.ai/qwen/qwen3.6-27b",
+      "checked": "2026-09-24",
+      "aliases": [
+        "qwen/qwen3.6-27b-20260422"
+      ]
+    },
+    "openai/gpt-5.5-pro": {
+      "provider": "openai",
+      "in": 30,
+      "out": 180,
+      "source": "https://openrouter.ai/openai/gpt-5.5-pro",
+      "checked": "2026-09-24",
+      "aliases": [
+        "openai/gpt-5.5-pro-20260423"
+      ]
+    },
+    "openai/gpt-5.5": {
+      "provider": "openai",
+      "in": 5,
+      "out": 30,
+      "source": "https://openrouter.ai/openai/gpt-5.5",
+      "checked": "2026-09-24",
+      "aliases": [
+        "openai/gpt-5.5-20260423"
+      ],
+      "speed": {
+        "p50LatencyMs": 3426.5,
+        "p50ThroughputTps": 65,
+        "requests": 11607,
+        "windowMinutes": 30,
+        "source": "https://openrouter.ai/openai/gpt-5.5",
+        "fetchedAt": "2026-09-24T08:12:40.773Z"
+      }
+    },
+    "deepseek/deepseek-v4-pro": {
+      "provider": "other",
+      "in": 0.9396,
+      "out": 1.8792,
+      "source": "https://openrouter.ai/deepseek/deepseek-v4-pro",
+      "checked": "2026-09-24",
+      "aliases": [
+        "deepseek/deepseek-v4-pro-20260423"
+      ]
+    },
+    "deepseek/deepseek-v4-flash": {
+      "provider": "other",
+      "in": 0.088606,
+      "out": 0.177212,
+      "source": "https://openrouter.ai/deepseek/deepseek-v4-flash",
+      "checked": "2026-09-24",
+      "aliases": [
+        "deepseek/deepseek-v4-flash-20260423"
+      ]
+    },
+    "tencent/hy3-preview": {
+      "provider": "other",
+      "in": 0.18,
+      "out": 0.6,
+      "source": "https://openrouter.ai/tencent/hy3-preview",
+      "checked": "2026-09-24",
+      "aliases": [
+        "tencent/hy3-preview-20260421"
+      ]
+    },
+    "xiaomi/mimo-v2.5-pro": {
+      "provider": "other",
+      "in": 0.435,
+      "out": 0.87,
+      "source": "https://openrouter.ai/xiaomi/mimo-v2.5-pro",
+      "checked": "2026-09-24",
+      "aliases": [
+        "xiaomi/mimo-v2.5-pro-20260422"
+      ]
+    },
+    "xiaomi/mimo-v2.5": {
+      "provider": "other",
+      "in": 0.14,
+      "out": 0.28,
+      "source": "https://openrouter.ai/xiaomi/mimo-v2.5",
+      "checked": "2026-09-24",
+      "aliases": [
+        "xiaomi/mimo-v2.5-20260422"
+      ]
+    },
+    "openai/gpt-5.4-image-2": {
+      "provider": "openai",
+      "in": 8,
+      "out": 15,
+      "source": "https://openrouter.ai/openai/gpt-5.4-image-2",
+      "checked": "2026-09-24",
+      "aliases": [
+        "openai/gpt-5.4-image-2-20260421"
+      ]
+    },
+    "~anthropic/claude-opus-latest": {
+      "provider": "other",
+      "in": 4,
+      "out": 20,
+      "source": "https://openrouter.ai/~anthropic/claude-opus-latest",
+      "checked": "2026-09-24"
+    },
+    "moonshotai/kimi-k2.6": {
+      "provider": "other",
+      "in": 0.95,
+      "out": 4,
+      "source": "https://openrouter.ai/moonshotai/kimi-k2.6",
+      "checked": "2026-09-24",
+      "aliases": [
+        "moonshotai/kimi-k2.6-20260420"
+      ]
+    },
+    "anthropic/claude-opus-4.7": {
+      "provider": "anthropic",
+      "in": 5,
+      "out": 25,
+      "source": "https://openrouter.ai/anthropic/claude-opus-4.7",
+      "checked": "2026-09-24",
+      "aliases": [
+        "anthropic/claude-4.7-opus-20260416"
+      ]
+    },
+    "z-ai/glm-5.1": {
+      "provider": "other",
+      "in": 0.966,
+      "out": 3.036,
+      "source": "https://openrouter.ai/z-ai/glm-5.1",
+      "checked": "2026-09-24",
+      "aliases": [
+        "z-ai/glm-5.1-20260406"
+      ]
+    },
+    "google/gemma-4-26b-a4b-it": {
+      "provider": "other",
+      "in": 0.09,
+      "out": 0.3,
+      "source": "https://openrouter.ai/google/gemma-4-26b-a4b-it",
+      "checked": "2026-09-24",
+      "aliases": [
+        "google/gemma-4-26b-a4b-it-20260403"
+      ]
+    },
+    "google/gemma-4-31b-it": {
+      "provider": "other",
+      "in": 0.09,
+      "out": 0.34,
+      "source": "https://openrouter.ai/google/gemma-4-31b-it",
+      "checked": "2026-09-24",
+      "aliases": [
+        "google/gemma-4-31b-it-20260402"
+      ]
+    },
+    "qwen/qwen3.6-plus": {
+      "provider": "other",
+      "in": 0.325,
+      "out": 1.95,
+      "source": "https://openrouter.ai/qwen/qwen3.6-plus",
+      "checked": "2026-09-24",
+      "aliases": [
+        "qwen/qwen3.6-plus-04-02"
+      ]
+    },
+    "z-ai/glm-5v-turbo": {
+      "provider": "other",
+      "in": 1.2,
+      "out": 4,
+      "source": "https://openrouter.ai/z-ai/glm-5v-turbo",
+      "checked": "2026-09-24",
+      "aliases": [
+        "z-ai/glm-5v-turbo-20260401"
+      ]
+    },
+    "arcee-ai/trinity-large-thinking": {
+      "provider": "other",
+      "in": 0.25,
+      "out": 0.8,
+      "source": "https://openrouter.ai/arcee-ai/trinity-large-thinking",
+      "checked": "2026-09-24"
+    },
+    "x-ai/grok-4.20-multi-agent": {
+      "provider": "other",
+      "in": 1.25,
+      "out": 2.5,
+      "source": "https://openrouter.ai/x-ai/grok-4.20-multi-agent",
+      "checked": "2026-09-24",
+      "aliases": [
+        "x-ai/grok-4.20-multi-agent-20260309"
+      ]
+    },
+    "x-ai/grok-4.20": {
+      "provider": "other",
+      "in": 1.25,
+      "out": 2.5,
+      "source": "https://openrouter.ai/x-ai/grok-4.20",
+      "checked": "2026-09-24",
+      "aliases": [
+        "x-ai/grok-4.20-20260309"
+      ]
+    },
+    "google/lyria-3-pro-preview": {
+      "provider": "other",
+      "in": 0,
+      "out": 0,
+      "source": "https://openrouter.ai/google/lyria-3-pro-preview",
+      "checked": "2026-09-24",
+      "aliases": [
+        "google/lyria-3-pro-preview-20260330"
+      ]
+    },
+    "google/lyria-3-clip-preview": {
+      "provider": "other",
+      "in": 0,
+      "out": 0,
+      "source": "https://openrouter.ai/google/lyria-3-clip-preview",
+      "checked": "2026-09-24",
+      "aliases": [
+        "google/lyria-3-clip-preview-20260330"
+      ]
+    },
+    "rekaai/reka-edge": {
+      "provider": "other",
+      "in": 0.1,
+      "out": 0.1,
+      "source": "https://openrouter.ai/rekaai/reka-edge",
+      "checked": "2026-09-24",
+      "aliases": [
+        "rekaai/reka-edge-2603"
+      ]
+    },
+    "minimax/minimax-m2.7": {
+      "provider": "other",
+      "in": 0.3,
+      "out": 1.2,
+      "source": "https://openrouter.ai/minimax/minimax-m2.7",
+      "checked": "2026-09-24",
+      "aliases": [
+        "minimax/minimax-m2.7-20260318"
+      ]
+    },
+    "openai/gpt-5.4-nano": {
+      "provider": "openai",
+      "in": 0.2,
+      "out": 1.25,
+      "source": "https://openrouter.ai/openai/gpt-5.4-nano",
+      "checked": "2026-09-24",
+      "aliases": [
+        "openai/gpt-5.4-nano-20260317"
+      ]
+    },
+    "openai/gpt-5.4-mini": {
+      "provider": "openai",
+      "in": 0.75,
+      "out": 4.5,
+      "source": "https://openrouter.ai/openai/gpt-5.4-mini",
+      "checked": "2026-09-24",
+      "aliases": [
+        "openai/gpt-5.4-mini-20260317"
+      ]
+    },
+    "mistralai/mistral-small-2603": {
+      "provider": "other",
+      "in": 0.15,
+      "out": 0.6,
+      "source": "https://openrouter.ai/mistralai/mistral-small-2603",
+      "checked": "2026-09-24"
+    },
+    "z-ai/glm-5-turbo": {
+      "provider": "other",
+      "in": 1.2,
+      "out": 4,
+      "source": "https://openrouter.ai/z-ai/glm-5-turbo",
+      "checked": "2026-09-24",
+      "aliases": [
+        "z-ai/glm-5-turbo-20260315"
+      ]
+    },
+    "nvidia/nemotron-3-super-120b-a12b": {
+      "provider": "other",
+      "in": 0.08,
+      "out": 0.45,
+      "source": "https://openrouter.ai/nvidia/nemotron-3-super-120b-a12b",
+      "checked": "2026-09-24",
+      "aliases": [
+        "nvidia/nemotron-3-super-120b-a12b-20230311"
+      ]
+    },
+    "bytedance-seed/seed-2.0-lite": {
+      "provider": "other",
+      "in": 0.25,
+      "out": 2,
+      "source": "https://openrouter.ai/bytedance-seed/seed-2.0-lite",
+      "checked": "2026-09-24",
+      "aliases": [
+        "bytedance-seed/seed-2.0-lite-20260309"
+      ]
+    },
+    "qwen/qwen3.5-9b": {
+      "provider": "other",
+      "in": 0.1,
+      "out": 0.15,
+      "source": "https://openrouter.ai/qwen/qwen3.5-9b",
+      "checked": "2026-09-24",
+      "aliases": [
+        "qwen/qwen3.5-9b-20260310"
+      ]
+    },
+    "openai/gpt-5.4-pro": {
+      "provider": "openai",
+      "in": 30,
+      "out": 180,
+      "source": "https://openrouter.ai/openai/gpt-5.4-pro",
+      "checked": "2026-09-24",
+      "aliases": [
+        "openai/gpt-5.4-pro-20260305"
+      ]
+    },
+    "openai/gpt-5.4": {
+      "provider": "openai",
+      "in": 2.5,
+      "out": 15,
+      "source": "https://openrouter.ai/openai/gpt-5.4",
+      "checked": "2026-09-24",
+      "aliases": [
+        "openai/gpt-5.4-20260305"
+      ],
+      "speed": {
+        "p50LatencyMs": 1120,
+        "p50ThroughputTps": 41,
+        "requests": 11628,
+        "windowMinutes": 30,
+        "source": "https://openrouter.ai/openai/gpt-5.4",
+        "fetchedAt": "2026-09-24T08:12:34.839Z"
+      }
+    },
+    "inception/mercury-2": {
+      "provider": "other",
+      "in": 0.25,
+      "out": 0.75,
+      "source": "https://openrouter.ai/inception/mercury-2",
+      "checked": "2026-09-24",
+      "aliases": [
+        "inception/mercury-2-20260304"
+      ]
+    },
+    "google/gemini-3.1-flash-lite-preview": {
+      "provider": "other",
+      "in": 0.25,
+      "out": 1.5,
+      "source": "https://openrouter.ai/google/gemini-3.1-flash-lite-preview",
+      "checked": "2026-09-24",
+      "aliases": [
+        "google/gemini-3.1-flash-lite-preview-20260303"
+      ],
+      "speed": {
+        "p50LatencyMs": 631,
+        "p50ThroughputTps": 98,
+        "requests": 45868,
+        "windowMinutes": 30,
+        "source": "https://openrouter.ai/google/gemini-3.1-flash-lite-preview",
+        "fetchedAt": "2026-09-24T08:12:43.400Z"
+      }
+    },
+    "bytedance-seed/seed-2.0-mini": {
+      "provider": "other",
+      "in": 0.1,
+      "out": 0.4,
+      "source": "https://openrouter.ai/bytedance-seed/seed-2.0-mini",
+      "checked": "2026-09-24",
+      "aliases": [
+        "bytedance-seed/seed-2.0-mini-20260224"
+      ]
+    },
+    "google/gemini-3.1-flash-image-preview": {
+      "provider": "other",
+      "in": 0.5,
+      "out": 3,
+      "source": "https://openrouter.ai/google/gemini-3.1-flash-image-preview",
+      "checked": "2026-09-24",
+      "aliases": [
+        "google/gemini-3.1-flash-image-preview-20260226"
+      ]
+    },
+    "qwen/qwen3.5-35b-a3b": {
+      "provider": "other",
+      "in": 0.3125,
+      "out": 1.25,
+      "source": "https://openrouter.ai/qwen/qwen3.5-35b-a3b",
+      "checked": "2026-09-24",
+      "aliases": [
+        "qwen/qwen3.5-35b-a3b-20260224"
+      ]
+    },
+    "qwen/qwen3.5-27b": {
+      "provider": "other",
+      "in": 0.195,
+      "out": 1.56,
+      "source": "https://openrouter.ai/qwen/qwen3.5-27b",
+      "checked": "2026-09-24",
+      "aliases": [
+        "qwen/qwen3.5-27b-20260224"
+      ]
+    },
+    "qwen/qwen3.5-122b-a10b": {
+      "provider": "other",
+      "in": 0.26,
+      "out": 2.08,
+      "source": "https://openrouter.ai/qwen/qwen3.5-122b-a10b",
+      "checked": "2026-09-24",
+      "aliases": [
+        "qwen/qwen3.5-122b-a10b-20260224"
+      ]
+    },
+    "qwen/qwen3.5-flash-02-23": {
+      "provider": "other",
+      "in": 0.065,
+      "out": 0.26,
+      "source": "https://openrouter.ai/qwen/qwen3.5-flash-02-23",
+      "checked": "2026-09-24",
+      "aliases": [
+        "qwen/qwen3.5-flash-20260224"
+      ]
+    },
+    "google/gemini-3.1-pro-preview-customtools": {
+      "provider": "other",
+      "in": 2,
+      "out": 12,
+      "source": "https://openrouter.ai/google/gemini-3.1-pro-preview-customtools",
+      "checked": "2026-09-24",
+      "aliases": [
+        "google/gemini-3.1-pro-preview-customtools-20260219"
+      ]
+    },
+    "openai/gpt-5.3-codex": {
+      "provider": "openai",
+      "in": 1.75,
+      "out": 14,
+      "source": "https://openrouter.ai/openai/gpt-5.3-codex",
+      "checked": "2026-09-24",
+      "aliases": [
+        "openai/gpt-5.3-codex-20260224"
+      ]
+    },
+    "aion-labs/aion-2.0": {
+      "provider": "other",
+      "in": 0.8,
+      "out": 1.6,
+      "source": "https://openrouter.ai/aion-labs/aion-2.0",
+      "checked": "2026-09-24",
+      "aliases": [
+        "aion-labs/aion-2.0-20260223"
+      ]
+    },
+    "google/gemini-3.1-pro-preview": {
+      "provider": "other",
+      "in": 2,
+      "out": 12,
+      "source": "https://openrouter.ai/google/gemini-3.1-pro-preview",
+      "checked": "2026-09-24",
+      "aliases": [
+        "google/gemini-3.1-pro-preview-20260219"
+      ],
+      "speed": {
+        "p50LatencyMs": 2969,
+        "p50ThroughputTps": 74,
+        "requests": 38222,
+        "windowMinutes": 30,
+        "source": "https://openrouter.ai/google/gemini-3.1-pro-preview",
+        "fetchedAt": "2026-09-24T08:12:41.701Z"
+      }
+    },
+    "anthropic/claude-sonnet-4.6": {
+      "provider": "anthropic",
+      "in": 3,
+      "out": 15,
+      "source": "https://openrouter.ai/anthropic/claude-sonnet-4.6",
+      "checked": "2026-09-24",
+      "aliases": [
+        "anthropic/claude-4.6-sonnet-20260217"
+      ],
+      "speed": {
+        "p50LatencyMs": 1184,
+        "p50ThroughputTps": 41,
+        "requests": 44761,
+        "windowMinutes": 30,
+        "source": "https://openrouter.ai/anthropic/claude-sonnet-4.6",
+        "fetchedAt": "2026-09-24T08:12:38.262Z"
+      }
+    },
+    "qwen/qwen3.5-plus-02-15": {
+      "provider": "other",
+      "in": 0.26,
+      "out": 1.56,
+      "source": "https://openrouter.ai/qwen/qwen3.5-plus-02-15",
+      "checked": "2026-09-24",
+      "aliases": [
+        "qwen/qwen3.5-plus-20260216"
+      ]
+    },
+    "qwen/qwen3.5-397b-a17b": {
+      "provider": "other",
+      "in": 0.55,
+      "out": 3.5,
+      "source": "https://openrouter.ai/qwen/qwen3.5-397b-a17b",
+      "checked": "2026-09-24",
+      "aliases": [
+        "qwen/qwen3.5-397b-a17b-20260216"
+      ]
+    },
+    "minimax/minimax-m2.5": {
+      "provider": "other",
+      "in": 0.27,
+      "out": 1.08,
+      "source": "https://openrouter.ai/minimax/minimax-m2.5",
+      "checked": "2026-09-24",
+      "aliases": [
+        "minimax/minimax-m2.5-20260211"
+      ]
+    },
+    "z-ai/glm-5": {
+      "provider": "other",
+      "in": 0.6,
+      "out": 1.92,
+      "source": "https://openrouter.ai/z-ai/glm-5",
+      "checked": "2026-09-24",
+      "aliases": [
+        "z-ai/glm-5-20260211"
+      ]
+    },
+    "qwen/qwen3-max-thinking": {
+      "provider": "other",
+      "in": 0.78,
+      "out": 3.9,
+      "source": "https://openrouter.ai/qwen/qwen3-max-thinking",
+      "checked": "2026-09-24",
+      "aliases": [
+        "qwen/qwen3-max-thinking-20260123"
+      ]
+    },
+    "anthropic/claude-opus-4.6": {
+      "provider": "anthropic",
+      "in": 5,
+      "out": 25,
+      "source": "https://openrouter.ai/anthropic/claude-opus-4.6",
+      "checked": "2026-09-24",
+      "aliases": [
+        "anthropic/claude-4.6-opus-20260205"
+      ],
+      "speed": {
+        "p50LatencyMs": 1767.5,
+        "p50ThroughputTps": 40,
+        "requests": 7086,
+        "windowMinutes": 30,
+        "source": "https://openrouter.ai/anthropic/claude-opus-4.6",
+        "fetchedAt": "2026-09-24T08:12:45.014Z"
+      }
+    },
+    "qwen/qwen3-coder-next": {
+      "provider": "other",
+      "in": 0.12,
+      "out": 0.8,
+      "source": "https://openrouter.ai/qwen/qwen3-coder-next",
+      "checked": "2026-09-24",
+      "aliases": [
+        "qwen/qwen3-coder-next-2025-02-03"
+      ]
+    },
+    "openrouter/free": {
+      "provider": "other",
+      "in": 0,
+      "out": 0,
+      "source": "https://openrouter.ai/openrouter/free",
+      "checked": "2026-09-24"
+    },
+    "stepfun/step-3.5-flash": {
+      "provider": "other",
+      "in": 0.1,
+      "out": 0.3,
+      "source": "https://openrouter.ai/stepfun/step-3.5-flash",
+      "checked": "2026-09-24"
+    },
+    "moonshotai/kimi-k2.5": {
+      "provider": "other",
+      "in": 0.45,
+      "out": 2.25,
+      "source": "https://openrouter.ai/moonshotai/kimi-k2.5",
+      "checked": "2026-09-24",
+      "aliases": [
+        "moonshotai/kimi-k2.5-0127"
+      ]
+    },
+    "upstage/solar-pro-3": {
+      "provider": "other",
+      "in": 0.15,
+      "out": 0.6,
+      "source": "https://openrouter.ai/upstage/solar-pro-3",
+      "checked": "2026-09-24"
+    },
+    "minimax/minimax-m2-her": {
+      "provider": "other",
+      "in": 0.3,
+      "out": 1.2,
+      "source": "https://openrouter.ai/minimax/minimax-m2-her",
+      "checked": "2026-09-24",
+      "aliases": [
+        "minimax/minimax-m2-her-20260123"
+      ]
+    },
+    "writer/palmyra-x5": {
+      "provider": "other",
+      "in": 0.6,
+      "out": 6,
+      "source": "https://openrouter.ai/writer/palmyra-x5",
+      "checked": "2026-09-24",
+      "aliases": [
+        "writer/palmyra-x5-20250428"
+      ]
+    },
+    "openai/gpt-audio": {
+      "provider": "openai",
+      "in": 2.5,
+      "out": 10,
+      "source": "https://openrouter.ai/openai/gpt-audio",
+      "checked": "2026-09-24"
+    },
+    "openai/gpt-audio-mini": {
+      "provider": "openai",
+      "in": 0.6,
+      "out": 2.4,
+      "source": "https://openrouter.ai/openai/gpt-audio-mini",
+      "checked": "2026-09-24"
+    },
+    "z-ai/glm-4.7-flash": {
+      "provider": "other",
+      "in": 0.0605,
+      "out": 0.4,
+      "source": "https://openrouter.ai/z-ai/glm-4.7-flash",
+      "checked": "2026-09-24",
+      "aliases": [
+        "z-ai/glm-4.7-flash-20260119"
+      ]
+    },
+    "openai/gpt-5.2-codex": {
+      "provider": "openai",
+      "in": 1.75,
+      "out": 14,
+      "source": "https://openrouter.ai/openai/gpt-5.2-codex",
+      "checked": "2026-09-24",
+      "aliases": [
+        "openai/gpt-5.2-codex-20260114"
+      ]
+    },
+    "bytedance-seed/seed-1.6-flash": {
+      "provider": "other",
+      "in": 0.075,
+      "out": 0.3,
+      "source": "https://openrouter.ai/bytedance-seed/seed-1.6-flash",
+      "checked": "2026-09-24",
+      "aliases": [
+        "bytedance-seed/seed-1.6-flash-20250625"
+      ]
+    },
+    "bytedance-seed/seed-1.6": {
+      "provider": "other",
+      "in": 0.25,
+      "out": 2,
+      "source": "https://openrouter.ai/bytedance-seed/seed-1.6",
+      "checked": "2026-09-24",
+      "aliases": [
+        "bytedance-seed/seed-1.6-20250625"
+      ]
+    },
+    "minimax/minimax-m2.1": {
+      "provider": "other",
+      "in": 0.3,
+      "out": 1.2,
+      "source": "https://openrouter.ai/minimax/minimax-m2.1",
+      "checked": "2026-09-24"
+    },
+    "z-ai/glm-4.7": {
+      "provider": "other",
+      "in": 0.4,
+      "out": 1.75,
+      "source": "https://openrouter.ai/z-ai/glm-4.7",
+      "checked": "2026-09-24",
+      "aliases": [
+        "z-ai/glm-4.7-20251222"
+      ]
+    },
+    "google/gemini-3-flash-preview": {
+      "provider": "other",
+      "in": 0.5,
+      "out": 3,
+      "source": "https://openrouter.ai/google/gemini-3-flash-preview",
+      "checked": "2026-09-24",
+      "aliases": [
+        "google/gemini-3-flash-preview-20251217"
+      ]
+    },
+    "nvidia/nemotron-3-nano-30b-a3b": {
+      "provider": "other",
+      "in": 0.05,
+      "out": 0.2,
+      "source": "https://openrouter.ai/nvidia/nemotron-3-nano-30b-a3b",
+      "checked": "2026-09-24"
+    },
+    "openai/gpt-5.2-chat": {
+      "provider": "openai",
+      "in": 1.75,
+      "out": 14,
+      "source": "https://openrouter.ai/openai/gpt-5.2-chat",
+      "checked": "2026-09-24",
+      "aliases": [
+        "openai/gpt-5.2-chat-20251211"
+      ]
+    },
+    "openai/gpt-5.2-pro": {
+      "provider": "openai",
+      "in": 21,
+      "out": 168,
+      "source": "https://openrouter.ai/openai/gpt-5.2-pro",
+      "checked": "2026-09-24",
+      "aliases": [
+        "openai/gpt-5.2-pro-20251211"
+      ]
+    },
+    "openai/gpt-5.2": {
+      "provider": "openai",
+      "in": 1.75,
+      "out": 14,
+      "source": "https://openrouter.ai/openai/gpt-5.2",
+      "checked": "2026-09-24",
+      "aliases": [
+        "openai/gpt-5.2-20251211"
+      ]
+    },
+    "relace/relace-search": {
+      "provider": "other",
+      "in": 1,
+      "out": 3,
+      "source": "https://openrouter.ai/relace/relace-search",
+      "checked": "2026-09-24",
+      "aliases": [
+        "relace/relace-search-20251208"
+      ]
+    },
+    "z-ai/glm-4.6v": {
+      "provider": "other",
+      "in": 0.3,
+      "out": 0.9,
+      "source": "https://openrouter.ai/z-ai/glm-4.6v",
+      "checked": "2026-09-24",
+      "aliases": [
+        "z-ai/glm-4.6-20251208"
+      ]
+    },
+    "openai/gpt-5.1-codex-max": {
+      "provider": "openai",
+      "in": 1.25,
+      "out": 10,
+      "source": "https://openrouter.ai/openai/gpt-5.1-codex-max",
+      "checked": "2026-09-24",
+      "aliases": [
+        "openai/gpt-5.1-codex-max-20251204"
+      ],
+      "speed": {
+        "p50LatencyMs": 12454,
+        "p50ThroughputTps": 95,
+        "requests": 21,
+        "windowMinutes": 30,
+        "source": "https://openrouter.ai/openai/gpt-5.1-codex-max",
+        "fetchedAt": "2026-09-24T08:12:51.040Z"
+      }
+    },
+    "amazon/nova-2-lite-v1": {
+      "provider": "other",
+      "in": 0.3,
+      "out": 2.5,
+      "source": "https://openrouter.ai/amazon/nova-2-lite-v1",
+      "checked": "2026-09-24"
+    },
+    "mistralai/ministral-14b-2512": {
+      "provider": "other",
+      "in": 0.2,
+      "out": 0.2,
+      "source": "https://openrouter.ai/mistralai/ministral-14b-2512",
+      "checked": "2026-09-24"
+    },
+    "mistralai/ministral-8b-2512": {
+      "provider": "other",
+      "in": 0.15,
+      "out": 0.15,
+      "source": "https://openrouter.ai/mistralai/ministral-8b-2512",
+      "checked": "2026-09-24"
+    },
+    "mistralai/ministral-3b-2512": {
+      "provider": "other",
+      "in": 0.1,
+      "out": 0.1,
+      "source": "https://openrouter.ai/mistralai/ministral-3b-2512",
+      "checked": "2026-09-24"
+    },
+    "deepseek/deepseek-v3.2": {
+      "provider": "other",
+      "in": 0.269,
+      "out": 0.4,
+      "source": "https://openrouter.ai/deepseek/deepseek-v3.2",
+      "checked": "2026-09-24",
+      "aliases": [
+        "deepseek/deepseek-v3.2-20251201"
+      ]
+    },
+    "anthropic/claude-opus-4.5": {
+      "provider": "anthropic",
+      "in": 5,
+      "out": 25,
+      "source": "https://openrouter.ai/anthropic/claude-opus-4.5",
+      "checked": "2026-09-24",
+      "aliases": [
+        "anthropic/claude-4.5-opus-20251124"
+      ]
+    },
+    "google/gemini-3-pro-image-preview": {
+      "provider": "other",
+      "in": 2,
+      "out": 12,
+      "source": "https://openrouter.ai/google/gemini-3-pro-image-preview",
+      "checked": "2026-09-24",
+      "aliases": [
+        "google/gemini-3-pro-image-preview-20251120"
+      ]
+    },
+    "openai/gpt-5.1": {
+      "provider": "openai",
+      "in": 1.25,
+      "out": 10,
+      "source": "https://openrouter.ai/openai/gpt-5.1",
+      "checked": "2026-09-24",
+      "aliases": [
+        "openai/gpt-5.1-20251113"
+      ]
+    },
+    "openai/gpt-5.1-codex": {
+      "provider": "openai",
+      "in": 1.25,
+      "out": 10,
+      "source": "https://openrouter.ai/openai/gpt-5.1-codex",
+      "checked": "2026-09-24",
+      "aliases": [
+        "openai/gpt-5.1-codex-20251113"
+      ]
+    },
+    "openai/gpt-5.1-codex-mini": {
+      "provider": "openai",
+      "in": 0.25,
+      "out": 2,
+      "source": "https://openrouter.ai/openai/gpt-5.1-codex-mini",
+      "checked": "2026-09-24",
+      "aliases": [
+        "openai/gpt-5.1-codex-mini-20251113"
+      ]
+    },
+    "moonshotai/kimi-k2-thinking": {
+      "provider": "other",
+      "in": 0.6,
+      "out": 2.5,
+      "source": "https://openrouter.ai/moonshotai/kimi-k2-thinking",
+      "checked": "2026-09-24",
+      "aliases": [
+        "moonshotai/kimi-k2-thinking-20251106"
+      ]
+    },
+    "amazon/nova-premier-v1": {
+      "provider": "other",
+      "in": 2.5,
+      "out": 12.5,
+      "source": "https://openrouter.ai/amazon/nova-premier-v1",
+      "checked": "2026-09-24"
+    },
+    "perplexity/sonar-pro-search": {
+      "provider": "other",
+      "in": 3,
+      "out": 15,
+      "source": "https://openrouter.ai/perplexity/sonar-pro-search",
+      "checked": "2026-09-24"
+    },
+    "mistralai/voxtral-small-24b-2507": {
+      "provider": "other",
+      "in": 0.1,
+      "out": 0.3,
+      "source": "https://openrouter.ai/mistralai/voxtral-small-24b-2507",
+      "checked": "2026-09-24"
+    },
+    "openai/gpt-oss-safeguard-20b": {
+      "provider": "openai",
+      "in": 0.075,
+      "out": 0.3,
+      "source": "https://openrouter.ai/openai/gpt-oss-safeguard-20b",
+      "checked": "2026-09-24"
+    },
+    "minimax/minimax-m2": {
+      "provider": "other",
+      "in": 0.3,
+      "out": 1.2,
+      "source": "https://openrouter.ai/minimax/minimax-m2",
+      "checked": "2026-09-24"
+    },
+    "qwen/qwen3-vl-32b-instruct": {
+      "provider": "other",
+      "in": 0.104,
+      "out": 0.416,
+      "source": "https://openrouter.ai/qwen/qwen3-vl-32b-instruct",
+      "checked": "2026-09-24"
+    },
+    "ibm-granite/granite-4.0-h-micro": {
+      "provider": "other",
+      "in": 0.017,
+      "out": 0.112,
+      "source": "https://openrouter.ai/ibm-granite/granite-4.0-h-micro",
+      "checked": "2026-09-24"
+    },
+    "openai/gpt-5-image-mini": {
+      "provider": "openai",
+      "in": 2.5,
+      "out": 2,
+      "source": "https://openrouter.ai/openai/gpt-5-image-mini",
+      "checked": "2026-09-24"
+    },
+    "anthropic/claude-haiku-4.5": {
+      "provider": "anthropic",
+      "in": 1,
+      "out": 5,
+      "source": "https://openrouter.ai/anthropic/claude-haiku-4.5",
+      "checked": "2026-09-24",
+      "aliases": [
+        "anthropic/claude-4.5-haiku-20251001"
+      ],
+      "speed": {
+        "p50LatencyMs": 853,
+        "p50ThroughputTps": 64,
+        "requests": 78221,
+        "windowMinutes": 30,
+        "source": "https://openrouter.ai/anthropic/claude-haiku-4.5",
+        "fetchedAt": "2026-09-24T08:12:25.875Z"
+      }
+    },
+    "qwen/qwen3-vl-8b-thinking": {
+      "provider": "other",
+      "in": 0.18,
+      "out": 2.1,
+      "source": "https://openrouter.ai/qwen/qwen3-vl-8b-thinking",
+      "checked": "2026-09-24"
+    },
+    "qwen/qwen3-vl-8b-instruct": {
+      "provider": "other",
+      "in": 0.117,
+      "out": 0.455,
+      "source": "https://openrouter.ai/qwen/qwen3-vl-8b-instruct",
+      "checked": "2026-09-24"
+    },
+    "openai/gpt-5-image": {
+      "provider": "openai",
+      "in": 10,
+      "out": 10,
+      "source": "https://openrouter.ai/openai/gpt-5-image",
+      "checked": "2026-09-24"
+    },
+    "google/gemini-2.5-flash-image": {
+      "provider": "other",
+      "in": 0.3,
+      "out": 2.5,
+      "source": "https://openrouter.ai/google/gemini-2.5-flash-image",
+      "checked": "2026-09-24"
+    },
+    "qwen/qwen3-vl-30b-a3b-thinking": {
+      "provider": "other",
+      "in": 0.2,
+      "out": 2.4,
+      "source": "https://openrouter.ai/qwen/qwen3-vl-30b-a3b-thinking",
+      "checked": "2026-09-24"
+    },
+    "qwen/qwen3-vl-30b-a3b-instruct": {
+      "provider": "other",
+      "in": 0.13,
+      "out": 0.52,
+      "source": "https://openrouter.ai/qwen/qwen3-vl-30b-a3b-instruct",
+      "checked": "2026-09-24"
+    },
+    "openai/gpt-5-pro": {
+      "provider": "openai",
+      "in": 15,
+      "out": 120,
+      "source": "https://openrouter.ai/openai/gpt-5-pro",
+      "checked": "2026-09-24",
+      "aliases": [
+        "openai/gpt-5-pro-2025-10-06"
+      ]
+    },
+    "z-ai/glm-4.6": {
+      "provider": "other",
+      "in": 0.43,
+      "out": 1.75,
+      "source": "https://openrouter.ai/z-ai/glm-4.6",
+      "checked": "2026-09-24"
+    },
+    "anthropic/claude-sonnet-4.5": {
+      "provider": "anthropic",
+      "in": 3,
+      "out": 15,
+      "source": "https://openrouter.ai/anthropic/claude-sonnet-4.5",
+      "checked": "2026-09-24",
+      "aliases": [
+        "anthropic/claude-4.5-sonnet-20250929"
+      ],
+      "speed": {
+        "p50LatencyMs": 1958,
+        "p50ThroughputTps": 37,
+        "requests": 14425,
+        "windowMinutes": 30,
+        "source": "https://openrouter.ai/anthropic/claude-sonnet-4.5",
+        "fetchedAt": "2026-09-24T08:12:50.130Z"
+      }
+    },
+    "deepseek/deepseek-v3.2-exp": {
+      "provider": "other",
+      "in": 0.27,
+      "out": 0.41,
+      "source": "https://openrouter.ai/deepseek/deepseek-v3.2-exp",
+      "checked": "2026-09-24"
+    },
+    "thedrummer/cydonia-24b-v4.1": {
+      "provider": "other",
+      "in": 0.3,
+      "out": 0.5,
+      "source": "https://openrouter.ai/thedrummer/cydonia-24b-v4.1",
+      "checked": "2026-09-24"
+    },
+    "relace/relace-apply-3": {
+      "provider": "other",
+      "in": 0.85,
+      "out": 1.25,
+      "source": "https://openrouter.ai/relace/relace-apply-3",
+      "checked": "2026-09-24"
+    },
+    "qwen/qwen3-vl-235b-a22b-thinking": {
+      "provider": "other",
+      "in": 0.4,
+      "out": 4,
+      "source": "https://openrouter.ai/qwen/qwen3-vl-235b-a22b-thinking",
+      "checked": "2026-09-24"
+    },
+    "qwen/qwen3-vl-235b-a22b-instruct": {
+      "provider": "other",
+      "in": 0.21,
+      "out": 1.9,
+      "source": "https://openrouter.ai/qwen/qwen3-vl-235b-a22b-instruct",
+      "checked": "2026-09-24"
+    },
+    "qwen/qwen3-max": {
+      "provider": "other",
+      "in": 0.78,
+      "out": 3.9,
+      "source": "https://openrouter.ai/qwen/qwen3-max",
+      "checked": "2026-09-24"
+    },
+    "qwen/qwen3-coder-plus": {
+      "provider": "other",
+      "in": 0.65,
+      "out": 3.25,
+      "source": "https://openrouter.ai/qwen/qwen3-coder-plus",
+      "checked": "2026-09-24"
+    },
+    "deepseek/deepseek-v3.1-terminus": {
+      "provider": "other",
+      "in": 0.27,
+      "out": 1,
+      "source": "https://openrouter.ai/deepseek/deepseek-v3.1-terminus",
+      "checked": "2026-09-24"
+    },
+    "qwen/qwen3-coder-flash": {
+      "provider": "other",
+      "in": 0.195,
+      "out": 0.975,
+      "source": "https://openrouter.ai/qwen/qwen3-coder-flash",
+      "checked": "2026-09-24"
+    },
+    "qwen/qwen3-next-80b-a3b-thinking": {
+      "provider": "other",
+      "in": 0.15,
+      "out": 1.2,
+      "source": "https://openrouter.ai/qwen/qwen3-next-80b-a3b-thinking",
+      "checked": "2026-09-24",
+      "aliases": [
+        "qwen/qwen3-next-80b-a3b-thinking-2509"
+      ]
+    },
+    "qwen/qwen3-next-80b-a3b-instruct": {
+      "provider": "other",
+      "in": 0.1,
+      "out": 1.1,
+      "source": "https://openrouter.ai/qwen/qwen3-next-80b-a3b-instruct",
+      "checked": "2026-09-24",
+      "aliases": [
+        "qwen/qwen3-next-80b-a3b-instruct-2509"
+      ]
+    },
+    "qwen/qwen-plus-2025-07-28": {
+      "provider": "other",
+      "in": 0.26,
+      "out": 0.78,
+      "source": "https://openrouter.ai/qwen/qwen-plus-2025-07-28",
+      "checked": "2026-09-24"
+    },
+    "moonshotai/kimi-k2-0905": {
+      "provider": "other",
+      "in": 0.6,
+      "out": 2.5,
+      "source": "https://openrouter.ai/moonshotai/kimi-k2-0905",
+      "checked": "2026-09-24"
+    },
+    "qwen/qwen3-30b-a3b-thinking-2507": {
+      "provider": "other",
+      "in": 0.2,
+      "out": 2.4,
+      "source": "https://openrouter.ai/qwen/qwen3-30b-a3b-thinking-2507",
+      "checked": "2026-09-24"
+    },
+    "nousresearch/hermes-4-405b": {
+      "provider": "other",
+      "in": 1,
+      "out": 3,
+      "source": "https://openrouter.ai/nousresearch/hermes-4-405b",
+      "checked": "2026-09-24"
+    },
+    "deepseek/deepseek-chat-v3.1": {
+      "provider": "other",
+      "in": 0.25,
+      "out": 0.95,
+      "source": "https://openrouter.ai/deepseek/deepseek-chat-v3.1",
+      "checked": "2026-09-24"
+    },
+    "mistralai/mistral-medium-3.1": {
+      "provider": "other",
+      "in": 0.4,
+      "out": 2,
+      "source": "https://openrouter.ai/mistralai/mistral-medium-3.1",
+      "checked": "2026-09-24"
+    },
+    "z-ai/glm-4.5v": {
+      "provider": "other",
+      "in": 0.6,
+      "out": 1.8,
+      "source": "https://openrouter.ai/z-ai/glm-4.5v",
+      "checked": "2026-09-24"
+    },
+    "openai/gpt-5": {
+      "provider": "openai",
+      "in": 1.25,
+      "out": 10,
+      "source": "https://openrouter.ai/openai/gpt-5",
+      "checked": "2026-09-24",
+      "aliases": [
+        "openai/gpt-5-2025-08-07"
+      ],
+      "speed": {
+        "p50LatencyMs": 4265.5,
+        "p50ThroughputTps": 75,
+        "requests": 4752,
+        "windowMinutes": 30,
+        "source": "https://openrouter.ai/openai/gpt-5",
+        "fetchedAt": "2026-09-24T08:12:39.971Z"
+      }
+    },
+    "openai/gpt-5-mini": {
+      "provider": "openai",
+      "in": 0.25,
+      "out": 2,
+      "source": "https://openrouter.ai/openai/gpt-5-mini",
+      "checked": "2026-09-24",
+      "aliases": [
+        "openai/gpt-5-mini-2025-08-07"
+      ],
+      "speed": {
+        "p50LatencyMs": 3441,
+        "p50ThroughputTps": 76,
+        "requests": 46286,
+        "windowMinutes": 30,
+        "source": "https://openrouter.ai/openai/gpt-5-mini",
+        "fetchedAt": "2026-09-24T08:12:24.865Z"
+      }
+    },
+    "openai/gpt-5-nano": {
+      "provider": "openai",
+      "in": 0.05,
+      "out": 0.4,
+      "source": "https://openrouter.ai/openai/gpt-5-nano",
+      "checked": "2026-09-24",
+      "aliases": [
+        "openai/gpt-5-nano-2025-08-07"
+      ],
+      "speed": {
+        "p50LatencyMs": 2307,
+        "p50ThroughputTps": 84,
+        "requests": 64970,
+        "windowMinutes": 30,
+        "source": "https://openrouter.ai/openai/gpt-5-nano",
+        "fetchedAt": "2026-09-24T08:12:36.472Z"
+      }
+    },
+    "openai/gpt-oss-120b": {
+      "provider": "openai",
+      "in": 0.15,
+      "out": 0.6,
+      "source": "https://openrouter.ai/openai/gpt-oss-120b",
+      "checked": "2026-09-24"
+    },
+    "openai/gpt-oss-20b": {
+      "provider": "openai",
+      "in": 0.018,
+      "out": 0.09,
+      "source": "https://openrouter.ai/openai/gpt-oss-20b",
+      "checked": "2026-09-24"
+    },
+    "anthropic/claude-opus-4.1": {
+      "provider": "anthropic",
+      "in": 15,
+      "out": 75,
+      "source": "https://openrouter.ai/anthropic/claude-opus-4.1",
+      "checked": "2026-09-24",
+      "aliases": [
+        "anthropic/claude-4.1-opus-20250805"
+      ]
+    },
+    "mistralai/codestral-2508": {
+      "provider": "other",
+      "in": 0.3,
+      "out": 0.9,
+      "source": "https://openrouter.ai/mistralai/codestral-2508",
+      "checked": "2026-09-24"
+    },
+    "qwen/qwen3-coder-30b-a3b-instruct": {
+      "provider": "other",
+      "in": 0.07,
+      "out": 0.28,
+      "source": "https://openrouter.ai/qwen/qwen3-coder-30b-a3b-instruct",
+      "checked": "2026-09-24"
+    },
+    "qwen/qwen3-30b-a3b-instruct-2507": {
+      "provider": "other",
+      "in": 0.1,
+      "out": 0.3,
+      "source": "https://openrouter.ai/qwen/qwen3-30b-a3b-instruct-2507",
+      "checked": "2026-09-24"
+    },
+    "z-ai/glm-4.5": {
+      "provider": "other",
+      "in": 0.6,
+      "out": 2.2,
+      "source": "https://openrouter.ai/z-ai/glm-4.5",
+      "checked": "2026-09-24"
+    },
+    "z-ai/glm-4.5-air": {
+      "provider": "other",
+      "in": 0.13,
+      "out": 0.85,
+      "source": "https://openrouter.ai/z-ai/glm-4.5-air",
+      "checked": "2026-09-24"
+    },
+    "qwen/qwen3-235b-a22b-thinking-2507": {
+      "provider": "other",
+      "in": 0.23,
+      "out": 2.3,
+      "source": "https://openrouter.ai/qwen/qwen3-235b-a22b-thinking-2507",
+      "checked": "2026-09-24"
+    },
+    "qwen/qwen3-coder": {
+      "provider": "other",
+      "in": 0.3,
+      "out": 1,
+      "source": "https://openrouter.ai/qwen/qwen3-coder",
+      "checked": "2026-09-24",
+      "aliases": [
+        "qwen/qwen3-coder-480b-a35b-07-25"
+      ]
+    },
+    "bytedance/ui-tars-1.5-7b": {
+      "provider": "other",
+      "in": 0.1,
+      "out": 0.2,
+      "source": "https://openrouter.ai/bytedance/ui-tars-1.5-7b",
+      "checked": "2026-09-24"
+    },
+    "google/gemini-2.5-flash-lite": {
+      "provider": "other",
+      "in": 0.1,
+      "out": 0.4,
+      "source": "https://openrouter.ai/google/gemini-2.5-flash-lite",
+      "checked": "2026-09-24",
+      "speed": {
+        "p50LatencyMs": 493,
+        "p50ThroughputTps": 89,
+        "requests": 437534,
+        "windowMinutes": 30,
+        "source": "https://openrouter.ai/google/gemini-2.5-flash-lite",
+        "fetchedAt": "2026-09-24T08:12:46.686Z"
+      }
+    },
+    "qwen/qwen3-235b-a22b-2507": {
+      "provider": "other",
+      "in": 0.0875,
+      "out": 0.35,
+      "source": "https://openrouter.ai/qwen/qwen3-235b-a22b-2507",
+      "checked": "2026-09-24",
+      "aliases": [
+        "qwen/qwen3-235b-a22b-07-25"
+      ]
+    },
+    "moonshotai/kimi-k2": {
+      "provider": "other",
+      "in": 0.57,
+      "out": 2.3,
+      "source": "https://openrouter.ai/moonshotai/kimi-k2",
+      "checked": "2026-09-24"
+    },
+    "cognitivecomputations/dolphin-mistral-24b-venice-edition": {
+      "provider": "other",
+      "in": 0.2,
+      "out": 0.9,
+      "source": "https://openrouter.ai/cognitivecomputations/dolphin-mistral-24b-venice-edition",
+      "checked": "2026-09-24",
+      "aliases": [
+        "venice/uncensored"
+      ]
+    },
+    "tencent/hunyuan-a13b-instruct": {
+      "provider": "other",
+      "in": 0.14,
+      "out": 0.57,
+      "source": "https://openrouter.ai/tencent/hunyuan-a13b-instruct",
+      "checked": "2026-09-24"
+    },
+    "morph/morph-v3-large": {
+      "provider": "other",
+      "in": 0.9,
+      "out": 1.9,
+      "source": "https://openrouter.ai/morph/morph-v3-large",
+      "checked": "2026-09-24"
+    },
+    "morph/morph-v3-fast": {
+      "provider": "other",
+      "in": 0.8,
+      "out": 1.2,
+      "source": "https://openrouter.ai/morph/morph-v3-fast",
+      "checked": "2026-09-24"
+    },
+    "baidu/ernie-4.5-vl-424b-a47b": {
+      "provider": "other",
+      "in": 0.42,
+      "out": 1.25,
+      "source": "https://openrouter.ai/baidu/ernie-4.5-vl-424b-a47b",
+      "checked": "2026-09-24"
+    },
+    "mistralai/mistral-small-3.2-24b-instruct": {
+      "provider": "other",
+      "in": 0.09375,
+      "out": 0.25,
+      "source": "https://openrouter.ai/mistralai/mistral-small-3.2-24b-instruct",
+      "checked": "2026-09-24",
+      "aliases": [
+        "mistralai/mistral-small-3.2-24b-instruct-2506"
+      ]
+    },
+    "minimax/minimax-m1": {
+      "provider": "other",
+      "in": 0.4,
+      "out": 2.2,
+      "source": "https://openrouter.ai/minimax/minimax-m1",
+      "checked": "2026-09-24"
+    },
+    "google/gemini-2.5-flash": {
+      "provider": "other",
+      "in": 0.3,
+      "out": 2.5,
+      "source": "https://openrouter.ai/google/gemini-2.5-flash",
+      "checked": "2026-09-24",
+      "speed": {
+        "p50LatencyMs": 613,
+        "p50ThroughputTps": 74,
+        "requests": 308556,
+        "windowMinutes": 30,
+        "source": "https://openrouter.ai/google/gemini-2.5-flash",
+        "fetchedAt": "2026-09-24T08:12:27.041Z"
+      }
+    },
+    "google/gemini-2.5-pro": {
+      "provider": "other",
+      "in": 1.25,
+      "out": 10,
+      "source": "https://openrouter.ai/google/gemini-2.5-pro",
+      "checked": "2026-09-24",
+      "speed": {
+        "p50LatencyMs": 2414,
+        "p50ThroughputTps": 92,
+        "requests": 15580,
+        "windowMinutes": 30,
+        "source": "https://openrouter.ai/google/gemini-2.5-pro",
+        "fetchedAt": "2026-09-24T08:12:45.831Z"
+      }
+    },
+    "openai/o3-pro": {
+      "provider": "openai",
+      "in": 20,
+      "out": 80,
+      "source": "https://openrouter.ai/openai/o3-pro",
+      "checked": "2026-09-24",
+      "aliases": [
+        "openai/o3-pro-2025-06-10"
+      ]
+    },
+    "google/gemini-2.5-pro-preview": {
+      "provider": "other",
+      "in": 1.25,
+      "out": 10,
+      "source": "https://openrouter.ai/google/gemini-2.5-pro-preview",
+      "checked": "2026-09-24",
+      "aliases": [
+        "google/gemini-2.5-pro-preview-06-05"
+      ]
+    },
+    "deepseek/deepseek-r1-0528": {
+      "provider": "other",
+      "in": 0.5,
+      "out": 2.15,
+      "source": "https://openrouter.ai/deepseek/deepseek-r1-0528",
+      "checked": "2026-09-24"
+    },
+    "anthropic/claude-sonnet-4": {
+      "provider": "anthropic",
+      "in": 3,
+      "out": 15,
+      "source": "https://openrouter.ai/anthropic/claude-sonnet-4",
+      "checked": "2026-09-24",
+      "aliases": [
+        "anthropic/claude-4-sonnet-20250522"
+      ],
+      "speed": {
+        "p50LatencyMs": 1188.5,
+        "p50ThroughputTps": 47,
+        "requests": 6444,
+        "windowMinutes": 30,
+        "source": "https://openrouter.ai/anthropic/claude-sonnet-4",
+        "fetchedAt": "2026-09-24T08:12:34.035Z"
+      }
+    },
+    "mistralai/mistral-medium-3": {
+      "provider": "other",
+      "in": 0.4,
+      "out": 2,
+      "source": "https://openrouter.ai/mistralai/mistral-medium-3",
+      "checked": "2026-09-24"
+    },
+    "meta-llama/llama-guard-4-12b": {
+      "provider": "other",
+      "in": 0.18,
+      "out": 0.18,
+      "source": "https://openrouter.ai/meta-llama/llama-guard-4-12b",
+      "checked": "2026-09-24"
+    },
+    "qwen/qwen3-30b-a3b": {
+      "provider": "other",
+      "in": 0.12,
+      "out": 0.5,
+      "source": "https://openrouter.ai/qwen/qwen3-30b-a3b",
+      "checked": "2026-09-24",
+      "aliases": [
+        "qwen/qwen3-30b-a3b-04-28"
+      ]
+    },
+    "qwen/qwen3-8b": {
+      "provider": "other",
+      "in": 0.117,
+      "out": 0.455,
+      "source": "https://openrouter.ai/qwen/qwen3-8b",
+      "checked": "2026-09-24",
+      "aliases": [
+        "qwen/qwen3-8b-04-28"
+      ]
+    },
+    "qwen/qwen3-14b": {
+      "provider": "other",
+      "in": 0.12,
+      "out": 0.24,
+      "source": "https://openrouter.ai/qwen/qwen3-14b",
+      "checked": "2026-09-24",
+      "aliases": [
+        "qwen/qwen3-14b-04-28"
+      ]
+    },
+    "qwen/qwen3-32b": {
+      "provider": "other",
+      "in": 0.08,
+      "out": 0.28,
+      "source": "https://openrouter.ai/qwen/qwen3-32b",
+      "checked": "2026-09-24",
+      "aliases": [
+        "qwen/qwen3-32b-04-28"
+      ]
+    },
+    "qwen/qwen3-235b-a22b": {
+      "provider": "other",
+      "in": 0.455,
+      "out": 1.82,
+      "source": "https://openrouter.ai/qwen/qwen3-235b-a22b",
+      "checked": "2026-09-24",
+      "aliases": [
+        "qwen/qwen3-235b-a22b-04-28"
+      ]
+    },
+    "openai/o4-mini-high": {
+      "provider": "openai",
+      "in": 1.1,
+      "out": 4.4,
+      "source": "https://openrouter.ai/openai/o4-mini-high",
+      "checked": "2026-09-24",
+      "aliases": [
+        "openai/o4-mini-high-2025-04-16"
+      ]
+    },
+    "openai/o3": {
+      "provider": "openai",
+      "in": 2,
+      "out": 8,
+      "source": "https://openrouter.ai/openai/o3",
+      "checked": "2026-09-24",
+      "aliases": [
+        "openai/o3-2025-04-16"
+      ],
+      "speed": {
+        "p50LatencyMs": 3227,
+        "p50ThroughputTps": 91,
+        "requests": 94,
+        "windowMinutes": 30,
+        "source": "https://openrouter.ai/openai/o3",
+        "fetchedAt": "2026-09-24T08:12:37.361Z"
+      }
+    },
+    "openai/o4-mini": {
+      "provider": "openai",
+      "in": 1.1,
+      "out": 4.4,
+      "source": "https://openrouter.ai/openai/o4-mini",
+      "checked": "2026-09-24",
+      "aliases": [
+        "openai/o4-mini-2025-04-16"
+      ],
+      "speed": {
+        "p50LatencyMs": 4037,
+        "p50ThroughputTps": 129,
+        "requests": 311,
+        "windowMinutes": 30,
+        "source": "https://openrouter.ai/openai/o4-mini",
+        "fetchedAt": "2026-09-24T08:12:49.336Z"
+      }
+    },
+    "openai/gpt-4.1": {
+      "provider": "openai",
+      "in": 2,
+      "out": 8,
+      "source": "https://openrouter.ai/openai/gpt-4.1",
+      "checked": "2026-09-24",
+      "aliases": [
+        "openai/gpt-4.1-2025-04-14"
+      ]
+    },
+    "openai/gpt-4.1-mini": {
+      "provider": "openai",
+      "in": 0.4,
+      "out": 1.6,
+      "source": "https://openrouter.ai/openai/gpt-4.1-mini",
+      "checked": "2026-09-24",
+      "aliases": [
+        "openai/gpt-4.1-mini-2025-04-14"
+      ],
+      "speed": {
+        "p50LatencyMs": 953,
+        "p50ThroughputTps": 52,
+        "requests": 81457,
+        "windowMinutes": 30,
+        "source": "https://openrouter.ai/openai/gpt-4.1-mini",
+        "fetchedAt": "2026-09-24T08:12:30.598Z"
+      }
+    },
+    "openai/gpt-4.1-nano": {
+      "provider": "openai",
+      "in": 0.1,
+      "out": 0.4,
+      "source": "https://openrouter.ai/openai/gpt-4.1-nano",
+      "checked": "2026-09-24",
+      "aliases": [
+        "openai/gpt-4.1-nano-2025-04-14"
+      ],
+      "speed": {
+        "p50LatencyMs": 838,
+        "p50ThroughputTps": 61,
+        "requests": 52250,
+        "windowMinutes": 30,
+        "source": "https://openrouter.ai/openai/gpt-4.1-nano",
+        "fetchedAt": "2026-09-24T08:12:31.490Z"
+      }
+    },
+    "meta-llama/llama-4-maverick": {
+      "provider": "other",
+      "in": 0.1875,
+      "out": 0.6525,
+      "source": "https://openrouter.ai/meta-llama/llama-4-maverick",
+      "checked": "2026-09-24",
+      "aliases": [
+        "meta-llama/llama-4-maverick-17b-128e-instruct"
+      ]
+    },
+    "meta-llama/llama-4-scout": {
+      "provider": "other",
+      "in": 0.1,
+      "out": 0.3,
+      "source": "https://openrouter.ai/meta-llama/llama-4-scout",
+      "checked": "2026-09-24",
+      "aliases": [
+        "meta-llama/llama-4-scout-17b-16e-instruct"
+      ],
+      "speed": {
+        "p50LatencyMs": 725.5,
+        "p50ThroughputTps": 21,
+        "requests": 9167,
+        "windowMinutes": 30,
+        "source": "https://openrouter.ai/meta-llama/llama-4-scout",
+        "fetchedAt": "2026-09-24T08:12:42.559Z"
+      }
+    },
+    "deepseek/deepseek-chat-v3-0324": {
+      "provider": "other",
+      "in": 0.25,
+      "out": 1,
+      "source": "https://openrouter.ai/deepseek/deepseek-chat-v3-0324",
+      "checked": "2026-09-24"
+    },
+    "openai/o1-pro": {
+      "provider": "openai",
+      "in": 150,
+      "out": 600,
+      "source": "https://openrouter.ai/openai/o1-pro",
+      "checked": "2026-09-24"
+    },
+    "mistralai/mistral-small-3.1-24b-instruct": {
+      "provider": "other",
+      "in": 0.351,
+      "out": 0.555,
+      "source": "https://openrouter.ai/mistralai/mistral-small-3.1-24b-instruct",
+      "checked": "2026-09-24",
+      "aliases": [
+        "mistralai/mistral-small-3.1-24b-instruct-2503"
+      ]
+    },
+    "google/gemma-3-4b-it": {
+      "provider": "other",
+      "in": 0.05,
+      "out": 0.1,
+      "source": "https://openrouter.ai/google/gemma-3-4b-it",
+      "checked": "2026-09-24"
+    },
+    "google/gemma-3-12b-it": {
+      "provider": "other",
+      "in": 0.05,
+      "out": 0.15,
+      "source": "https://openrouter.ai/google/gemma-3-12b-it",
+      "checked": "2026-09-24"
+    },
+    "cohere/command-a": {
+      "provider": "other",
+      "in": 2.5,
+      "out": 10,
+      "source": "https://openrouter.ai/cohere/command-a",
+      "checked": "2026-09-24",
+      "aliases": [
+        "cohere/command-a-03-2025"
+      ]
+    },
+    "rekaai/reka-flash-3": {
+      "provider": "other",
+      "in": 0.1,
+      "out": 0.2,
+      "source": "https://openrouter.ai/rekaai/reka-flash-3",
+      "checked": "2026-09-24"
+    },
+    "google/gemma-3-27b-it": {
+      "provider": "other",
+      "in": 0.08,
+      "out": 0.45,
+      "source": "https://openrouter.ai/google/gemma-3-27b-it",
+      "checked": "2026-09-24"
+    },
+    "thedrummer/skyfall-36b-v2": {
+      "provider": "other",
+      "in": 0.55,
+      "out": 0.8,
+      "source": "https://openrouter.ai/thedrummer/skyfall-36b-v2",
+      "checked": "2026-09-24"
+    },
+    "perplexity/sonar-reasoning-pro": {
+      "provider": "other",
+      "in": 2,
+      "out": 8,
+      "source": "https://openrouter.ai/perplexity/sonar-reasoning-pro",
+      "checked": "2026-09-24"
+    },
+    "perplexity/sonar-pro": {
+      "provider": "other",
+      "in": 3,
+      "out": 15,
+      "source": "https://openrouter.ai/perplexity/sonar-pro",
+      "checked": "2026-09-24"
+    },
+    "perplexity/sonar-deep-research": {
+      "provider": "other",
+      "in": 2,
+      "out": 8,
+      "source": "https://openrouter.ai/perplexity/sonar-deep-research",
+      "checked": "2026-09-24"
+    },
+    "mistralai/mistral-saba": {
+      "provider": "other",
+      "in": 0.2,
+      "out": 0.6,
+      "source": "https://openrouter.ai/mistralai/mistral-saba",
+      "checked": "2026-09-24",
+      "aliases": [
+        "mistralai/mistral-saba-2502"
+      ]
+    },
+    "openai/o3-mini-high": {
+      "provider": "openai",
+      "in": 1.1,
+      "out": 4.4,
+      "source": "https://openrouter.ai/openai/o3-mini-high",
+      "checked": "2026-09-24",
+      "aliases": [
+        "openai/o3-mini-high-2025-01-31"
+      ]
+    },
+    "aion-labs/aion-rp-llama-3.1-8b": {
+      "provider": "other",
+      "in": 0.8,
+      "out": 1.6,
+      "source": "https://openrouter.ai/aion-labs/aion-rp-llama-3.1-8b",
+      "checked": "2026-09-24"
+    },
+    "qwen/qwen2.5-vl-72b-instruct": {
+      "provider": "other",
+      "in": 0.8,
+      "out": 1,
+      "source": "https://openrouter.ai/qwen/qwen2.5-vl-72b-instruct",
+      "checked": "2026-09-24"
+    },
+    "qwen/qwen-plus": {
+      "provider": "other",
+      "in": 0.26,
+      "out": 0.78,
+      "source": "https://openrouter.ai/qwen/qwen-plus",
+      "checked": "2026-09-24",
+      "aliases": [
+        "qwen/qwen-plus-2025-01-25"
+      ]
+    },
+    "openai/o3-mini": {
+      "provider": "openai",
+      "in": 1.1,
+      "out": 4.4,
+      "source": "https://openrouter.ai/openai/o3-mini",
+      "checked": "2026-09-24",
+      "aliases": [
+        "openai/o3-mini-2025-01-31"
+      ],
+      "speed": {
+        "p50LatencyMs": 3720,
+        "p50ThroughputTps": 199,
+        "requests": 1422,
+        "windowMinutes": 30,
+        "source": "https://openrouter.ai/openai/o3-mini",
+        "fetchedAt": "2026-09-24T08:12:29.986Z"
+      }
+    },
+    "mistralai/mistral-small-24b-instruct-2501": {
+      "provider": "other",
+      "in": 0.05,
+      "out": 0.08,
+      "source": "https://openrouter.ai/mistralai/mistral-small-24b-instruct-2501",
+      "checked": "2026-09-24"
+    },
+    "perplexity/sonar": {
+      "provider": "other",
+      "in": 1,
+      "out": 1,
+      "source": "https://openrouter.ai/perplexity/sonar",
+      "checked": "2026-09-24"
+    },
+    "deepseek/deepseek-r1-distill-llama-70b": {
+      "provider": "other",
+      "in": 0.8,
+      "out": 0.8,
+      "source": "https://openrouter.ai/deepseek/deepseek-r1-distill-llama-70b",
+      "checked": "2026-09-24"
+    },
+    "deepseek/deepseek-r1": {
+      "provider": "other",
+      "in": 0.7,
+      "out": 2.5,
+      "source": "https://openrouter.ai/deepseek/deepseek-r1",
+      "checked": "2026-09-24"
+    },
+    "minimax/minimax-01": {
+      "provider": "other",
+      "in": 0.2,
+      "out": 1.1,
+      "source": "https://openrouter.ai/minimax/minimax-01",
+      "checked": "2026-09-24"
+    },
+    "microsoft/phi-4": {
+      "provider": "other",
+      "in": 0.07,
+      "out": 0.14,
+      "source": "https://openrouter.ai/microsoft/phi-4",
+      "checked": "2026-09-24"
+    },
+    "deepseek/deepseek-chat": {
+      "provider": "other",
+      "in": 0.32,
+      "out": 0.89,
+      "source": "https://openrouter.ai/deepseek/deepseek-chat",
+      "checked": "2026-09-24",
+      "aliases": [
+        "deepseek/deepseek-chat-v3"
+      ],
+      "speed": {
+        "p50LatencyMs": 1410,
+        "p50ThroughputTps": 22,
+        "requests": 13168,
+        "windowMinutes": 30,
+        "source": "https://openrouter.ai/deepseek/deepseek-chat",
+        "fetchedAt": "2026-09-24T08:12:44.198Z"
+      }
+    },
+    "sao10k/l3.3-euryale-70b": {
+      "provider": "other",
+      "in": 0.65,
+      "out": 0.75,
+      "source": "https://openrouter.ai/sao10k/l3.3-euryale-70b",
+      "checked": "2026-09-24",
+      "aliases": [
+        "sao10k/l3.3-euryale-70b-v2.3"
+      ]
+    },
+    "openai/o1": {
+      "provider": "openai",
+      "in": 15,
+      "out": 60,
+      "source": "https://openrouter.ai/openai/o1",
+      "checked": "2026-09-24",
+      "aliases": [
+        "openai/o1-2024-12-17"
+      ]
+    },
+    "cohere/command-r7b-12-2024": {
+      "provider": "other",
+      "in": 0.0375,
+      "out": 0.15,
+      "source": "https://openrouter.ai/cohere/command-r7b-12-2024",
+      "checked": "2026-09-24"
+    },
+    "meta-llama/llama-3.3-70b-instruct": {
+      "provider": "other",
+      "in": 0.1,
+      "out": 0.32,
+      "source": "https://openrouter.ai/meta-llama/llama-3.3-70b-instruct",
+      "checked": "2026-09-24"
+    },
+    "amazon/nova-lite-v1": {
+      "provider": "other",
+      "in": 0.06,
+      "out": 0.24,
+      "source": "https://openrouter.ai/amazon/nova-lite-v1",
+      "checked": "2026-09-24"
+    },
+    "amazon/nova-micro-v1": {
+      "provider": "other",
+      "in": 0.035,
+      "out": 0.14,
+      "source": "https://openrouter.ai/amazon/nova-micro-v1",
+      "checked": "2026-09-24"
+    },
+    "amazon/nova-pro-v1": {
+      "provider": "other",
+      "in": 0.8,
+      "out": 3.2,
+      "source": "https://openrouter.ai/amazon/nova-pro-v1",
+      "checked": "2026-09-24"
+    },
+    "openai/gpt-4o-2024-11-20": {
+      "provider": "openai",
+      "in": 2.5,
+      "out": 10,
+      "source": "https://openrouter.ai/openai/gpt-4o-2024-11-20",
+      "checked": "2026-09-24"
+    },
+    "mistralai/mistral-large-2407": {
+      "provider": "other",
+      "in": 2,
+      "out": 6,
+      "source": "https://openrouter.ai/mistralai/mistral-large-2407",
+      "checked": "2026-09-24"
+    },
+    "qwen/qwen-2.5-coder-32b-instruct": {
+      "provider": "other",
+      "in": 0.66,
+      "out": 1,
+      "source": "https://openrouter.ai/qwen/qwen-2.5-coder-32b-instruct",
+      "checked": "2026-09-24"
+    },
+    "thedrummer/unslopnemo-12b": {
+      "provider": "other",
+      "in": 0.4,
+      "out": 0.4,
+      "source": "https://openrouter.ai/thedrummer/unslopnemo-12b",
+      "checked": "2026-09-24"
+    },
+    "anthracite-org/magnum-v4-72b": {
+      "provider": "other",
+      "in": 2.5,
+      "out": 5,
+      "source": "https://openrouter.ai/anthracite-org/magnum-v4-72b",
+      "checked": "2026-09-24"
+    },
+    "qwen/qwen-2.5-7b-instruct": {
+      "provider": "other",
+      "in": 0.1,
+      "out": 0.2,
+      "source": "https://openrouter.ai/qwen/qwen-2.5-7b-instruct",
+      "checked": "2026-09-24"
+    },
+    "meta-llama/llama-3.2-1b-instruct": {
+      "provider": "other",
+      "in": 0.027,
+      "out": 0.201,
+      "source": "https://openrouter.ai/meta-llama/llama-3.2-1b-instruct",
+      "checked": "2026-09-24"
+    },
+    "meta-llama/llama-3.2-3b-instruct": {
+      "provider": "other",
+      "in": 0.05,
+      "out": 0.33,
+      "source": "https://openrouter.ai/meta-llama/llama-3.2-3b-instruct",
+      "checked": "2026-09-24"
+    },
+    "qwen/qwen-2.5-72b-instruct": {
+      "provider": "other",
+      "in": 0.36,
+      "out": 0.4,
+      "source": "https://openrouter.ai/qwen/qwen-2.5-72b-instruct",
+      "checked": "2026-09-24"
+    },
+    "cohere/command-r-08-2024": {
+      "provider": "other",
+      "in": 0.15,
+      "out": 0.6,
+      "source": "https://openrouter.ai/cohere/command-r-08-2024",
+      "checked": "2026-09-24"
+    },
+    "cohere/command-r-plus-08-2024": {
+      "provider": "other",
+      "in": 2.5,
+      "out": 10,
+      "source": "https://openrouter.ai/cohere/command-r-plus-08-2024",
+      "checked": "2026-09-24"
+    },
+    "sao10k/l3.1-euryale-70b": {
+      "provider": "other",
+      "in": 0.85,
+      "out": 0.85,
+      "source": "https://openrouter.ai/sao10k/l3.1-euryale-70b",
+      "checked": "2026-09-24"
+    },
+    "nousresearch/hermes-3-llama-3.1-70b": {
+      "provider": "other",
+      "in": 0.7,
+      "out": 0.7,
+      "source": "https://openrouter.ai/nousresearch/hermes-3-llama-3.1-70b",
+      "checked": "2026-09-24"
+    },
+    "nousresearch/hermes-3-llama-3.1-405b": {
+      "provider": "other",
+      "in": 1,
+      "out": 1,
+      "source": "https://openrouter.ai/nousresearch/hermes-3-llama-3.1-405b",
+      "checked": "2026-09-24"
+    },
+    "sao10k/l3-lunaris-8b": {
+      "provider": "other",
+      "in": 0.04,
+      "out": 0.05,
+      "source": "https://openrouter.ai/sao10k/l3-lunaris-8b",
+      "checked": "2026-09-24"
+    },
+    "openai/gpt-4o-2024-08-06": {
+      "provider": "openai",
+      "in": 2.5,
+      "out": 10,
+      "source": "https://openrouter.ai/openai/gpt-4o-2024-08-06",
+      "checked": "2026-09-24",
+      "speed": {
+        "p50LatencyMs": 710,
+        "p50ThroughputTps": 14,
+        "requests": 2035,
+        "windowMinutes": 30,
+        "source": "https://openrouter.ai/openai/gpt-4o-2024-08-06",
+        "fetchedAt": "2026-09-24T08:12:47.492Z"
+      }
+    },
+    "meta-llama/llama-3.1-70b-instruct": {
+      "provider": "other",
+      "in": 0.4,
+      "out": 0.4,
+      "source": "https://openrouter.ai/meta-llama/llama-3.1-70b-instruct",
+      "checked": "2026-09-24"
+    },
+    "meta-llama/llama-3.1-8b-instruct": {
+      "provider": "other",
+      "in": 0.05,
+      "out": 0.08,
+      "source": "https://openrouter.ai/meta-llama/llama-3.1-8b-instruct",
+      "checked": "2026-09-24"
+    },
+    "mistralai/mistral-nemo": {
+      "provider": "other",
+      "in": 0.019,
+      "out": 0.03,
+      "source": "https://openrouter.ai/mistralai/mistral-nemo",
+      "checked": "2026-09-24"
+    },
+    "openai/gpt-4o-mini": {
+      "provider": "openai",
+      "in": 0.15,
+      "out": 0.6,
+      "source": "https://openrouter.ai/openai/gpt-4o-mini",
+      "checked": "2026-09-24",
+      "speed": {
+        "p50LatencyMs": 506,
+        "p50ThroughputTps": 56,
+        "requests": 173203,
+        "windowMinutes": 30,
+        "source": "https://openrouter.ai/openai/gpt-4o-mini",
+        "fetchedAt": "2026-09-24T08:12:24.066Z"
+      }
+    },
+    "openai/gpt-4o-mini-2024-07-18": {
+      "provider": "openai",
+      "in": 0.15,
+      "out": 0.6,
+      "source": "https://openrouter.ai/openai/gpt-4o-mini-2024-07-18",
+      "checked": "2026-09-24"
+    },
+    "google/gemma-2-27b-it": {
+      "provider": "other",
+      "in": 0.65,
+      "out": 0.65,
+      "source": "https://openrouter.ai/google/gemma-2-27b-it",
+      "checked": "2026-09-24"
+    },
+    "openai/gpt-4o": {
+      "provider": "openai",
+      "in": 2.5,
+      "out": 10,
+      "source": "https://openrouter.ai/openai/gpt-4o",
+      "checked": "2026-09-24",
+      "speed": {
+        "p50LatencyMs": 545,
+        "p50ThroughputTps": 53,
+        "requests": 14907,
+        "windowMinutes": 30,
+        "source": "https://openrouter.ai/openai/gpt-4o",
+        "fetchedAt": "2026-09-24T08:12:32.390Z"
+      }
+    },
+    "openai/gpt-4o-2024-05-13": {
+      "provider": "openai",
+      "in": 5,
+      "out": 15,
+      "source": "https://openrouter.ai/openai/gpt-4o-2024-05-13",
+      "checked": "2026-09-24"
+    },
+    "mistralai/mixtral-8x22b-instruct": {
+      "provider": "other",
+      "in": 2,
+      "out": 6,
+      "source": "https://openrouter.ai/mistralai/mixtral-8x22b-instruct",
+      "checked": "2026-09-24"
+    },
+    "microsoft/wizardlm-2-8x22b": {
+      "provider": "other",
+      "in": 0.62,
+      "out": 0.62,
+      "source": "https://openrouter.ai/microsoft/wizardlm-2-8x22b",
+      "checked": "2026-09-24"
+    },
+    "openai/gpt-4-turbo": {
+      "provider": "openai",
+      "in": 10,
+      "out": 30,
+      "source": "https://openrouter.ai/openai/gpt-4-turbo",
+      "checked": "2026-09-24"
+    },
+    "anthropic/claude-3-haiku": {
+      "provider": "anthropic",
+      "in": 0.25,
+      "out": 1.25,
+      "source": "https://openrouter.ai/anthropic/claude-3-haiku",
+      "checked": "2026-09-24"
+    },
+    "mistralai/mistral-large": {
+      "provider": "other",
+      "in": 2,
+      "out": 6,
+      "source": "https://openrouter.ai/mistralai/mistral-large",
+      "checked": "2026-09-24"
+    },
+    "openai/gpt-3.5-turbo-0613": {
+      "provider": "openai",
+      "in": 1,
+      "out": 2,
+      "source": "https://openrouter.ai/openai/gpt-3.5-turbo-0613",
+      "checked": "2026-09-24"
+    },
+    "openai/gpt-3.5-turbo-instruct": {
+      "provider": "openai",
+      "in": 1.5,
+      "out": 2,
+      "source": "https://openrouter.ai/openai/gpt-3.5-turbo-instruct",
+      "checked": "2026-09-24"
+    },
+    "openai/gpt-3.5-turbo-16k": {
+      "provider": "openai",
+      "in": 3,
+      "out": 4,
+      "source": "https://openrouter.ai/openai/gpt-3.5-turbo-16k",
+      "checked": "2026-09-24"
+    },
+    "mancer/weaver": {
+      "provider": "other",
+      "in": 0.4,
+      "out": 0.75,
+      "source": "https://openrouter.ai/mancer/weaver",
+      "checked": "2026-09-24"
+    },
+    "undi95/remm-slerp-l2-13b": {
+      "provider": "other",
+      "in": 0.35,
+      "out": 0.65,
+      "source": "https://openrouter.ai/undi95/remm-slerp-l2-13b",
+      "checked": "2026-09-24"
+    },
+    "gryphe/mythomax-l2-13b": {
+      "provider": "other",
+      "in": 0.08,
+      "out": 0.11,
+      "source": "https://openrouter.ai/gryphe/mythomax-l2-13b",
+      "checked": "2026-09-24"
+    },
+    "openai/gpt-3.5-turbo": {
+      "provider": "openai",
+      "in": 0.5,
+      "out": 1.5,
+      "source": "https://openrouter.ai/openai/gpt-3.5-turbo",
+      "checked": "2026-09-24",
+      "speed": {
+        "p50LatencyMs": 605,
+        "p50ThroughputTps": 34,
+        "requests": 3095,
+        "windowMinutes": 30,
+        "source": "https://openrouter.ai/openai/gpt-3.5-turbo",
+        "fetchedAt": "2026-09-24T08:12:29.079Z"
+      }
+    },
+    "openai/gpt-4": {
+      "provider": "openai",
+      "in": 30,
+      "out": 60,
+      "source": "https://openrouter.ai/openai/gpt-4",
+      "checked": "2026-09-24",
+      "speed": {
+        "p50LatencyMs": 460,
+        "p50ThroughputTps": 17,
+        "requests": 187,
+        "windowMinutes": 30,
+        "source": "https://openrouter.ai/openai/gpt-4",
+        "fetchedAt": "2026-09-24T08:12:33.224Z"
+      }
+    }
+  }
+}

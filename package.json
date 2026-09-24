@@ -1,0 +1,62 @@
+{
+  "name": "jev-swap",
+  "version": "0.1.0",
+  "description": "Find the LLM calls in your TS/JS or Python code that are really decisions, estimate their cost and speed on TypeSafe Jev, convert them, and prove the swap on your own traffic.",
+  "keywords": [
+    "llm",
+    "jev",
+    "typesafe",
+    "openai",
+    "anthropic",
+    "ai-sdk",
+    "langchain",
+    "cost",
+    "classification",
+    "decision",
+    "cli"
+  ],
+  "homepage": "https://github.com/0xjba/jev-swap#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/0xjba/jev-swap.git"
+  },
+  "bugs": {
+    "url": "https://github.com/0xjba/jev-swap/issues"
+  },
+  "author": "Jobin (https://github.com/0xjba)",
+  "type": "module",
+  "bin": {
+    "jev-swap": "dist/cli.js"
+  },
+  "files": [
+    "dist",
+    "py/scan_py.py",
+    "data/prices.json",
+    "data/reference-models.json",
+    "data/optout.txt",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "dev": "tsx src/cli.ts",
+    "demo": "tsx src/cli.ts scan examples/demo-app && tsx src/cli.ts convert && tsx src/cli.ts shadow examples/samples.jsonl --mock",
+    "demo:proxy": "node examples/proxy-demo/demo.mjs",
+    "site": "python3 site/gen/build.py",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.128.0",
+    "@typesafe-ai/sdk": "^0.6.0",
+    "commander": "^15.0.0",
+    "js-tiktoken": "^1.0.21",
+    "ts-morph": "^28.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.2",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2"
+  }
+}

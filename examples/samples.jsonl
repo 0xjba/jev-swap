@@ -1,0 +1,220 @@
+{"candidate":"triage-classifyTicket","state":"I was charged twice this month (#0)","llm":{"category":"billing","urgent":true,"priority":1},"llm_usage":{"input_tokens":180,"output_tokens":60}}
+{"candidate":"triage-classifyTicket","state":"The API returns 500 on every request (#1)","llm":{"category":"technical","urgent":false,"priority":2},"llm_usage":{"input_tokens":181,"output_tokens":60}}
+{"candidate":"triage-classifyTicket","state":"Can I get a quote for 50 seats? (#2)","llm":{"category":"sales","urgent":false,"priority":3},"llm_usage":{"input_tokens":182,"output_tokens":60}}
+{"candidate":"triage-classifyTicket","state":"My invoice has the wrong VAT number (#3)","llm":{"category":"billing","urgent":true,"priority":4},"llm_usage":{"input_tokens":183,"output_tokens":60}}
+{"candidate":"triage-classifyTicket","state":"Login page is down for our whole team (#4)","llm":{"category":"technical","urgent":false,"priority":5},"llm_usage":{"input_tokens":184,"output_tokens":60}}
+{"candidate":"triage-classifyTicket","state":"Do you offer annual discounts? (#5)","llm":{"category":"sales","urgent":false,"priority":1},"llm_usage":{"input_tokens":185,"output_tokens":60}}
+{"candidate":"triage-classifyTicket","state":"Refund still not processed after 2 weeks (#6)","llm":{"category":"billing","urgent":true,"priority":2},"llm_usage":{"input_tokens":186,"output_tokens":60}}
+{"candidate":"triage-classifyTicket","state":"Webhook deliveries are delayed by hours (#7)","llm":{"category":"technical","urgent":false,"priority":3},"llm_usage":{"input_tokens":187,"output_tokens":60}}
+{"candidate":"triage-classifyTicket","state":"I was charged twice this month (#8)","llm":{"category":"billing","urgent":false,"priority":4},"llm_usage":{"input_tokens":188,"output_tokens":60}}
+{"candidate":"triage-classifyTicket","state":"The API returns 500 on every request (#9)","llm":{"category":"technical","urgent":true,"priority":5},"llm_usage":{"input_tokens":189,"output_tokens":60}}
+{"candidate":"triage-classifyTicket","state":"Can I get a quote for 50 seats? (#10)","llm":{"category":"sales","urgent":false,"priority":1},"llm_usage":{"input_tokens":190,"output_tokens":60}}
+{"candidate":"triage-classifyTicket","state":"My invoice has the wrong VAT number (#11)","llm":{"category":"billing","urgent":false,"priority":2},"llm_usage":{"input_tokens":191,"output_tokens":60}}
+{"candidate":"triage-classifyTicket","state":"Login page is down for our whole team (#12)","llm":{"category":"technical","urgent":true,"priority":3},"llm_usage":{"input_tokens":192,"output_tokens":60}}
+{"candidate":"triage-classifyTicket","state":"Do you offer annual discounts? (#13)","llm":{"category":"sales","urgent":false,"priority":4},"llm_usage":{"input_tokens":193,"output_tokens":60}}
+{"candidate":"triage-classifyTicket","state":"Refund still not processed after 2 weeks (#14)","llm":{"category":"billing","urgent":false,"priority":5},"llm_usage":{"input_tokens":194,"output_tokens":60}}
+{"candidate":"triage-classifyTicket","state":"Webhook deliveries are delayed by hours (#15)","llm":{"category":"technical","urgent":true,"priority":1},"llm_usage":{"input_tokens":195,"output_tokens":60}}
+{"candidate":"triage-classifyTicket","state":"I was charged twice this month (#16)","llm":{"category":"billing","urgent":false,"priority":2},"llm_usage":{"input_tokens":196,"output_tokens":60}}
+{"candidate":"triage-classifyTicket","state":"The API returns 500 on every request (#17)","llm":{"category":"technical","urgent":false,"priority":3},"llm_usage":{"input_tokens":197,"output_tokens":60}}
+{"candidate":"triage-classifyTicket","state":"Can I get a quote for 50 seats? (#18)","llm":{"category":"sales","urgent":true,"priority":4},"llm_usage":{"input_tokens":198,"output_tokens":60}}
+{"candidate":"triage-classifyTicket","state":"My invoice has the wrong VAT number (#19)","llm":{"category":"billing","urgent":false,"priority":5},"llm_usage":{"input_tokens":199,"output_tokens":60}}
+{"candidate":"triage-classifyTicket","state":"Login page is down for our whole team (#20)","llm":{"category":"technical","urgent":false,"priority":1},"llm_usage":{"input_tokens":180,"output_tokens":60}}
+{"candidate":"triage-classifyTicket","state":"Do you offer annual discounts? (#21)","llm":{"category":"sales","urgent":true,"priority":2},"llm_usage":{"input_tokens":181,"output_tokens":60}}
+{"candidate":"triage-classifyTicket","state":"Refund still not processed after 2 weeks (#22)","llm":{"category":"billing","urgent":false,"priority":3},"llm_usage":{"input_tokens":182,"output_tokens":60}}
+{"candidate":"triage-classifyTicket","state":"Webhook deliveries are delayed by hours (#23)","llm":{"category":"technical","urgent":false,"priority":4},"llm_usage":{"input_tokens":183,"output_tokens":60}}
+{"candidate":"triage-classifyTicket","state":"I was charged twice this month (#24)","llm":{"category":"billing","urgent":true,"priority":5},"llm_usage":{"input_tokens":184,"output_tokens":60}}
+{"candidate":"triage-classifyTicket","state":"The API returns 500 on every request (#25)","llm":{"category":"technical","urgent":false,"priority":1},"llm_usage":{"input_tokens":185,"output_tokens":60}}
+{"candidate":"triage-classifyTicket","state":"Can I get a quote for 50 seats? (#26)","llm":{"category":"sales","urgent":false,"priority":2},"llm_usage":{"input_tokens":186,"output_tokens":60}}
+{"candidate":"triage-classifyTicket","state":"My invoice has the wrong VAT number (#27)","llm":{"category":"billing","urgent":true,"priority":3},"llm_usage":{"input_tokens":187,"output_tokens":60}}
+{"candidate":"triage-classifyTicket","state":"Login page is down for our whole team (#28)","llm":{"category":"technical","urgent":false,"priority":4},"llm_usage":{"input_tokens":188,"output_tokens":60}}
+{"candidate":"triage-classifyTicket","state":"Do you offer annual discounts? (#29)","llm":{"category":"sales","urgent":false,"priority":5},"llm_usage":{"input_tokens":189,"output_tokens":60}}
+{"candidate":"triage-classifyTicket","state":"Refund still not processed after 2 weeks (#30)","llm":{"category":"billing","urgent":true,"priority":1},"llm_usage":{"input_tokens":190,"output_tokens":60}}
+{"candidate":"triage-classifyTicket","state":"Webhook deliveries are delayed by hours (#31)","llm":{"category":"technical","urgent":false,"priority":2},"llm_usage":{"input_tokens":191,"output_tokens":60}}
+{"candidate":"triage-classifyTicket","state":"I was charged twice this month (#32)","llm":{"category":"billing","urgent":false,"priority":3},"llm_usage":{"input_tokens":192,"output_tokens":60}}
+{"candidate":"triage-classifyTicket","state":"The API returns 500 on every request (#33)","llm":{"category":"technical","urgent":true,"priority":4},"llm_usage":{"input_tokens":193,"output_tokens":60}}
+{"candidate":"triage-classifyTicket","state":"Can I get a quote for 50 seats? (#34)","llm":{"category":"sales","urgent":false,"priority":5},"llm_usage":{"input_tokens":194,"output_tokens":60}}
+{"candidate":"triage-classifyTicket","state":"My invoice has the wrong VAT number (#35)","llm":{"category":"billing","urgent":false,"priority":1},"llm_usage":{"input_tokens":195,"output_tokens":60}}
+{"candidate":"triage-classifyTicket","state":"Login page is down for our whole team (#36)","llm":{"category":"technical","urgent":true,"priority":2},"llm_usage":{"input_tokens":196,"output_tokens":60}}
+{"candidate":"triage-classifyTicket","state":"Do you offer annual discounts? (#37)","llm":{"category":"sales","urgent":false,"priority":3},"llm_usage":{"input_tokens":197,"output_tokens":60}}
+{"candidate":"triage-classifyTicket","state":"Refund still not processed after 2 weeks (#38)","llm":{"category":"billing","urgent":false,"priority":4},"llm_usage":{"input_tokens":198,"output_tokens":60}}
+{"candidate":"triage-classifyTicket","state":"Webhook deliveries are delayed by hours (#39)","llm":{"category":"technical","urgent":true,"priority":5},"llm_usage":{"input_tokens":199,"output_tokens":60}}
+{"candidate":"moderation-moderate","state":"Great post, thanks! [0]","llm":{"action":"allow","contains_pii":false},"llm_usage":{"input_tokens":420,"output_tokens":45}}
+{"candidate":"moderation-moderate","state":"Call me at 555-0199 for a deal [1]","llm":{"action":"review","contains_pii":true},"llm_usage":{"input_tokens":420,"output_tokens":45}}
+{"candidate":"moderation-moderate","state":"This is garbage and so are you [2]","llm":{"action":"block","contains_pii":false},"llm_usage":{"input_tokens":420,"output_tokens":45}}
+{"candidate":"moderation-moderate","state":"Interesting take, I disagree though [3]","llm":{"action":"allow","contains_pii":false},"llm_usage":{"input_tokens":420,"output_tokens":45}}
+{"candidate":"moderation-moderate","state":"My address is 12 Elm St, come by [4]","llm":{"action":"review","contains_pii":true},"llm_usage":{"input_tokens":420,"output_tokens":45}}
+{"candidate":"moderation-moderate","state":"Buy followers cheap at spam.example [5]","llm":{"action":"block","contains_pii":false},"llm_usage":{"input_tokens":420,"output_tokens":45}}
+{"candidate":"moderation-moderate","state":"Great post, thanks! [6]","llm":{"action":"allow","contains_pii":false},"llm_usage":{"input_tokens":420,"output_tokens":45}}
+{"candidate":"moderation-moderate","state":"Call me at 555-0199 for a deal [7]","llm":{"action":"review","contains_pii":true},"llm_usage":{"input_tokens":420,"output_tokens":45}}
+{"candidate":"moderation-moderate","state":"This is garbage and so are you [8]","llm":{"action":"block","contains_pii":false},"llm_usage":{"input_tokens":420,"output_tokens":45}}
+{"candidate":"moderation-moderate","state":"Interesting take, I disagree though [9]","llm":{"action":"allow","contains_pii":false},"llm_usage":{"input_tokens":420,"output_tokens":45}}
+{"candidate":"moderation-moderate","state":"My address is 12 Elm St, come by [10]","llm":{"action":"review","contains_pii":true},"llm_usage":{"input_tokens":420,"output_tokens":45}}
+{"candidate":"moderation-moderate","state":"Buy followers cheap at spam.example [11]","llm":{"action":"block","contains_pii":false},"llm_usage":{"input_tokens":420,"output_tokens":45}}
+{"candidate":"moderation-moderate","state":"Great post, thanks! [12]","llm":{"action":"allow","contains_pii":false},"llm_usage":{"input_tokens":420,"output_tokens":45}}
+{"candidate":"moderation-moderate","state":"Call me at 555-0199 for a deal [13]","llm":{"action":"review","contains_pii":true},"llm_usage":{"input_tokens":420,"output_tokens":45}}
+{"candidate":"moderation-moderate","state":"This is garbage and so are you [14]","llm":{"action":"block","contains_pii":false},"llm_usage":{"input_tokens":420,"output_tokens":45}}
+{"candidate":"moderation-moderate","state":"Interesting take, I disagree though [15]","llm":{"action":"allow","contains_pii":false},"llm_usage":{"input_tokens":420,"output_tokens":45}}
+{"candidate":"moderation-moderate","state":"My address is 12 Elm St, come by [16]","llm":{"action":"review","contains_pii":true},"llm_usage":{"input_tokens":420,"output_tokens":45}}
+{"candidate":"moderation-moderate","state":"Buy followers cheap at spam.example [17]","llm":{"action":"block","contains_pii":false},"llm_usage":{"input_tokens":420,"output_tokens":45}}
+{"candidate":"moderation-moderate","state":"Great post, thanks! [18]","llm":{"action":"allow","contains_pii":false},"llm_usage":{"input_tokens":420,"output_tokens":45}}
+{"candidate":"moderation-moderate","state":"Call me at 555-0199 for a deal [19]","llm":{"action":"review","contains_pii":true},"llm_usage":{"input_tokens":420,"output_tokens":45}}
+{"candidate":"moderation-moderate","state":"This is garbage and so are you [20]","llm":{"action":"block","contains_pii":false},"llm_usage":{"input_tokens":420,"output_tokens":45}}
+{"candidate":"moderation-moderate","state":"Interesting take, I disagree though [21]","llm":{"action":"allow","contains_pii":false},"llm_usage":{"input_tokens":420,"output_tokens":45}}
+{"candidate":"moderation-moderate","state":"My address is 12 Elm St, come by [22]","llm":{"action":"review","contains_pii":true},"llm_usage":{"input_tokens":420,"output_tokens":45}}
+{"candidate":"moderation-moderate","state":"Buy followers cheap at spam.example [23]","llm":{"action":"block","contains_pii":false},"llm_usage":{"input_tokens":420,"output_tokens":45}}
+{"candidate":"moderation-moderate","state":"Great post, thanks! [24]","llm":{"action":"allow","contains_pii":false},"llm_usage":{"input_tokens":420,"output_tokens":45}}
+{"candidate":"moderation-moderate","state":"Call me at 555-0199 for a deal [25]","llm":{"action":"review","contains_pii":true},"llm_usage":{"input_tokens":420,"output_tokens":45}}
+{"candidate":"moderation-moderate","state":"This is garbage and so are you [26]","llm":{"action":"block","contains_pii":false},"llm_usage":{"input_tokens":420,"output_tokens":45}}
+{"candidate":"moderation-moderate","state":"Interesting take, I disagree though [27]","llm":{"action":"allow","contains_pii":false},"llm_usage":{"input_tokens":420,"output_tokens":45}}
+{"candidate":"moderation-moderate","state":"My address is 12 Elm St, come by [28]","llm":{"action":"review","contains_pii":true},"llm_usage":{"input_tokens":420,"output_tokens":45}}
+{"candidate":"moderation-moderate","state":"Buy followers cheap at spam.example [29]","llm":{"action":"block","contains_pii":false},"llm_usage":{"input_tokens":420,"output_tokens":45}}
+{"candidate":"moderation-moderate","state":"Great post, thanks! [30]","llm":{"action":"allow","contains_pii":false},"llm_usage":{"input_tokens":420,"output_tokens":45}}
+{"candidate":"moderation-moderate","state":"Call me at 555-0199 for a deal [31]","llm":{"action":"review","contains_pii":true},"llm_usage":{"input_tokens":420,"output_tokens":45}}
+{"candidate":"moderation-moderate","state":"This is garbage and so are you [32]","llm":{"action":"block","contains_pii":false},"llm_usage":{"input_tokens":420,"output_tokens":45}}
+{"candidate":"moderation-moderate","state":"Interesting take, I disagree though [33]","llm":{"action":"allow","contains_pii":false},"llm_usage":{"input_tokens":420,"output_tokens":45}}
+{"candidate":"moderation-moderate","state":"My address is 12 Elm St, come by [34]","llm":{"action":"review","contains_pii":true},"llm_usage":{"input_tokens":420,"output_tokens":45}}
+{"candidate":"moderation-moderate","state":"Buy followers cheap at spam.example [35]","llm":{"action":"block","contains_pii":false},"llm_usage":{"input_tokens":420,"output_tokens":45}}
+{"candidate":"moderation-moderate","state":"Great post, thanks! [36]","llm":{"action":"allow","contains_pii":false},"llm_usage":{"input_tokens":420,"output_tokens":45}}
+{"candidate":"moderation-moderate","state":"Call me at 555-0199 for a deal [37]","llm":{"action":"review","contains_pii":true},"llm_usage":{"input_tokens":420,"output_tokens":45}}
+{"candidate":"moderation-moderate","state":"This is garbage and so are you [38]","llm":{"action":"block","contains_pii":false},"llm_usage":{"input_tokens":420,"output_tokens":45}}
+{"candidate":"moderation-moderate","state":"Interesting take, I disagree though [39]","llm":{"action":"allow","contains_pii":false},"llm_usage":{"input_tokens":420,"output_tokens":45}}
+{"candidate":"sentiment-reviewSentiment","state":"Love it, works perfectly (0)","llm":{"choice":"positive"},"llm_usage":{"input_tokens":70,"output_tokens":3}}
+{"candidate":"sentiment-reviewSentiment","state":"It's okay, nothing special (1)","llm":{"choice":"neutral"},"llm_usage":{"input_tokens":70,"output_tokens":3}}
+{"candidate":"sentiment-reviewSentiment","state":"Broke after two days (2)","llm":{"choice":"negative"},"llm_usage":{"input_tokens":70,"output_tokens":3}}
+{"candidate":"sentiment-reviewSentiment","state":"Exceeded expectations (3)","llm":{"choice":"positive"},"llm_usage":{"input_tokens":70,"output_tokens":3}}
+{"candidate":"sentiment-reviewSentiment","state":"Average battery life (4)","llm":{"choice":"neutral"},"llm_usage":{"input_tokens":70,"output_tokens":3}}
+{"candidate":"sentiment-reviewSentiment","state":"Terrible support experience (5)","llm":{"choice":"negative"},"llm_usage":{"input_tokens":70,"output_tokens":3}}
+{"candidate":"sentiment-reviewSentiment","state":"Love it, works perfectly (6)","llm":{"choice":"positive"},"llm_usage":{"input_tokens":70,"output_tokens":3}}
+{"candidate":"sentiment-reviewSentiment","state":"It's okay, nothing special (7)","llm":{"choice":"neutral"},"llm_usage":{"input_tokens":70,"output_tokens":3}}
+{"candidate":"sentiment-reviewSentiment","state":"Broke after two days (8)","llm":{"choice":"negative"},"llm_usage":{"input_tokens":70,"output_tokens":3}}
+{"candidate":"sentiment-reviewSentiment","state":"Exceeded expectations (9)","llm":{"choice":"positive"},"llm_usage":{"input_tokens":70,"output_tokens":3}}
+{"candidate":"sentiment-reviewSentiment","state":"Average battery life (10)","llm":{"choice":"neutral"},"llm_usage":{"input_tokens":70,"output_tokens":3}}
+{"candidate":"sentiment-reviewSentiment","state":"Terrible support experience (11)","llm":{"choice":"negative"},"llm_usage":{"input_tokens":70,"output_tokens":3}}
+{"candidate":"sentiment-reviewSentiment","state":"Love it, works perfectly (12)","llm":{"choice":"positive"},"llm_usage":{"input_tokens":70,"output_tokens":3}}
+{"candidate":"sentiment-reviewSentiment","state":"It's okay, nothing special (13)","llm":{"choice":"neutral"},"llm_usage":{"input_tokens":70,"output_tokens":3}}
+{"candidate":"sentiment-reviewSentiment","state":"Broke after two days (14)","llm":{"choice":"negative"},"llm_usage":{"input_tokens":70,"output_tokens":3}}
+{"candidate":"sentiment-reviewSentiment","state":"Exceeded expectations (15)","llm":{"choice":"positive"},"llm_usage":{"input_tokens":70,"output_tokens":3}}
+{"candidate":"sentiment-reviewSentiment","state":"Average battery life (16)","llm":{"choice":"neutral"},"llm_usage":{"input_tokens":70,"output_tokens":3}}
+{"candidate":"sentiment-reviewSentiment","state":"Terrible support experience (17)","llm":{"choice":"negative"},"llm_usage":{"input_tokens":70,"output_tokens":3}}
+{"candidate":"sentiment-reviewSentiment","state":"Love it, works perfectly (18)","llm":{"choice":"positive"},"llm_usage":{"input_tokens":70,"output_tokens":3}}
+{"candidate":"sentiment-reviewSentiment","state":"It's okay, nothing special (19)","llm":{"choice":"neutral"},"llm_usage":{"input_tokens":70,"output_tokens":3}}
+{"candidate":"sentiment-reviewSentiment","state":"Broke after two days (20)","llm":{"choice":"negative"},"llm_usage":{"input_tokens":70,"output_tokens":3}}
+{"candidate":"sentiment-reviewSentiment","state":"Exceeded expectations (21)","llm":{"choice":"positive"},"llm_usage":{"input_tokens":70,"output_tokens":3}}
+{"candidate":"sentiment-reviewSentiment","state":"Average battery life (22)","llm":{"choice":"neutral"},"llm_usage":{"input_tokens":70,"output_tokens":3}}
+{"candidate":"sentiment-reviewSentiment","state":"Terrible support experience (23)","llm":{"choice":"negative"},"llm_usage":{"input_tokens":70,"output_tokens":3}}
+{"candidate":"sentiment-reviewSentiment","state":"Love it, works perfectly (24)","llm":{"choice":"positive"},"llm_usage":{"input_tokens":70,"output_tokens":3}}
+{"candidate":"sentiment-reviewSentiment","state":"It's okay, nothing special (25)","llm":{"choice":"neutral"},"llm_usage":{"input_tokens":70,"output_tokens":3}}
+{"candidate":"sentiment-reviewSentiment","state":"Broke after two days (26)","llm":{"choice":"negative"},"llm_usage":{"input_tokens":70,"output_tokens":3}}
+{"candidate":"sentiment-reviewSentiment","state":"Exceeded expectations (27)","llm":{"choice":"positive"},"llm_usage":{"input_tokens":70,"output_tokens":3}}
+{"candidate":"sentiment-reviewSentiment","state":"Average battery life (28)","llm":{"choice":"neutral"},"llm_usage":{"input_tokens":70,"output_tokens":3}}
+{"candidate":"sentiment-reviewSentiment","state":"Terrible support experience (29)","llm":{"choice":"negative"},"llm_usage":{"input_tokens":70,"output_tokens":3}}
+{"candidate":"sentiment-reviewSentiment","state":"Love it, works perfectly (30)","llm":{"choice":"positive"},"llm_usage":{"input_tokens":70,"output_tokens":3}}
+{"candidate":"sentiment-reviewSentiment","state":"It's okay, nothing special (31)","llm":{"choice":"neutral"},"llm_usage":{"input_tokens":70,"output_tokens":3}}
+{"candidate":"sentiment-reviewSentiment","state":"Broke after two days (32)","llm":{"choice":"negative"},"llm_usage":{"input_tokens":70,"output_tokens":3}}
+{"candidate":"sentiment-reviewSentiment","state":"Exceeded expectations (33)","llm":{"choice":"positive"},"llm_usage":{"input_tokens":70,"output_tokens":3}}
+{"candidate":"sentiment-reviewSentiment","state":"Average battery life (34)","llm":{"choice":"neutral"},"llm_usage":{"input_tokens":70,"output_tokens":3}}
+{"candidate":"sentiment-reviewSentiment","state":"Terrible support experience (35)","llm":{"choice":"negative"},"llm_usage":{"input_tokens":70,"output_tokens":3}}
+{"candidate":"sentiment-reviewSentiment","state":"Love it, works perfectly (36)","llm":{"choice":"positive"},"llm_usage":{"input_tokens":70,"output_tokens":3}}
+{"candidate":"sentiment-reviewSentiment","state":"It's okay, nothing special (37)","llm":{"choice":"neutral"},"llm_usage":{"input_tokens":70,"output_tokens":3}}
+{"candidate":"sentiment-reviewSentiment","state":"Broke after two days (38)","llm":{"choice":"negative"},"llm_usage":{"input_tokens":70,"output_tokens":3}}
+{"candidate":"sentiment-reviewSentiment","state":"Exceeded expectations (39)","llm":{"choice":"positive"},"llm_usage":{"input_tokens":70,"output_tokens":3}}
+{"candidate":"spam-isSpam","state":"You won a free cruise! Click now #0","llm":{"answer":"yes"},"llm_usage":{"input_tokens":95,"output_tokens":2}}
+{"candidate":"spam-isSpam","state":"Team sync moved to 3pm #1","llm":{"answer":"no"},"llm_usage":{"input_tokens":95,"output_tokens":2}}
+{"candidate":"spam-isSpam","state":"Cheap meds, no prescription #2","llm":{"answer":"yes"},"llm_usage":{"input_tokens":95,"output_tokens":2}}
+{"candidate":"spam-isSpam","state":"Your invoice for September #3","llm":{"answer":"no"},"llm_usage":{"input_tokens":95,"output_tokens":2}}
+{"candidate":"spam-isSpam","state":"Claim your prize before midnight #4","llm":{"answer":"yes"},"llm_usage":{"input_tokens":95,"output_tokens":2}}
+{"candidate":"spam-isSpam","state":"Can you review my PR? #5","llm":{"answer":"no"},"llm_usage":{"input_tokens":95,"output_tokens":2}}
+{"candidate":"spam-isSpam","state":"You won a free cruise! Click now #6","llm":{"answer":"yes"},"llm_usage":{"input_tokens":95,"output_tokens":2}}
+{"candidate":"spam-isSpam","state":"Team sync moved to 3pm #7","llm":{"answer":"no"},"llm_usage":{"input_tokens":95,"output_tokens":2}}
+{"candidate":"spam-isSpam","state":"Cheap meds, no prescription #8","llm":{"answer":"yes"},"llm_usage":{"input_tokens":95,"output_tokens":2}}
+{"candidate":"spam-isSpam","state":"Your invoice for September #9","llm":{"answer":"no"},"llm_usage":{"input_tokens":95,"output_tokens":2}}
+{"candidate":"spam-isSpam","state":"Claim your prize before midnight #10","llm":{"answer":"yes"},"llm_usage":{"input_tokens":95,"output_tokens":2}}
+{"candidate":"spam-isSpam","state":"Can you review my PR? #11","llm":{"answer":"no"},"llm_usage":{"input_tokens":95,"output_tokens":2}}
+{"candidate":"spam-isSpam","state":"You won a free cruise! Click now #12","llm":{"answer":"yes"},"llm_usage":{"input_tokens":95,"output_tokens":2}}
+{"candidate":"spam-isSpam","state":"Team sync moved to 3pm #13","llm":{"answer":"no"},"llm_usage":{"input_tokens":95,"output_tokens":2}}
+{"candidate":"spam-isSpam","state":"Cheap meds, no prescription #14","llm":{"answer":"yes"},"llm_usage":{"input_tokens":95,"output_tokens":2}}
+{"candidate":"spam-isSpam","state":"Your invoice for September #15","llm":{"answer":"no"},"llm_usage":{"input_tokens":95,"output_tokens":2}}
+{"candidate":"spam-isSpam","state":"Claim your prize before midnight #16","llm":{"answer":"yes"},"llm_usage":{"input_tokens":95,"output_tokens":2}}
+{"candidate":"spam-isSpam","state":"Can you review my PR? #17","llm":{"answer":"no"},"llm_usage":{"input_tokens":95,"output_tokens":2}}
+{"candidate":"spam-isSpam","state":"You won a free cruise! Click now #18","llm":{"answer":"yes"},"llm_usage":{"input_tokens":95,"output_tokens":2}}
+{"candidate":"spam-isSpam","state":"Team sync moved to 3pm #19","llm":{"answer":"no"},"llm_usage":{"input_tokens":95,"output_tokens":2}}
+{"candidate":"spam-isSpam","state":"Cheap meds, no prescription #20","llm":{"answer":"yes"},"llm_usage":{"input_tokens":95,"output_tokens":2}}
+{"candidate":"spam-isSpam","state":"Your invoice for September #21","llm":{"answer":"no"},"llm_usage":{"input_tokens":95,"output_tokens":2}}
+{"candidate":"spam-isSpam","state":"Claim your prize before midnight #22","llm":{"answer":"yes"},"llm_usage":{"input_tokens":95,"output_tokens":2}}
+{"candidate":"spam-isSpam","state":"Can you review my PR? #23","llm":{"answer":"no"},"llm_usage":{"input_tokens":95,"output_tokens":2}}
+{"candidate":"spam-isSpam","state":"You won a free cruise! Click now #24","llm":{"answer":"yes"},"llm_usage":{"input_tokens":95,"output_tokens":2}}
+{"candidate":"spam-isSpam","state":"Team sync moved to 3pm #25","llm":{"answer":"no"},"llm_usage":{"input_tokens":95,"output_tokens":2}}
+{"candidate":"spam-isSpam","state":"Cheap meds, no prescription #26","llm":{"answer":"yes"},"llm_usage":{"input_tokens":95,"output_tokens":2}}
+{"candidate":"spam-isSpam","state":"Your invoice for September #27","llm":{"answer":"no"},"llm_usage":{"input_tokens":95,"output_tokens":2}}
+{"candidate":"spam-isSpam","state":"Claim your prize before midnight #28","llm":{"answer":"yes"},"llm_usage":{"input_tokens":95,"output_tokens":2}}
+{"candidate":"spam-isSpam","state":"Can you review my PR? #29","llm":{"answer":"no"},"llm_usage":{"input_tokens":95,"output_tokens":2}}
+{"candidate":"spam-isSpam","state":"You won a free cruise! Click now #30","llm":{"answer":"yes"},"llm_usage":{"input_tokens":95,"output_tokens":2}}
+{"candidate":"spam-isSpam","state":"Team sync moved to 3pm #31","llm":{"answer":"no"},"llm_usage":{"input_tokens":95,"output_tokens":2}}
+{"candidate":"spam-isSpam","state":"Cheap meds, no prescription #32","llm":{"answer":"yes"},"llm_usage":{"input_tokens":95,"output_tokens":2}}
+{"candidate":"spam-isSpam","state":"Your invoice for September #33","llm":{"answer":"no"},"llm_usage":{"input_tokens":95,"output_tokens":2}}
+{"candidate":"spam-isSpam","state":"Claim your prize before midnight #34","llm":{"answer":"yes"},"llm_usage":{"input_tokens":95,"output_tokens":2}}
+{"candidate":"spam-isSpam","state":"Can you review my PR? #35","llm":{"answer":"no"},"llm_usage":{"input_tokens":95,"output_tokens":2}}
+{"candidate":"spam-isSpam","state":"You won a free cruise! Click now #36","llm":{"answer":"yes"},"llm_usage":{"input_tokens":95,"output_tokens":2}}
+{"candidate":"spam-isSpam","state":"Team sync moved to 3pm #37","llm":{"answer":"no"},"llm_usage":{"input_tokens":95,"output_tokens":2}}
+{"candidate":"spam-isSpam","state":"Cheap meds, no prescription #38","llm":{"answer":"yes"},"llm_usage":{"input_tokens":95,"output_tokens":2}}
+{"candidate":"spam-isSpam","state":"Your invoice for September #39","llm":{"answer":"no"},"llm_usage":{"input_tokens":95,"output_tokens":2}}
+{"candidate":"triage-triage_ticket","state":"Charged twice again [py 0]","llm":{"team":"billing","urgent":true,"priority":1},"llm_usage":{"input_tokens":210,"output_tokens":70}}
+{"candidate":"triage-triage_ticket","state":"App crashes on launch [py 1]","llm":{"team":"technical","urgent":false,"priority":2},"llm_usage":{"input_tokens":210,"output_tokens":70}}
+{"candidate":"triage-triage_ticket","state":"Need pricing for 200 seats [py 2]","llm":{"team":"sales","urgent":false,"priority":3},"llm_usage":{"input_tokens":210,"output_tokens":70}}
+{"candidate":"triage-triage_ticket","state":"Wrong billing address on invoice [py 3]","llm":{"team":"billing","urgent":false,"priority":4},"llm_usage":{"input_tokens":210,"output_tokens":70}}
+{"candidate":"triage-triage_ticket","state":"Charged twice again [py 4]","llm":{"team":"billing","urgent":true,"priority":5},"llm_usage":{"input_tokens":210,"output_tokens":70}}
+{"candidate":"triage-triage_ticket","state":"App crashes on launch [py 5]","llm":{"team":"technical","urgent":false,"priority":1},"llm_usage":{"input_tokens":210,"output_tokens":70}}
+{"candidate":"triage-triage_ticket","state":"Need pricing for 200 seats [py 6]","llm":{"team":"sales","urgent":false,"priority":2},"llm_usage":{"input_tokens":210,"output_tokens":70}}
+{"candidate":"triage-triage_ticket","state":"Wrong billing address on invoice [py 7]","llm":{"team":"billing","urgent":false,"priority":3},"llm_usage":{"input_tokens":210,"output_tokens":70}}
+{"candidate":"triage-triage_ticket","state":"Charged twice again [py 8]","llm":{"team":"billing","urgent":true,"priority":4},"llm_usage":{"input_tokens":210,"output_tokens":70}}
+{"candidate":"triage-triage_ticket","state":"App crashes on launch [py 9]","llm":{"team":"technical","urgent":false,"priority":5},"llm_usage":{"input_tokens":210,"output_tokens":70}}
+{"candidate":"triage-triage_ticket","state":"Need pricing for 200 seats [py 10]","llm":{"team":"sales","urgent":false,"priority":1},"llm_usage":{"input_tokens":210,"output_tokens":70}}
+{"candidate":"triage-triage_ticket","state":"Wrong billing address on invoice [py 11]","llm":{"team":"billing","urgent":false,"priority":2},"llm_usage":{"input_tokens":210,"output_tokens":70}}
+{"candidate":"triage-triage_ticket","state":"Charged twice again [py 12]","llm":{"team":"billing","urgent":true,"priority":3},"llm_usage":{"input_tokens":210,"output_tokens":70}}
+{"candidate":"triage-triage_ticket","state":"App crashes on launch [py 13]","llm":{"team":"technical","urgent":false,"priority":4},"llm_usage":{"input_tokens":210,"output_tokens":70}}
+{"candidate":"triage-triage_ticket","state":"Need pricing for 200 seats [py 14]","llm":{"team":"sales","urgent":false,"priority":5},"llm_usage":{"input_tokens":210,"output_tokens":70}}
+{"candidate":"triage-triage_ticket","state":"Wrong billing address on invoice [py 15]","llm":{"team":"billing","urgent":false,"priority":1},"llm_usage":{"input_tokens":210,"output_tokens":70}}
+{"candidate":"triage-triage_ticket","state":"Charged twice again [py 16]","llm":{"team":"billing","urgent":true,"priority":2},"llm_usage":{"input_tokens":210,"output_tokens":70}}
+{"candidate":"triage-triage_ticket","state":"App crashes on launch [py 17]","llm":{"team":"technical","urgent":false,"priority":3},"llm_usage":{"input_tokens":210,"output_tokens":70}}
+{"candidate":"triage-triage_ticket","state":"Need pricing for 200 seats [py 18]","llm":{"team":"sales","urgent":false,"priority":4},"llm_usage":{"input_tokens":210,"output_tokens":70}}
+{"candidate":"triage-triage_ticket","state":"Wrong billing address on invoice [py 19]","llm":{"team":"billing","urgent":false,"priority":5},"llm_usage":{"input_tokens":210,"output_tokens":70}}
+{"candidate":"triage-triage_ticket","state":"Charged twice again [py 20]","llm":{"team":"billing","urgent":true,"priority":1},"llm_usage":{"input_tokens":210,"output_tokens":70}}
+{"candidate":"triage-triage_ticket","state":"App crashes on launch [py 21]","llm":{"team":"technical","urgent":false,"priority":2},"llm_usage":{"input_tokens":210,"output_tokens":70}}
+{"candidate":"triage-triage_ticket","state":"Need pricing for 200 seats [py 22]","llm":{"team":"sales","urgent":false,"priority":3},"llm_usage":{"input_tokens":210,"output_tokens":70}}
+{"candidate":"triage-triage_ticket","state":"Wrong billing address on invoice [py 23]","llm":{"team":"billing","urgent":false,"priority":4},"llm_usage":{"input_tokens":210,"output_tokens":70}}
+{"candidate":"triage-triage_ticket","state":"Charged twice again [py 24]","llm":{"team":"billing","urgent":true,"priority":5},"llm_usage":{"input_tokens":210,"output_tokens":70}}
+{"candidate":"triage-triage_ticket","state":"App crashes on launch [py 25]","llm":{"team":"technical","urgent":false,"priority":1},"llm_usage":{"input_tokens":210,"output_tokens":70}}
+{"candidate":"triage-triage_ticket","state":"Need pricing for 200 seats [py 26]","llm":{"team":"sales","urgent":false,"priority":2},"llm_usage":{"input_tokens":210,"output_tokens":70}}
+{"candidate":"triage-triage_ticket","state":"Wrong billing address on invoice [py 27]","llm":{"team":"billing","urgent":false,"priority":3},"llm_usage":{"input_tokens":210,"output_tokens":70}}
+{"candidate":"triage-triage_ticket","state":"Charged twice again [py 28]","llm":{"team":"billing","urgent":true,"priority":4},"llm_usage":{"input_tokens":210,"output_tokens":70}}
+{"candidate":"triage-triage_ticket","state":"App crashes on launch [py 29]","llm":{"team":"technical","urgent":false,"priority":5},"llm_usage":{"input_tokens":210,"output_tokens":70}}
+{"candidate":"refunds-build_refund_reviewer","state":{"request":"Item never arrived [0]","order_value":20},"llm":{"decision":"approve","fraud_risk":0},"llm_usage":{"input_tokens":260,"output_tokens":40}}
+{"candidate":"refunds-build_refund_reviewer","state":{"request":"Changed my mind [1]","order_value":21},"llm":{"decision":"deny","fraud_risk":1},"llm_usage":{"input_tokens":260,"output_tokens":40}}
+{"candidate":"refunds-build_refund_reviewer","state":{"request":"Charged after cancelling [2]","order_value":22},"llm":{"decision":"approve","fraud_risk":0},"llm_usage":{"input_tokens":260,"output_tokens":40}}
+{"candidate":"refunds-build_refund_reviewer","state":{"request":"Box was empty, third claim this month [3]","order_value":23},"llm":{"decision":"escalate","fraud_risk":3},"llm_usage":{"input_tokens":260,"output_tokens":40}}
+{"candidate":"refunds-build_refund_reviewer","state":{"request":"Item never arrived [4]","order_value":24},"llm":{"decision":"approve","fraud_risk":0},"llm_usage":{"input_tokens":260,"output_tokens":40}}
+{"candidate":"refunds-build_refund_reviewer","state":{"request":"Changed my mind [5]","order_value":25},"llm":{"decision":"deny","fraud_risk":1},"llm_usage":{"input_tokens":260,"output_tokens":40}}
+{"candidate":"refunds-build_refund_reviewer","state":{"request":"Charged after cancelling [6]","order_value":26},"llm":{"decision":"approve","fraud_risk":0},"llm_usage":{"input_tokens":260,"output_tokens":40}}
+{"candidate":"refunds-build_refund_reviewer","state":{"request":"Box was empty, third claim this month [7]","order_value":27},"llm":{"decision":"escalate","fraud_risk":3},"llm_usage":{"input_tokens":260,"output_tokens":40}}
+{"candidate":"refunds-build_refund_reviewer","state":{"request":"Item never arrived [8]","order_value":28},"llm":{"decision":"approve","fraud_risk":0},"llm_usage":{"input_tokens":260,"output_tokens":40}}
+{"candidate":"refunds-build_refund_reviewer","state":{"request":"Changed my mind [9]","order_value":29},"llm":{"decision":"deny","fraud_risk":1},"llm_usage":{"input_tokens":260,"output_tokens":40}}
+{"candidate":"refunds-build_refund_reviewer","state":{"request":"Charged after cancelling [10]","order_value":30},"llm":{"decision":"approve","fraud_risk":0},"llm_usage":{"input_tokens":260,"output_tokens":40}}
+{"candidate":"refunds-build_refund_reviewer","state":{"request":"Box was empty, third claim this month [11]","order_value":31},"llm":{"decision":"escalate","fraud_risk":3},"llm_usage":{"input_tokens":260,"output_tokens":40}}
+{"candidate":"refunds-build_refund_reviewer","state":{"request":"Item never arrived [12]","order_value":32},"llm":{"decision":"approve","fraud_risk":0},"llm_usage":{"input_tokens":260,"output_tokens":40}}
+{"candidate":"refunds-build_refund_reviewer","state":{"request":"Changed my mind [13]","order_value":33},"llm":{"decision":"deny","fraud_risk":1},"llm_usage":{"input_tokens":260,"output_tokens":40}}
+{"candidate":"refunds-build_refund_reviewer","state":{"request":"Charged after cancelling [14]","order_value":34},"llm":{"decision":"approve","fraud_risk":0},"llm_usage":{"input_tokens":260,"output_tokens":40}}
+{"candidate":"refunds-build_refund_reviewer","state":{"request":"Box was empty, third claim this month [15]","order_value":35},"llm":{"decision":"escalate","fraud_risk":3},"llm_usage":{"input_tokens":260,"output_tokens":40}}
+{"candidate":"refunds-build_refund_reviewer","state":{"request":"Item never arrived [16]","order_value":36},"llm":{"decision":"approve","fraud_risk":0},"llm_usage":{"input_tokens":260,"output_tokens":40}}
+{"candidate":"refunds-build_refund_reviewer","state":{"request":"Changed my mind [17]","order_value":37},"llm":{"decision":"deny","fraud_risk":1},"llm_usage":{"input_tokens":260,"output_tokens":40}}
+{"candidate":"refunds-build_refund_reviewer","state":{"request":"Charged after cancelling [18]","order_value":38},"llm":{"decision":"approve","fraud_risk":0},"llm_usage":{"input_tokens":260,"output_tokens":40}}
+{"candidate":"refunds-build_refund_reviewer","state":{"request":"Box was empty, third claim this month [19]","order_value":39},"llm":{"decision":"escalate","fraud_risk":3},"llm_usage":{"input_tokens":260,"output_tokens":40}}
+{"candidate":"refunds-build_refund_reviewer","state":{"request":"Item never arrived [20]","order_value":40},"llm":{"decision":"approve","fraud_risk":0},"llm_usage":{"input_tokens":260,"output_tokens":40}}
+{"candidate":"refunds-build_refund_reviewer","state":{"request":"Changed my mind [21]","order_value":41},"llm":{"decision":"deny","fraud_risk":1},"llm_usage":{"input_tokens":260,"output_tokens":40}}
+{"candidate":"refunds-build_refund_reviewer","state":{"request":"Charged after cancelling [22]","order_value":42},"llm":{"decision":"approve","fraud_risk":0},"llm_usage":{"input_tokens":260,"output_tokens":40}}
+{"candidate":"refunds-build_refund_reviewer","state":{"request":"Box was empty, third claim this month [23]","order_value":43},"llm":{"decision":"escalate","fraud_risk":3},"llm_usage":{"input_tokens":260,"output_tokens":40}}
+{"candidate":"refunds-build_refund_reviewer","state":{"request":"Item never arrived [24]","order_value":44},"llm":{"decision":"approve","fraud_risk":0},"llm_usage":{"input_tokens":260,"output_tokens":40}}
+{"candidate":"refunds-build_refund_reviewer","state":{"request":"Changed my mind [25]","order_value":45},"llm":{"decision":"deny","fraud_risk":1},"llm_usage":{"input_tokens":260,"output_tokens":40}}
+{"candidate":"refunds-build_refund_reviewer","state":{"request":"Charged after cancelling [26]","order_value":46},"llm":{"decision":"approve","fraud_risk":0},"llm_usage":{"input_tokens":260,"output_tokens":40}}
+{"candidate":"refunds-build_refund_reviewer","state":{"request":"Box was empty, third claim this month [27]","order_value":47},"llm":{"decision":"escalate","fraud_risk":3},"llm_usage":{"input_tokens":260,"output_tokens":40}}
+{"candidate":"refunds-build_refund_reviewer","state":{"request":"Item never arrived [28]","order_value":48},"llm":{"decision":"approve","fraud_risk":0},"llm_usage":{"input_tokens":260,"output_tokens":40}}
+{"candidate":"refunds-build_refund_reviewer","state":{"request":"Changed my mind [29]","order_value":49},"llm":{"decision":"deny","fraud_risk":1},"llm_usage":{"input_tokens":260,"output_tokens":40}}

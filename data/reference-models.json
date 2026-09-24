@@ -1,0 +1,30 @@
+{
+  "_comment": "Likely models for calls whose model is chosen at runtime, per provider family: each provider's small default models, since decision calls (routing, yes/no checks, classification) usually run on them. Hand-picked, NOT measured usage. They are also the cheapest options, so the savings shown are the conservative ones. Keys are OpenRouter ids (data/prices.json).",
+  "families": {
+    "openai": [
+      "openai/gpt-4o-mini",
+      "openai/gpt-5-mini"
+    ],
+    "anthropic": [
+      "anthropic/claude-haiku-4.5"
+    ],
+    "google": [
+      "google/gemini-2.5-flash"
+    ]
+  },
+  "sdkFamilies": {
+    "openai": "openai",
+    "@ai-sdk/openai": "openai",
+    "@azure/openai": "openai",
+    "langchain-openai": "openai",
+    "@langchain/openai": "openai",
+    "@anthropic-ai/sdk": "anthropic",
+    "anthropic": "anthropic",
+    "@ai-sdk/anthropic": "anthropic",
+    "langchain-anthropic": "anthropic",
+    "@langchain/anthropic": "anthropic",
+    "@ai-sdk/google": "google",
+    "@ai-sdk/google-vertex": "google",
+    "@langchain/google-genai": "google"
+  }
+}
