@@ -66,20 +66,26 @@ export const Banner: React.FC = () => (
       <Crop x={W - IN + 10} y={H - IN + 10} dx={-1} dy={-1} />
 
       {/* Left column: lockup and line. */}
-      <text x={96} y={140} fontFamily={MONO} fontSize={17} letterSpacing={0.7} fill={C.pink}>
+      <text x={96} y={124} fontFamily={MONO} fontSize={17} letterSpacing={0.7} fill={C.pink}>
         {"// open source"}
         <tspan fill={C.mid}> ...................... </tspan>
         <tspan fill={C.muted}>for TypeSafe Jev</tspan>
       </text>
-      <HalftoneMark x={146} y={262} size={124} pitch={3.4} />
-      <text x={200} y={290} fontFamily={MONO} fontWeight={600} fontSize={76} letterSpacing={-2.5} fill={C.text}>
+      <HalftoneMark x={146} y={236} size={124} pitch={3.4} />
+      <text x={200} y={264} fontFamily={MONO} fontWeight={600} fontSize={76} letterSpacing={-2.5} fill={C.text}>
         jev<tspan fill={C.muted} fontWeight={500}>-swap</tspan>
       </text>
-      <text fontFamily={SANS} fontWeight={500} fontSize={42} letterSpacing={-1.2} fill={C.text}>
-        <tspan x={96} y={420}>Find the decisions.</tspan>
-        <tspan x={96} y={470}>Swap them to Jev.</tspan>
-        <tspan x={96} y={520} fill={C.pink}>Prove it.</tspan>
-      </text>
+      {/* The workflow, in order: the last step is the payoff. */}
+      {["Find the decisions", "Run the shadow proxy", "Estimate the savings", "See the difference", "Swap to Jev"].map((step, i, all) => (
+        <g key={step}>
+          <text x={96} y={392 + i * 42} fontFamily={MONO} fontSize={16} fill={i === all.length - 1 ? C.pink : C.dim}>
+            {String(i + 1).padStart(2, "0")}
+          </text>
+          <text x={136} y={392 + i * 42} fontFamily={SANS} fontWeight={500} fontSize={30} letterSpacing={-0.8} fill={i === all.length - 1 ? C.pink : C.text}>
+            {step}
+          </text>
+        </g>
+      ))}
 
       {/* Right column: the switch in halftone. */}
       <g>
