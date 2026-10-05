@@ -36,15 +36,21 @@ export function questionFromName(f: DecisionField): string {
   return `Rate the ${label} from ${f.min} (lowest) to ${f.max} (highest).`;
 }
 
+/** The call's own prompt with interpolated input removed: the rules the LLM is given. */
+export function promptRules(c: Candidate): string {
+  let p = c.prompt ?? "";
+  for (const e of c.stateExprs) p = p.split(`{${e}}`).join("");
+  return p.replace(/[ \t]+\n/g, "\n").replace(/\n{3,}/g, "\n\n").trim();
+}
+
 export function instructionsFor(c: Candidate, f: DecisionField): string {
-  if (f.description) return f.description;
-  if (c.signal === "prompt-heuristic" && c.prompt) {
-    // The prompt is the question itself; the input it interpolates goes to Jev as state.
-    let p = c.prompt;
-    for (const e of c.stateExprs) p = p.split(`{${e}}`).join("");
-    return p.replace(/[ \t]+\n/g, "\n").replace(/\n{3,}/g, "\n\n").trim();
-  }
-  return questionFromName(f);
+  const rules = promptRules(c);
+  // A yes/no prompt is the question itself; the input it interpolates goes to Jev as state.
+  if (c.signal === "prompt-heuristic" && rules) return rules;
+  const ask = f.description ?? questionFromName(f);
+  // A schema call's prompt carries the decision rules its field descriptions leave out: definitions,
+  // examples, tie-breakers. Jev has no shared context field, so each question carries them.
+  return rules ? `${rules}\n\n${ask}` : ask;
 }
 
 export function scoreLabels(f: Extract<DecisionField, { kind: "score" }>): string[] {

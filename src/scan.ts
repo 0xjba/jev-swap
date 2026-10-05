@@ -1,7 +1,7 @@
 import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
-import { Node, Project, SyntaxKind, type CallExpression } from "ts-morph";
+import { Node, Project, SyntaxKind, ts, VariableDeclarationKind, type CallExpression, type Identifier } from "ts-morph";
 import fs from "node:fs";
 import type { Candidate, DecisionField, ModelRef } from "./types.js";
 
@@ -325,6 +325,115 @@ export function httpRequest(call: CallExpression, callee: string): { provider: C
   return { provider, api: `http ${path ? path[0] : "POST"}`, body };
 }
 
+// ---------- static prompt text ----------
+//
+// Prompts are often kept in constants, sometimes in another module behind a tsconfig path alias
+// (`import { RULES } from "@/prompts"`). Resolving them gives Jev the same rules the LLM gets;
+// without them a schema call is judged from its one-line field description alone.
+
+interface StaticText { text: string; state: string[] }
+
+const optionsCache = new Map<string, ts.CompilerOptions | null>();
+
+/** Compiler options from the nearest tsconfig.json above `file` (for path aliases), cached per directory. */
+function compilerOptionsFor(file: string): ts.CompilerOptions | undefined {
+  const visited: string[] = [];
+  let dir = path.dirname(file);
+  let found: ts.CompilerOptions | null = null;
+  for (;;) {
+    if (optionsCache.has(dir)) { found = optionsCache.get(dir)!; break; }
+    visited.push(dir);
+    const cfg = path.join(dir, "tsconfig.json");
+    if (fs.existsSync(cfg)) {
+      const read = ts.readConfigFile(cfg, ts.sys.readFile);
+      // An unresolvable `extends` (uninstalled package) is reported but still yields this file's own options.
+      found = read.config ? ts.parseJsonConfigFileContent(read.config, ts.sys, dir).options : null;
+      break;
+    }
+    const up = path.dirname(dir);
+    if (up === dir) break;
+    dir = up;
+  }
+  for (const d of visited) optionsCache.set(d, found);
+  return found ?? undefined;
+}
+
+function resolveModuleFile(spec: string, fromFile: string): string | undefined {
+  const opts = compilerOptionsFor(fromFile) ?? {};
+  const r = ts.resolveModuleName(spec, fromFile, {
+    ...opts,
+    allowJs: true,
+    moduleResolution: opts.moduleResolution ?? ts.ModuleResolutionKind.Bundler,
+  }, ts.sys);
+  const f = r.resolvedModule?.resolvedFileName;
+  return f && !f.endsWith(".d.ts") && !f.includes(`${path.sep}node_modules${path.sep}`) ? f : undefined;
+}
+
+function isConst(decl: Node): boolean {
+  const list = decl.getParent();
+  return !!list && Node.isVariableDeclarationList(list) && list.getDeclarationKind() === VariableDeclarationKind.Const;
+}
+
+/** Initializer of a `const` the identifier refers to: same file, a followed import, or an aliased import. */
+function constInitializer(id: Identifier): Node | undefined {
+  try {
+    for (const def of id.getDefinitionNodes()) {
+      if (Node.isVariableDeclaration(def)) return isConst(def) ? def.getInitializer() : undefined;
+    }
+  } catch {
+    /* unresolved: fall through to the import lookup */
+  }
+  const sf = id.getSourceFile();
+  const name = id.getText();
+  for (const imp of sf.getImportDeclarations()) {
+    for (const spec of imp.getNamedImports()) {
+      if ((spec.getAliasNode()?.getText() ?? spec.getName()) !== name) continue;
+      const target = resolveModuleFile(imp.getModuleSpecifierValue(), sf.getFilePath());
+      const decl = target ? sf.getProject().addSourceFileAtPathIfExists(target)?.getVariableDeclaration(spec.getName()) : undefined;
+      return decl && isConst(decl) ? decl.getInitializer() : undefined;
+    }
+  }
+  return undefined;
+}
+
+/**
+ * The text a prompt expression evaluates to when it is built from literals and constants.
+ * Interpolations that cannot be resolved stay as `{expr}` placeholders and are reported as state.
+ */
+function staticText(n: Node, depth = 0): StaticText | undefined {
+  if (depth > 8) return undefined;
+  let u = n;
+  while (Node.isAsExpression(u) || Node.isParenthesizedExpression(u) || Node.isSatisfiesExpression(u) || Node.isNonNullExpression(u)) {
+    u = u.getExpression();
+  }
+  if (Node.isStringLiteral(u) || Node.isNoSubstitutionTemplateLiteral(u)) return { text: u.getLiteralText(), state: [] };
+  if (Node.isTemplateExpression(u)) {
+    let text = u.getHead().getLiteralText();
+    const state: string[] = [];
+    for (const span of u.getTemplateSpans()) {
+      const e = span.getExpression();
+      const inner = staticText(e, depth + 1);
+      if (inner) { text += inner.text; state.push(...inner.state); }
+      else { state.push(e.getText()); text += `{${e.getText()}}`; }
+      text += span.getLiteral().getLiteralText();
+    }
+    return { text, state };
+  }
+  if (Node.isBinaryExpression(u) && u.getOperatorToken().getKind() === SyntaxKind.PlusToken) {
+    const l = staticText(u.getLeft(), depth + 1);
+    const r = staticText(u.getRight(), depth + 1);
+    if (!l && !r) return undefined;
+    const part = (st: StaticText | undefined, side: Node): StaticText => st ?? { text: `{${side.getText()}}`, state: [side.getText()] };
+    const a = part(l, u.getLeft()), b = part(r, u.getRight());
+    return { text: a.text + b.text, state: [...a.state, ...b.state] };
+  }
+  if (Node.isIdentifier(u)) {
+    const init = constInitializer(u);
+    return init ? staticText(init, depth + 1) : undefined;
+  }
+  return undefined;
+}
+
 // ---------- prompt / state extraction ----------
 
 function extractPrompt(call: CallExpression, extraRoots: Node[] = []): { prompt?: string; stateExprs: string[] } {
@@ -341,16 +450,9 @@ function extractPrompt(call: CallExpression, extraRoots: Node[] = []): { prompt?
       if (!raw) continue;
       const lit = strValue(raw);
       if (lit !== undefined) { texts.push(lit); continue; }
-      if (Node.isTemplateExpression(raw)) {
-        let t = raw.getHead().getLiteralText();
-        for (const span of raw.getTemplateSpans()) {
-          const expr = span.getExpression().getText();
-          stateExprs.push(expr);
-          t += `{${expr}}` + span.getLiteral().getLiteralText();
-        }
-        texts.push(t);
-        continue;
-      }
+      // Template literals, constants (also imported ones) and `+` concatenations of them.
+      const st = staticText(raw);
+      if (st) { texts.push(st.text); stateExprs.push(...st.state); continue; }
       const u = unwrap(raw);
       if (Node.isArrayLiteralExpression(u) || Node.isObjectLiteralExpression(u)) continue;
       stateExprs.push(raw.getText());

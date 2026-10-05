@@ -505,9 +505,10 @@ export function buildDashboard(out: string, opts: { stateMin: number; stateMax: 
     const cands = production.map((c): DashboardCandidate => {
       // Re-price from the current table so price updates don't need a re-scan.
       const priced = c.model?.id ? lookupPrice(prices, c.model.id) : undefined;
-      // Jev's billed request size from the measured profile: base + per question. A yes/no-prompt question
-      // also carries its prompt text (kept from scan time as a chars/4 estimate).
-      const extra = c.signal === "schema" ? 0 : prof.stateFactor * c.tokens.jevStatic.tokens;
+      // Jev's billed request size from the measured profile: base + per question. A question that also
+      // carries the call's prompt text (yes/no-prompt calls, and schema calls whose prompt is in source)
+      // adds it (kept from scan time as a chars/4 estimate).
+      const extra = c.signal === "schema" && !c.tokens.promptInSource ? 0 : prof.stateFactor * c.tokens.jevStatic.tokens;
       const t: StaticTokens = {
         ...c.tokens,
         jevStatic: { tokens: Math.round(jevRequestTokens(prof, c.fields.length, 0) + extra), method: "estimate:chars/4" },
@@ -591,7 +592,7 @@ export function buildDashboard(out: string, opts: { stateMin: number; stateMax: 
       ],
       assumptions: [
         `state_tokens (the user input each call sends) is unknown from source, so each figure is a range over ${opts.stateMin}-${opts.stateMax} tokens; the same count is used on both sides.`,
-        "prompt_tokens counts only prompt text found in the call's source, without interpolated input. Prompts loaded from files or other modules are missed (promptInSource: false).",
+        "prompt_tokens counts prompt text the scanner resolves statically: literals and constants, including ones imported from other modules or through tsconfig path aliases, without interpolated input. Prompts built at runtime or read from files are missed (promptInSource: false). Jev's questions carry the same prompt text, so its cost includes it.",
         "output_tokens is the smallest JSON the schema allows. Reasoning tokens, schema/tool definitions, tool-use system prompts and chat framing are left out of llm_cost, so llm_cost is a lower bound and the reduction is conservative.",
         `jev_request_tokens = ${prof.baseTokens} + ${prof.perQuestion} per question, and state_factor = ${prof.stateFactor}: Jev's billed input tokens, fitted from ${prof.calls} live Jev calls on ${prof.measuredAt.slice(0, 10)} (jev-swap oss measure-jev).`,
         `Prices are list prices from OpenRouter (${prices.source}, fetched ${prices.fetchedAt.slice(0, 10)}); Jev's from its OpenRouter page. Calls whose model can't be read or isn't listed there are shown but left out of totals.`,
