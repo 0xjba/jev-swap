@@ -111,10 +111,10 @@ npm run render     # -> video/out/jev-swap-launch.mp4 (web encode, ~12 Mbps; the
 ## Samples format (JSONL)
 
 ```json
-{"candidate":"triage-classifyTicket","state":"raw input the LLM saw","llm":{"category":"billing","urgent":true,"priority":3},"llm_usage":{"input_tokens":180,"output_tokens":60}}
+{"candidate":"triage-classifyTicket","state":"raw input the LLM saw","llm":{"category":"billing","urgent":true,"priority":3},"llm_usage":{"input_tokens":180,"output_tokens":60},"llm_ms":840}
 ```
 
-`llm_usage` is optional; it's needed only for LLM cost comparison.
+`llm_usage` and `llm_ms` are optional. `llm_usage` enables the cost comparison and the saving %; `llm_ms` (the LLM call's latency in milliseconds, measured where you recorded it) enables the speed comparison. The proxy writes both.
 
 ## Mapping
 

@@ -27,10 +27,18 @@ export interface CandidateResult {
   curve: CurvePoint[];
   recommended: CurvePoint | null;
   latencyMs: { p50: number; p95: number } | null;
+  /** From the samples' `llm_ms`, when every sample has it. */
+  llmLatencyMs: { p50: number; p95: number } | null;
+  /** LLM p50 / Jev p50, both measured. Null in mock mode or without `llm_ms`. */
+  speedup: number | null;
   jevInputTokens: number;
   jevCostPerCall: number;
   llmCostPerCall: number | null;
   hybridCostPerCall: number | null;
+  /** 1 - Jev / LLM cost per call, if every call went to Jev. */
+  jevSaving: number | null;
+  /** 1 - hybrid / LLM cost per call at the recommended threshold. Null when no threshold meets the target. */
+  hybridSaving: number | null;
 }
 
 // ---------- mock transport ----------
@@ -174,7 +182,8 @@ export async function shadow(candidates: Candidate[], rows: SampleRow[], o: Shad
         const llmCost = row.llm_usage && o.llmPriceIn !== undefined && o.llmPriceOut !== undefined
           ? (row.llm_usage.input_tokens * o.llmPriceIn + row.llm_usage.output_tokens * o.llmPriceOut) / 1e6
           : null;
-        return { ok: true as const, ms, perField, conf, inTok: res.usage.input_tokens as number, llmCost };
+        const llmMs = typeof row.llm_ms === "number" && Number.isFinite(row.llm_ms) ? row.llm_ms : null;
+        return { ok: true as const, ms, perField, conf, inTok: res.usage.input_tokens as number, llmCost, llmMs };
       } catch (e) {
         return { ok: false as const, error: String(e) };
       }
@@ -197,6 +206,10 @@ export async function shadow(candidates: Candidate[], rows: SampleRow[], o: Shad
     const hybridCostPerCall = llmCostPerCall !== null && recommended
       ? jevCostPerCall + llmCostPerCall * (1 - recommended.coverage)
       : null;
+    const saving = (cost: number | null) => (cost !== null && llmCostPerCall ? 1 - cost / llmCostPerCall : null);
+    const latencyMs = o.mock || !ok.length ? null : { p50: pct(ok.map((r) => r.ms), 50), p95: pct(ok.map((r) => r.ms), 95) };
+    const llmMs = ok.map((r) => r.llmMs).filter((x): x is number => x !== null);
+    const llmLatencyMs = ok.length && llmMs.length === ok.length ? { p50: pct(llmMs, 50), p95: pct(llmMs, 95) } : null;
 
     results.push({
       id: c.id,
@@ -208,11 +221,15 @@ export async function shadow(candidates: Candidate[], rows: SampleRow[], o: Shad
       exactAgreement: ok.length ? ok.filter(exact).length / ok.length : 0,
       curve,
       recommended,
-      latencyMs: o.mock || !ok.length ? null : { p50: pct(ok.map((r) => r.ms), 50), p95: pct(ok.map((r) => r.ms), 95) },
+      latencyMs,
+      llmLatencyMs,
+      speedup: latencyMs && llmLatencyMs && latencyMs.p50 > 0 ? llmLatencyMs.p50 / latencyMs.p50 : null,
       jevInputTokens,
       jevCostPerCall,
       llmCostPerCall,
       hybridCostPerCall,
+      jevSaving: saving(jevCostPerCall),
+      hybridSaving: saving(hybridCostPerCall),
     });
     if (errors) console.warn(`[${c.id}] ${errors} request(s) failed; first: ${(runs.find((r) => !r.ok) as any)?.error}`);
   }

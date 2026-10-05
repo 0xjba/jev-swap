@@ -98,7 +98,11 @@ program
       }
     }
     for (const r of results) {
-      console.log(`  ${r.id}: ${r.samples} samples, exact agreement ${(r.exactAgreement * 100).toFixed(1)}%, recommended threshold ${r.recommended?.threshold ?? "none"}`);
+      const extras = [
+        r.hybridSaving !== null ? `${(r.hybridSaving * 100).toFixed(1)}% cheaper (hybrid)` : undefined,
+        r.speedup !== null ? `${r.speedup.toFixed(1)}x faster (p50)` : undefined,
+      ].filter(Boolean);
+      console.log(`  ${r.id}: ${r.samples} samples, exact agreement ${(r.exactAgreement * 100).toFixed(1)}%, recommended threshold ${r.recommended?.threshold ?? "none"}${extras.length ? `, ${extras.join(", ")}` : ""}`);
     }
     console.log(`\nWrote ${path.join(opts.out, "REPORT.md")}${opts.mock ? "  (SIMULATED)" : ""}`);
   });

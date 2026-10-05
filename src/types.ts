@@ -37,4 +37,6 @@ export interface SampleRow {
   state: unknown;
   llm: Record<string, unknown>;
   llm_usage?: { input_tokens: number; output_tokens: number };
+  /** The LLM call's latency in ms, measured where it was recorded. Enables the speed comparison. */
+  llm_ms?: number;
 }

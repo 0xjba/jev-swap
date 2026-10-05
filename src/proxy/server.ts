@@ -103,7 +103,7 @@ export function startProxy(candidates: Candidate[], o: ProxyOptions) {
       return;
     }
     const usage = extractUsage(up.json);
-    samplesLog.write(JSON.stringify({ candidate: c.id, state, llm, ...(usage ? { llm_usage: usage } : {}) }) + "\n");
+    samplesLog.write(JSON.stringify({ candidate: c.id, state, llm, ...(usage ? { llm_usage: usage } : {}), llm_ms: Math.round(up.ms) }) + "\n");
 
     const m: Mirror = { n: ++seq, at: Date.now(), candidate: c.id, state: state.slice(0, 400), llm, llmMs: up.ms, llmCost: llmCostOf(usage) };
     let jr: any;
