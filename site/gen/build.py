@@ -21,11 +21,24 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 SITE = os.path.dirname(HERE)
 ROOT = os.path.dirname(SITE)
 
-scan_svg, _ = scenes.hero_scan()
-scan_m_svg, _ = scenes.hero_scan_mobile()
 proxy_svg, _ = scenes.hero()
 proxy_m_svg, _ = scenes.hero_mobile()
-gate_svg, _ = scenes.gate()
+
+
+def figure(name):
+    """An isometric figure built by site/gen/figures/<name>.mjs (run by `npm run site`): its card markup and live code."""
+    out = os.path.join(HERE, "figures", "out")
+    with open(os.path.join(out, f"{name}.html")) as fh:
+        html = fh.read()
+    with open(os.path.join(out, f"{name}.js")) as fh:
+        js = fh.read()
+    return html, f"<script>{js}</script>"
+
+
+with open(os.path.join(HERE, "figures", "out", "iso.css")) as _fh:
+    FIG_CSS = _fh.read() + ".hero-art .iso{max-width:940px;margin:0 auto}"
+sorter_html, sorter_js = figure("sorter")
+gate_html, gate_js = figure("gate")
 i_scan, i_conv, i_shadow = scenes.icon_scan(), scenes.icon_convert(), scenes.icon_shadow()
 
 # Prices refreshed by `oss prices` (oss-out/prices.json), else the snapshot bundled with the package.
@@ -142,7 +155,7 @@ def home():
 <p class="small">No API key needed to scan · TypeScript, JavaScript, Python</p>
 {proof}</div>
 </div>
-<div class="hero-art"><div class="d">{scan_svg}</div><div class="m">{scan_m_svg}</div></div>
+<div class="hero-art">{sorter_html}</div>
 ''', id_="top")
 
     def fact_link(big, text, href, cls=""):
@@ -221,7 +234,7 @@ def home():
 );
 ticket.source <span class="c-com">// &quot;jev&quot; or &quot;llm&quot;</span></pre>
 </div>
-<div style="flex: 1 1 420px; min-width: 0; max-width: 560px; margin: 0 auto;">{gate_svg}</div>
+<div style="flex: 1 1 460px; min-width: 0; max-width: 620px; margin: 0 auto;">{gate_html}</div>
 </div></div>''')
 
     teaser = ""
@@ -338,7 +351,7 @@ npm install -g jev-swap</pre>
     body = "\n".join([hero, facts, problem, speed, how, safety, teaser, trailer, calc, report, coverage, faq, install, footer(SOURCES)])
     return page("jev-swap — stop paying LLM prices for decisions",
                 "Find the LLM calls in your codebase that are really decisions, see what they'd cost and how fast they'd run on TypeSafe Jev, and swap them with a safe fallback.",
-                "index.html", body, extra_css=race_css, script=f"<script>{CALC_JS.replace('__JEV_IN__', format(JEV['in'], 'g')).replace('__JEV_BASE__', str(PROF['baseTokens'])).replace('__JEV_PERQ__', str(PROF['perQuestion'])).replace('__JEV_SF__', format(PROF['stateFactor'], 'g'))}</script>")
+                "index.html", body, extra_css=race_css + FIG_CSS, script=sorter_js + gate_js + f"<script>{CALC_JS.replace('__JEV_IN__', format(JEV['in'], 'g')).replace('__JEV_BASE__', str(PROF['baseTokens'])).replace('__JEV_PERQ__', str(PROF['perQuestion'])).replace('__JEV_SF__', format(PROF['stateFactor'], 'g'))}</script>")
 
 
 # ======================================================================
