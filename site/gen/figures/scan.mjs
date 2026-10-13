@@ -263,12 +263,6 @@ writeFigure("scan", {
   title: "jev-swap scan",
   hint: "Hover to scrub · arrows step",
   readout: "$ jev-swap scan ./app",
-  keys: [
-    { mark: "lit", label: "An LLM call that only returns a label, a yes/no or a score" },
-    { mark: "raised", label: "A call that writes free text: left as it is" },
-  ],
-  caption:
-    "A demo codebase of twelve files. The scan bar reads every LLM call; the five that are really decisions light up, and each one gets a card on the rail of its type into Jev. The tiles stay in the tray: jev-swap writes new code beside your call and never removes it.",
   stage: `<div class="iso-stage" tabindex="0" role="slider" aria-label="jev-swap scan: arrow keys step through the five decisions it finds" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">${svg}</div>`,
   live,
 });

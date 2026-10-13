@@ -261,12 +261,6 @@ writeFigure("fallback", {
   title: "The safety net",
   hint: "Hover to adjust",
   readout: "threshold 0.70 · Jev answers 6 of 8 · LLM 2",
-  keys: [
-    { mark: "lit", label: "A Jev answer confident enough to use" },
-    { mark: "raised", label: "Not confident enough: your LLM answers instead" },
-  ],
-  caption:
-    "Eight example answers. A bar is as long as its confidence and the gap is as wide as your threshold, so a confident answer bridges the gap and reaches your app as Jev's, and an unsure one falls back to the LLM you run today. Raise the threshold and the gap widens.",
   stage: `<div class="iso-stage" tabindex="0" role="slider" aria-label="The safety net: arrow keys move the threshold" aria-valuemin="${RANGE[0]}" aria-valuemax="${RANGE[1]}" aria-valuenow="0.70">${svg}</div>`,
   live,
 });
